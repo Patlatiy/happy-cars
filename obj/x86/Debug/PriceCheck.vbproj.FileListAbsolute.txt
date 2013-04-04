@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\GenerateResource.write.1.tlog
@@ -114,3 +115,122 @@ D:\Repos\happy-cars\obj\x86\Debug\HappyCars.StateForm.resources
 D:\Repos\happy-cars\obj\x86\Debug\HappyCars.Resources.resources
 D:\Repos\happy-cars\obj\x86\Debug\HappyCars.ZPForm.resources
 D:\Repos\happy-cars\obj\x86\Debug\PriceCheck.vbproj.GenerateResource.Cache
+=======
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\PriceCheck\PriceCheck\obj\x86\Debug\PriceCheck.exe
+E:\PriceCheck\PriceCheck\obj\x86\Debug\PriceCheck.xml
+E:\PriceCheck\PriceCheck\obj\x86\Debug\PriceCheck.pdb
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\bin\Debug\Happy Cars.exe
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\bin\Debug\Happy Cars.pdb
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\bin\Debug\Happy Cars.xml
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\HappyCars.Form1.resources
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\HappyCars.Form2.resources
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\Happy Cars.exe
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\Happy Cars.xml
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\Happy Cars.pdb
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\Happy Cars.exe
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\Happy Cars.xml
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\Happy Cars.pdb
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\HappyCars.Form1.resources
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\HappyCars.Form2.resources
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\bin\Debug\Happy Cars.exe
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\bin\Debug\Happy Cars.pdb
+C:\Users\802090\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\bin\Debug\Happy Cars.xml
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.exe
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.xml
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.pdb
+C:\Users\802090\Dropbox\PCProject\PriceCheck\bin\Debug\Happy Cars.exe
+C:\Users\802090\Dropbox\PCProject\PriceCheck\bin\Debug\Happy Cars.pdb
+C:\Users\802090\Dropbox\PCProject\PriceCheck\bin\Debug\Happy Cars.xml
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form1.resources
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form2.resources
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\802090\Dropbox\PCProject\PriceCheck\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.exe
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.xml
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.pdb
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\bin\Debug\Happy Cars.exe
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\bin\Debug\Happy Cars.pdb
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\bin\Debug\Happy Cars.xml
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form1.resources
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form2.resources
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Snay\Documents\My Dropbox\PCProject\PriceCheck\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Snay\Documents\Visual Studio 2010\Projects\PriceCheck\PriceCheck\obj\x86\Debug\HappyCars.Dialog1.resources
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.exe
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.xml
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.pdb
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.exe
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.pdb
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.xml
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form1.resources
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form2.resources
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.exe.config
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\PriceCheck.vbproj.GenerateResource.Cache
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.StateForm.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.exe.config
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.exe
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.pdb
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.xml
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form1.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form2.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.StateForm.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\PriceCheck.vbproj.GenerateResource.Cache
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.exe
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.xml
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.pdb
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.CashLeaf.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.CashLeaf.resources
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.AdvanceForm.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.DebtForm.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.AdvanceForm.resources
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.DebtForm.resources
+C:\Users\Snay\Documents\My Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.ZPForm.resources
+C:\Users\802090\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.ZPForm.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.exe.config
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.exe
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.xml
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\Happy Cars.pdb
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.exe
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.pdb
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\bin\Debug\Happy Cars.xml
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.CashLeaf.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.DebtForm.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form1.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Form2.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.AdvanceForm.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.StateForm.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.ZPForm.resources
+C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\PriceCheck.vbproj.GenerateResource.Cache
+D:\Repos\happy-cars\bin\Debug\Happy Cars.exe.config
+D:\Repos\happy-cars\obj\x86\Debug\Happy Cars.exe
+D:\Repos\happy-cars\obj\x86\Debug\Happy Cars.xml
+D:\Repos\happy-cars\obj\x86\Debug\Happy Cars.pdb
+D:\Repos\happy-cars\bin\Debug\Happy Cars.exe
+D:\Repos\happy-cars\bin\Debug\Happy Cars.pdb
+D:\Repos\happy-cars\bin\Debug\Happy Cars.xml
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.CashLeaf.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.DebtForm.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.Form1.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.Form2.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.AdvanceForm.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.StateForm.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.Resources.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.ZPForm.resources
+D:\Repos\happy-cars\obj\x86\Debug\PriceCheck.vbproj.GenerateResource.Cache
+D:\Repos\happy-cars\bin\Debug\sqlite3.dll
+>>>>>>> Im confused

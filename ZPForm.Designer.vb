@@ -49,6 +49,7 @@ Partial Class ZPForm
         'dZP
         '
         Me.dZP.AllowUserToAddRows = False
+        Me.dZP.AllowUserToResizeRows = False
         Me.dZP.BackgroundColor = System.Drawing.Color.White
         Me.dZP.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dZP.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]

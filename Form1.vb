@@ -56,7 +56,7 @@
     Dim dayCC As Integer 'Количество автомобилей на мойке за текущий день [daily car count]
     Dim DayCCMount As Integer 'Количество автомобилей на шиномонтаже за текущий день {daily car count mount]
     Dim DayCCService As UInteger 'Количество автомобилей на сервисе за текущий день [daily car count service]
-    Dim dPath As String 'Директория с рабочими файлами
+    Public dPath As String 'Директория с рабочими файлами
     Dim fPath As String 'Путь к файлу дневной/ночной базы мойки (.ini) [file path]
     Dim fmPath As String 'Путь к файлу дневной базы шиномонтажа (.ini) [file mount path]
     Dim sPath As String 'Путь к файлу дневной базы сервиса (.ini) [service path]
@@ -92,6 +92,7 @@
     Public daySum As Long 'Дневная сумма
     Dim LOADING As Boolean = True
     Dim LoadProcedureRunning As Boolean = True
+    Dim ClosingNow As Boolean = False
 
     ''' <summary>
     ''' Процедура пересчёта цен
@@ -224,7 +225,7 @@
 0:
 
         If DiscountNud.Value <> 0 And ServiceMode < 2 Then
-            sum = sum - Math.Floor(((sum * DiscountNud.Value / 100)) / 10) * 10
+            sum = sum - Math.Floor(sum * DiscountNud.Value / 100)
         End If
 
         Label1.Text = CStr(sum) & " р."
@@ -235,8 +236,9 @@
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        ClosingNow = True
         RecountRows()
-        SaveDaylist()
+        SaveAll()
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -247,60 +249,60 @@
             End If
         Next
         If READ_ONLY_MODE Then
-            ComboBox1.Hide()
-            txtNumber.Hide()
-            Button1.Hide()
-            Button4.Hide()
-            Button5.Hide()
-            Button6.Hide()
-            Button7.Hide()
-            AddCashButton.Hide()
-            OweBox.Hide()
-            OweBox2.Hide()
-            OweBox3.Hide()
-            GroupBox1.Hide()
-            GroupBox2.Hide()
-            GroupBox5.Hide()
-            GroupBox6.Hide()
-            GroupBox7.Hide()
-            dataDay.Dock = DockStyle.Fill
-            dataDay.Columns(4).Width = 500
-            NightBox.Left = 870
-            NightBox.Top = 10
-            btnDebt1.Left = 860
-            btnDebt1.Top = 25
-            btnDebt2.Left = 860
-            btnDebt2.Top = 5
-            btnDebt3.Left = 870
-            btnDebt3.Top = 5
-            dataDayMount.Dock = DockStyle.Fill
-            dataDayMount.Columns(4).Width = 500
-            dataService.Dock = DockStyle.Fill
-            dataService.Columns(4).Width = 250
-            dataService.Columns(6).Width = 250
-            TabControl1.Width = 927
-            Label14.Hide()
-            DiscountNud.Hide()
-            DiscountCombo.Hide()
-            Button2.Left = 700
-            Button3.Left = 820
-            lblDaySum.Left = 10
-            lblDaySum.Top = 5
-            Label1.Hide()
-            Label12.Hide()
-            Chart1.Width = 890
-            lblDOW.Left = 629
-            curDatePicker.Left = lblDOW.Left + lblDOW.Width
-            'dSchedule2.Hide()
-            'Button12.Hide()
-            'ComboTLS2.Hide()
-            'lblTomorrow.Hide()
-            'GroupBox8.Left = 491
-            Me.Width = 955
-            Me.Height = 593
-            For i = 0 To dCash.ColumnCount - 1
-                dCash.Columns(i).ReadOnly = True
-            Next
+            'ComboBox1.Hide()
+            'txtNumber.Hide()
+            'Button1.Hide()
+            'Button4.Hide()
+            'Button5.Hide()
+            'Button6.Hide()
+            'Button7.Hide()
+            'AddCashButton.Hide()
+            'OweBox.Hide()
+            'OweBox2.Hide()
+            'OweBox3.Hide()
+            'GroupBox1.Hide()
+            'GroupBox2.Hide()
+            'GroupBox5.Hide()
+            'GroupBox6.Hide()
+            'GroupBox7.Hide()
+            'dataDay.Dock = DockStyle.Fill
+            'dataDay.Columns(4).Width = 500
+            'NightBox.Left = 870
+            'NightBox.Top = 10
+            'btnDebt1.Left = 860
+            'btnDebt1.Top = 25
+            'btnDebt2.Left = 860
+            'btnDebt2.Top = 5
+            'btnDebt3.Left = 870
+            'btnDebt3.Top = 5
+            'dataDayMount.Dock = DockStyle.Fill
+            'dataDayMount.Columns(4).Width = 500
+            'dataService.Dock = DockStyle.Fill
+            'dataService.Columns(4).Width = 250
+            'dataService.Columns(6).Width = 250
+            'TabControl1.Width = 927
+            'Label14.Hide()
+            'DiscountNud.Hide()
+            'DiscountCombo.Hide()
+            'Button2.Left = 700
+            'Button3.Left = 820
+            'lblDaySum.Left = 10
+            'lblDaySum.Top = 5
+            'Label1.Hide()
+            'Label12.Hide()
+            'Chart1.Width = 890
+            'lblDOW.Left = 629
+            'curDatePicker.Left = lblDOW.Left + lblDOW.Width
+            ''dSchedule2.Hide()
+            ''Button12.Hide()
+            ''ComboTLS2.Hide()
+            ''lblTomorrow.Hide()
+            ''GroupBox8.Left = 491
+            'Me.Width = 955
+            'Me.Height = 593
+            'For i = 0 To dCash.ColumnCount - 1
+            '    dCash.Columns(i).ReadOnly = True
+            'Next
             Me.Text = Me.Text & " - ТОЛЬКО ЧТЕНИЕ"
         End If
         LoadCars()
@@ -309,78 +311,135 @@
         LOADING = False
     End Sub
 
-    ''' <summary>
-    ''' Процедура загрузки формы
-    ''' </summary>
-    ''' <remarks></remarks>
-    Public Sub LoadProcedure(ByVal DateOfLoad As Date)
-        'Static RunCount As Integer
-        'RunCount += 1
-        'MsgBox(CStr(RunCount))
-        LoadProcedureRunning = True
+    Public Sub LoadWash()
         dayCC = 1 'Устанавлиаем номер последней машины
-        DayCCMount = 1 'Устанавлиаем номер последней машины на шиномонтаже
-        DayCCService = 1 'Устанавливаем ... ну вы поняли
-        curDate = DateOfLoad 'Устанавливаем дату для сверки
-        nextDay = curDate.AddDays(1) 'Устанавливаем следующий день
-        curDatePicker.Value = curDate 'Устанавливаем дату в элемент выбора даты
         dataDay.Rows.Clear() 'Очищаем все строки дневного отчёта мойки
-        dataDayMount.Rows.Clear() 'Очищаем все строки дневного отчёта шиномонтажа
-        dataService.Rows.Clear() 'очищаем... ну вы поняли
-        dCash.Rows.Clear() 'Очищаем кассовуюю книгу
-        dSchedule1.Rows.Clear() 'Очищаем сегодняшние записи
-        dSchedule2.Rows.Clear() 'Очищаем завтрашние записи
-        dTable.Rows.Clear() 'Чистим табель
-        dTable.Columns.Clear() 'Чистим табель
-        comboTLS.SelectedIndex = 1
-        ComboTLS2.SelectedIndex = 1
-        comboMonth.SelectedIndex = curDate.Month - 1
-        comboYear.Text = CStr(curDate.Year)
-        ComboBox2.SelectedIndex = 0
         ComboNightWorkers.Items.Clear()
-        'Устанавливаем переменные файловых путей:
-        fPath = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month)
-        nddPath = Application.StartupPath & "\data\" & CStr(nextDay.Year) & "\" & CStr(nextDay.Month)
-        ndPath = nddPath & "\" & CStr(nextDay.Day) & "ndtmp.ini"
-        cdPath = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & "ndtmp.ini"
-        sc1Path = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & CStr(CurSche) & "sc.ini"
-        sc2Path = Application.StartupPath & "\data\" & CStr(nextDay.Year) & "\" & CStr(nextDay.Month) & "\" & CStr(nextDay.Day) & CStr(CurSche) & "sc.ini"
-        If DayMode Then ePath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & ".xlsx") Else ePath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "N.xlsx")
-        emPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "M.xlsx")
-        rPath = Application.StartupPath & "\Report.xlsx"
-        rmPath = Application.StartupPath & "\MReport.xlsx"
-        dPath = fPath
-        cPath = My.Computer.FileSystem.CombinePath(dPath, CStr(curDate.Day) & "c.ini")
-        fmPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "m.ini")
-        sPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "s.ini")
-        nPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "N.ini")
-        tPath = My.Computer.FileSystem.CombinePath(fPath, "Table.ini")
-        If DayMode Then fPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & ".ini") Else fPath = nPath
         Dim curRow As String()
-        'Работаем со штатом и табелем:
-        'Считываем работников:
-        If LOADING Then
-            Using tFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\State.ini")
-                tFile.TextFieldType = FileIO.FieldType.Delimited
-                tFile.SetDelimiters("|")
-                Worker.nextID = CInt(tFile.ReadFields(0))
-                Dim curShop As Integer
-                While Not tFile.EndOfData
-                    curRow = tFile.ReadFields
-                    Select Case curRow(0)
-                        Case "[Wash]"
-                            curShop = 0
-                        Case "[Mount]"
-                            curShop = 1
-                        Case "[Service]"
-                            curShop = 2
-                        Case Else
-                            Dim w As New Worker(CInt(curRow(0)), curRow(1), curRow(2), curRow(3), curShop, curRow(4), CLng(curRow(5)), CInt(curRow(6)), CBool(curRow(7)))
-                    End Select
+        For Each wrkr In Worker.AllOfThem
+            If wrkr.GetWorkshopInt = 0 Then
+                ComboNightWorkers.Items.Add(wrkr.FullName)
+                WorkerIDForNightWorkers(ComboNightWorkers.Items.Count - 1) = wrkr.GetID
+            End If
+        Next
+        'Считываем базу сегодняшнего дня или ночи:
+        If My.Computer.FileSystem.FileExists(fPath) Then
+            Using baseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(fPath)
+                baseFile.TextFieldType = FileIO.FieldType.Delimited
+                baseFile.SetDelimiters("|")
+                CurNightWorkerID = Nothing
+                While Not baseFile.EndOfData
+                    curRow = baseFile.ReadFields
+                    If curRow.Length = 1 And curRow(0) <> "" Then
+                        CurNightWorkerID = CInt(curRow(0))
+                        For i = 0 To 1000
+                            If WorkerIDForNightWorkers(i) = CurNightWorkerID Then
+                                ComboNightWorkers.SelectedIndex = i
+                                Exit For
+                            End If
+                        Next
+                        Continue While
+                    End If
+                    Try
+                        AddRecord(CULng(curRow(7)), CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 0)
+                    Catch ex As Exception
+                        AddRecord(9999, CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 0)
+                    End Try
                 End While
             End Using
         End If
+    End Sub
 
+    Public Sub LoadMount()
+        DayCCMount = 1 'Устанавлиаем номер последней машины на шиномонтаже
+        dataDayMount.Rows.Clear() 'Очищаем все строки дневного отчёта шиномонтажа
+        Dim curRow As String()
+        If My.Computer.FileSystem.FileExists(fmPath) Then
+            Using mbaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(fmPath)
+                mbaseFile.TextFieldType = FileIO.FieldType.Delimited
+                mbaseFile.SetDelimiters("|")
+                While Not mbaseFile.EndOfData
+                    curRow = mbaseFile.ReadFields
+                    Try
+                        AddRecord(CULng(curRow(7)), CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 1)
+                    Catch ex As Exception
+                        AddRecord(9999, CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 1)
+                    End Try
+                End While
+            End Using
+        End If
+    End Sub
+
+    Public Sub LoadService()
+        DayCCService = 1 'Устанавливаем ... ну вы поняли
+        dataService.Rows.Clear() 'очищаем... ну вы поняли
+        Dim curRow As String()
+        If My.Computer.FileSystem.FileExists(sPath) Then
+            Using sbaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(sPath)
+                sbaseFile.TextFieldType = FileIO.FieldType.Delimited
+                sbaseFile.SetDelimiters("|")
+                While Not sbaseFile.EndOfData
+                    curRow = sbaseFile.ReadFields
+                    Try
+                        If curRow.Length = 10 Then 'Обеспечиваем совместимость со старым форматом
+                            AddRecord(CULng(curRow(9)), CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(5)), curRow(6), CULng(curRow(7)), "~", "~", CULng(curRow(8)))
+                        Else
+                            AddRecord(CULng(curRow(11)), CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(7)), curRow(8), CULng(curRow(9)), curRow(5), curRow(6), CULng(curRow(10)))
+                        End If
+                    Catch ex As Exception
+                        If curRow.Length = 9 Then
+                            AddRecord(9999, CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(5)), curRow(6), CULng(curRow(7)), "~", "~", CULng(curRow(8)))
+                        Else
+                            AddRecord(9999, CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(7)), curRow(8), CULng(curRow(9)), curRow(5), curRow(6), CULng(curRow(10)))
+                        End If
+                    End Try
+                End While
+            End Using
+        End If
+    End Sub
+
+    Public Sub LoadCash()
+        dCash.Rows.Clear() 'Очищаем кассовуюю книгу
+        Dim curRow As String()
+        'Считываем базу кассовой книги:
+        Dim EXISTS As Boolean = False
+        If My.Computer.FileSystem.FileExists(cdPath) Then
+            EXISTS = True
+            Using cdBaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(cdPath)
+                cdBaseFile.TextFieldType = FileIO.FieldType.Delimited
+                cdBaseFile.SetDelimiters("|")
+                curRow = cdBaseFile.ReadFields
+                AddCash("x", "Остаток в кассе", "", "", curRow(0), "0", "")
+            End Using
+            'If Not READ_ONLY_MODE Then My.Computer.FileSystem.DeleteFile(cdPath)
+        End If
+        If My.Computer.FileSystem.FileExists(cPath) Then
+            Using cbaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(cPath)
+                cbaseFile.TextFieldType = FileIO.FieldType.Delimited
+                cbaseFile.SetDelimiters("|")
+                curRow = cbaseFile.ReadFields
+                curID = CULng(curRow(0))
+                While Not cbaseFile.EndOfData
+                    curRow = cbaseFile.ReadFields
+                    If EXISTS And curRow(1) = "Остаток в кассе" Then Continue While
+                    AddCash(curRow(0), curRow(1), curRow(2), curRow(3), curRow(4), curRow(5), curRow(6))
+                End While
+            End Using
+        End If
+    End Sub
+
+    Public Sub LoadTable()
+        Exit Sub
+        dTable.Rows.Clear() 'Чистим табель
+        dTable.Columns.Clear() 'Чистим табель
+        Dim curRow As String()
+        For Each wrkr In Worker.AllOfThem
+            wrkr.WorkingDaysInCurMonth = 0
+            wrkr.HoursWorkedInCurMonth = 0
+            For i = 0 To 31
+                wrkr.TableForCurMonth(i) = 0
+            Next
+        Next
         'Создаём первые столбцы табеля:
         dTable.Columns.Add("dTable_ID", "ID")
         dTable.Columns("dTable_ID").Width = 30
@@ -397,24 +456,108 @@
             dTable.Columns("column_day" & CStr(i)).Width = 30
         Next
         For Each wrkr In Worker.AllOfThem
-            wrkr.WorkingDaysInCurMonth = 0
-            wrkr.HoursWorkedInCurMonth = 0
-            wrkr.wBonus = 0
-            wrkr.wOtherPayments = 0
-            wrkr.wAdvance = 0
-            wrkr.wOtherCharges = 0
-            For i = 0 To 31
-                wrkr.TableForCurMonth(i) = 0
-            Next
             dTable.Rows.Add(CStr(wrkr.GetID), wrkr.Get2Name & " " & wrkr.GetName & " " & wrkr.GetPatron, wrkr.GetJob)
-            If wrkr.GetWorkshopInt = 0 Then
-                ComboNightWorkers.Items.Add(wrkr.FullName)
-                WorkerIDForNightWorkers(ComboNightWorkers.Items.Count - 1) = wrkr.GetID
-            End If
             For Each cell In dTable.Rows(dTable.RowCount - 1).Cells
                 cell.style.backcolor = DefaultBackColor
                 cell.style.forecolor = DefaultForeColor
             Next
+        Next
+        'Заполняем табель:
+        If My.Computer.FileSystem.FileExists(tPath) Then
+            Using tFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(tPath)
+                tFile.TextFieldType = FileIO.FieldType.Delimited
+                tFile.SetDelimiters("|")
+                While Not tFile.EndOfData
+                    curRow = tFile.ReadFields
+                    Dim RowID As Integer = FindRowByID(curRow(0))
+                    If RowID = -1 Then Continue While
+                    For i = 1 To curRow.Count \ 4
+                        dTable.Item("column_day" & CStr(i), RowID).Value = curRow(i * 4 - 3)
+                        dTable.Item("column_day" & CStr(i), RowID).Style.BackColor = System.Drawing.Color.FromArgb(CInt(curRow(i * 4 - 2)), CInt(curRow(i * 4 - 1)), CInt(curRow(i * 4)))
+                        Dim w As Worker = Worker.FindByID(CInt(dTable.Item("dTable_ID", RowID).Value))
+                        If curRow(i * 4 - 3) <> "" Then w.HoursWorkedInCurMonth += CDbl(curRow(i * 4 - 3))
+                        If curRow(i * 4 - 2) <> "255" Or curRow(i * 4 - 1) <> "255" Or curRow(i * 4) <> "255" Then
+                            w.TableForCurMonth(i) = w.GetNorm
+                            w.WorkingDaysInCurMonth += 1
+                        Else
+                            w.TableForCurMonth(i) = 0
+                        End If
+                    Next
+                End While
+            End Using
+        End If
+        If ComboWorkshops.SelectedIndex = 0 Then
+            ComboWorkshops_SelectedIndexChanged(ComboWorkshops, Nothing) 'Обновляем табель
+        Else
+            ComboWorkshops.SelectedIndex = 0 'Показываем мойку
+        End If
+        RecountWorkers()
+        Worker.CalculateAllHourCosts()
+    End Sub
+
+    Public Sub LoadSchedule(Optional RefreshHash As Boolean = False)
+        sc1Path = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & CStr(CurSche) & "sc.ini"
+        sc2Path = Application.StartupPath & "\data\" & CStr(nextDay.Year) & "\" & CStr(nextDay.Month) & "\" & CStr(nextDay.Day) & CStr(CurSche) & "sc.ini"
+        dSchedule1.Rows.Clear() 'Очищаем сегодняшние записи
+        dSchedule2.Rows.Clear() 'Очищаем завтрашние записи
+        comboTLS.SelectedIndex = 1
+        ComboTLS2.SelectedIndex = 1
+        Dim curRow As String()
+        For i = START_HOUR To END_HOUR - 1
+            dSchedule1.Rows.Add(CStr(i) & ":00", "", "", "+", "-")
+            dSchedule1.Rows.Add(CStr(i) & ":30", "", "", "+", "-")
+            dSchedule2.Rows.Add(CStr(i) & ":00", "", "", "+", "-")
+            dSchedule2.Rows.Add(CStr(i) & ":30", "", "", "+", "-")
+        Next
+        If My.Computer.FileSystem.FileExists(sc1Path) Then
+            Using sc1File As New Microsoft.VisualBasic.FileIO.TextFieldParser(sc1Path)
+                sc1File.TextFieldType = FileIO.FieldType.Delimited
+                sc1File.SetDelimiters("|")
+                Dim ji As Integer = 0
+                While Not sc1File.EndOfData
+                    curRow = sc1File.ReadFields
+                    dSchedule1.Rows(ji).SetValues(curRow(0), curRow(1), curRow(2))
+                    ji += 1
+                End While
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(sc2Path) Then
+            Using sc2File As New Microsoft.VisualBasic.FileIO.TextFieldParser(sc2Path)
+                sc2File.TextFieldType = FileIO.FieldType.Delimited
+                sc2File.SetDelimiters("|")
+                Dim ji As Integer = 0
+                While Not sc2File.EndOfData
+                    curRow = sc2File.ReadFields
+                    dSchedule2.Rows(ji).SetValues(curRow(0), curRow(1), curRow(2))
+                    ji += 1
+                End While
+            End Using
+        End If
+        If RefreshHash Then
+            If My.Computer.FileSystem.FileExists(sc1Path) Then
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(sc1Path)
+                    sc1HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                End Using
+            Else
+                sc1HashCode = Nothing
+            End If
+            If My.Computer.FileSystem.FileExists(sc2Path) Then
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(sc2Path)
+                    sc2HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                End Using
+            End If
+        Else
+            sc2HashCode = Nothing
+        End If
+    End Sub
+
+    Public Sub LoadAdvance()
+        Dim CurRow As String()
+        For Each wrkr In Worker.AllOfThem
+            wrkr.wBonus = 0
+            wrkr.wOtherPayments = 0
+            wrkr.wAdvance = 0
+            wrkr.wOtherCharges = 0
         Next
         If My.Computer.FileSystem.FileExists(dPath & "\Advance.ini") Then
             Using tFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(dPath & "\Advance.ini")
@@ -445,11 +588,14 @@
                             Case 4
                                 Worker.FindByID(CInt(curRow(0))).wOtherCharges = CDbl(curRow(1))
                         End Select
-
                     End If
                 End While
             End Using
         End If
+    End Sub
+
+    Public Sub LoadDebts()
+        Dim CurRow As String()
         If My.Computer.FileSystem.FileExists(dPath & "\Debts.ini") Then
             Using dFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(dPath & "\Debts.ini")
                 dFile.TextFieldType = FileIO.FieldType.Delimited
@@ -465,149 +611,94 @@
                 End While
             End Using
         End If
-        'Заполняем табель:
-        If My.Computer.FileSystem.FileExists(tPath) Then
-            Using tFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(tPath)
-                tFile.TextFieldType = FileIO.FieldType.Delimited
-                tFile.SetDelimiters("|")
-                While Not tFile.EndOfData
-                    curRow = tFile.ReadFields
-                    Dim RowID As Integer = FindRowByID(curRow(0))
-                    If RowID = -1 Then Continue While
-                    For i = 1 To curRow.Count \ 4
-                        dTable.Item("column_day" & CStr(i), RowID).Value = curRow(i * 4 - 3)
-                        dTable.Item("column_day" & CStr(i), RowID).Style.BackColor = System.Drawing.Color.FromArgb(CInt(curRow(i * 4 - 2)), CInt(curRow(i * 4 - 1)), CInt(curRow(i * 4)))
-                        Dim w As Worker = Worker.FindByID(CInt(dTable.Item("dTable_ID", RowID).Value))
-                        If curRow(i * 4 - 3) <> "" Then w.HoursWorkedInCurMonth += CDbl(curRow(i * 4 - 3))
-                        If curRow(i * 4 - 2) <> "255" Or curRow(i * 4 - 1) <> "255" Or curRow(i * 4) <> "255" Then
-                            w.TableForCurMonth(i) = w.GetNorm
-                            w.WorkingDaysInCurMonth += 1
-                        Else
-                            w.TableForCurMonth(i) = 0
-                        End If
-                    Next
-                End While
-            End Using
+    End Sub
+
+    Public Sub LoadState()
+        Worker.Clear()
+        Dim curRow As String()
+        Using tFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\State.ini")
+            tFile.TextFieldType = FileIO.FieldType.Delimited
+            tFile.SetDelimiters("|")
+            Worker.nextID = CInt(tFile.ReadFields(0))
+            Dim curShop As Integer
+            While Not tFile.EndOfData
+                curRow = tFile.ReadFields
+                Select Case curRow(0)
+                    Case "[Wash]"
+                        curShop = 0
+                    Case "[Mount]"
+                        curShop = 1
+                    Case "[Service]"
+                        curShop = 2
+                    Case Else
+                        Dim w As New Worker(CInt(curRow(0)), curRow(1), curRow(2), curRow(3), curShop, curRow(4), CLng(curRow(5)), CInt(curRow(6)), CBool(curRow(7)))
+                End Select
+            End While
+        End Using
+        comboMaster.Items.Clear()
+        comboExecutor.Items.Clear()
+        For Each w As Worker In Worker.AllOfThem
+            If w.GetWorkshopInt = 2 Then
+                If w.GetJob.ToLower = "мастер" Then comboMaster.Items.Add(w.FullName)
+                comboExecutor.Items.Add(w.FullName)
+            End If
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' Процедура загрузки формы
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Sub LoadProcedure(ByVal DateOfLoad As Date)
+        'Static RunCount As Integer
+        'RunCount += 1
+        'MsgBox(CStr(RunCount))
+        LoadProcedureRunning = True
+        curDate = DateOfLoad 'Устанавливаем дату для сверки
+        nextDay = curDate.AddDays(1) 'Устанавливаем следующий день
+        curDatePicker.Value = curDate 'Устанавливаем дату в элемент выбора даты
+        dtpFrom.Value = curDate.AddDays(1 - curDate.Day) 'Устанавливаем значения DateTimePicker'ов на вкладке "Аналитика"
+        dtpTo.Value = curDate.AddDays(Date.DaysInMonth(curDate.Year, curDate.Month) - curDate.Day) 'Устанавливаем значения DateTimePicker'ов на вкладке "Аналитика"
+        comboMonth.SelectedIndex = curDate.Month - 1
+        comboYear.Text = CStr(curDate.Year)
+        ComboBox2.SelectedIndex = 6
+        'Устанавливаем переменные файловых путей:
+        fPath = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month)
+        nddPath = Application.StartupPath & "\data\" & CStr(nextDay.Year) & "\" & CStr(nextDay.Month)
+        ndPath = nddPath & "\" & CStr(nextDay.Day) & "ndtmp.ini"
+        cdPath = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & "ndtmp.ini"
+        sc1Path = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & CStr(CurSche) & "sc.ini"
+        sc2Path = Application.StartupPath & "\data\" & CStr(nextDay.Year) & "\" & CStr(nextDay.Month) & "\" & CStr(nextDay.Day) & CStr(CurSche) & "sc.ini"
+        If DayMode Then ePath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & ".xlsx") Else ePath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "N.xlsx")
+        emPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "M.xlsx")
+        rPath = Application.StartupPath & "\Report.xlsx"
+        rmPath = Application.StartupPath & "\MReport.xlsx"
+        dPath = fPath
+        cPath = My.Computer.FileSystem.CombinePath(dPath, CStr(curDate.Day) & "c.ini")
+        fmPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "m.ini")
+        sPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "s.ini")
+        nPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & "N.ini")
+        tPath = My.Computer.FileSystem.CombinePath(fPath, "Table.ini")
+        If DayMode Then fPath = My.Computer.FileSystem.CombinePath(fPath, CStr(curDate.Day) & ".ini") Else fPath = nPath
+
+        'Работаем со штатом и табелем:
+        'Считываем работников:
+        If LOADING Then 'Только при первом запуске:
+            LoadState()
         End If
-        If ComboWorkshops.SelectedIndex = 0 Then
-            ComboWorkshops_SelectedIndexChanged(ComboWorkshops, Nothing) 'Обновляем табель
-        Else
-            ComboWorkshops.SelectedIndex = 0 'Показываем мойку
-        End If
+
         zpWorkshops.SelectedIndex = 0 'Заполняем работников на вкладке "ЗП"
-        RecountWorkers()
-        Worker.CalculateAllHourCosts()
+
         'Работаем с папкой месяца:
         If My.Computer.FileSystem.DirectoryExists(dPath) Then
-            'Считываем базу сегодняшнего дня или ночи:
-            If My.Computer.FileSystem.FileExists(fPath) Then
-                Using baseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(fPath)
-                    baseFile.TextFieldType = FileIO.FieldType.Delimited
-                    baseFile.SetDelimiters("|")
-                    CurNightWorkerID = Nothing
-                    While Not baseFile.EndOfData
-                        curRow = baseFile.ReadFields
-                        If curRow.Length = 1 And curRow(0) <> "" Then
-                            CurNightWorkerID = CInt(curRow(0))
-                            For i = 0 To 1000
-                                If WorkerIDForNightWorkers(i) = CurNightWorkerID Then
-                                    ComboNightWorkers.SelectedIndex = i
-                                    Exit For
-                                End If
-                            Next
-                            Continue While
-                        End If
-                        Try
-                            AddRecord(CULng(curRow(7)), CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 0)
-                        Catch ex As Exception
-                            AddRecord(9999, CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 0)
-                        End Try
-                    End While
-                End Using
-            End If
-            If My.Computer.FileSystem.FileExists(fmPath) Then
-                Using mbaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(fmPath)
-                    mbaseFile.TextFieldType = FileIO.FieldType.Delimited
-                    mbaseFile.SetDelimiters("|")
-                    While Not mbaseFile.EndOfData
-                        curRow = mbaseFile.ReadFields
-                        Try
-                            AddRecord(CULng(curRow(7)), CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 1)
-                        Catch ex As Exception
-                            AddRecord(9999, CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 1)
-                        End Try
-                    End While
-                End Using
-            End If
-            If My.Computer.FileSystem.FileExists(sPath) Then
-                Using sbaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(sPath)
-                    sbaseFile.TextFieldType = FileIO.FieldType.Delimited
-                    sbaseFile.SetDelimiters("|")
-                    While Not sbaseFile.EndOfData
-                        curRow = sbaseFile.ReadFields
-                        Try
-                            AddRecord(CULng(curRow(9)), CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(5)), curRow(6), CULng(curRow(7)), CULng(curRow(8)))
-                        Catch ex As Exception
-                            AddRecord(9999, CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(5)), curRow(6), CULng(curRow(7)), CULng(curRow(8)))
-                        End Try
-                    End While
-                End Using
-            End If
-            'Считываем базу кассовой книги:
-            Dim EXISTS As Boolean = False
-            If My.Computer.FileSystem.FileExists(cdPath) Then
-                EXISTS = True
-                Using cdBaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(cdPath)
-                    cdBaseFile.TextFieldType = FileIO.FieldType.Delimited
-                    cdBaseFile.SetDelimiters("|")
-                    curRow = cdBaseFile.ReadFields
-                    AddCash("x", "Остаток в кассе", "", "", curRow(0), "0", "")
-                End Using
-                'If Not READ_ONLY_MODE Then My.Computer.FileSystem.DeleteFile(cdPath)
-            End If
-            If My.Computer.FileSystem.FileExists(cPath) Then
-                Using cbaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(cPath)
-                    cbaseFile.TextFieldType = FileIO.FieldType.Delimited
-                    cbaseFile.SetDelimiters("|")
-                    curRow = cbaseFile.ReadFields
-                    curID = CULng(curRow(0))
-                    While Not cbaseFile.EndOfData
-                        curRow = cbaseFile.ReadFields
-                        If EXISTS And curRow(1) = "Остаток в кассе" Then Continue While
-                        AddCash(curRow(0), curRow(1), curRow(2), curRow(3), curRow(4), curRow(5), curRow(6))
-                    End While
-                End Using
-            End If
-            For i = START_HOUR To END_HOUR - 1
-                dSchedule1.Rows.Add(CStr(i) & ":00", "", "", "+", "-")
-                dSchedule1.Rows.Add(CStr(i) & ":30", "", "", "+", "-")
-                dSchedule2.Rows.Add(CStr(i) & ":00", "", "", "+", "-")
-                dSchedule2.Rows.Add(CStr(i) & ":30", "", "", "+", "-")
-            Next
-            If My.Computer.FileSystem.FileExists(sc1Path) Then
-                Using sc1File As New Microsoft.VisualBasic.FileIO.TextFieldParser(sc1Path)
-                    sc1File.TextFieldType = FileIO.FieldType.Delimited
-                    sc1File.SetDelimiters("|")
-                    Dim ji As Integer = 0
-                    While Not sc1File.EndOfData
-                        curRow = sc1File.ReadFields
-                        dSchedule1.Rows(ji).SetValues(curRow(0), curRow(1), curRow(2))
-                        ji += 1
-                    End While
-                End Using
-            End If
-            If My.Computer.FileSystem.FileExists(sc2Path) Then
-                Using sc2File As New Microsoft.VisualBasic.FileIO.TextFieldParser(sc2Path)
-                    sc2File.TextFieldType = FileIO.FieldType.Delimited
-                    sc2File.SetDelimiters("|")
-                    Dim ji As Integer = 0
-                    While Not sc2File.EndOfData
-                        curRow = sc2File.ReadFields
-                        dSchedule2.Rows(ji).SetValues(curRow(0), curRow(1), curRow(2))
-                        ji += 1
-                    End While
-                End Using
-            End If
+            LoadWash()
+            LoadMount()
+            LoadService()
+            LoadCash()
+            LoadSchedule()
+            LoadTable()
+            LoadAdvance()
+            LoadDebts()
         Else
             If Not READ_ONLY_MODE Then My.Computer.FileSystem.CreateDirectory(dPath)
         End If
@@ -665,12 +756,68 @@
         Dim strWashDayTotal As String = CStr(CountAverage(1, Date.DaysInMonth(curDate.Year, curDate.Month), dPath, ".ini", 6, True))
         Dim strWashNightTotal As String = CStr(CountAverage(1, Date.DaysInMonth(curDate.Year, curDate.Month), dPath, "N.ini", 6, True))
         Dim strMountTotal As String = CStr(CountAverage(1, Date.DaysInMonth(curDate.Year, curDate.Month), dPath, "m.ini", 6, True))
-        Dim strServiceTotal As String = CStr(CountAverage(1, Date.DaysInMonth(curDate.Year, curDate.Month), dPath, "s.ini", 5, True))
+        Dim strServiceTotal As String = CStr(CountAverage(1, Date.DaysInMonth(curDate.Year, curDate.Month), dPath, "s.ini", 7, True))
         Dim strTotal As String = CStr(CInt(strWashDayTotal) + CInt(strWashNightTotal) + CInt(strMountTotal) + CInt(strServiceTotal))
         Label19.Text = Form2.NumberToMonth(curDate.Month) & ": Дневная выручка по мойке: " & strWashDayTotal & " Ночная выручка по мойке: " & strWashNightTotal & " Выручка по шиномонтажу: " & strMountTotal & " Выручка по сервису: " & strServiceTotal & " Общая выручка: " & strTotal
+        'Заполнение хэш-кодов
+        If My.Computer.FileSystem.FileExists(fPath) Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
+                WashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(fmPath) Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(fmPath)
+                MountHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(sPath) Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(sPath)
+                ServiceHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(cPath) Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(cPath)
+                CashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(tPath) Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(tPath)
+                TableHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(sc1Path) Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(sc1Path)
+                sc1HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(sc2Path) Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(sc2Path)
+                sc2HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(dPath & "\Advance.ini") Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Advance.ini")
+                AdvanceHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(dPath & "\Debts.ini") Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Debts.ini")
+                DebtsHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(Application.StartupPath & "\data\State.ini") Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\State.ini")
+                StateHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
         'Завершающие процедуры:
         FillPrices()
         RecountRows()
+        If LOADING Then
+            CreateWatchers()
+        Else
+            UpdateWatchers()
+        End If
         LoadProcedureRunning = False
     End Sub
 
@@ -1010,22 +1157,26 @@
                     If OweBox.CheckState = CheckState.Unchecked Then
                         AddRecord(curID, CULng(dayCC), ComboBox1.Text, txtNumber.Text, service, FormattedTime(), CULng(sum), curGr)
                         AddCash("Автомойка", curDate.ToString("dd.MM.yyyy"), FormattedTime(), sum, 0, ComboBox1.Text & " " & txtNumber.Text & "; " & service)
+                        SaveCash()
                     Else
                         AddRecord(curID, CULng(dayCC), ComboBox1.Text, txtNumber.Text, service, FormattedTime(), CULng(sum), curGr)
                         AddDebt(curID)
                         curID += 1
+                        SaveDebts()
                     End If
                 Else
                     If OweBox.CheckState = CheckState.Unchecked Then
                         AddRecord(curID, CULng(dayCC), ComboBox1.Text, txtNumber.Text, service, "Ночь", CULng(sum), curGr)
                         AddCash("Автомойка", curDate.ToString("dd.MM.yyyy"), "Ночь", sum, 0, ComboBox1.Text & " " & txtNumber.Text & "; " & service)
+                        SaveCash()
                     Else
                         AddRecord(curID, CULng(dayCC), ComboBox1.Text, txtNumber.Text, service, "Ночь", CULng(sum), curGr)
                         AddDebt(curID)
                         curID += 1
+                        SaveDebts()
                     End If
-
                 End If
+                SaveWash()
             Case 1
                 'На первый взгляд простой алгоритм образования строки услуг шиномонтажа:
                 If serviceBox1.Checked Then service = service & serviceBox1.Text & " x" & CStr(nud1.Value) & SVC_DIVIDER
@@ -1046,6 +1197,10 @@
                 If ServiceBox16.Checked Then service = service & ServiceBox16.Text & " x" & CStr(nud16.Value) & SVC_DIVIDER
                 If ServiceBox17.Checked Then service = service & ServiceBox17.Text & " x" & CStr(nud17.Value) & SVC_DIVIDER
                 If OtherBox2.CheckState = CheckState.Checked Then service = service & OtherText2.Text & " (" & CStr(OtherNUD2.Value) & ")" & SVC_DIVIDER
+                If service = "" Then
+                    MsgBox("Вы забыли выбрать услуги!", MsgBoxStyle.Critical)
+                    GoTo 9
+                End If
                 service = service.Remove(service.Length - 2, 2)
                 If OweBox2.CheckState = CheckState.Unchecked Then
                     AddRecord(CULng(curID), DayCCMount, ComboBox1.Text, txtNumber.Text, service, FormattedTime(), sum, curGr)
@@ -1054,23 +1209,38 @@
                     AddRecord(curID, DayCCMount, ComboBox1.Text, txtNumber.Text, service, FormattedTime(), sum, curGr)
                     AddDebt(curID)
                     curID += 1
+                    SaveDebts()
                 End If
+                SaveMount()
+                SaveCash()
             Case 2
-                AddRecord(CULng(curID), DayCCService, ComboBox1.Text, txtNumber.Text, FormattedTime, workBox.Text, CULng(WorkDiscounted.Text), partsBox.Text, CULng(PartsSumDiscounted.Text), CULng(PartsOutDiscounted.Text))
+                Dim Executor As String = ""
+                If listExecutors.Items.Count = 0 Then
+                    Executor = comboExecutor.Text
+                Else
+                    For Each item In listExecutors.Items
+                        Executor &= item & ", "
+                    Next
+                    Executor = Executor.Remove(Executor.Length - 2, 2)
+                End If
+                AddRecord(CULng(curID), DayCCService, ComboBox1.Text, txtNumber.Text, FormattedTime, workBox.Text, CULng(WorkDiscounted.Text), partsBox.Text, CULng(PartsSumDiscounted.Text), comboMaster.Text, Executor, CULng(PartsOutDiscounted.Text))
                 If OweBox3.CheckState = CheckState.Checked Then
                     AddDebt(curID)
                     curID += 1
-                    Exit Select
-                End If
-                If partsBox.Text <> "" Or (partsSumBox.Text <> "0" And partsSumBox.Text <> "") Or (partsOutBox.Text <> "0" And partsOutBox.Text <> "") Then
-                    AddCash("Автосервис", CULng(WorkDiscounted.Text) + CULng(PartsSumDiscounted.Text), CULng(PartsOutDiscounted.Text), ComboBox1.Text & " " & txtNumber.Text & "; Работы: " & workBox.Text & ". Расходные материалы: " & partsBox.Text & " на сумму " & partsSumBox.Text)
+                    SaveDebts()
                 Else
-                    AddCash("Автосервис", CULng(WorkDiscounted.Text), 0, ComboBox1.Text & " " & txtNumber.Text & "; Работы: " & workBox.Text)
+                    If partsBox.Text <> "" Or (partsSumBox.Text <> "0" And partsSumBox.Text <> "") Or (partsOutBox.Text <> "0" And partsOutBox.Text <> "") Then
+                        AddCash("Автосервис", CULng(WorkDiscounted.Text) + CULng(PartsSumDiscounted.Text), CULng(PartsOutDiscounted.Text), ComboBox1.Text & " " & txtNumber.Text & "; Работы: " & workBox.Text & ". Расходные материалы: " & partsBox.Text & " на сумму " & partsSumBox.Text & "; Мастер: " & comboMaster.Text & ", исполнители: " & Executor)
+                    Else
+                        AddCash("Автосервис", CULng(WorkDiscounted.Text), 0, ComboBox1.Text & " " & txtNumber.Text & "; Работы: " & workBox.Text & "; Мастер: " & comboMaster.Text & ", исполнители: " & Executor)
+                    End If
+                    SaveCash()
                 End If
+                SaveService()
         End Select
-        SaveDaylist()
         Me.Clear()
         FillPrices()
+9:
         Button1.Enabled = True
         Button1.Text = "Записать >>"
     End Sub
@@ -1147,7 +1317,7 @@
     ''' Добавляет запись во вкладке автосервиса
     ''' </summary>
     ''' <remarks></remarks>
-    Public Sub AddRecord(ulngID As ULong, ulngCount As ULong, strMark As String, strNumber As String, strTime As String, strService As String, ulngServiceSum As ULong, strParts As String, ulngPartsSum As ULong, Optional ulngPartsOut As ULong = 0)
+    Public Sub AddRecord(ulngID As ULong, ulngCount As ULong, strMark As String, strNumber As String, strTime As String, strService As String, ulngServiceSum As ULong, strParts As String, ulngPartsSum As ULong, strMaster As String, strExecutor As String, Optional ulngPartsOut As ULong = 0)
         Dim rowcount As Integer
         rowcount = dataService.RowCount - 1
         dataService.Rows.Add()
@@ -1156,11 +1326,13 @@
         dataService.Item(2, rowcount).Value = strMark
         dataService.Item(3, rowcount).Value = strNumber
         dataService.Item(4, rowcount).Value = strService
-        dataService.Item(5, rowcount).Value = CStr(ulngServiceSum)
-        dataService.Item(6, rowcount).Value = strParts
-        dataService.Item(7, rowcount).Value = CStr(ulngPartsSum)
-        dataService.Item(8, rowcount).Value = CStr(ulngPartsOut)
-        dataService.Item(9, rowcount).Value = CStr(ulngID)
+        dataService.Item(5, rowcount).Value = strMaster
+        dataService.Item(6, rowcount).Value = strExecutor
+        dataService.Item(7, rowcount).Value = CStr(ulngServiceSum)
+        dataService.Item(8, rowcount).Value = strParts
+        dataService.Item(9, rowcount).Value = CStr(ulngPartsSum)
+        dataService.Item(10, rowcount).Value = CStr(ulngPartsOut)
+        dataService.Item(11, rowcount).Value = CStr(ulngID)
         dataService.ClearSelection()
         DayCCService += 1
         dataService.FirstDisplayedScrollingRowIndex = dataService.RowCount - 1
@@ -1219,7 +1391,20 @@
     ''' <summary>
     ''' Сохраняет списки оказанных услуг в файлы fPath и fmPath
     ''' </summary>
-    Public Sub SaveDaylist()
+    Public Sub SaveAll()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        SaveWash()
+        SaveMount()
+        SaveService()
+        SaveCash()
+        SaveSchedule()
+        SaveTable()
+        SaveState()
+        SaveAdvance()
+        SaveDebts()
+    End Sub
+
+    Public Sub SaveWash()
         If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
         RecountRows()
         Dim tmpSTR As String = ""
@@ -1235,8 +1420,16 @@
             tmpSTR = tmpSTR & dataDay.Item(7, i).Value & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(fPath, tmpSTR, False)
+        Application.DoEvents()
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
+            WashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+    End Sub
 
-        tmpSTR = ""
+    Public Sub SaveMount()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        RecountRows()
+        Dim tmpSTR As String = ""
         For i = 0 To dataDayMount.RowCount - 2
             tmpSTR = tmpSTR & dataDayMount.Item(0, i).Value & "|"
             tmpSTR = tmpSTR & dataDayMount.Item(2, i).Value & "|"
@@ -1248,8 +1441,16 @@
             tmpSTR = tmpSTR & dataDayMount.Item(7, i).Value & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(fmPath, tmpSTR, False)
+        Application.DoEvents()
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(fmPath)
+            MountHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+    End Sub
 
-        tmpSTR = ""
+    Public Sub SaveService()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        RecountRows()
+        Dim tmpSTR As String = ""
         For i = 0 To dataService.RowCount - 2
             For j = 0 To dataService.ColumnCount - 1
                 tmpSTR = tmpSTR & dataService.Item(j, i).Value & "|"
@@ -1258,8 +1459,15 @@
             tmpSTR = tmpSTR & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(sPath, tmpSTR, False)
+        Application.DoEvents()
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(sPath)
+            ServiceHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+    End Sub
 
-        tmpSTR = CStr(curID) & vbNewLine
+    Public Sub SaveCash()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        Dim tmpSTR As String = CStr(curID) & vbNewLine
         For i = 0 To dCash.RowCount - 2
             For j = 0 To dCash.ColumnCount - 1
                 tmpSTR = tmpSTR & dCash.Item(j, i).Value & "|"
@@ -1268,11 +1476,19 @@
             tmpSTR = tmpSTR & vbNewLine
         Next i
         My.Computer.FileSystem.WriteAllText(cPath, tmpSTR, False)
-
         tmpSTR = CStr(cSum)
         My.Computer.FileSystem.WriteAllText(ndPath, tmpSTR, False)
+        Application.DoEvents()
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(cPath)
+            CashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+    End Sub
 
-        tmpSTR = ""
+    Dim ScheduleSaving As Boolean = False
+
+    Public Sub SaveSchedule()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        Dim tmpSTR As String = ""
         For i = 0 To dSchedule1.RowCount - 1
             For j = 0 To dSchedule1.ColumnCount - 1
                 tmpSTR = tmpSTR & dSchedule1.Item(j, i).Value & "|"
@@ -1281,7 +1497,6 @@
             tmpSTR = tmpSTR & vbNewLine
         Next i
         My.Computer.FileSystem.WriteAllText(sc1Path, tmpSTR, False)
-
         tmpSTR = ""
         For i = 0 To dSchedule2.RowCount - 1
             For j = 0 To dSchedule2.ColumnCount - 1
@@ -1292,7 +1507,14 @@
         Next i
         My.Computer.FileSystem.WriteAllText(sc2Path, tmpSTR, False)
 
-        tmpSTR = ""
+        ScheduleTimer.Start()
+        ScheduleSaving = True
+    End Sub
+
+    Public Sub SaveTable()
+        Exit Sub
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        Dim tmpSTR As String = ""
         For i = 0 To dTable.RowCount - 1
             tmpSTR = tmpSTR & dTable.Item("dTable_ID", i).Value & "|"
             For j = 3 To dTable.ColumnCount - 1
@@ -1302,26 +1524,15 @@
             tmpSTR = tmpSTR & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(tPath, tmpSTR, False)
+        Application.DoEvents()
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(tPath)
+            TableHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+    End Sub
 
-        tmpSTR = CStr(Worker.nextID) & vbNewLine
-        For i = 0 To 2
-            Select Case i
-                Case 0
-                    tmpSTR = tmpSTR & "[Wash]" & vbNewLine
-                Case 1
-                    tmpSTR = tmpSTR & "[Mount]" & vbNewLine
-                Case 2
-                    tmpSTR = tmpSTR & "[Service]" & vbNewLine
-            End Select
-            For Each wrkr In Worker.AllOfThem
-                If wrkr.GetWorkshopInt = i Then
-                    tmpSTR = tmpSTR & CStr(wrkr.GetID) & "|" & wrkr.GetName & "|" & wrkr.Get2Name & "|" & wrkr.GetPatron & "|" & wrkr.GetJob & "|" & CStr(wrkr.GetSalary) & "|" & CStr(wrkr.GetNorm) & "|" & CStr(wrkr.wFixedSalary) & vbNewLine
-                End If
-            Next
-        Next
-        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\State.ini", tmpSTR, False)
-
-        tmpSTR = "[Advance]" & vbNewLine
+    Public Sub SaveAdvance()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        Dim tmpSTR As String = "[Advance]" & vbNewLine
         For Each w In Worker.AllOfThem
             If w.wAdvance <> 0 Then
                 tmpSTR = tmpSTR & w.GetID & "|" & CStr(w.wAdvance) & vbNewLine
@@ -1346,9 +1557,16 @@
             End If
         Next
         My.Computer.FileSystem.WriteAllText(dPath & "\Advance.ini", tmpSTR, False)
+        Application.DoEvents()
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Advance.ini")
+            AdvanceHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+    End Sub
 
+    Public Sub SaveDebts()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
         Dim ReduceFor As Integer = 0
-        tmpSTR = CStr(NextDebtID) & vbNewLine
+        Dim tmpSTR As String = CStr(NextDebtID) & vbNewLine
         For i = 0 To NextDebtID - 1
             If DebtID(i, 0) = 0 Then
                 ReduceFor += 1
@@ -1362,6 +1580,35 @@
             tmpSTR &= CStr(NextDebtID)
         End If
         My.Computer.FileSystem.WriteAllText(dPath & "\Debts.ini", tmpSTR, False)
+        Application.DoEvents()
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Debts.ini")
+            DebtsHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+    End Sub
+
+    Public Sub SaveState()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        Dim tmpSTR As String = CStr(Worker.nextID) & vbNewLine
+        For i = 0 To 2
+            Select Case i
+                Case 0
+                    tmpSTR = tmpSTR & "[Wash]" & vbNewLine
+                Case 1
+                    tmpSTR = tmpSTR & "[Mount]" & vbNewLine
+                Case 2
+                    tmpSTR = tmpSTR & "[Service]" & vbNewLine
+            End Select
+            For Each wrkr In Worker.AllOfThem
+                If wrkr.GetWorkshopInt = i Then
+                    tmpSTR = tmpSTR & CStr(wrkr.GetID) & "|" & wrkr.GetName & "|" & wrkr.Get2Name & "|" & wrkr.GetPatron & "|" & wrkr.GetJob & "|" & CStr(wrkr.GetSalary) & "|" & CStr(wrkr.GetNorm) & "|" & CStr(wrkr.wFixedSalary) & vbNewLine
+                End If
+            Next
+        Next
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\State.ini", tmpSTR, False)
+        Application.DoEvents()
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\State.ini")
+            StateHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
     End Sub
 
     Private Sub txtNumber_Enter(sender As Object, e As System.EventArgs) Handles txtNumber.Enter
@@ -1371,7 +1618,6 @@
     Private Sub txtNumber_LostFocus(sender As Object, e As System.EventArgs) Handles txtNumber.LostFocus
         If txtNumber.Text = "" Then txtNumber.Text = "... и номер машины"
     End Sub
-
 
     Private Sub Report(Optional ByVal Silently As Boolean = True)
         '    Dim Exc As New Microsoft.Office.Interop.Excel.Application
@@ -1444,7 +1690,7 @@
     ''' </summary>
     Private Sub midnightTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles midnightTimer.Tick
         If curDate.Day <> My.Computer.Clock.LocalTime.Day Then
-            SaveDaylist()
+            SaveAll()
             LoadProcedure(My.Computer.Clock.LocalTime.Date)
         End If
     End Sub
@@ -1517,6 +1763,7 @@
                     Try
                         If CULng(dCash.Item(0, i).Value) = DelID Then
                             dCash.Rows.RemoveAt(i)
+                            SaveCash()
                             Exit For
                         End If
                     Catch ex As Exception
@@ -1526,7 +1773,7 @@
         End If
         RecountRows()
         Commit()
-        SaveDaylist()
+        SaveWash()
     End Sub
 
     ''' <summary>
@@ -1624,6 +1871,10 @@
         OweBox.CheckState = CheckState.Unchecked
         OweBox2.CheckState = CheckState.Unchecked
         DiscountCombo.SelectedIndex = 0
+        listExecutors.Items.Clear()
+        DiscountNud.Value = 0
+        DiscountCombo.SelectedIndex = 0
+
 
         'clearing mount checkboxes:
         serviceBox1.CheckState = CheckState.Unchecked
@@ -1650,6 +1901,8 @@
         partsBox.Text = ""
         partsSumBox.Text = "0"
         partsOutBox.Text = "0"
+        comboMaster.Text = "Мастер"
+        comboExecutor.Text = "Исполнитель"
 
         'clearing UpDown Counters:
         nud1.Value = 4
@@ -1694,6 +1947,8 @@
                 WTL = "Mount"
             Case 2
                 WTL = "Service"
+            Case 4
+                WTL = "Cash"
             Case Else
                 Exit Sub
         End Select
@@ -1713,18 +1968,17 @@
                     ComboNightWorkers.Show()
                 End If
             Case 3, 4, 5, 6
-                Label12.Hide()
-                Label1.Hide()
+                'Label12.Hide()
+                'Label1.Hide()
                 lblNightWorkers.Hide()
                 ComboNightWorkers.Hide()
             Case Else
-                Label12.Show()
-                Label1.Show()
+                'Label12.Show()
+                'Label1.Show()
                 lblNightWorkers.Hide()
                 ComboNightWorkers.Hide()
         End Select
 0:
-
         FillPrices()
         Commit()
     End Sub
@@ -1749,6 +2003,7 @@
                 Try
                     If CULng(dCash.Item(0, i).Value) = DelID Then
                         dCash.Item(4, i).Value = dataDay.Item(6, e.RowIndex).Value
+                        SaveCash()
                         Exit For
                     End If
                 Catch ex As Exception
@@ -1756,21 +2011,37 @@
             Next
         End If
         Commit()
-        SaveDaylist()
+        SaveWash()
     End Sub
 
-    Private Sub curDatePicker_ValueChanged(sender As System.Object, e As System.EventArgs) Handles curDatePicker.ValueChanged, NightBox.CheckedChanged
-        If Not LoadProcedureRunning Then SaveDaylist()
-        DayMode = Not NightBox.Checked
+    Private Sub curDatePicker_ValueChanged(sender As System.Object, e As System.EventArgs) Handles curDatePicker.ValueChanged
+        If Not LoadProcedureRunning Then SaveAll()
         lblDOW.Text = DOW(curDatePicker.Value)
         lblToday.Text = DOW(curDatePicker.Value, True)
         lblToday.Text = lblToday.Text & " - " & curDatePicker.Value.ToString("dd.MM.yyyy")
         lblTomorrow.Text = DOW(curDatePicker.Value.AddDays(1), True)
         lblTomorrow.Text = lblTomorrow.Text & " - " & curDatePicker.Value.AddDays(1).ToString("dd.MM.yyyy")
+        If LoadProcedureRunning Then Exit Sub
+        LoadProcedure(curDatePicker.Value)
+        Commit()
+    End Sub
+
+    Private Sub NightBox_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles NightBox.CheckedChanged
+        If Not LoadProcedureRunning Then SaveWash()
+        DayMode = Not NightBox.Checked
+        lblDOW.Text = DOW(curDatePicker.Value)
         lblNightWorkers.Visible = Not DayMode And Not READ_ONLY_MODE
         ComboNightWorkers.Visible = Not DayMode And Not READ_ONLY_MODE
         If LoadProcedureRunning Then Exit Sub
-        LoadProcedure(curDatePicker.Value)
+        If DayMode Then
+            fPath = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & ".ini"
+        Else
+            fPath = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & "N.ini"
+        End If
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
+            WashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+        LoadWash()
         Commit()
     End Sub
 
@@ -1854,7 +2125,7 @@
                 dCash.Rows.RemoveAt(SelectedRow.Index)
             Next
             Commit()
-            SaveDaylist()
+            SaveCash()
         Catch er As Exception
             MsgBox(er.Message, MsgBoxStyle.Critical)
         End Try
@@ -1873,7 +2144,7 @@
 
     Private Sub dCash_CellEndEdit(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dCash.CellEndEdit
         Commit()
-        SaveDaylist()
+        SaveCash()
     End Sub
 
     Private Sub dataDayMount_CellDoubleClick1(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataDayMount.CellDoubleClick
@@ -1886,6 +2157,7 @@
                     Try
                         If CULng(dCash.Item(0, i).Value) = DelID Then
                             dCash.Rows.RemoveAt(i)
+                            SaveCash()
                             Exit For
                         End If
                     Catch ex As Exception
@@ -1895,7 +2167,7 @@
         End If
         RecountRows()
         Commit()
-        SaveDaylist()
+        SaveMount()
     End Sub
 
     Private Sub dataDayMount_CellEndEdit1(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataDayMount.CellEndEdit
@@ -1906,6 +2178,7 @@
                 Try
                     If CULng(dCash.Item(0, i).Value) = DelID Then
                         dCash.Item(4, i).Value = dataDayMount.Item(6, e.RowIndex).Value
+                        SaveCash()
                         Exit For
                     End If
                 Catch ex As Exception
@@ -1913,20 +2186,30 @@
             Next
         End If
         Commit()
-        SaveDaylist()
+        SaveMount()
     End Sub
 
     Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
+        On Error Resume Next
         Commit()
-        If dCash.AllowUserToAddRows = True And CStr(dCash.Item(0, dCash.RowCount - 2).Value) <> "XXX" Then
+        If dCash.AllowUserToAddRows = True Then
             Dim Income As ULong = 0
             Dim Outcome As ULong = 0
-            For i = 0 To dCash.RowCount - 2
+            Dim i As Integer = 0
+            Do Until i > dCash.RowCount - 2
+                If CStr(dCash.Item(0, i).Value).ToLower = "xxx" Then
+                    dCash.Rows.RemoveAt(i)
+                    Continue Do
+                End If
+                If dCash.Item(4, i).Value = "" Then dCash.Item(4, i).Value = "0"
+                If dCash.Item(5, i).Value = "" Then dCash.Item(5, i).Value = "0"
                 Income += CULng(dCash.Item(4, i).Value)
                 Outcome += CULng(dCash.Item(5, i).Value)
-            Next
-            AddCash("xxx", "День закрыт", curDate.ToString("dd.MM.yyyy"), FormattedTime, CStr(Income) & " р.", CStr(Outcome) & " р.", "В кассе: " & CStr(cSum))
+                i += 1
+            Loop
+        AddCash("xxx", "День закрыт", curDate.ToString("dd.MM.yyyy"), FormattedTime, CStr(Income) & " р.", CStr(Outcome) & " р.", "В кассе: " & CStr(cSum))
         End If
+        SaveCash()
         Form2.LoadCash()
         Form2.Show()
     End Sub
@@ -1981,14 +2264,14 @@
         AddCash(AddComboBox.Text, CULng(AddIncomeBox.Text), CULng(AddOutcomeBox.Text), AddCommentBox.Text)
         Me.Clear()
         Commit()
-        SaveDaylist()
+        SaveCash()
     End Sub
 
     Private Sub dataService_CellDoubleClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataService.CellDoubleClick
         If GlobalMode = 1 Then
             If MsgBox("Удалить запись?!", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 Dim DelID As ULong = 9999
-                DelID = CULng(dataService.Item(9, e.RowIndex).Value)
+                DelID = CULng(dataService.Item("Column10", e.RowIndex).Value)
                 dataService.Rows.RemoveAt(e.RowIndex)
                 For i = 0 To dCash.RowCount - 1
                     Try
@@ -2003,7 +2286,8 @@
         End If
         RecountRows()
         Commit()
-        SaveDaylist()
+        SaveService()
+        SaveCash()
     End Sub
 
     Private Sub ClearAllSelection(sender As System.Object, e As System.EventArgs) Handles TabPage1.Click, TabPage2.Click, TabPage3.Click, TabPage4.Click, Me.Click
@@ -2033,7 +2317,7 @@
                 Chart1.Series(GraphName).Points.AddXY(CInt(comboDayTo.Text), sum)
             Case 2
                 Dim SName As String = "Шиномонтаж " & comboMonth.Text & " " & CStr(curDate.Year)
-                AddGraph(dPath, "m.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName)
+                AddGraph(dpath, "m.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName)
             Case 3
                 Dim sum As Long = CountAverage(CInt(comboDayFrom.Text), CInt(comboDayTo.Text), dpath, "m.ini", 6)
                 Dim GraphName = "Шиномонтаж ср. " & comboMonth.Text & " " & CStr(curDate.Year)
@@ -2045,9 +2329,9 @@
                 Chart1.Series(GraphName).Points.AddXY(CInt(comboDayTo.Text), sum)
             Case 4
                 Dim SName As String = "Сервис " & comboMonth.Text & " " & CStr(curDate.Year)
-                AddGraph(dPath, "s.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 5, SName)
+                AddGraph(dpath, "s.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 7, SName)
             Case 5
-                Dim sum As Long = CountAverage(CInt(comboDayFrom.Text), CInt(comboDayTo.Text), dpath, "s.ini", 5)
+                Dim sum As Long = CountAverage(CInt(comboDayFrom.Text), CInt(comboDayTo.Text), dpath, "s.ini", 7)
                 Dim GraphName = "Сервис ср. " & comboMonth.Text & " " & CStr(curDate.Year)
                 If Not Chart1.Series.IsUniqueName(GraphName) Then Chart1.Series.Remove(Chart1.Series.FindByName(GraphName))
                 Chart1.Series.Add(GraphName)
@@ -2058,10 +2342,10 @@
             Case 6
                 Dim SName As String = "Выручка " & comboMonth.Text & " " & CStr(curDate.Year)
                 Dim YVals(31) As ULong
-                AddGraph(dPath, "N.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
-                AddGraph(dPath, ".ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
-                AddGraph(dPath, "m.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
-                AddGraph(dpath, "s.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 5, SName, False, YVals)
+                AddGraph(dpath, "N.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
+                AddGraph(dpath, ".ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
+                AddGraph(dpath, "m.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
+                AddGraph(dpath, "s.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 7, SName, False, YVals)
             Case 7
                 Dim SName As String = "Ср. выручка " & comboMonth.Text & " " & CStr(curDate.Year)
                 Dim YVals(31) As ULong
@@ -2069,7 +2353,7 @@
                 AddGraph(dpath, "N.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, ".ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, "m.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
-                AddGraph(dpath, "s.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 5, SName, True, YVals)
+                AddGraph(dpath, "s.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 7, SName, True, YVals)
                 For Each i As ULong In YVals
                     sum += i
                 Next
@@ -2177,11 +2461,11 @@
         If e.ColumnIndex = 3 And e.RowIndex <> sender.RowCount - 1 Then
             sender.Item(1, e.RowIndex + 1).Value = sender.Item(1, e.RowIndex).Value
             sender.Item(2, e.RowIndex + 1).Value = sender.Item(2, e.RowIndex).Value
-            SaveDaylist()
+            SaveSchedule()
         ElseIf e.ColumnIndex = 4 Then
             sender.Item(1, e.RowIndex).Value = ""
             sender.Item(2, e.RowIndex).Value = ""
-            SaveDaylist()
+            SaveSchedule()
         End If
     End Sub
 
@@ -2231,26 +2515,26 @@
 
     Private Sub RadioButton19_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton19.CheckedChanged
         If sender.checked = True Then CurSche = 1
-        If Not LOADING Then LoadProcedure(curDate)
+        If Not LOADING Then LoadSchedule(True)
     End Sub
 
     Private Sub RadioButton20_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton20.CheckedChanged
         If sender.checked = True Then CurSche = 2
-        If Not LOADING Then LoadProcedure(curDate)
+        If Not LOADING Then LoadSchedule(True)
     End Sub
 
     Private Sub RadioButton21_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton21.CheckedChanged
         If sender.checked = True Then CurSche = 3
-        If Not LOADING Then LoadProcedure(curDate)
+        If Not LOADING Then LoadSchedule(True)
     End Sub
 
     Private Sub RadioButton22_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton22.CheckedChanged
         If sender.checked = True Then CurSche = 4
-        If Not LOADING Then LoadProcedure(curDate)
+        If Not LOADING Then LoadSchedule(True)
     End Sub
 
     Private Sub dSchedule1_CellEndEdit(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dSchedule1.CellEndEdit
-        SaveDaylist()
+        SaveSchedule()
     End Sub
 
     Private Sub techWashBox_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles techWashBox.CheckedChanged
@@ -2282,29 +2566,31 @@
     End Sub
 
     Private Sub dSchedule2_CellEndEdit(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dSchedule2.CellEndEdit
-        SaveDaylist()
+        SaveSchedule()
     End Sub
 
     Private Sub dataService_CellEndEdit(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataService.CellEndEdit
-        If e.ColumnIndex = 5 Or e.ColumnIndex = 7 Then
+        If e.ColumnIndex = 7 Or e.ColumnIndex = 9 Then
             Dim DelID As ULong = 9999
-            DelID = CULng(dataService.Item(9, e.RowIndex).Value)
+            DelID = CULng(dataService.Item("Column10", e.RowIndex).Value)
             For i = 0 To dCash.RowCount - 1
                 Try
                     If CULng(dCash.Item(0, i).Value) = DelID Then
-                        dCash.Item(4, i).Value = CStr(CLng(dataService.Item(5, e.RowIndex).Value) + CLng(dataService.Item(7, e.RowIndex).Value))
+                        dCash.Item(4, i).Value = CStr(CLng(dataService.Item(7, e.RowIndex).Value) + CLng(dataService.Item(9, e.RowIndex).Value))
+                        SaveCash()
                         Exit For
                     End If
                 Catch ex As Exception
                 End Try
             Next
-        ElseIf e.ColumnIndex = 8 Then
+        ElseIf e.ColumnIndex = 10 Then
             Dim DelID As ULong = 9999
-            DelID = CULng(dataService.Item(9, e.RowIndex).Value)
+            DelID = CULng(dataService.Item("Column10", e.RowIndex).Value)
             For i = 0 To dCash.RowCount - 1
                 Try
                     If CULng(dCash.Item(0, i).Value) = DelID Then
-                        dCash.Item(5, i).Value = dataService.Item(8, e.RowIndex).Value
+                        dCash.Item(5, i).Value = dataService.Item(10, e.RowIndex).Value
+                        SaveCash()
                         Exit For
                     End If
                 Catch ex As Exception
@@ -2312,16 +2598,16 @@
             Next
         End If
         Commit()
-        SaveDaylist()
+        SaveService()
     End Sub
 
     Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
         For Each SelCell In dTable.SelectedCells
             If SelCell.OwningColumn.Index < 3 Then Continue For
             SelCell.Value = CStr(nudHoursToAdd.Value)
-            RecountWorkers(selcell.ColumnIndex - 2)
+            RecountWorkers(SelCell.ColumnIndex - 2)
         Next
-        SaveDaylist()
+        SaveTable()
     End Sub
 
     Public Function FindRowByID(IDToFind As Integer) As Integer
@@ -2404,6 +2690,7 @@
     End Sub
 
     Private Sub zpWorkshops_SelectedIndexChanged(sender As Object, e As EventArgs) Handles zpWorkshops.SelectedIndexChanged
+        Exit Sub
         zpWorkers.Items.Clear()
         For Each w In Worker.AllOfThem
             If w.GetWorkshopInt = zpWorkshops.SelectedIndex Then
@@ -2414,6 +2701,7 @@
     End Sub
 
     Private Sub zpWorkers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles zpWorkers.SelectedIndexChanged
+        Exit Sub
         dSalary.Rows.Clear()
         Dim D_I_M As Integer = Date.DaysInMonth(curDate.Year, curDate.Month)
         Dim tmpSTR As String
@@ -2430,7 +2718,7 @@
             If tmpSTR = "0" Then
                 tmpSTR2 = "0"
             Else
-                tmpSTR2 = CStr(Math.Round(DayTotal(0, i) / DayWorkerCount(0, i) / 100 * DayPercent(0, i) - tmpCarCount * 20, 2))
+                tmpSTR2 = CStr(Math.Round((DayTotal(0, i) - tmpCarCount * 20) / DayWorkerCount(0, i) / 100 * DayPercent(0, i), 2))
             End If
             NightIncome = CountNightIncome(i, i, w.GetID) / 2
             If w.wFixedSalary Then
@@ -2441,7 +2729,7 @@
             dSalary.Rows.Add(CStr(i) & "." & CStr(curDate.Month) & "." & CStr(curDate.Year), _
                              CStr(DayPercent(0, i)), _
                              CStr(DayWorkerCount(0, i)), _
-                             CStr(DayTotal(0, i)), _
+                             CStr(DayTotal(0, i) - tmpCarCount * 20), _
                              CStr(tmpCarCount), _
                              tmpSTR2, _
                              tmpAppearance, _
@@ -2503,11 +2791,12 @@
         CashLeaf.Show()
     End Sub
 
-    Public Function ComeGetSum(Source As DataGridView, Column As Integer, Optional StartRow As Integer = 0, Optional EndRow As Integer = -1) As Double
+    Public Function ComeGetSum(Source As DataGridView, Column As Integer, Optional StartRow As Integer = 0, Optional EndRow As Integer = -1, Optional VisibleOnly As Boolean = False) As Double
         On Error Resume Next
         Dim dblSum As Double = 0
         If EndRow = -1 Then EndRow = Source.RowCount - 1
         For i = StartRow To EndRow
+            If VisibleOnly And Not Source.Rows(i).Visible Then Continue For
             dblSum += CDbl(Source.Item(Column, i).Value)
         Next
         Return dblSum
@@ -2516,7 +2805,7 @@
     Private Sub ComboNightWorkers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboNightWorkers.SelectedIndexChanged
         If LoadProcedureRunning Then Exit Sub
         CurNightWorkerID = WorkerIDForNightWorkers(sender.selectedindex)
-        SaveDaylist()
+        SaveWash()
     End Sub
 
     Private Sub OweBox3_CheckedChanged(sender As Object, e As EventArgs) Handles OweBox3.CheckedChanged
@@ -2547,5 +2836,265 @@
 
     Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
         ZPForm.Show()
+    End Sub
+
+    Private Sub btnLoadAnalytics_Click(sender As Object, e As EventArgs) Handles btnLoadAnalytics.Click
+        If dtpTo.Value < dtpFrom.Value Then
+            Exit Sub
+        End If
+        dgvAnalytics.Rows.Clear()
+        comboFilter.Items.Clear()
+        comboFilter.Items.Add("Показать все")
+        Dim curRow As String()
+        Dim CurrentDate As Date = dtpFrom.Value
+        Dim cPath As String
+        While CurrentDate <= dtpTo.Value
+            cPath = Application.StartupPath & "\data\" & CStr(CurrentDate.Year) & "\" & CStr(CurrentDate.Month) & "\" & CStr(CurrentDate.Day) & "c.ini"
+            If My.Computer.FileSystem.FileExists(cPath) Then
+                Using cbaseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(cPath)
+                    cbaseFile.TextFieldType = FileIO.FieldType.Delimited
+                    cbaseFile.SetDelimiters("|")
+                    While Not cbaseFile.EndOfData
+                        curRow = cbaseFile.ReadFields
+                        If curRow.Length = 1 Or curRow(0) = "x" Or curRow(0) = "xxx" Then Continue While
+                        For i = 0 To comboFilter.Items.Count - 1
+                            If comboFilter.Items(i) = curRow(1) Then GoTo 7
+                        Next
+                        comboFilter.Items.Add(curRow(1))
+7:
+                        dgvAnalytics.Rows.Add(curRow(0), curRow(1), curRow(2), curRow(3), curRow(4), curRow(5), curRow(6))
+                    End While
+                End Using
+            End If
+            CurrentDate = CurrentDate.AddDays(1)
+        End While
+        dgvAnalytics.Rows.Add("autosum", "СУММА", "", "", ComeGetSum(dgvAnalytics, 4), ComeGetSum(dgvAnalytics, 5))
+        dgvAnalytics.ClearSelection()
+    End Sub
+
+    Private Sub btnClearAnalytics_Click(sender As Object, e As EventArgs) Handles btnClearAnalytics.Click
+        dgvAnalytics.Rows.Clear()
+    End Sub
+
+    Private Sub comboFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboFilter.SelectedIndexChanged
+        Dim showall As Boolean = False
+        If comboFilter.SelectedIndex = 0 Then showall = True
+        For i = 0 To dgvAnalytics.RowCount - 1
+            If showall Or dgvAnalytics.Item(1, i).Value = comboFilter.Text Then
+                dgvAnalytics.Rows(i).Visible = True
+            Else
+                dgvAnalytics.Rows(i).Visible = False
+            End If
+            If dgvAnalytics.Item(0, i).Value = "autosum" Then
+                dgvAnalytics.Rows(i).Visible = True
+                dgvAnalytics.Item(4, i).Value = ComeGetSum(dgvAnalytics, 4, 0, dgvAnalytics.RowCount - 2, True)
+                dgvAnalytics.Item(5, i).Value = ComeGetSum(dgvAnalytics, 5, 0, dgvAnalytics.RowCount - 2, True)
+            End If
+        Next
+    End Sub
+
+    Private Sub dgvAnalytics_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAnalytics.CellContentClick
+
+    End Sub
+
+    Private Sub dgvAnalytics_SelectionChanged(sender As Object, e As EventArgs) Handles dgvAnalytics.SelectionChanged
+        On Error Resume Next
+        Dim sum As ULong
+        For Each cell As DataGridViewCell In dgvAnalytics.SelectedCells
+            sum += CULng(cell.Value)
+        Next
+        Label1.Text = CStr(sum)
+    End Sub
+
+    Dim CurDirWatcher As System.IO.FileSystemWatcher
+    Dim AppDirWatcher As System.IO.FileSystemWatcher
+
+    Sub CreateWatchers()
+        'On Error Resume Next
+        'RemoveHandler CurDirWatcher.Created, AddressOf SomethingChanged
+        'RemoveHandler CurDirWatcher.Changed, AddressOf SomethingChanged
+        'RemoveHandler CurDirWatcher.Deleted, AddressOf SomethingChanged
+        'RemoveHandler CurDirWatcher.Renamed, AddressOf SomethingChanged
+
+        CurDirWatcher = New System.IO.FileSystemWatcher()
+        CurDirWatcher.Path = dPath
+        CurDirWatcher.NotifyFilter = (System.IO.NotifyFilters.LastWrite Or System.IO.NotifyFilters.FileName Or System.IO.NotifyFilters.DirectoryName)
+        CurDirWatcher.Filter = "*.ini"
+        CurDirWatcher.EnableRaisingEvents = True
+        AddHandler CurDirWatcher.Created, AddressOf SomethingChanged
+        AddHandler CurDirWatcher.Changed, AddressOf SomethingChanged
+        AddHandler CurDirWatcher.Deleted, AddressOf SomethingChanged
+        AddHandler CurDirWatcher.Renamed, AddressOf SomethingChanged
+
+        'RemoveHandler AppDirWatcher.Created, AddressOf SomethingChanged
+        'RemoveHandler AppDirWatcher.Changed, AddressOf SomethingChanged
+        'RemoveHandler AppDirWatcher.Deleted, AddressOf SomethingChanged
+        'RemoveHandler AppDirWatcher.Renamed, AddressOf SomethingChanged
+
+        AppDirWatcher = New System.IO.FileSystemWatcher()
+        AppDirWatcher.Path = Application.StartupPath & "\data"
+        AppDirWatcher.NotifyFilter = (System.IO.NotifyFilters.LastWrite Or System.IO.NotifyFilters.FileName Or System.IO.NotifyFilters.DirectoryName)
+        AppDirWatcher.Filter = "*.ini"
+        AppDirWatcher.EnableRaisingEvents = True
+        AddHandler AppDirWatcher.Created, AddressOf SomethingChanged
+        AddHandler AppDirWatcher.Changed, AddressOf SomethingChanged
+        AddHandler AppDirWatcher.Deleted, AddressOf SomethingChanged
+        AddHandler AppDirWatcher.Renamed, AddressOf SomethingChanged
+    End Sub
+
+    Sub UpdateWatchers()
+        CurDirWatcher.Path = dPath
+        CurDirWatcher.NotifyFilter = (System.IO.NotifyFilters.LastWrite Or System.IO.NotifyFilters.FileName Or System.IO.NotifyFilters.DirectoryName)
+        CurDirWatcher.Filter = "*.ini"
+        CurDirWatcher.EnableRaisingEvents = True
+        AppDirWatcher.Path = Application.StartupPath & "\data"
+        AppDirWatcher.NotifyFilter = (System.IO.NotifyFilters.LastWrite Or System.IO.NotifyFilters.FileName Or System.IO.NotifyFilters.DirectoryName)
+        AppDirWatcher.Filter = "*.ini"
+        AppDirWatcher.EnableRaisingEvents = True
+    End Sub
+
+    Dim WashHashCode As Byte()
+    Dim MountHashCode As Byte()
+    Dim ServiceHashCode As Byte()
+    Dim CashHashCode As Byte()
+    Dim sc1HashCode As Byte()
+    Dim sc2HashCode As Byte()
+    Dim TableHashCode As Byte()
+    Dim AdvanceHashCode As Byte()
+    Dim DebtsHashCode As Byte()
+    Dim StateHashCode As Byte()
+
+    Sub SomethingChanged(source As Object, e As System.IO.FileSystemEventArgs)
+        If ClosingNow Then Exit Sub
+        On Error Resume Next
+        Dim Appendix As String
+        Dim CDD As String = CStr(curDate.Day)
+        Dim NDD As String = CStr(curDate.AddDays(1).Day)
+        Appendix = e.Name
+        Appendix = Appendix.Remove(Appendix.Length - 4, 4)
+        Select Case Appendix
+            Case CDD, CDD & "N"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, WashHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadWash())
+                Me.Invoke(Sub() Commit())
+                WashHashCode = HashCode
+            Case CDD & "m"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(fmPath)
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, MountHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadMount())
+                Me.Invoke(Sub() Commit())
+                MountHashCode = HashCode
+            Case CDD & "s"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(sPath)
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, ServiceHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadService())
+                Me.Invoke(Sub() Commit())
+                ServiceHashCode = HashCode
+            Case CDD & "c"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(cPath)
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, CashHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadCash())
+                Me.Invoke(Sub() Commit())
+                CashHashCode = HashCode
+            Case CDD & CStr(CurSche) & "sc"
+                If ScheduleSaving Then Exit Select
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(sc1Path)
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, sc1HashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadSchedule())
+                sc1HashCode = HashCode
+            Case NDD & CStr(CurSche) & "sc"
+                If ScheduleSaving Then Exit Select
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(sc2Path)
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, sc2HashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadSchedule())
+                sc2HashCode = HashCode
+            Case "Table"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Table.ini")
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, TableHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadTable())
+                TableHashCode = HashCode
+            Case "Advance"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Advance.ini")
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, AdvanceHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadAdvance())
+                AdvanceHashCode = HashCode
+            Case "Debts"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Debts.ini")
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, DebtsHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadDebts())
+                DebtsHashCode = HashCode
+            Case "State"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\State.ini")
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, StateHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadState())
+                StateHashCode = HashCode
+        End Select
+    End Sub
+
+    Public Function HashCodeEquals(FirstHashCode As Byte(), SecondHashCode As Byte()) As Boolean
+        If FirstHashCode.Length <> SecondHashCode.Length Then Return False
+        For i = 0 To FirstHashCode.Length - 1
+            If FirstHashCode(i) <> SecondHashCode(i) Then Return False
+        Next
+        Return True
+    End Function
+
+    Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
+        SaveTable()
+        RecountWorkers()
+        Worker.CalculateAllHourCosts()
+    End Sub
+
+    Private Sub ScheduleTimer_Tick(sender As Object, e As EventArgs) Handles ScheduleTimer.Tick
+        On Error Resume Next
+        ScheduleTimer.Stop()
+        sc1HashCode = Nothing
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(sc1Path)
+            sc1HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+        sc2HashCode = Nothing
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(sc2Path)
+            sc2HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+        ScheduleSaving = False
+    End Sub
+
+    Private Sub btnAddExecutor_Click(sender As Object, e As EventArgs) Handles btnAddExecutor.Click
+        If comboExecutor.Text = "Исполнитель" Then Exit Sub
+        For Each lstItem In listExecutors.Items
+            If comboExecutor.Text = lstItem Then Exit Sub
+        Next
+        listExecutors.Items.Add(comboExecutor.Text)
     End Sub
 End Class

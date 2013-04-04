@@ -30,6 +30,7 @@
     End Sub
 
     Public Sub New(ID As Integer, WorkerName As String, Worker2ndName As String, WorkerPatronymic As String, WorkerWorkshop As Integer, WorkerJob As String, WorkerSalary As Long, WorkerNorm As Integer, FixedSalary As Boolean)
+        If ID >= nextID Then nextID = ID + 1
         AllOfThem.Add(Me)
         wName = WorkerName
         w2Name = Worker2ndName
@@ -40,6 +41,14 @@
         wSalary = WorkerSalary
         wNorm = WorkerNorm
         wFixedSalary = FixedSalary
+    End Sub
+
+    Public Sub Dispose()
+        AllOfThem.Remove(Me)
+    End Sub
+
+    Public Shared Sub Clear()
+        AllOfThem.Clear()
     End Sub
 
     Public Function FullName() As String

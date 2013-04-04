@@ -58,7 +58,7 @@ HappyCars
 	<param name="uintSum">Сумма</param>
 	<param name="uintGroup">Группа</param>
 	<param name="SMode">Режим (0 - автомойка, 1 - шиномонтаж)</param>
-</member><member name="M:HappyCars.Form1.AddRecord(System.UInt64,System.UInt64,System.String,System.String,System.String,System.String,System.UInt64,System.String,System.UInt64,System.UInt64)">
+</member><member name="M:HappyCars.Form1.AddRecord(System.UInt64,System.UInt64,System.String,System.String,System.String,System.String,System.UInt64,System.String,System.UInt64,System.String,System.String,System.UInt64)">
 	<summary>
  Добавляет запись во вкладке автосервиса
  </summary>
@@ -67,7 +67,7 @@ HappyCars
 	<summary>
  Возвращает текущее время в формате String (xx:xx)
  </summary>
-</member><member name="M:HappyCars.Form1.SaveDaylist">
+</member><member name="M:HappyCars.Form1.SaveAll">
 	<summary>
  Сохраняет списки оказанных услуг в файлы fPath и fmPath
  </summary>

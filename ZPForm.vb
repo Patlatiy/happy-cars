@@ -15,17 +15,28 @@
 
     Private Sub ZPForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label1.Text = "Рассчетная ведомость за " & Form2.NumberToMonth(Form1.curDate.Month)
+        Dim cnt As Integer = 1
+        Select Case Form1.zpWorkshops.SelectedIndex
+            Case 0
+                GoTo Wash
+            Case 1
+                GoTo Mount
+            Case 2
+                GoTo Service
+        End Select
+Service:
         dZP.Rows.Add("", "", "Ремонтный цех")
         For i = 0 To dZP.ColumnCount - 1
             dZP.Item(i, dZP.RowCount - 1).Style.BackColor = Color.LightGray
         Next
-        Dim cnt As Integer = 1
         For Each w In Worker.AllOfThem
             If w.GetWorkshopInt = 2 Then
                 dZP.Rows.Add(w.GetID, Str(cnt), w.FullName, w.GetJob, CStr(Math.Round(w.HoursWorkedInCurMonth / w.GetNorm, 1)), "", CStr(w.GetSalary), CStr(w.wBonus), CStr(w.wOtherPayments), CStr(w.wAdvance), CStr(w.wOtherCharges), CStr(w.GetSalary + w.wBonus + w.wOtherPayments - w.wAdvance - w.wOtherCharges))
                 cnt += 1
             End If
         Next
+        GoTo Final
+Wash:
         dZP.Rows.Add("", "", "Моечный цех")
         For i = 0 To dZP.ColumnCount - 1
             dZP.Item(i, dZP.RowCount - 1).Style.BackColor = Color.LightGray
@@ -40,10 +51,12 @@
                         Exit For
                     End If
                 Next
-                dZP.Rows.Add(w.GetID, Str(cnt), w.FullName, w.GetJob, CStr(Math.Round(w.HoursWorkedInCurMonth / w.GetNorm, 1)), CStr(Math.Round(w.wNightSum)), CStr(w.GetSalary), CStr(w.wBonus), CStr(w.wOtherPayments), CStr(w.wAdvance), CStr(w.wOtherCharges), CStr(w.GetSalary + Math.Round(w.wNightSum) + w.wBonus + w.wOtherPayments - w.wAdvance - w.wOtherCharges))
+                dZP.Rows.Add(w.GetID, Str(cnt), w.FullName, w.GetJob, CStr(Math.Round(w.HoursWorkedInCurMonth / w.GetNorm, 1)), CStr(Math.Round(w.wPercentSum + w.wNightSum)), CStr(Math.Round(w.wSalarySum)), CStr(w.wBonus), CStr(w.wOtherPayments), CStr(w.wAdvance), CStr(w.wOtherCharges), CStr(w.wTotalSum))
                 cnt += 1
             End If
         Next
+        GoTo Final
+Mount:
         dZP.Rows.Add("", "", "Шиномонтажный цех")
         For i = 0 To dZP.ColumnCount - 1
             dZP.Item(i, dZP.RowCount - 1).Style.BackColor = Color.LightGray
@@ -54,6 +67,8 @@
                 cnt += 1
             End If
         Next
+        GoTo Final
+Final:
         dZP.Height = dZP.ColumnHeadersHeight + dZP.Rows.GetRowsHeight(DataGridViewElementStates.Visible) + 4
         dZP.ClearSelection()
     End Sub
@@ -76,5 +91,9 @@
                 Exit Sub
         End Select
         sender.item(11, e.RowIndex).value = CStr(w.GetSalary + Math.Round(w.wNightSum) + w.wBonus + w.wOtherPayments - w.wAdvance - w.wOtherCharges)
+    End Sub
+
+    Private Sub dZP_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dZP.CellContentClick
+
     End Sub
 End Class

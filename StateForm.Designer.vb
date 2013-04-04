@@ -53,6 +53,8 @@ Partial Class StateForm
         Me.Label11 = New System.Windows.Forms.Label()
         Me.nudOC = New System.Windows.Forms.NumericUpDown()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         CType(Me.nudSalary, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNorm, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHour, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -172,7 +174,6 @@ Partial Class StateForm
         Me.Button2.TabIndex = 12
         Me.Button2.Text = "Удалить"
         Me.Button2.UseVisualStyleBackColor = True
-        Me.Button2.Visible = False
         '
         'Label6
         '
@@ -328,11 +329,31 @@ Partial Class StateForm
         Me.Label12.TabIndex = 25
         Me.Label12.Text = "Прочие удержания"
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(410, 325)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 29
+        Me.Button3.Text = "Применить"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(329, 325)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 30
+        Me.Button4.Text = "ОК"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'StateForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(493, 352)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.nudOP)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.nudOC)
@@ -410,4 +431,6 @@ Partial Class StateForm
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents nudOC As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 End Class

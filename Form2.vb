@@ -7,6 +7,7 @@
 
     Public Sub LoadMonth(WhatToLoad As String, ByVal StartingDay As Integer, ByVal EndingDay As Integer, intMonth As Integer, intYear As Integer)
         Dim sum As ULong = 0
+        Dim diff As ULong = 0
         Dim cnt As UInteger = 0
         fpath = Application.StartupPath & "\data\" & CStr(intYear) & "\" & CStr(intMonth) & "\"
         Dim CurRow As String()
@@ -163,7 +164,7 @@
                                 baseFile.SetDelimiters("|")
                                 While Not baseFile.EndOfData
                                     CurRow = baseFile.ReadFields
-                                    sum += CULng(CurRow(5)) + CULng(CurRow(7)) - CULng(CurRow(8))
+                                    sum += CULng(CurRow(7)) + CULng(CurRow(9)) - CULng(CurRow(10))
                                     cnt += 1
                                 End While
                                 dataDay.Rows.Add()
@@ -190,10 +191,76 @@
                 dataDay.AllowUserToAddRows = False
                 dataNight.AllowUserToAddRows = False
                 dataDay.Height = 22 + 22 * dataDay.RowCount
-                dataNight.Height = 22 + 22 * dataNight.RowCount
                 dataDay.ClearSelection()
-                dataNight.ClearSelection()
                 Label1.Text = "Месячный отчёт по сервису с " & CStr(StartingDay) & " по " & CStr(EndingDay) & ", " & NumberToMonth(intMonth) & " " & CStr(intYear)
+            Case "Cash"
+                Dim sum2 As ULong = 0
+                Dim diff2 As ULong = 0
+                dataCash.Rows.Clear()
+                dataDay.Hide()
+                dataNight.Hide()
+                dataDay1.Hide()
+                dataCash.Show()
+                dataCash.Columns.Clear()
+                dataCash.AllowUserToAddRows = True
+                dataCash.Columns.Add("cmn0", "")
+                dataCash.Columns.Add("cmn1", "Приход")
+                dataCash.Columns.Add("cmn2", "Расход")
+                dataCash.Columns.Add("cmn3", "Общ. приход")
+                dataCash.Columns.Add("cmn4", "Общ. расход")
+                If My.Computer.FileSystem.DirectoryExists(fpath) Then
+                    For i = StartingDay To EndingDay
+                        If My.Computer.FileSystem.FileExists(fpath & CStr(i) & "c.ini") Then
+                            Using baseFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(fpath & CStr(i) & "c.ini")
+                                baseFile.TextFieldType = FileIO.FieldType.Delimited
+                                baseFile.SetDelimiters("|")
+                                While Not baseFile.EndOfData
+                                    CurRow = baseFile.ReadFields
+                                    If dataCash.RowCount = 1 And CurRow(0) = "x" Then
+                                        dataCash.Rows.Add()
+                                        dataCash.Item(0, dataCash.RowCount - 2).Value = "Остаток"
+                                        dataCash.Item(1, dataCash.RowCount - 2).Value = CurRow(4)
+                                        sum2 = CULng(CurRow(4))
+                                    End If
+                                    If CurRow.Length > 1 And CurRow(0) <> "x" And CurRow(0) <> "xxx" Then
+                                        sum += CULng(CurRow(4))
+                                        diff += CULng(CurRow(5))
+                                        cnt += 1
+                                    End If
+                                End While
+                                If sum <> 0 Or diff <> 0 Then
+                                    dataCash.Rows.Add()
+                                    dataCash.Item(1, dataCash.RowCount - 2).Value = CStr(sum)
+                                    sum2 += sum
+                                    sum = 0
+                                    dataCash.Item(3, dataCash.RowCount - 2).Value = CStr(sum2)
+                                    dataCash.Item(2, dataCash.RowCount - 2).Value = CStr(diff)
+                                    diff2 += diff
+                                    diff = 0
+                                    dataCash.Item(4, dataCash.RowCount - 2).Value = CStr(diff2)
+                                    cnt = 0
+                                    dataCash.Item(0, dataCash.RowCount - 2).Value = CStr(i)
+                                End If
+                            End Using
+                        End If
+                    Next
+                    Dim tmpInt As Integer = 0
+                    dataCash.Rows.Add()
+                    dataCash.Item(0, dataCash.RowCount - 2).Value = "Итого:"
+                    dataCash.Item(0, dataCash.RowCount - 2).Style.Alignment = DataGridViewContentAlignment.MiddleRight
+                    Dim tmpint2 = 0
+                    Dim tmpint3 = 0
+                    For i = 0 To dataCash.RowCount - 2
+                        tmpint2 += CInt(dataCash.Item(2, i).Value)
+                        tmpint3 += CInt(dataCash.Item(1, i).Value)
+                    Next
+                    dataCash.Item(1, dataCash.RowCount - 2).Value = CStr(tmpint3)
+                    dataCash.Item(2, dataCash.RowCount - 2).Value = CStr(tmpint2)
+                End If
+                dataCash.AllowUserToAddRows = False
+                dataCash.Height = 22 + 22 * dataCash.RowCount
+                dataCash.ClearSelection()
+                Label1.Text = "Месячный отчёт по кассе с " & CStr(StartingDay) & " по " & CStr(EndingDay) & ", " & NumberToMonth(intMonth) & " " & CStr(intYear)
         End Select
 
     End Sub

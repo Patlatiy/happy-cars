@@ -2,10 +2,11 @@
     Dim EDIT_MODE As Boolean = True
 
     Private Sub StateForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        Form1.SaveDaylist()
+        Form1.SaveAll()
     End Sub
 
     Private Sub StateForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        EDIT_MODE = False
         StateList.Groups.Add(New ListViewGroup("Group_Wash", "Мойка"))
         StateList.Groups.Add(New ListViewGroup("Group_Mount", "Шиномонтаж"))
         StateList.Groups.Add(New ListViewGroup("Group_Service", "Сервис"))
@@ -15,6 +16,7 @@
             StateList.Items.Item(StateList.Items.Count - 1).Group = StateList.Groups(wrkr.GetWorkshopInt)
             StateList.Items.Item(StateList.Items.Count - 1).Tag = wrkr.GetID
         Next
+        EDIT_MODE = True
     End Sub
 
     Private Sub StateList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles StateList.SelectedIndexChanged
@@ -107,6 +109,7 @@
             cell.style.backcolor = Form1.DefaultBackColor
             cell.style.forecolor = Form1.DefaultForeColor
         Next
+        StateList.Items.Item(StateList.Items.Count - 1).Selected = True
     End Sub
 
     Private Sub nudSalary_ValueChanged(sender As Object, e As EventArgs) Handles nudSalary.ValueChanged
@@ -174,5 +177,39 @@
                 w.wOtherPayments = sender.value
             Next
         End If
+    End Sub
+
+    Private Sub nudNorm_ValueChanged(sender As Object, e As EventArgs) Handles nudNorm.ValueChanged
+        If EDIT_MODE Then
+            For Each SI In StateList.SelectedItems
+                Dim w As Worker = Worker.FindByID(SI.tag)
+                EDIT_MODE = False
+                w.SetNorm(nudNorm.Value)
+                w.CalculateHourCost()
+                nudHour.Value = w.GetHourCost
+                EDIT_MODE = True
+            Next
+        End If
+    End Sub
+
+    Private Sub SaveState()
+        Form1.SaveState()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        For Each SI In StateList.SelectedItems
+
+            Worker.FindByID(SI.tag).Dispose()
+            StateList.Items.Remove(SI)
+        Next
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        SaveState()
+        Me.Close()
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        SaveState()
     End Sub
 End Class

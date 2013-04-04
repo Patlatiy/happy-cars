@@ -280,6 +280,7 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.nudHoursToAdd = New System.Windows.Forms.NumericUpDown()
         Me.Button15 = New System.Windows.Forms.Button()
@@ -291,6 +292,7 @@ Partial Class Form1
         Me.ComboWorkshops = New System.Windows.Forms.ComboBox()
         Me.dTable = New System.Windows.Forms.DataGridView()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
@@ -316,8 +318,8 @@ Partial Class Form1
         Me.lblNightWorkers = New System.Windows.Forms.Label()
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
+        Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -376,6 +378,8 @@ Partial Class Form1
         Me.TabPage8.SuspendLayout()
         CType(Me.dSalary, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage10.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -1122,6 +1126,7 @@ Partial Class Form1
         Me.TabControl1.Controls.Add(Me.TabPage9)
         Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage8)
+        Me.TabControl1.Controls.Add(Me.TabPage10)
         Me.TabControl1.Location = New System.Drawing.Point(12, 40)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -2949,6 +2954,16 @@ Partial Class Form1
         Me.TabPage7.TabIndex = 6
         Me.TabPage7.Text = "Табель"
         '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label21.Location = New System.Drawing.Point(19, 155)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(1124, 108)
+        Me.Label21.TabIndex = 112
+        Me.Label21.Text = "Отключено за неуплату"
+        '
         'Button19
         '
         Me.Button19.Location = New System.Drawing.Point(612, 4)
@@ -3083,6 +3098,16 @@ Partial Class Form1
         Me.TabPage8.Size = New System.Drawing.Size(1164, 488)
         Me.TabPage8.TabIndex = 7
         Me.TabPage8.Text = "Зарплата"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label22.Location = New System.Drawing.Point(19, 155)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(1124, 108)
+        Me.Label22.TabIndex = 113
+        Me.Label22.Text = "Отключено за неуплату"
         '
         'Button18
         '
@@ -3293,25 +3318,23 @@ Partial Class Form1
         '
         Me.ScheduleTimer.Interval = 1000
         '
-        'Label21
+        'TabPage10
         '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label21.Location = New System.Drawing.Point(19, 155)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(1124, 108)
-        Me.Label21.TabIndex = 112
-        Me.Label21.Text = "Отключено за неуплату"
+        Me.TabPage10.Controls.Add(Me.DataGridView1)
+        Me.TabPage10.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage10.Name = "TabPage10"
+        Me.TabPage10.Size = New System.Drawing.Size(1164, 488)
+        Me.TabPage10.TabIndex = 9
+        Me.TabPage10.Text = "TabPage10"
+        Me.TabPage10.UseVisualStyleBackColor = True
         '
-        'Label22
+        'DataGridView1
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label22.Location = New System.Drawing.Point(19, 155)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(1124, 108)
-        Me.Label22.TabIndex = 113
-        Me.Label22.Text = "Отключено за неуплату"
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(4, 4)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(240, 150)
+        Me.DataGridView1.TabIndex = 0
         '
         'Form1
         '
@@ -3418,6 +3441,8 @@ Partial Class Form1
         Me.TabPage8.PerformLayout()
         CType(Me.dSalary, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage10.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3713,5 +3738,7 @@ Partial Class Form1
     Friend WithEvents btnAddExecutor As System.Windows.Forms.Button
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents TabPage10 As System.Windows.Forms.TabPage
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
 
 End Class

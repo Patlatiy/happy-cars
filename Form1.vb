@@ -1967,11 +1967,6 @@
                     lblNightWorkers.Show()
                     ComboNightWorkers.Show()
                 End If
-            Case 3, 4, 5, 6
-                'Label12.Hide()
-                'Label1.Hide()
-                lblNightWorkers.Hide()
-                ComboNightWorkers.Hide()
             Case Else
                 'Label12.Show()
                 'Label1.Show()
@@ -2038,9 +2033,12 @@
         Else
             fPath = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & "N.ini"
         End If
-        Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
-            WashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
-        End Using
+        Try
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
+                WashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        Catch ex As Exception
+        End Try
         LoadWash()
         Commit()
     End Sub

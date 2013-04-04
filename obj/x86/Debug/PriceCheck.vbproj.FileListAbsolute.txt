@@ -98,3 +98,19 @@ C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.S
 C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
 C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\HappyCars.ZPForm.resources
 C:\Users\patla_000\Dropbox\Global\PCProject\PriceCheck\obj\x86\Debug\PriceCheck.vbproj.GenerateResource.Cache
+D:\Repos\happy-cars\bin\Debug\Happy Cars.exe.config
+D:\Repos\happy-cars\obj\x86\Debug\Happy Cars.exe
+D:\Repos\happy-cars\obj\x86\Debug\Happy Cars.xml
+D:\Repos\happy-cars\obj\x86\Debug\Happy Cars.pdb
+D:\Repos\happy-cars\bin\Debug\Happy Cars.exe
+D:\Repos\happy-cars\bin\Debug\Happy Cars.pdb
+D:\Repos\happy-cars\bin\Debug\Happy Cars.xml
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.CashLeaf.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.DebtForm.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.Form1.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.Form2.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.AdvanceForm.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.StateForm.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.Resources.resources
+D:\Repos\happy-cars\obj\x86\Debug\HappyCars.ZPForm.resources
+D:\Repos\happy-cars\obj\x86\Debug\PriceCheck.vbproj.GenerateResource.Cache

@@ -280,6 +280,7 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.nudHoursToAdd = New System.Windows.Forms.NumericUpDown()
         Me.Button15 = New System.Windows.Forms.Button()
@@ -291,6 +292,7 @@ Partial Class Form1
         Me.ComboWorkshops = New System.Windows.Forms.ComboBox()
         Me.dTable = New System.Windows.Forms.DataGridView()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
@@ -316,8 +318,9 @@ Partial Class Form1
         Me.lblNightWorkers = New System.Windows.Forms.Label()
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
+        Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -376,6 +379,7 @@ Partial Class Form1
         Me.TabPage8.SuspendLayout()
         CType(Me.dSalary, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage10.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -548,9 +552,9 @@ Partial Class Form1
         Me.carpetsBox.AutoSize = True
         Me.carpetsBox.Location = New System.Drawing.Point(33, 122)
         Me.carpetsBox.Name = "carpetsBox"
-        Me.carpetsBox.Size = New System.Drawing.Size(90, 17)
+        Me.carpetsBox.Size = New System.Drawing.Size(69, 17)
         Me.carpetsBox.TabIndex = 19
-        Me.carpetsBox.Text = "(12) Коврики"
+        Me.carpetsBox.Text = "Коврики"
         Me.carpetsBox.UseVisualStyleBackColor = True
         '
         'CarpCounter
@@ -568,9 +572,9 @@ Partial Class Form1
         Me.cabinBox.AutoSize = True
         Me.cabinBox.Location = New System.Drawing.Point(18, 53)
         Me.cabinBox.Name = "cabinBox"
-        Me.cabinBox.Size = New System.Drawing.Size(72, 17)
+        Me.cabinBox.Size = New System.Drawing.Size(57, 17)
         Me.cabinBox.TabIndex = 18
-        Me.cabinBox.Text = "(8) Салон"
+        Me.cabinBox.Text = "Салон"
         Me.cabinBox.UseVisualStyleBackColor = True
         '
         'wetBox
@@ -578,9 +582,9 @@ Partial Class Form1
         Me.wetBox.AutoSize = True
         Me.wetBox.Location = New System.Drawing.Point(33, 76)
         Me.wetBox.Name = "wetBox"
-        Me.wetBox.Size = New System.Drawing.Size(130, 17)
+        Me.wetBox.Size = New System.Drawing.Size(109, 17)
         Me.wetBox.TabIndex = 17
-        Me.wetBox.Text = "(11) Влажная уборка"
+        Me.wetBox.Text = "Влажная уборка"
         Me.wetBox.UseVisualStyleBackColor = True
         '
         'vacuumBox
@@ -588,9 +592,9 @@ Partial Class Form1
         Me.vacuumBox.AutoSize = True
         Me.vacuumBox.Location = New System.Drawing.Point(33, 99)
         Me.vacuumBox.Name = "vacuumBox"
-        Me.vacuumBox.Size = New System.Drawing.Size(87, 17)
+        Me.vacuumBox.Size = New System.Drawing.Size(72, 17)
         Me.vacuumBox.TabIndex = 16
-        Me.vacuumBox.Text = "(9) Пылесос"
+        Me.vacuumBox.Text = "Пылесос"
         Me.vacuumBox.UseVisualStyleBackColor = True
         '
         'plexBox
@@ -598,9 +602,9 @@ Partial Class Form1
         Me.plexBox.AutoSize = True
         Me.plexBox.Location = New System.Drawing.Point(5, 7)
         Me.plexBox.Name = "plexBox"
-        Me.plexBox.Size = New System.Drawing.Size(92, 17)
+        Me.plexBox.Size = New System.Drawing.Size(77, 17)
         Me.plexBox.TabIndex = 15
-        Me.plexBox.Text = "(1) Комплекс"
+        Me.plexBox.Text = "Комплекс"
         Me.plexBox.UseVisualStyleBackColor = True
         '
         'bodyBox
@@ -608,9 +612,9 @@ Partial Class Form1
         Me.bodyBox.AutoSize = True
         Me.bodyBox.Location = New System.Drawing.Point(18, 30)
         Me.bodyBox.Name = "bodyBox"
-        Me.bodyBox.Size = New System.Drawing.Size(104, 17)
+        Me.bodyBox.Size = New System.Drawing.Size(89, 17)
         Me.bodyBox.TabIndex = 14
-        Me.bodyBox.Text = "(2) Кузов (пена)"
+        Me.bodyBox.Text = "Кузов (пена)"
         Me.bodyBox.UseVisualStyleBackColor = True
         '
         'WD40Box
@@ -618,9 +622,9 @@ Partial Class Form1
         Me.WD40Box.AutoSize = True
         Me.WD40Box.Location = New System.Drawing.Point(210, 204)
         Me.WD40Box.Name = "WD40Box"
-        Me.WD40Box.Size = New System.Drawing.Size(117, 17)
+        Me.WD40Box.Size = New System.Drawing.Size(96, 17)
         Me.WD40Box.TabIndex = 31
-        Me.WD40Box.Text = "(26) Замки WD-40"
+        Me.WD40Box.Text = "Замки WD-40"
         Me.WD40Box.UseVisualStyleBackColor = True
         '
         'resinBox
@@ -628,9 +632,9 @@ Partial Class Form1
         Me.resinBox.AutoSize = True
         Me.resinBox.Location = New System.Drawing.Point(210, 181)
         Me.resinBox.Name = "resinBox"
-        Me.resinBox.Size = New System.Drawing.Size(158, 17)
+        Me.resinBox.Size = New System.Drawing.Size(137, 17)
         Me.resinBox.TabIndex = 30
-        Me.resinBox.Text = "(25) Уплотнители силикон"
+        Me.resinBox.Text = "Уплотнители силикон"
         Me.resinBox.UseVisualStyleBackColor = True
         '
         'airBox
@@ -638,9 +642,9 @@ Partial Class Form1
         Me.airBox.AutoSize = True
         Me.airBox.Location = New System.Drawing.Point(15, 270)
         Me.airBox.Name = "airBox"
-        Me.airBox.Size = New System.Drawing.Size(147, 17)
+        Me.airBox.Size = New System.Drawing.Size(126, 17)
         Me.airBox.TabIndex = 29
-        Me.airBox.Text = "(24) Продувка воздухом"
+        Me.airBox.Text = "Продувка воздухом"
         Me.airBox.UseVisualStyleBackColor = True
         '
         'techWashBox
@@ -658,9 +662,9 @@ Partial Class Form1
         Me.blackMouldBox.AutoSize = True
         Me.blackMouldBox.Location = New System.Drawing.Point(210, 158)
         Me.blackMouldBox.Name = "blackMouldBox"
-        Me.blackMouldBox.Size = New System.Drawing.Size(155, 17)
+        Me.blackMouldBox.Size = New System.Drawing.Size(134, 17)
         Me.blackMouldBox.TabIndex = 26
-        Me.blackMouldBox.Text = "(22) Чернение молдингов"
+        Me.blackMouldBox.Text = "Чернение молдингов"
         Me.blackMouldBox.UseVisualStyleBackColor = True
         '
         'blackBumperBox
@@ -668,9 +672,9 @@ Partial Class Form1
         Me.blackBumperBox.AutoSize = True
         Me.blackBumperBox.Location = New System.Drawing.Point(210, 135)
         Me.blackBumperBox.Name = "blackBumperBox"
-        Me.blackBumperBox.Size = New System.Drawing.Size(150, 17)
+        Me.blackBumperBox.Size = New System.Drawing.Size(129, 17)
         Me.blackBumperBox.TabIndex = 25
-        Me.blackBumperBox.Text = "(22) Чернение бамперов"
+        Me.blackBumperBox.Text = "Чернение бамперов"
         Me.blackBumperBox.UseVisualStyleBackColor = True
         '
         'blackTyreBox
@@ -678,9 +682,9 @@ Partial Class Form1
         Me.blackTyreBox.AutoSize = True
         Me.blackTyreBox.Location = New System.Drawing.Point(210, 112)
         Me.blackTyreBox.Name = "blackTyreBox"
-        Me.blackTyreBox.Size = New System.Drawing.Size(120, 17)
+        Me.blackTyreBox.Size = New System.Drawing.Size(99, 17)
         Me.blackTyreBox.TabIndex = 24
-        Me.blackTyreBox.Text = "(22) Чернение шин"
+        Me.blackTyreBox.Text = "Чернение шин"
         Me.blackTyreBox.UseVisualStyleBackColor = True
         '
         'discFoamBox
@@ -688,9 +692,9 @@ Partial Class Form1
         Me.discFoamBox.AutoSize = True
         Me.discFoamBox.Location = New System.Drawing.Point(210, 89)
         Me.discFoamBox.Name = "discFoamBox"
-        Me.discFoamBox.Size = New System.Drawing.Size(107, 17)
+        Me.discFoamBox.Size = New System.Drawing.Size(86, 17)
         Me.discFoamBox.TabIndex = 23
-        Me.discFoamBox.Text = "(21) Диски пена"
+        Me.discFoamBox.Text = "Диски пена"
         Me.discFoamBox.UseVisualStyleBackColor = True
         '
         'discBox
@@ -698,9 +702,9 @@ Partial Class Form1
         Me.discBox.AutoSize = True
         Me.discBox.Location = New System.Drawing.Point(210, 66)
         Me.discBox.Name = "discBox"
-        Me.discBox.Size = New System.Drawing.Size(131, 17)
+        Me.discBox.Size = New System.Drawing.Size(110, 17)
         Me.discBox.TabIndex = 22
-        Me.discBox.Text = "(20) Диски давление"
+        Me.discBox.Text = "Диски давление"
         Me.discBox.UseVisualStyleBackColor = True
         '
         'arcFoamBox
@@ -708,9 +712,9 @@ Partial Class Form1
         Me.arcFoamBox.AutoSize = True
         Me.arcFoamBox.Location = New System.Drawing.Point(15, 453)
         Me.arcFoamBox.Name = "arcFoamBox"
-        Me.arcFoamBox.Size = New System.Drawing.Size(158, 17)
+        Me.arcFoamBox.Size = New System.Drawing.Size(137, 17)
         Me.arcFoamBox.TabIndex = 21
-        Me.arcFoamBox.Text = "(19) Колёсные арки (пена)"
+        Me.arcFoamBox.Text = "Колёсные арки (пена)"
         Me.arcFoamBox.UseVisualStyleBackColor = True
         '
         'arcBox
@@ -718,9 +722,9 @@ Partial Class Form1
         Me.arcBox.AutoSize = True
         Me.arcBox.Location = New System.Drawing.Point(15, 432)
         Me.arcBox.Name = "arcBox"
-        Me.arcBox.Size = New System.Drawing.Size(125, 17)
+        Me.arcBox.Size = New System.Drawing.Size(104, 17)
         Me.arcBox.TabIndex = 20
-        Me.arcBox.Text = "(18) Колёсные арки"
+        Me.arcBox.Text = "Колёсные арки"
         Me.arcBox.UseVisualStyleBackColor = True
         '
         'leatherBox
@@ -728,9 +732,9 @@ Partial Class Form1
         Me.leatherBox.AutoSize = True
         Me.leatherBox.Location = New System.Drawing.Point(210, 227)
         Me.leatherBox.Name = "leatherBox"
-        Me.leatherBox.Size = New System.Drawing.Size(143, 17)
+        Me.leatherBox.Size = New System.Drawing.Size(122, 17)
         Me.leatherBox.TabIndex = 19
-        Me.leatherBox.Text = "(17) Кондиционер кожи"
+        Me.leatherBox.Text = "Кондиционер кожи"
         Me.leatherBox.UseVisualStyleBackColor = True
         '
         'polishPlasticBox
@@ -738,9 +742,9 @@ Partial Class Form1
         Me.polishPlasticBox.AutoSize = True
         Me.polishPlasticBox.Location = New System.Drawing.Point(15, 409)
         Me.polishPlasticBox.Name = "polishPlasticBox"
-        Me.polishPlasticBox.Size = New System.Drawing.Size(147, 17)
+        Me.polishPlasticBox.Size = New System.Drawing.Size(126, 17)
         Me.polishPlasticBox.TabIndex = 18
-        Me.polishPlasticBox.Text = "(16) Полирока пластика"
+        Me.polishPlasticBox.Text = "Полирока пластика"
         Me.polishPlasticBox.UseVisualStyleBackColor = True
         '
         'polishTorpBox
@@ -748,9 +752,9 @@ Partial Class Form1
         Me.polishTorpBox.AutoSize = True
         Me.polishTorpBox.Location = New System.Drawing.Point(15, 386)
         Me.polishTorpBox.Name = "polishTorpBox"
-        Me.polishTorpBox.Size = New System.Drawing.Size(149, 17)
+        Me.polishTorpBox.Size = New System.Drawing.Size(128, 17)
         Me.polishTorpBox.TabIndex = 17
-        Me.polishTorpBox.Text = "(15) Полировка торпеды"
+        Me.polishTorpBox.Text = "Полировка торпеды"
         Me.polishTorpBox.UseVisualStyleBackColor = True
         '
         'frontGlassBox
@@ -758,9 +762,9 @@ Partial Class Form1
         Me.frontGlassBox.AutoSize = True
         Me.frontGlassBox.Location = New System.Drawing.Point(28, 363)
         Me.frontGlassBox.Name = "frontGlassBox"
-        Me.frontGlassBox.Size = New System.Drawing.Size(129, 17)
+        Me.frontGlassBox.Size = New System.Drawing.Size(108, 17)
         Me.frontGlassBox.TabIndex = 16
-        Me.frontGlassBox.Text = "(14) Лобовое стекло"
+        Me.frontGlassBox.Text = "Лобовое стекло"
         Me.frontGlassBox.UseVisualStyleBackColor = True
         '
         'bottomBox
@@ -768,9 +772,9 @@ Partial Class Form1
         Me.bottomBox.AutoSize = True
         Me.bottomBox.Location = New System.Drawing.Point(15, 317)
         Me.bottomBox.Name = "bottomBox"
-        Me.bottomBox.Size = New System.Drawing.Size(77, 17)
+        Me.bottomBox.Size = New System.Drawing.Size(62, 17)
         Me.bottomBox.TabIndex = 11
-        Me.bottomBox.Text = "(7) Днище"
+        Me.bottomBox.Text = "Днище"
         Me.bottomBox.UseVisualStyleBackColor = True
         '
         'driveBox
@@ -778,9 +782,9 @@ Partial Class Form1
         Me.driveBox.AutoSize = True
         Me.driveBox.Location = New System.Drawing.Point(15, 294)
         Me.driveBox.Name = "driveBox"
-        Me.driveBox.Size = New System.Drawing.Size(96, 17)
+        Me.driveBox.Size = New System.Drawing.Size(81, 17)
         Me.driveBox.TabIndex = 10
-        Me.driveBox.Text = "(6) Двигатель"
+        Me.driveBox.Text = "Двигатель"
         Me.driveBox.UseVisualStyleBackColor = True
         '
         'expressBox
@@ -788,9 +792,9 @@ Partial Class Form1
         Me.expressBox.AutoSize = True
         Me.expressBox.Location = New System.Drawing.Point(15, 178)
         Me.expressBox.Name = "expressBox"
-        Me.expressBox.Size = New System.Drawing.Size(90, 17)
+        Me.expressBox.Size = New System.Drawing.Size(75, 17)
         Me.expressBox.TabIndex = 8
-        Me.expressBox.Text = "(3) Экспресс"
+        Me.expressBox.Text = "Экспресс"
         Me.expressBox.UseVisualStyleBackColor = True
         '
         'waxBox
@@ -798,9 +802,9 @@ Partial Class Form1
         Me.waxBox.AutoSize = True
         Me.waxBox.Location = New System.Drawing.Point(15, 247)
         Me.waxBox.Name = "waxBox"
-        Me.waxBox.Size = New System.Drawing.Size(66, 17)
+        Me.waxBox.Size = New System.Drawing.Size(51, 17)
         Me.waxBox.TabIndex = 7
-        Me.waxBox.Text = "(4) Воск"
+        Me.waxBox.Text = "Воск"
         Me.waxBox.UseVisualStyleBackColor = True
         '
         'trunkBox
@@ -808,9 +812,9 @@ Partial Class Form1
         Me.trunkBox.AutoSize = True
         Me.trunkBox.Location = New System.Drawing.Point(210, 43)
         Me.trunkBox.Name = "trunkBox"
-        Me.trunkBox.Size = New System.Drawing.Size(97, 17)
+        Me.trunkBox.Size = New System.Drawing.Size(76, 17)
         Me.trunkBox.TabIndex = 4
-        Me.trunkBox.Text = "(10) Багажник"
+        Me.trunkBox.Text = "Багажник"
         Me.trunkBox.UseVisualStyleBackColor = True
         '
         'glassBox
@@ -818,9 +822,9 @@ Partial Class Form1
         Me.glassBox.AutoSize = True
         Me.glassBox.Location = New System.Drawing.Point(15, 340)
         Me.glassBox.Name = "glassBox"
-        Me.glassBox.Size = New System.Drawing.Size(83, 17)
+        Me.glassBox.Size = New System.Drawing.Size(62, 17)
         Me.glassBox.TabIndex = 3
-        Me.glassBox.Text = "(13) Стёкла"
+        Me.glassBox.Text = "Стёкла"
         Me.glassBox.UseVisualStyleBackColor = True
         '
         'showerBox
@@ -828,9 +832,9 @@ Partial Class Form1
         Me.showerBox.AutoSize = True
         Me.showerBox.Location = New System.Drawing.Point(15, 201)
         Me.showerBox.Name = "showerBox"
-        Me.showerBox.Size = New System.Drawing.Size(73, 17)
+        Me.showerBox.Size = New System.Drawing.Size(58, 17)
         Me.showerBox.TabIndex = 0
-        Me.showerBox.Text = "(5) Облив"
+        Me.showerBox.Text = "Облив"
         Me.showerBox.UseVisualStyleBackColor = True
         '
         'Panel2
@@ -869,9 +873,9 @@ Partial Class Form1
         Me.stainBitumenBox.AutoSize = True
         Me.stainBitumenBox.Location = New System.Drawing.Point(9, 3)
         Me.stainBitumenBox.Name = "stainBitumenBox"
-        Me.stainBitumenBox.Size = New System.Drawing.Size(129, 17)
+        Me.stainBitumenBox.Size = New System.Drawing.Size(108, 17)
         Me.stainBitumenBox.TabIndex = 27
-        Me.stainBitumenBox.Text = "(23) Удаление пятен"
+        Me.stainBitumenBox.Text = "Удаление пятен"
         Me.stainBitumenBox.UseVisualStyleBackColor = True
         '
         'GroupBox4
@@ -1122,6 +1126,7 @@ Partial Class Form1
         Me.TabControl1.Controls.Add(Me.TabPage9)
         Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage8)
+        Me.TabControl1.Controls.Add(Me.TabPage10)
         Me.TabControl1.Location = New System.Drawing.Point(12, 40)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -2949,6 +2954,16 @@ Partial Class Form1
         Me.TabPage7.TabIndex = 6
         Me.TabPage7.Text = "Табель"
         '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label21.Location = New System.Drawing.Point(19, 155)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(1124, 108)
+        Me.Label21.TabIndex = 112
+        Me.Label21.Text = "Отключено за неуплату"
+        '
         'Button19
         '
         Me.Button19.Location = New System.Drawing.Point(612, 4)
@@ -3083,6 +3098,16 @@ Partial Class Form1
         Me.TabPage8.Size = New System.Drawing.Size(1164, 488)
         Me.TabPage8.TabIndex = 7
         Me.TabPage8.Text = "Зарплата"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label22.Location = New System.Drawing.Point(19, 155)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(1124, 108)
+        Me.Label22.TabIndex = 113
+        Me.Label22.Text = "Отключено за неуплату"
         '
         'Button18
         '
@@ -3293,25 +3318,34 @@ Partial Class Form1
         '
         Me.ScheduleTimer.Interval = 1000
         '
-        'Label21
+        'TabPage10
         '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label21.Location = New System.Drawing.Point(19, 155)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(1124, 108)
-        Me.Label21.TabIndex = 112
-        Me.Label21.Text = "Отключено за неуплату"
+        Me.TabPage10.Controls.Add(Me.Label23)
+        Me.TabPage10.Controls.Add(Me.Button20)
+        Me.TabPage10.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage10.Name = "TabPage10"
+        Me.TabPage10.Size = New System.Drawing.Size(1164, 488)
+        Me.TabPage10.TabIndex = 9
+        Me.TabPage10.Text = "TabPage10"
+        Me.TabPage10.UseVisualStyleBackColor = True
         '
-        'Label22
+        'Button20
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label22.Location = New System.Drawing.Point(19, 155)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(1124, 108)
-        Me.Label22.TabIndex = 113
-        Me.Label22.Text = "Отключено за неуплату"
+        Me.Button20.Location = New System.Drawing.Point(308, 94)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(75, 23)
+        Me.Button20.TabIndex = 0
+        Me.Button20.Text = "Button20"
+        Me.Button20.UseVisualStyleBackColor = True
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(287, 33)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(45, 13)
+        Me.Label23.TabIndex = 1
+        Me.Label23.Text = "Label23"
         '
         'Form1
         '
@@ -3418,6 +3452,8 @@ Partial Class Form1
         Me.TabPage8.PerformLayout()
         CType(Me.dSalary, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage10.ResumeLayout(False)
+        Me.TabPage10.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3713,5 +3749,8 @@ Partial Class Form1
     Friend WithEvents btnAddExecutor As System.Windows.Forms.Button
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents TabPage10 As System.Windows.Forms.TabPage
+    Friend WithEvents Button20 As System.Windows.Forms.Button
+    Friend WithEvents Label23 As System.Windows.Forms.Label
 
 End Class

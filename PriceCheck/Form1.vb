@@ -3100,4 +3100,11 @@
         Next
         listExecutors.Items.Add(comboExecutor.Text)
     End Sub
+
+    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
+        Dim testCustomer = New HCCustomer("Vasya", "Pupkin", "Bat'kovich", "+7 910 811 61 17")
+        Dim testPartList = New List(Of HCOrder.HCPart)
+        Dim testOrder = New HCOrder(testCustomer, curDate, 1000, curDate, 100, curDate, testPartList)
+        Label23.Text = testOrder.Customer.FirstName
+    End Sub
 End Class

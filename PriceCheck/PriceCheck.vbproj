@@ -128,12 +128,14 @@
     <Compile Include="AdvanceForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HCCustomer.vb" />
     <Compile Include="DebtForm.Designer.vb">
       <DependentUpon>DebtForm.vb</DependentUpon>
     </Compile>
     <Compile Include="DebtForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HCOrder.vb" />
     <Compile Include="ZPForm.Designer.vb">
       <DependentUpon>ZPForm.vb</DependentUpon>
     </Compile>

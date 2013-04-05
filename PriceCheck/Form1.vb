@@ -94,6 +94,8 @@
     Dim LoadProcedureRunning As Boolean = True
     Dim ClosingNow As Boolean = False
 
+    Public CustomerList As New List(Of HCCustomer)
+
     ''' <summary>
     ''' Процедура пересчёта цен
     ''' </summary>
@@ -3102,9 +3104,100 @@
     End Sub
 
     Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
-        Dim testCustomer = New HCCustomer("Vasya", "Pupkin", "Bat'kovich", "+7 910 811 61 17")
+        Dim tmpName As String
+        Dim tmp2Name As String
+        Dim tmpPatron As String
+        Dim tmpPhoneNumber As String
+        Randomize(curDate.Second)
+        Dim tmpRnd As Short = Math.Ceiling(Rnd() * 10)
+        Select Case tmpRnd
+            Case 1
+                tmpName = "Александр"
+            Case 2
+                tmpName = "Сергей"
+            Case 3
+                tmpName = "Алексей"
+            Case 4
+                tmpName = "Виталий"
+            Case 5
+                tmpName = "Василий"
+            Case 6
+                tmpName = "Константин"
+            Case 7
+                tmpName = "Владислав"
+            Case 8
+                tmpName = "Владимир"
+            Case 9
+                tmpName = "Никита"
+            Case Else
+                tmpName = "Илья"
+        End Select
+
+        tmpRnd = Math.Ceiling(Rnd() * 10)
+        Select Case tmpRnd
+            Case 1
+                tmp2Name = "Смирнов"
+            Case 2
+                tmp2Name = "Иванов"
+            Case 3
+                tmp2Name = "Попов"
+            Case 4
+                tmp2Name = "Кузнецов"
+            Case 5
+                tmp2Name = "Лебедев"
+            Case 6
+                tmp2Name = "Козлов"
+            Case 7
+                tmp2Name = "Новиков"
+            Case 8
+                tmp2Name = "Морозов"
+            Case 9
+                tmp2Name = "Петров"
+            Case Else
+                tmp2Name = "Волков"
+        End Select
+
+        tmpRnd = Math.Ceiling(Rnd() * 10)
+        Select Case tmpRnd
+            Case 1
+                tmpPatron = "Александрович"
+            Case 2
+                tmpPatron = "Сергеевич"
+            Case 3
+                tmpPatron = "Алексеевич"
+            Case 4
+                tmpPatron = "Витальевич"
+            Case 5
+                tmpPatron = "Васильевич"
+            Case 6
+                tmpPatron = "Константинович"
+            Case 7
+                tmpPatron = "Владиславович"
+            Case 8
+                tmpPatron = "Владимирович"
+            Case 9
+                tmpPatron = "Никитич"
+            Case Else
+                tmpPatron = "Ильич"
+        End Select
+
+        tmpPhoneNumber = "+7 4852 " & CStr(Math.Ceiling(Rnd() * 900000 + 100000))
+
+        Dim testCustomer = New HCCustomer(tmpName, tmp2Name, tmpPatron, tmpPhoneNumber)
+        dgvCustomers.Rows.Add(testCustomer.GetFullName, testCustomer.Phone, "Заказы")
+        CustomerList.Add(testCustomer)
+
+        If Not Button21.Enabled Then Button21.Enabled = True
+    End Sub
+
+    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
         Dim testPartList = New List(Of HCOrder.HCPart)
+        Dim newPart = New HCOrder.HCPart("SomeNameHere", 2, 1000)
+        testPartList.Add(newPart)
+        newPart = New HCOrder.HCPart("SomeNameHereAgain", 1, 100)
+        testPartList.Add(newPart)
+        Dim testCustomer = CustomerList(Math.Floor(Rnd() * CustomerList.Count))
         Dim testOrder = New HCOrder(testCustomer, curDate, 1000, curDate, 100, curDate, testPartList)
-        Label23.Text = testOrder.Customer.FirstName
+        dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, CBool(Math.Round(Rnd())))
     End Sub
 End Class

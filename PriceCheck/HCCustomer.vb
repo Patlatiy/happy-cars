@@ -11,4 +11,8 @@
         Patron = nPatron
         Phone = nPhone
     End Sub
+
+    Public Function GetFullName() As String
+        Return Me.SecondName & " " & Me.FirstName & " " & Me.Patron
+    End Function
 End Class

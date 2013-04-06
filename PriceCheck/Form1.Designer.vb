@@ -266,6 +266,8 @@ Partial Class Form1
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.comboFilter = New System.Windows.Forms.ComboBox()
         Me.btnClearAnalytics = New System.Windows.Forms.Button()
         Me.btnLoadAnalytics = New System.Windows.Forms.Button()
@@ -310,8 +312,11 @@ Partial Class Form1
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.dgvOrders = New System.Windows.Forms.DataGridView()
-        Me.dgvCustomers = New System.Windows.Forms.DataGridView()
         Me.Button21 = New System.Windows.Forms.Button()
+        Me.dgvCustomers = New System.Windows.Forms.DataGridView()
+        Me.ColumnName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnPhone = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnOrders = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Button20 = New System.Windows.Forms.Button()
         Me.lblDaySum = New System.Windows.Forms.Label()
         Me.curDatePicker = New System.Windows.Forms.DateTimePicker()
@@ -323,12 +328,12 @@ Partial Class Form1
         Me.lblNightWorkers = New System.Windows.Forms.Label()
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.ColumnName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColumnPhone = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColumnOrders = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.cmnOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmnCustomer = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.cmnDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -2816,6 +2821,8 @@ Partial Class Form1
         'TabPage9
         '
         Me.TabPage9.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage9.Controls.Add(Me.Label24)
+        Me.TabPage9.Controls.Add(Me.Label23)
         Me.TabPage9.Controls.Add(Me.comboFilter)
         Me.TabPage9.Controls.Add(Me.btnClearAnalytics)
         Me.TabPage9.Controls.Add(Me.btnLoadAnalytics)
@@ -2827,6 +2834,24 @@ Partial Class Form1
         Me.TabPage9.Size = New System.Drawing.Size(1164, 488)
         Me.TabPage9.TabIndex = 8
         Me.TabPage9.Text = "Аналитика"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(938, 35)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(21, 13)
+        Me.Label24.TabIndex = 107
+        Me.Label24.Text = "По"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(943, 10)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(14, 13)
+        Me.Label23.TabIndex = 107
+        Me.Label23.Text = "С"
         '
         'comboFilter
         '
@@ -2857,17 +2882,19 @@ Partial Class Form1
         '
         'dtpTo
         '
-        Me.dtpTo.Location = New System.Drawing.Point(932, 32)
+        Me.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpTo.Location = New System.Drawing.Point(965, 32)
         Me.dtpTo.Name = "dtpTo"
-        Me.dtpTo.Size = New System.Drawing.Size(142, 20)
+        Me.dtpTo.Size = New System.Drawing.Size(109, 20)
         Me.dtpTo.TabIndex = 103
         Me.dtpTo.Value = New Date(2012, 9, 3, 14, 6, 0, 0)
         '
         'dtpFrom
         '
-        Me.dtpFrom.Location = New System.Drawing.Point(932, 6)
+        Me.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpFrom.Location = New System.Drawing.Point(965, 6)
         Me.dtpFrom.Name = "dtpFrom"
-        Me.dtpFrom.Size = New System.Drawing.Size(142, 20)
+        Me.dtpFrom.Size = New System.Drawing.Size(109, 20)
         Me.dtpFrom.TabIndex = 102
         Me.dtpFrom.Value = New Date(2012, 9, 3, 14, 6, 0, 0)
         '
@@ -3248,9 +3275,11 @@ Partial Class Form1
         '
         'TabPage10
         '
+        Me.TabPage10.Controls.Add(Me.Label26)
+        Me.TabPage10.Controls.Add(Me.Label25)
         Me.TabPage10.Controls.Add(Me.dgvOrders)
-        Me.TabPage10.Controls.Add(Me.dgvCustomers)
         Me.TabPage10.Controls.Add(Me.Button21)
+        Me.TabPage10.Controls.Add(Me.dgvCustomers)
         Me.TabPage10.Controls.Add(Me.Button20)
         Me.TabPage10.Location = New System.Drawing.Point(4, 22)
         Me.TabPage10.Name = "TabPage10"
@@ -3263,39 +3292,56 @@ Partial Class Form1
         '
         Me.dgvOrders.AllowUserToAddRows = False
         Me.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvOrders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnOrderNumber, Me.cmnCustomer, Me.cmnDone})
-        Me.dgvOrders.Location = New System.Drawing.Point(606, 14)
+        Me.dgvOrders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnOrderNumber, Me.cmnCustomer, Me.cmnEdit, Me.cmnDone})
+        Me.dgvOrders.Location = New System.Drawing.Point(597, 27)
         Me.dgvOrders.Name = "dgvOrders"
         Me.dgvOrders.RowHeadersVisible = False
         Me.dgvOrders.RowTemplate.Height = 30
-        Me.dgvOrders.Size = New System.Drawing.Size(549, 442)
-        Me.dgvOrders.TabIndex = 3
+        Me.dgvOrders.Size = New System.Drawing.Size(549, 429)
+        Me.dgvOrders.TabIndex = 7
+        '
+        'Button21
+        '
+        Me.Button21.Enabled = False
+        Me.Button21.Location = New System.Drawing.Point(597, 462)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(102, 23)
+        Me.Button21.TabIndex = 6
+        Me.Button21.Text = "Ещё заказ!"
+        Me.Button21.UseVisualStyleBackColor = True
         '
         'dgvCustomers
         '
         Me.dgvCustomers.AllowUserToAddRows = False
         Me.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCustomers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColumnName, Me.ColumnPhone, Me.ColumnOrders})
-        Me.dgvCustomers.Location = New System.Drawing.Point(12, 14)
+        Me.dgvCustomers.Location = New System.Drawing.Point(15, 27)
         Me.dgvCustomers.Name = "dgvCustomers"
         Me.dgvCustomers.RowHeadersVisible = False
         Me.dgvCustomers.RowTemplate.Height = 30
-        Me.dgvCustomers.Size = New System.Drawing.Size(549, 442)
+        Me.dgvCustomers.Size = New System.Drawing.Size(549, 429)
         Me.dgvCustomers.TabIndex = 2
         '
-        'Button21
+        'ColumnName
         '
-        Me.Button21.Enabled = False
-        Me.Button21.Location = New System.Drawing.Point(606, 462)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(102, 23)
-        Me.Button21.TabIndex = 0
-        Me.Button21.Text = "Ещё заказ!"
-        Me.Button21.UseVisualStyleBackColor = True
+        Me.ColumnName.HeaderText = "Имя"
+        Me.ColumnName.Name = "ColumnName"
+        Me.ColumnName.Width = 220
+        '
+        'ColumnPhone
+        '
+        Me.ColumnPhone.HeaderText = "Телефон"
+        Me.ColumnPhone.Name = "ColumnPhone"
+        '
+        'ColumnOrders
+        '
+        Me.ColumnOrders.HeaderText = "Заказы"
+        Me.ColumnOrders.Name = "ColumnOrders"
+        Me.ColumnOrders.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'Button20
         '
-        Me.Button20.Location = New System.Drawing.Point(459, 462)
+        Me.Button20.Location = New System.Drawing.Point(462, 462)
         Me.Button20.Name = "Button20"
         Me.Button20.Size = New System.Drawing.Size(102, 23)
         Me.Button20.TabIndex = 0
@@ -3315,15 +3361,16 @@ Partial Class Form1
         '
         'curDatePicker
         '
-        Me.curDatePicker.Location = New System.Drawing.Point(1051, 34)
+        Me.curDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.curDatePicker.Location = New System.Drawing.Point(1095, 34)
         Me.curDatePicker.Name = "curDatePicker"
-        Me.curDatePicker.Size = New System.Drawing.Size(120, 20)
+        Me.curDatePicker.Size = New System.Drawing.Size(76, 20)
         Me.curDatePicker.TabIndex = 16
         Me.curDatePicker.Value = New Date(2012, 9, 3, 14, 6, 0, 0)
         '
         'lblDOW
         '
-        Me.lblDOW.Location = New System.Drawing.Point(862, 32)
+        Me.lblDOW.Location = New System.Drawing.Point(906, 33)
         Me.lblDOW.Name = "lblDOW"
         Me.lblDOW.Size = New System.Drawing.Size(183, 20)
         Me.lblDOW.TabIndex = 18
@@ -3384,23 +3431,6 @@ Partial Class Form1
         '
         Me.ScheduleTimer.Interval = 1000
         '
-        'ColumnName
-        '
-        Me.ColumnName.HeaderText = "Имя"
-        Me.ColumnName.Name = "ColumnName"
-        Me.ColumnName.Width = 220
-        '
-        'ColumnPhone
-        '
-        Me.ColumnPhone.HeaderText = "Телефон"
-        Me.ColumnPhone.Name = "ColumnPhone"
-        '
-        'ColumnOrders
-        '
-        Me.ColumnOrders.HeaderText = "Заказы"
-        Me.ColumnOrders.Name = "ColumnOrders"
-        Me.ColumnOrders.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
         'cmnOrderNumber
         '
         Me.cmnOrderNumber.HeaderText = "Номер"
@@ -3413,11 +3443,37 @@ Partial Class Form1
         Me.cmnCustomer.Name = "cmnCustomer"
         Me.cmnCustomer.Width = 220
         '
+        'cmnEdit
+        '
+        Me.cmnEdit.HeaderText = "Подробно"
+        Me.cmnEdit.Name = "cmnEdit"
+        Me.cmnEdit.Width = 75
+        '
         'cmnDone
         '
         Me.cmnDone.HeaderText = "Исполнен?"
         Me.cmnDone.Name = "cmnDone"
         Me.cmnDone.Width = 70
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label25.Location = New System.Drawing.Point(593, 0)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(81, 24)
+        Me.Label25.TabIndex = 8
+        Me.Label25.Text = "Заказы"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label26.Location = New System.Drawing.Point(11, 0)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(95, 24)
+        Me.Label26.TabIndex = 8
+        Me.Label26.Text = "Клиенты"
         '
         'Form1
         '
@@ -3515,6 +3571,7 @@ Partial Class Form1
         Me.TabPage5.PerformLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage9.ResumeLayout(False)
+        Me.TabPage9.PerformLayout()
         CType(Me.dgvAnalytics, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage7.PerformLayout()
@@ -3524,6 +3581,7 @@ Partial Class Form1
         Me.TabPage8.PerformLayout()
         CType(Me.dSalary, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage10.ResumeLayout(False)
+        Me.TabPage10.PerformLayout()
         CType(Me.dgvOrders, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvCustomers, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3825,13 +3883,18 @@ Partial Class Form1
     Friend WithEvents TabPage10 As System.Windows.Forms.TabPage
     Friend WithEvents Button20 As System.Windows.Forms.Button
     Friend WithEvents dgvCustomers As System.Windows.Forms.DataGridView
-    Friend WithEvents dgvOrders As System.Windows.Forms.DataGridView
-    Friend WithEvents Button21 As System.Windows.Forms.Button
     Friend WithEvents ColumnName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColumnPhone As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColumnOrders As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents dgvOrders As System.Windows.Forms.DataGridView
+    Friend WithEvents Button21 As System.Windows.Forms.Button
+    Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents Label23 As System.Windows.Forms.Label
     Friend WithEvents cmnOrderNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cmnCustomer As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cmnEdit As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents cmnDone As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents Label25 As System.Windows.Forms.Label
 
 End Class

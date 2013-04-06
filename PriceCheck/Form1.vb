@@ -3108,7 +3108,7 @@
         Dim tmp2Name As String
         Dim tmpPatron As String
         Dim tmpPhoneNumber As String
-        Randomize(curDate.Second)
+        Randomize(My.Computer.Clock.LocalTime.Ticks)
         Dim tmpRnd As Short = Math.Ceiling(Rnd() * 10)
         Select Case tmpRnd
             Case 1
@@ -3136,25 +3136,25 @@
         tmpRnd = Math.Ceiling(Rnd() * 10)
         Select Case tmpRnd
             Case 1
-                tmp2Name = "Смирнов"
+                tmp2Name = "Пушкин"
             Case 2
-                tmp2Name = "Иванов"
+                tmp2Name = "Ломоносов"
             Case 3
-                tmp2Name = "Попов"
+                tmp2Name = "Достоевский"
             Case 4
-                tmp2Name = "Кузнецов"
+                tmp2Name = "Шишкин"
             Case 5
-                tmp2Name = "Лебедев"
+                tmp2Name = "Павлов"
             Case 6
-                tmp2Name = "Козлов"
+                tmp2Name = "Кутузов"
             Case 7
-                tmp2Name = "Новиков"
+                tmp2Name = "Антонов"
             Case 8
-                tmp2Name = "Морозов"
+                tmp2Name = "Даль"
             Case 9
-                tmp2Name = "Петров"
+                tmp2Name = "Шаляпин"
             Case Else
-                tmp2Name = "Волков"
+                tmp2Name = "Хрущёв"
         End Select
 
         tmpRnd = Math.Ceiling(Rnd() * 10)
@@ -3176,7 +3176,7 @@
             Case 8
                 tmpPatron = "Владимирович"
             Case 9
-                tmpPatron = "Никитич"
+                tmpPatron = "Юрьевич"
             Case Else
                 tmpPatron = "Ильич"
         End Select
@@ -3185,6 +3185,7 @@
 
         Dim testCustomer = New HCCustomer(tmpName, tmp2Name, tmpPatron, tmpPhoneNumber)
         dgvCustomers.Rows.Add(testCustomer.GetFullName, testCustomer.Phone, "Заказы")
+        dgvCustomers.FirstDisplayedScrollingRowIndex = dgvCustomers.Rows.Count - 1
         CustomerList.Add(testCustomer)
 
         If Not Button21.Enabled Then Button21.Enabled = True
@@ -3198,6 +3199,8 @@
         testPartList.Add(newPart)
         Dim testCustomer = CustomerList(Math.Floor(Rnd() * CustomerList.Count))
         Dim testOrder = New HCOrder(testCustomer, curDate, 1000, curDate, 100, curDate, testPartList)
-        dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, CBool(Math.Round(Rnd())))
+        Randomize(My.Computer.Clock.LocalTime.Ticks)
+        dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, "Подробно...", CBool(Math.Round(Rnd())))
+        dgvOrders.FirstDisplayedScrollingRowIndex = dgvOrders.Rows.Count - 1
     End Sub
 End Class

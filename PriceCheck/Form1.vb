@@ -94,7 +94,8 @@
     Dim LoadProcedureRunning As Boolean = True
     Dim ClosingNow As Boolean = False
 
-    Public CustomerList As New List(Of HCCustomer)
+    Dim CustomerList As List(Of HCCustomer) = HCCustomer.CustomerList
+    Dim OrderList As List(Of HCOrder) = HCOrder.OrderList
 
     ''' <summary>
     ''' Процедура пересчёта цен
@@ -3184,9 +3185,8 @@
         tmpPhoneNumber = "+7 4852 " & CStr(Math.Ceiling(Rnd() * 900000 + 100000))
 
         Dim testCustomer = New HCCustomer(tmpName, tmp2Name, tmpPatron, tmpPhoneNumber)
-        dgvCustomers.Rows.Add(testCustomer.GetFullName, testCustomer.Phone, "Заказы")
+        dgvCustomers.Rows.Add(CStr(testCustomer.ID), testCustomer.GetFullName, testCustomer.Phone, "Заказы")
         dgvCustomers.FirstDisplayedScrollingRowIndex = dgvCustomers.Rows.Count - 1
-        CustomerList.Add(testCustomer)
 
         If Not Button21.Enabled Then Button21.Enabled = True
     End Sub
@@ -3199,8 +3199,53 @@
         testPartList.Add(newPart)
         Dim testCustomer = CustomerList(Math.Floor(Rnd() * CustomerList.Count))
         Dim testOrder = New HCOrder(testCustomer, curDate, 1000, curDate, 100, curDate, testPartList)
+
         Randomize(My.Computer.Clock.LocalTime.Ticks)
         dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, "Подробно...", CBool(Math.Round(Rnd())))
         dgvOrders.FirstDisplayedScrollingRowIndex = dgvOrders.Rows.Count - 1
+    End Sub
+
+    Private Sub dgvOrders_CellContentClick(sender As System.Windows.Forms.DataGridView, e As DataGridViewCellEventArgs) Handles dgvOrders.CellContentClick
+        If e.ColumnIndex = 2 Then
+            frmOrder.Show(OrderList.Item(e.RowIndex))
+        End If
+    End Sub
+
+    Sub RefreshOrders()
+        dgvOrders.Rows.Clear()
+        For Each Order As HCOrder In OrderList
+            dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, "Подробно...", True)
+        Next
+    End Sub
+
+    Sub RefreshOrders(ByRef Customer As HCCustomer)
+        dgvOrders.Rows.Clear()
+        For Each Order In Customer.MyOrderList
+            dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, "Подробно...", True)
+        Next
+        btnShowAllOrders.Show()
+    End Sub
+
+    Sub RefreshCustomers()
+        dgvCustomers.Rows.Clear()
+        For Each Customer As HCCustomer In CustomerList
+            dgvCustomers.Rows.Add(CStr(Customer.ID), Customer.GetFullName, Customer.Phone, "Заказы")
+        Next
+    End Sub
+
+    Sub RefreshCustomersAndOrders()
+        RefreshCustomers()
+        RefreshOrders()
+    End Sub
+
+    Private Sub btnShowAllOrders_Click(sender As Object, e As EventArgs) Handles btnShowAllOrders.Click
+        RefreshOrders()
+        btnShowAllOrders.Hide()
+    End Sub
+
+    Private Sub dgvCustomers_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCustomers.CellContentClick
+        If e.ColumnIndex = 3 Then
+            RefreshOrders(HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value)))
+        End If
     End Sub
 End Class

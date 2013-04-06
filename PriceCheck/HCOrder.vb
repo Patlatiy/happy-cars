@@ -9,6 +9,7 @@
     Public AdvanceDate As Date
     Public Parts As List(Of HCPart)
     Public Number As OrderNumber
+    Public Shared OrderList As New List(Of HCOrder)
 
     Structure HCPart
         Public Name As String
@@ -60,6 +61,7 @@
             ByVal nAdvanceDate As Date, _
             ByVal nParts As List(Of HCPart))
         Customer = nCustomer
+        Customer.MyOrderList.Add(Me)
         DeliveryDate = nDeliveryDate
         PaymentSum = nPaymentSum
         PaymentDate = nPaymentDate
@@ -67,5 +69,6 @@
         AdvanceDate = nAdvanceDate
         Parts = nParts
         Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
+        OrderList.Add(Me)
     End Sub
 End Class

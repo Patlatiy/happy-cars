@@ -2,6 +2,8 @@
     Dim MyOrder As HCOrder
     Dim txtAdvanceLastValue As String
     Dim txtPaymentLastValue As String
+    Dim curPart As HCPart
+    Dim curPartPosition As Integer
 
     Overloads Sub Show(ByRef Order As HCOrder)
         Me.Show()
@@ -9,12 +11,8 @@
         Me.Text = "Заказ № " & MyOrder.Number.GetFullNumber
 
         lwParts.Items.Clear()
-        For Each Part As HCOrder.HCPart In MyOrder.Parts
-            Dim newArr(1) As String
-            newArr(0) = Part.Name
-            newArr(1) = CStr(Part.Count)
-            Dim newItem As New ListViewItem(newArr)
-            lwParts.Items.Add(newItem)
+        For Each Part As HCPart In MyOrder.PartList
+            AddPart(Part.Name, Part.Count)
         Next
 
         comboCustomers.Items.Clear()
@@ -24,11 +22,20 @@
             If Customer.ID = MyOrder.Customer.ID Then comboCustomers.SelectedItem = newItem
         Next
 
+        txtOrderNumber.Text = MyOrder.Number.GetFullNumber
         dtpDelivery.Value = Order.DeliveryDate
         txtAdvance.Text = CStr(MyOrder.AdvanceSum)
         dtpAdvance.Value = MyOrder.AdvanceDate
         txtPayment.Text = CStr(MyOrder.PaymentSum)
         dtpPayment.Value = MyOrder.PaymentDate
+    End Sub
+
+    Sub AddPart(NewPartName As String, NewPartCount As UInteger)
+        Dim newArr(1) As String
+        newArr(0) = NewPartName
+        newArr(1) = CStr(NewPartCount)
+        Dim newItem As New ListViewItem(newArr)
+        lwParts.Items.Add(newItem)
     End Sub
 
     Private Sub frmOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -54,7 +61,7 @@
         If MyOrder.DeliveryDate <> dtpDelivery.Value Then MyOrder.DeliveryDate = dtpDelivery.Value
     End Sub
 
-    Private Sub txtAdvance_TextChanged(sender As Object, e As EventArgs) Handles txtAdvance.TextChanged
+    Private Sub txtAdvance_TextChanged(sender As Object, e As EventArgs) Handles txtAdvance.TextChanged, txtOrderNumber.TextChanged
         If txtAdvance.Text = txtAdvanceLastValue Then Exit Sub
         Try
             MyOrder.AdvanceSum = CULng(txtAdvance.Text)
@@ -92,5 +99,31 @@
 
     Private Sub dtpPayment_ValueChanged(sender As Object, e As EventArgs) Handles dtpPayment.ValueChanged
         If MyOrder.PaymentDate <> dtpPayment.Value Then MyOrder.PaymentDate = dtpPayment.Value
+    End Sub
+
+    Private Sub lwParts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lwParts.SelectedIndexChanged
+        If lwParts.SelectedItems.Count = 0 Then Exit Sub
+        curPart = MyOrder.PartList.Item(lwParts.SelectedItems.Item(0).Index)
+        curPartPosition = lwParts.SelectedItems.Item(0).Index
+        txtPartName.Text = curPart.Name
+        nudPartCount.Value = curPart.Count
+        nudPartPrice.Value = curPart.Price
+    End Sub
+
+    Private Sub btnPartSave_Click(sender As Object, e As EventArgs) Handles btnPartSave.Click
+        curPart.Name = txtPartName.Text
+        curPart.Count = nudPartCount.Value
+        curPart.Price = nudPartPrice.Value
+        lwParts.Items(curPartPosition).Text = curPart.Name
+        lwParts.Items(curPartPosition).SubItems(1).Text = CStr(curPart.Count)
+    End Sub
+
+    Private Sub btnNewPart_Click(sender As Object, e As EventArgs) Handles btnNewPart.Click
+        Dim newPart As New HCPart("Новая запчасть", 1, 0)
+        MyOrder.PartList.Add(newPart)
+        AddPart(newPart.Name, newPart.Count)
+        lwParts.SelectedIndices.Clear()
+        lwParts.SelectedIndices.Add(lwParts.Items.Count - 1)
+        lwParts.Focus()
     End Sub
 End Class

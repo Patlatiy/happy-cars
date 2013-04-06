@@ -3192,10 +3192,10 @@
     End Sub
 
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
-        Dim testPartList = New List(Of HCOrder.HCPart)
-        Dim newPart = New HCOrder.HCPart("Первая запчасть", 2, 1000)
+        Dim testPartList = New List(Of HCPart)
+        Dim newPart = New HCPart("Первая запчасть", 2, 1000)
         testPartList.Add(newPart)
-        newPart = New HCOrder.HCPart("Вторая запчасть", 1, 100)
+        newPart = New HCPart("Вторая запчасть", 1, 100)
         testPartList.Add(newPart)
         Dim testCustomer = CustomerList(Math.Floor(Rnd() * CustomerList.Count))
         Dim testOrder = New HCOrder(testCustomer, curDate, 1000, curDate, 100, curDate, testPartList)

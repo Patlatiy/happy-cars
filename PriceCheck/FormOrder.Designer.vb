@@ -39,15 +39,30 @@ Partial Class frmOrder
         Me.dtpPayment = New System.Windows.Forms.DateTimePicker()
         Me.txtPayment = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtOrderNumber = New System.Windows.Forms.TextBox()
+        Me.btnNewPart = New System.Windows.Forms.Button()
+        Me.txtPartName = New System.Windows.Forms.TextBox()
+        Me.lblPartName = New System.Windows.Forms.Label()
+        Me.lblPartCount = New System.Windows.Forms.Label()
+        Me.nudPartCount = New System.Windows.Forms.NumericUpDown()
+        Me.nudPartPrice = New System.Windows.Forms.NumericUpDown()
+        Me.lblPartPrice = New System.Windows.Forms.Label()
+        Me.btnPartSave = New System.Windows.Forms.Button()
+        CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lwParts
         '
         Me.lwParts.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cmnPartName, Me.cmnPartCount})
+        Me.lwParts.FullRowSelect = True
         Me.lwParts.GridLines = True
-        Me.lwParts.Location = New System.Drawing.Point(310, 12)
+        Me.lwParts.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lwParts.Location = New System.Drawing.Point(250, 10)
+        Me.lwParts.MultiSelect = False
         Me.lwParts.Name = "lwParts"
-        Me.lwParts.Size = New System.Drawing.Size(216, 234)
+        Me.lwParts.Size = New System.Drawing.Size(216, 153)
         Me.lwParts.TabIndex = 0
         Me.lwParts.UseCompatibleStateImageBehavior = False
         Me.lwParts.View = System.Windows.Forms.View.Details
@@ -66,16 +81,16 @@ Partial Class frmOrder
         '
         Me.comboCustomers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.comboCustomers.FormattingEnabled = True
-        Me.comboCustomers.Location = New System.Drawing.Point(64, 12)
+        Me.comboCustomers.Location = New System.Drawing.Point(64, 37)
         Me.comboCustomers.Name = "comboCustomers"
-        Me.comboCustomers.Size = New System.Drawing.Size(240, 21)
+        Me.comboCustomers.Size = New System.Drawing.Size(171, 21)
         Me.comboCustomers.Sorted = True
         Me.comboCustomers.TabIndex = 1
         '
         'lblCustomer
         '
         Me.lblCustomer.AutoSize = True
-        Me.lblCustomer.Location = New System.Drawing.Point(12, 15)
+        Me.lblCustomer.Location = New System.Drawing.Point(12, 40)
         Me.lblCustomer.Name = "lblCustomer"
         Me.lblCustomer.Size = New System.Drawing.Size(46, 13)
         Me.lblCustomer.TabIndex = 2
@@ -84,7 +99,7 @@ Partial Class frmOrder
         'lblDelivery
         '
         Me.lblDelivery.AutoSize = True
-        Me.lblDelivery.Location = New System.Drawing.Point(12, 41)
+        Me.lblDelivery.Location = New System.Drawing.Point(12, 66)
         Me.lblDelivery.Name = "lblDelivery"
         Me.lblDelivery.Size = New System.Drawing.Size(60, 13)
         Me.lblDelivery.TabIndex = 3
@@ -93,7 +108,7 @@ Partial Class frmOrder
         'dtpDelivery
         '
         Me.dtpDelivery.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDelivery.Location = New System.Drawing.Point(216, 41)
+        Me.dtpDelivery.Location = New System.Drawing.Point(147, 64)
         Me.dtpDelivery.Name = "dtpDelivery"
         Me.dtpDelivery.Size = New System.Drawing.Size(88, 20)
         Me.dtpDelivery.TabIndex = 4
@@ -101,7 +116,7 @@ Partial Class frmOrder
         'lblAdvanceDate
         '
         Me.lblAdvanceDate.AutoSize = True
-        Me.lblAdvanceDate.Location = New System.Drawing.Point(12, 93)
+        Me.lblAdvanceDate.Location = New System.Drawing.Point(12, 128)
         Me.lblAdvanceDate.Name = "lblAdvanceDate"
         Me.lblAdvanceDate.Size = New System.Drawing.Size(75, 13)
         Me.lblAdvanceDate.TabIndex = 3
@@ -110,7 +125,7 @@ Partial Class frmOrder
         'dtpAdvance
         '
         Me.dtpAdvance.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpAdvance.Location = New System.Drawing.Point(216, 93)
+        Me.dtpAdvance.Location = New System.Drawing.Point(147, 126)
         Me.dtpAdvance.Name = "dtpAdvance"
         Me.dtpAdvance.Size = New System.Drawing.Size(88, 20)
         Me.dtpAdvance.TabIndex = 4
@@ -118,7 +133,7 @@ Partial Class frmOrder
         'lblAdvance
         '
         Me.lblAdvance.AutoSize = True
-        Me.lblAdvance.Location = New System.Drawing.Point(12, 70)
+        Me.lblAdvance.Location = New System.Drawing.Point(12, 105)
         Me.lblAdvance.Name = "lblAdvance"
         Me.lblAdvance.Size = New System.Drawing.Size(41, 13)
         Me.lblAdvance.TabIndex = 3
@@ -126,7 +141,7 @@ Partial Class frmOrder
         '
         'txtAdvance
         '
-        Me.txtAdvance.Location = New System.Drawing.Point(216, 67)
+        Me.txtAdvance.Location = New System.Drawing.Point(147, 100)
         Me.txtAdvance.Name = "txtAdvance"
         Me.txtAdvance.Size = New System.Drawing.Size(88, 20)
         Me.txtAdvance.TabIndex = 5
@@ -136,7 +151,7 @@ Partial Class frmOrder
         'lblPaymentDate
         '
         Me.lblPaymentDate.AutoSize = True
-        Me.lblPaymentDate.Location = New System.Drawing.Point(12, 145)
+        Me.lblPaymentDate.Location = New System.Drawing.Point(12, 192)
         Me.lblPaymentDate.Name = "lblPaymentDate"
         Me.lblPaymentDate.Size = New System.Drawing.Size(76, 13)
         Me.lblPaymentDate.TabIndex = 3
@@ -145,7 +160,7 @@ Partial Class frmOrder
         'lblPayment
         '
         Me.lblPayment.AutoSize = True
-        Me.lblPayment.Location = New System.Drawing.Point(12, 122)
+        Me.lblPayment.Location = New System.Drawing.Point(12, 169)
         Me.lblPayment.Name = "lblPayment"
         Me.lblPayment.Size = New System.Drawing.Size(47, 13)
         Me.lblPayment.TabIndex = 3
@@ -154,14 +169,14 @@ Partial Class frmOrder
         'dtpPayment
         '
         Me.dtpPayment.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpPayment.Location = New System.Drawing.Point(216, 145)
+        Me.dtpPayment.Location = New System.Drawing.Point(147, 190)
         Me.dtpPayment.Name = "dtpPayment"
         Me.dtpPayment.Size = New System.Drawing.Size(88, 20)
         Me.dtpPayment.TabIndex = 4
         '
         'txtPayment
         '
-        Me.txtPayment.Location = New System.Drawing.Point(216, 119)
+        Me.txtPayment.Location = New System.Drawing.Point(147, 164)
         Me.txtPayment.Name = "txtPayment"
         Me.txtPayment.Size = New System.Drawing.Size(88, 20)
         Me.txtPayment.TabIndex = 5
@@ -170,25 +185,126 @@ Partial Class frmOrder
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(450, 255)
+        Me.Button1.Location = New System.Drawing.Point(635, 253)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 6
         Me.Button1.Text = "Закрыть"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 15)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(83, 13)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Номер заказа:"
+        '
+        'txtOrderNumber
+        '
+        Me.txtOrderNumber.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtOrderNumber.Location = New System.Drawing.Point(147, 10)
+        Me.txtOrderNumber.Name = "txtOrderNumber"
+        Me.txtOrderNumber.ReadOnly = True
+        Me.txtOrderNumber.Size = New System.Drawing.Size(88, 20)
+        Me.txtOrderNumber.TabIndex = 5
+        Me.txtOrderNumber.Text = "0"
+        Me.txtOrderNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'btnNewPart
+        '
+        Me.btnNewPart.Location = New System.Drawing.Point(404, 169)
+        Me.btnNewPart.Name = "btnNewPart"
+        Me.btnNewPart.Size = New System.Drawing.Size(62, 22)
+        Me.btnNewPart.TabIndex = 7
+        Me.btnNewPart.Text = "Новая >>"
+        Me.btnNewPart.UseVisualStyleBackColor = True
+        '
+        'txtPartName
+        '
+        Me.txtPartName.Location = New System.Drawing.Point(561, 12)
+        Me.txtPartName.Name = "txtPartName"
+        Me.txtPartName.Size = New System.Drawing.Size(152, 20)
+        Me.txtPartName.TabIndex = 9
+        '
+        'lblPartName
+        '
+        Me.lblPartName.AutoSize = True
+        Me.lblPartName.Location = New System.Drawing.Point(472, 15)
+        Me.lblPartName.Name = "lblPartName"
+        Me.lblPartName.Size = New System.Drawing.Size(83, 13)
+        Me.lblPartName.TabIndex = 10
+        Me.lblPartName.Text = "Наименование"
+        '
+        'lblPartCount
+        '
+        Me.lblPartCount.AutoSize = True
+        Me.lblPartCount.Location = New System.Drawing.Point(472, 41)
+        Me.lblPartCount.Name = "lblPartCount"
+        Me.lblPartCount.Size = New System.Drawing.Size(66, 13)
+        Me.lblPartCount.TabIndex = 10
+        Me.lblPartCount.Text = "Количество"
+        '
+        'nudPartCount
+        '
+        Me.nudPartCount.Location = New System.Drawing.Point(668, 39)
+        Me.nudPartCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudPartCount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudPartCount.Name = "nudPartCount"
+        Me.nudPartCount.Size = New System.Drawing.Size(45, 20)
+        Me.nudPartCount.TabIndex = 11
+        Me.nudPartCount.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'nudPartPrice
+        '
+        Me.nudPartPrice.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudPartPrice.Location = New System.Drawing.Point(631, 65)
+        Me.nudPartPrice.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudPartPrice.Name = "nudPartPrice"
+        Me.nudPartPrice.Size = New System.Drawing.Size(82, 20)
+        Me.nudPartPrice.TabIndex = 12
+        '
+        'lblPartPrice
+        '
+        Me.lblPartPrice.AutoSize = True
+        Me.lblPartPrice.Location = New System.Drawing.Point(472, 67)
+        Me.lblPartPrice.Name = "lblPartPrice"
+        Me.lblPartPrice.Size = New System.Drawing.Size(77, 13)
+        Me.lblPartPrice.TabIndex = 10
+        Me.lblPartPrice.Text = "Цена закупки"
+        '
+        'btnPartSave
+        '
+        Me.btnPartSave.Location = New System.Drawing.Point(561, 98)
+        Me.btnPartSave.Name = "btnPartSave"
+        Me.btnPartSave.Size = New System.Drawing.Size(95, 23)
+        Me.btnPartSave.TabIndex = 13
+        Me.btnPartSave.Text = "<< Сохранить"
+        Me.btnPartSave.UseVisualStyleBackColor = True
+        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(537, 288)
+        Me.ClientSize = New System.Drawing.Size(722, 288)
+        Me.Controls.Add(Me.btnPartSave)
+        Me.Controls.Add(Me.nudPartPrice)
+        Me.Controls.Add(Me.nudPartCount)
+        Me.Controls.Add(Me.lblPartPrice)
+        Me.Controls.Add(Me.lblPartCount)
+        Me.Controls.Add(Me.lblPartName)
+        Me.Controls.Add(Me.txtPartName)
+        Me.Controls.Add(Me.btnNewPart)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.txtPayment)
+        Me.Controls.Add(Me.txtOrderNumber)
         Me.Controls.Add(Me.txtAdvance)
         Me.Controls.Add(Me.dtpPayment)
         Me.Controls.Add(Me.dtpAdvance)
         Me.Controls.Add(Me.dtpDelivery)
         Me.Controls.Add(Me.lblPayment)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblPaymentDate)
         Me.Controls.Add(Me.lblAdvance)
         Me.Controls.Add(Me.lblAdvanceDate)
@@ -203,6 +319,8 @@ Partial Class frmOrder
         Me.Name = "frmOrder"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Заказ № "
+        CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -223,4 +341,14 @@ Partial Class frmOrder
     Friend WithEvents dtpPayment As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtPayment As System.Windows.Forms.TextBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents txtOrderNumber As System.Windows.Forms.TextBox
+    Friend WithEvents btnNewPart As System.Windows.Forms.Button
+    Friend WithEvents txtPartName As System.Windows.Forms.TextBox
+    Friend WithEvents lblPartName As System.Windows.Forms.Label
+    Friend WithEvents lblPartCount As System.Windows.Forms.Label
+    Friend WithEvents nudPartCount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudPartPrice As System.Windows.Forms.NumericUpDown
+    Friend WithEvents lblPartPrice As System.Windows.Forms.Label
+    Friend WithEvents btnPartSave As System.Windows.Forms.Button
 End Class

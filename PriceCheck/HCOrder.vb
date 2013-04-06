@@ -7,20 +7,9 @@
 
     Public AdvanceSum As ULong
     Public AdvanceDate As Date
-    Public Parts As List(Of HCPart)
+    Public PartList As List(Of HCPart)
     Public Number As OrderNumber
     Public Shared OrderList As New List(Of HCOrder)
-
-    Structure HCPart
-        Public Name As String
-        Public Count As UInteger
-        Public Price As UInteger
-        Sub New(nName As String, nCount As UInteger, nPrice As UInteger)
-            Name = nName
-            Count = nCount
-            Price = nPrice
-        End Sub
-    End Structure
 
     Structure OrderNumber
         Public Year As Short
@@ -67,7 +56,7 @@
         PaymentDate = nPaymentDate
         AdvanceSum = nAdvanceSum
         AdvanceDate = nAdvanceDate
-        Parts = nParts
+        PartList = nParts
         Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
         OrderList.Add(Me)
     End Sub

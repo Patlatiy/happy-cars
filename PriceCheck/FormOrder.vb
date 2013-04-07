@@ -31,9 +31,9 @@
     End Sub
 
     Sub AddPart(NewPartName As String, NewPartCount As UInteger)
-        Dim newArr(1) As String
-        newArr(0) = NewPartName
-        newArr(1) = CStr(NewPartCount)
+        Dim newArr() As String = {NewPartName, CStr(NewPartCount)}
+        'newArr(0) = NewPartName
+        'newArr(1) = CStr(NewPartCount)
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items.Add(newItem)
     End Sub
@@ -54,10 +54,6 @@
             MyOrder.Customer = newCustomer
             Form1.RefreshOrders()
         End If
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Me.Close()
     End Sub
 
     Private Sub dtpDelivery_ValueChanged(sender As Object, e As EventArgs) Handles dtpDelivery.ValueChanged

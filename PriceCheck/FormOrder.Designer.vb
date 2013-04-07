@@ -38,7 +38,6 @@ Partial Class frmOrder
         Me.lblPayment = New System.Windows.Forms.Label()
         Me.dtpPayment = New System.Windows.Forms.DateTimePicker()
         Me.txtPayment = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtOrderNumber = New System.Windows.Forms.TextBox()
         Me.btnNewPart = New System.Windows.Forms.Button()
@@ -48,12 +47,16 @@ Partial Class frmOrder
         Me.nudPartCount = New System.Windows.Forms.NumericUpDown()
         Me.nudPartPrice = New System.Windows.Forms.NumericUpDown()
         Me.lblPartPrice = New System.Windows.Forms.Label()
+        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
+        Me.RectangleShape2 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
+        Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lwParts
         '
+        Me.lwParts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lwParts.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cmnPartName, Me.cmnPartCount})
         Me.lwParts.FullRowSelect = True
         Me.lwParts.GridLines = True
@@ -68,7 +71,7 @@ Partial Class frmOrder
         '
         'cmnPartName
         '
-        Me.cmnPartName.Text = "Название запчасти"
+        Me.cmnPartName.Text = "Наименование"
         Me.cmnPartName.Width = 150
         '
         'cmnPartCount
@@ -182,15 +185,6 @@ Partial Class frmOrder
         Me.txtPayment.Text = "0"
         Me.txtPayment.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(635, 253)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "Закрыть"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -213,17 +207,17 @@ Partial Class frmOrder
         '
         'btnNewPart
         '
-        Me.btnNewPart.Location = New System.Drawing.Point(404, 169)
+        Me.btnNewPart.Location = New System.Drawing.Point(327, 176)
         Me.btnNewPart.Name = "btnNewPart"
         Me.btnNewPart.Size = New System.Drawing.Size(62, 22)
         Me.btnNewPart.TabIndex = 7
-        Me.btnNewPart.Text = "Новая >>"
+        Me.btnNewPart.Text = "Новая"
         Me.btnNewPart.UseVisualStyleBackColor = True
         '
         'txtPartName
         '
         Me.txtPartName.Enabled = False
-        Me.txtPartName.Location = New System.Drawing.Point(561, 12)
+        Me.txtPartName.Location = New System.Drawing.Point(562, 24)
         Me.txtPartName.Name = "txtPartName"
         Me.txtPartName.Size = New System.Drawing.Size(152, 20)
         Me.txtPartName.TabIndex = 9
@@ -231,7 +225,7 @@ Partial Class frmOrder
         'lblPartName
         '
         Me.lblPartName.AutoSize = True
-        Me.lblPartName.Location = New System.Drawing.Point(472, 15)
+        Me.lblPartName.Location = New System.Drawing.Point(473, 27)
         Me.lblPartName.Name = "lblPartName"
         Me.lblPartName.Size = New System.Drawing.Size(83, 13)
         Me.lblPartName.TabIndex = 10
@@ -240,7 +234,7 @@ Partial Class frmOrder
         'lblPartCount
         '
         Me.lblPartCount.AutoSize = True
-        Me.lblPartCount.Location = New System.Drawing.Point(472, 41)
+        Me.lblPartCount.Location = New System.Drawing.Point(473, 53)
         Me.lblPartCount.Name = "lblPartCount"
         Me.lblPartCount.Size = New System.Drawing.Size(66, 13)
         Me.lblPartCount.TabIndex = 10
@@ -249,7 +243,7 @@ Partial Class frmOrder
         'nudPartCount
         '
         Me.nudPartCount.Enabled = False
-        Me.nudPartCount.Location = New System.Drawing.Point(668, 39)
+        Me.nudPartCount.Location = New System.Drawing.Point(669, 51)
         Me.nudPartCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudPartCount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudPartCount.Name = "nudPartCount"
@@ -261,7 +255,7 @@ Partial Class frmOrder
         '
         Me.nudPartPrice.Enabled = False
         Me.nudPartPrice.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudPartPrice.Location = New System.Drawing.Point(631, 65)
+        Me.nudPartPrice.Location = New System.Drawing.Point(632, 77)
         Me.nudPartPrice.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudPartPrice.Name = "nudPartPrice"
         Me.nudPartPrice.Size = New System.Drawing.Size(82, 20)
@@ -270,17 +264,39 @@ Partial Class frmOrder
         'lblPartPrice
         '
         Me.lblPartPrice.AutoSize = True
-        Me.lblPartPrice.Location = New System.Drawing.Point(472, 67)
+        Me.lblPartPrice.Location = New System.Drawing.Point(473, 79)
         Me.lblPartPrice.Name = "lblPartPrice"
         Me.lblPartPrice.Size = New System.Drawing.Size(77, 13)
         Me.lblPartPrice.TabIndex = 10
         Me.lblPartPrice.Text = "Цена закупки"
         '
+        'ShapeContainer1
+        '
+        Me.ShapeContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
+        Me.ShapeContainer1.Name = "ShapeContainer1"
+        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.RectangleShape2, Me.RectangleShape1})
+        Me.ShapeContainer1.Size = New System.Drawing.Size(735, 224)
+        Me.ShapeContainer1.TabIndex = 13
+        Me.ShapeContainer1.TabStop = False
+        '
+        'RectangleShape2
+        '
+        Me.RectangleShape2.Location = New System.Drawing.Point(465, 10)
+        Me.RectangleShape2.Name = "RectangleShape2"
+        Me.RectangleShape2.Size = New System.Drawing.Size(259, 201)
+        '
+        'RectangleShape1
+        '
+        Me.RectangleShape1.Location = New System.Drawing.Point(250, 162)
+        Me.RectangleShape1.Name = "RectangleShape1"
+        Me.RectangleShape1.Size = New System.Drawing.Size(215, 49)
+        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(722, 288)
+        Me.ClientSize = New System.Drawing.Size(735, 224)
         Me.Controls.Add(Me.nudPartPrice)
         Me.Controls.Add(Me.nudPartCount)
         Me.Controls.Add(Me.lblPartPrice)
@@ -288,7 +304,6 @@ Partial Class frmOrder
         Me.Controls.Add(Me.lblPartName)
         Me.Controls.Add(Me.txtPartName)
         Me.Controls.Add(Me.btnNewPart)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.txtPayment)
         Me.Controls.Add(Me.txtOrderNumber)
         Me.Controls.Add(Me.txtAdvance)
@@ -304,6 +319,7 @@ Partial Class frmOrder
         Me.Controls.Add(Me.lblCustomer)
         Me.Controls.Add(Me.comboCustomers)
         Me.Controls.Add(Me.lwParts)
+        Me.Controls.Add(Me.ShapeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -332,7 +348,6 @@ Partial Class frmOrder
     Friend WithEvents lblPayment As System.Windows.Forms.Label
     Friend WithEvents dtpPayment As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtPayment As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtOrderNumber As System.Windows.Forms.TextBox
     Friend WithEvents btnNewPart As System.Windows.Forms.Button
@@ -342,4 +357,7 @@ Partial Class frmOrder
     Friend WithEvents nudPartCount As System.Windows.Forms.NumericUpDown
     Friend WithEvents nudPartPrice As System.Windows.Forms.NumericUpDown
     Friend WithEvents lblPartPrice As System.Windows.Forms.Label
+    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
+    Friend WithEvents RectangleShape1 As Microsoft.VisualBasic.PowerPacks.RectangleShape
+    Friend WithEvents RectangleShape2 As Microsoft.VisualBasic.PowerPacks.RectangleShape
 End Class

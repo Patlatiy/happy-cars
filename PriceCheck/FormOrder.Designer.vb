@@ -48,7 +48,6 @@ Partial Class frmOrder
         Me.nudPartCount = New System.Windows.Forms.NumericUpDown()
         Me.nudPartPrice = New System.Windows.Forms.NumericUpDown()
         Me.lblPartPrice = New System.Windows.Forms.Label()
-        Me.btnPartSave = New System.Windows.Forms.Button()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -274,21 +273,11 @@ Partial Class frmOrder
         Me.lblPartPrice.TabIndex = 10
         Me.lblPartPrice.Text = "Цена закупки"
         '
-        'btnPartSave
-        '
-        Me.btnPartSave.Location = New System.Drawing.Point(561, 98)
-        Me.btnPartSave.Name = "btnPartSave"
-        Me.btnPartSave.Size = New System.Drawing.Size(95, 23)
-        Me.btnPartSave.TabIndex = 13
-        Me.btnPartSave.Text = "<< Сохранить"
-        Me.btnPartSave.UseVisualStyleBackColor = True
-        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(722, 288)
-        Me.Controls.Add(Me.btnPartSave)
         Me.Controls.Add(Me.nudPartPrice)
         Me.Controls.Add(Me.nudPartCount)
         Me.Controls.Add(Me.lblPartPrice)
@@ -350,5 +339,4 @@ Partial Class frmOrder
     Friend WithEvents nudPartCount As System.Windows.Forms.NumericUpDown
     Friend WithEvents nudPartPrice As System.Windows.Forms.NumericUpDown
     Friend WithEvents lblPartPrice As System.Windows.Forms.Label
-    Friend WithEvents btnPartSave As System.Windows.Forms.Button
 End Class

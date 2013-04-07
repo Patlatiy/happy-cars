@@ -102,20 +102,13 @@
     End Sub
 
     Private Sub lwParts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lwParts.SelectedIndexChanged
+        curPart = Nothing
         If lwParts.SelectedItems.Count = 0 Then Exit Sub
         curPart = MyOrder.PartList.Item(lwParts.SelectedItems.Item(0).Index)
         curPartPosition = lwParts.SelectedItems.Item(0).Index
         txtPartName.Text = curPart.Name
         nudPartCount.Value = curPart.Count
         nudPartPrice.Value = curPart.Price
-    End Sub
-
-    Private Sub btnPartSave_Click(sender As Object, e As EventArgs) Handles btnPartSave.Click
-        curPart.Name = txtPartName.Text
-        curPart.Count = nudPartCount.Value
-        curPart.Price = nudPartPrice.Value
-        lwParts.Items(curPartPosition).Text = curPart.Name
-        lwParts.Items(curPartPosition).SubItems(1).Text = CStr(curPart.Count)
     End Sub
 
     Private Sub btnNewPart_Click(sender As Object, e As EventArgs) Handles btnNewPart.Click
@@ -125,5 +118,27 @@
         lwParts.SelectedIndices.Clear()
         lwParts.SelectedIndices.Add(lwParts.Items.Count - 1)
         lwParts.Focus()
+    End Sub
+
+    Private Sub txtPartName_TextChanged(sender As Object, e As EventArgs) Handles txtPartName.TextChanged
+        If curPart Is Nothing Then Exit Sub
+        If txtPartName.Text = "" Then Exit Sub
+        If curPart.Name <> txtPartName.Text Then
+            curPart.Name = txtPartName.Text
+            lwParts.Items(curPartPosition).Text = curPart.Name
+        End If
+    End Sub
+
+    Private Sub nudPartCount_ValueChanged(sender As Object, e As EventArgs) Handles nudPartCount.ValueChanged
+        If curPart Is Nothing Then Exit Sub
+        If curPart.Count <> nudPartCount.Value Then
+            curPart.Count = nudPartCount.Value
+            lwParts.Items(curPartPosition).SubItems(1).Text = CStr(curPart.Count)
+        End If
+    End Sub
+
+    Private Sub nudPartPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudPartPrice.ValueChanged
+        If curPart Is Nothing Then Exit Sub
+        If curPart.Price <> nudPartPrice.Value Then curPart.Price = nudPartPrice.Value
     End Sub
 End Class

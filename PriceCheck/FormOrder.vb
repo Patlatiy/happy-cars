@@ -38,8 +38,8 @@
         lwParts.Items.Add(newItem)
     End Sub
 
-    Private Sub frmOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+    Private Sub frmOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Form1.Enabled = True
     End Sub
 
     Private Sub comboCustomers_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboCustomers.SelectedValueChanged
@@ -48,13 +48,16 @@
         If newCustomer Is Nothing Then
             MsgBox("Что-то пошло не так", MsgBoxStyle.Critical)
         Else
+            MyOrder.Customer.MyOrderList.Remove(MyOrder)
+            newCustomer.MyOrderList.Add(MyOrder)
+            newCustomer.MyOrderList.Sort(AddressOf HCOrder.CompareByNumber)
             MyOrder.Customer = newCustomer
-            Form1.RefreshCustomersAndOrders()
+            Form1.RefreshOrders()
         End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub dtpDelivery_ValueChanged(sender As Object, e As EventArgs) Handles dtpDelivery.ValueChanged
@@ -103,12 +106,16 @@
 
     Private Sub lwParts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lwParts.SelectedIndexChanged
         curPart = Nothing
-        If lwParts.SelectedItems.Count = 0 Then Exit Sub
+        If lwParts.SelectedItems.Count = 0 Then
+            DisablePartControls()
+            Exit Sub
+        End If
         curPart = MyOrder.PartList.Item(lwParts.SelectedItems.Item(0).Index)
         curPartPosition = lwParts.SelectedItems.Item(0).Index
         txtPartName.Text = curPart.Name
         nudPartCount.Value = curPart.Count
         nudPartPrice.Value = curPart.Price
+        EnablePartControls()
     End Sub
 
     Private Sub btnNewPart_Click(sender As Object, e As EventArgs) Handles btnNewPart.Click
@@ -140,5 +147,20 @@
     Private Sub nudPartPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudPartPrice.ValueChanged
         If curPart Is Nothing Then Exit Sub
         If curPart.Price <> nudPartPrice.Value Then curPart.Price = nudPartPrice.Value
+    End Sub
+
+    Sub EnablePartControls()
+        txtPartName.Enabled = True
+        nudPartCount.Enabled = True
+        nudPartPrice.Enabled = True
+    End Sub
+
+    Sub DisablePartControls()
+        txtPartName.Enabled = False
+        nudPartCount.Enabled = False
+        nudPartPrice.Enabled = False
+        txtPartName.Text = ""
+        nudPartCount.Value = 1
+        nudPartPrice.Value = 0
     End Sub
 End Class

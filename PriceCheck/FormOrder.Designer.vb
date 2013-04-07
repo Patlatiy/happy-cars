@@ -222,6 +222,7 @@ Partial Class frmOrder
         '
         'txtPartName
         '
+        Me.txtPartName.Enabled = False
         Me.txtPartName.Location = New System.Drawing.Point(561, 12)
         Me.txtPartName.Name = "txtPartName"
         Me.txtPartName.Size = New System.Drawing.Size(152, 20)
@@ -247,6 +248,7 @@ Partial Class frmOrder
         '
         'nudPartCount
         '
+        Me.nudPartCount.Enabled = False
         Me.nudPartCount.Location = New System.Drawing.Point(668, 39)
         Me.nudPartCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudPartCount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -257,6 +259,7 @@ Partial Class frmOrder
         '
         'nudPartPrice
         '
+        Me.nudPartPrice.Enabled = False
         Me.nudPartPrice.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudPartPrice.Location = New System.Drawing.Point(631, 65)
         Me.nudPartPrice.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})

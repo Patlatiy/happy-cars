@@ -60,4 +60,38 @@
         Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
         OrderList.Add(Me)
     End Sub
+
+    Public Shared Function CompareByNumber(ByVal a As HCOrder, ByVal b As HCOrder) As Integer
+        If a Is Nothing Then
+            If b Is Nothing Then
+                Return 0
+            Else
+                Return -1
+            End If
+        Else
+            If b Is Nothing Then
+                Return 1
+            Else
+                If a.Number.Year > b.Number.Year Then
+                    Return 1
+                ElseIf a.Number.Year < b.Number.Year Then
+                    Return -1
+                Else
+                    If a.Number.Month > b.Number.Month Then
+                        Return 1
+                    ElseIf a.Number.Month < b.Number.Month Then
+                        Return -1
+                    Else
+                        If a.Number.ID > b.Number.ID Then
+                            Return 1
+                        ElseIf a.Number.ID < b.Number.ID Then
+                            Return -1
+                        Else
+                            Return 0
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    End Function
 End Class

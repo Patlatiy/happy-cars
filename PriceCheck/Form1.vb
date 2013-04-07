@@ -96,6 +96,7 @@
 
     Dim CustomerList As List(Of HCCustomer) = HCCustomer.CustomerList
     Dim OrderList As List(Of HCOrder) = HCOrder.OrderList
+    Dim curCustomer As HCCustomer
 
     ''' <summary>
     ''' Процедура пересчёта цен
@@ -3205,25 +3206,36 @@
         dgvOrders.FirstDisplayedScrollingRowIndex = dgvOrders.Rows.Count - 1
     End Sub
 
-    Private Sub dgvOrders_CellContentClick(sender As System.Windows.Forms.DataGridView, e As DataGridViewCellEventArgs) Handles dgvOrders.CellContentClick
+    Private Sub dgvOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOrders.CellContentClick
         If e.ColumnIndex = 2 Then
-            frmOrder.Show(OrderList.Item(e.RowIndex))
+            Me.Enabled = False
+            NumberToFind = dgvOrders.Item(0, e.RowIndex).Value
+            frmOrder.Show(OrderList.Find(AddressOf FindOrderByNumber))
         End If
     End Sub
 
+    Dim NumberToFind As String
+    Private Function FindOrderByNumber(ByVal Order As HCOrder) As Boolean
+        If Order.Number.GetFullNumber = NumberToFind Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     Sub RefreshOrders()
         dgvOrders.Rows.Clear()
-        For Each Order As HCOrder In OrderList
-            dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, "Подробно...", True)
-        Next
-    End Sub
-
-    Sub RefreshOrders(ByRef Customer As HCCustomer)
-        dgvOrders.Rows.Clear()
-        For Each Order In Customer.MyOrderList
-            dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, "Подробно...", True)
-        Next
-        btnShowAllOrders.Show()
+        If curCustomer Is Nothing Then
+            For Each Order As HCOrder In OrderList
+                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, "Подробно...", True)
+            Next
+            btnShowAllOrders.Hide()
+        Else
+            For Each Order In curCustomer.MyOrderList
+                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, "Подробно...", True)
+            Next
+            btnShowAllOrders.Show()
+        End If
     End Sub
 
     Sub RefreshCustomers()
@@ -3239,13 +3251,15 @@
     End Sub
 
     Private Sub btnShowAllOrders_Click(sender As Object, e As EventArgs) Handles btnShowAllOrders.Click
+        curCustomer = Nothing
         RefreshOrders()
         btnShowAllOrders.Hide()
     End Sub
 
     Private Sub dgvCustomers_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCustomers.CellContentClick
         If e.ColumnIndex = 3 Then
-            RefreshOrders(HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value)))
+            curCustomer = HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value))
+            RefreshOrders()
         End If
     End Sub
 End Class

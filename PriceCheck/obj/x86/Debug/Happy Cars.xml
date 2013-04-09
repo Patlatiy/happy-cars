@@ -6,7 +6,12 @@ HappyCars
 </name>
 </assembly>
 <members>
-<member name="P:HappyCars.My.Resources.Resources.ResourceManager">
+<member name="M:HappyCars.frmOrder.CheckParts">
+	<summary>
+ Checks if there is any parts in MyOrder.PartList and Enables/Disables some controls on the form
+ </summary>
+	<remarks></remarks>
+</member><member name="P:HappyCars.My.Resources.Resources.ResourceManager">
 	<summary>
   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
 </summary>

@@ -7,6 +7,7 @@
 
     Public AdvanceSum As ULong
     Public AdvanceDate As Date
+    Private Discount As ULong = 0
     Public PartList As List(Of HCPart)
     Public Number As OrderNumber
     Public Shared OrderList As New List(Of HCOrder)
@@ -48,6 +49,7 @@
             ByVal nPaymentDate As Date, _
             ByVal nAdvanceSum As ULong, _
             ByVal nAdvanceDate As Date, _
+            ByVal nDiscount As Double, _
             ByVal nParts As List(Of HCPart))
         Customer = nCustomer
         Customer.MyOrderList.Add(Me)
@@ -58,6 +60,7 @@
         AdvanceDate = nAdvanceDate
         PartList = nParts
         Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
+        Me.SetDiscount(nDiscount)
         OrderList.Add(Me)
     End Sub
 
@@ -93,5 +96,23 @@
                 End If
             End If
         End If
+    End Function
+
+    Public Function GetDiscount() As Double
+        Return Discount / 100
+    End Function
+
+    Public Sub SetDiscount(sDiscount As Double)
+        Discount = CULng(sDiscount * 100)
+    End Sub
+
+    Public Function GetTotalPrice() As Double
+        Dim TotalOrderPrice As Double = 0
+        For Each Part In PartList
+            TotalOrderPrice += Part.GetSellPrice()
+        Next
+        TotalOrderPrice = TotalOrderPrice - Me.GetDiscount()
+        TotalOrderPrice = Math.Round(TotalOrderPrice, 2)
+        Return TotalOrderPrice
     End Function
 End Class

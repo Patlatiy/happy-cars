@@ -142,7 +142,7 @@
     </Compile>
     <Compile Include="HCListItem.vb" />
     <Compile Include="HCOrder.vb" />
-    <Compile Include="Parts.vb" />
+    <Compile Include="HCPart.vb" />
     <Compile Include="ZPForm.Designer.vb">
       <DependentUpon>ZPForm.vb</DependentUpon>
     </Compile>

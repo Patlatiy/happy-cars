@@ -28,12 +28,12 @@
         dtpAdvance.Value = MyOrder.AdvanceDate
         txtPayment.Text = CStr(MyOrder.PaymentSum)
         dtpPayment.Value = MyOrder.PaymentDate
+        FillDiscount()
+        FillTotal()
     End Sub
 
     Sub AddPart(NewPartName As String, NewPartCount As UInteger)
         Dim newArr() As String = {NewPartName, CStr(NewPartCount)}
-        'newArr(0) = NewPartName
-        'newArr(1) = CStr(NewPartCount)
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items.Add(newItem)
     End Sub
@@ -60,11 +60,12 @@
         If MyOrder.DeliveryDate <> dtpDelivery.Value Then MyOrder.DeliveryDate = dtpDelivery.Value
     End Sub
 
-    Private Sub txtAdvance_TextChanged(sender As Object, e As EventArgs) Handles txtAdvance.TextChanged, txtOrderNumber.TextChanged
+    Private Sub txtAdvance_TextChanged(sender As Object, e As EventArgs) Handles txtAdvance.TextChanged
         If txtAdvance.Text = txtAdvanceLastValue Then Exit Sub
         Try
             MyOrder.AdvanceSum = CULng(txtAdvance.Text)
             txtAdvanceLastValue = txtAdvance.Text
+            FillTotalReceived()
         Catch ex As Exception
             If txtAdvance.Text = "" Then
                 txtAdvance.Text = 0
@@ -81,6 +82,7 @@
         Try
             MyOrder.PaymentSum = CULng(txtPayment.Text)
             txtPaymentLastValue = txtPayment.Text
+            FillTotalReceived()
         Catch ex As Exception
             If txtPayment.Text = "" Then
                 txtPayment.Text = 0
@@ -153,9 +155,7 @@
         nudPartPrice.Enabled = True
         nudMargin.Enabled = True
         nudMarginPc.Enabled = True
-        nudDiscount.Enabled = True
-        nudDiscountPc.Enabled = True
-        txtTotal.Enabled = True
+        txtSellPrice.Enabled = True
     End Sub
 
     Sub DisablePartControls()
@@ -169,8 +169,8 @@
         nudMarginPc.Value = 0
         nudMargin.Enabled = False
         nudMargin.Value = 0
-        txtTotal.Enabled = False
-        txtTotal.Text = ""
+        txtSellPrice.Enabled = False
+        txtSellPrice.Text = ""
     End Sub
 
     Sub UpdatePart()
@@ -179,43 +179,109 @@
         nudPartCount.Value = curPart.Count
         nudPartPrice.Value = curPart.Price
 
-        'Чтобы не вызывать 2 раза подряд nudMargin_ValueChanged() и nudDiscount_ValueChanged() нужны If:
+        'Чтобы не вызывать 2 раза подряд nudMargin_ValueChanged() нужно условие:
         If nudMargin.Value = curPart.GetMargin Then
             nudMargin_ValueChanged(nudMargin, e:=New EventArgs())
         Else
             nudMargin.Value = curPart.GetMargin
         End If
 
-        If nudDiscount.Value = curPart.GetDiscount Then
+        FillDiscount()
+        FillSellPrice()
+        FillTotal()
+    End Sub
+
+    Sub FillSellPrice()
+        txtSellPrice.Text = CStr(curPart.GetSellPrice())
+    End Sub
+
+    Sub FillTotal()
+        CheckParts()
+        txtTotal.Text = CStr(MyOrder.GetTotalPrice)
+    End Sub
+
+    Sub FillTotalReceived()
+        txtTotalReceived.Text = CStr(CDbl(txtAdvance.Text) + CDbl(txtPayment.Text))
+    End Sub
+
+    Sub FillDiscount()
+        CheckParts()
+        'Чтобы не вызывать 2 раза подряд nudDiscount_ValueChanged() нужно условие:
+        If nudDiscount.Value = MyOrder.GetDiscount Then
             nudDiscount_ValueChanged(nudDiscount, e:=New EventArgs())
         Else
-            nudDiscount.Value = curPart.GetDiscount
+            nudDiscount.Value = MyOrder.GetDiscount
         End If
-
-        txtTotal.Text = CStr((curPart.Price + curPart.GetMargin - curPart.GetDiscount) * curPart.Count)
     End Sub
 
     Private Sub nudMarginPc_ValueChanged(sender As Object, e As EventArgs) Handles nudMarginPc.ValueChanged
+        If Silent_Change Then Exit Sub
         If curPart Is Nothing Then Exit Sub
-        Dim dblMargin As Double = curPart.Price * nudMarginPc.Value / 100
+        Dim dblMargin As Double = Math.Round(curPart.Price * nudMarginPc.Value / 100, 2)
         nudMargin.Value = dblMargin
         curPart.SetMargin(dblMargin)
     End Sub
 
     Private Sub nudMargin_ValueChanged(sender As Object, e As EventArgs) Handles nudMargin.ValueChanged
         If curPart Is Nothing Then Exit Sub
-        nudMarginPc.Value = nudMargin.Value * 100 / curPart.Price
+        If curPart.Price = 0 Then Exit Sub
+        Dim dblmargin As Double = Math.Round(nudMargin.Value * 100 / curPart.Price)
+        Silent_Change = True
+        nudMarginPc.Value = dblmargin
+        Silent_Change = False
+        curPart.SetMargin(nudMargin.Value)
+        FillSellPrice()
+        FillTotal()
     End Sub
 
+    Dim Silent_Change As Boolean = False
     Private Sub nudDiscountPc_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscountPc.ValueChanged
-        If curPart Is Nothing Then Exit Sub
-        Dim dblDiscount As Double = curPart.Price * nudDiscountPc.Value / 100
+        If Silent_Change Then Exit Sub
+        Dim dblDiscount As Double = MyOrder.GetTotalPrice * nudDiscountPc.Value / 100
         nudDiscount.Value = dblDiscount
-        curPart.SetDiscount(dblDiscount)
     End Sub
 
     Private Sub nudDiscount_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscount.ValueChanged
+        Dim newValue = Math.Round(nudDiscount.Value * 100 / MyOrder.GetTotalPrice)
+        If newValue >= nudDiscountPc.Minimum And newValue <= nudDiscountPc.Maximum Then
+            Silent_Change = True
+            nudDiscountPc.Value = newValue
+            Silent_Change = False
+            MyOrder.SetDiscount(nudDiscount.Value)
+        End If
+    End Sub
+
+    Private Sub btnDeletePart_Click(sender As Object, e As EventArgs) Handles btnDeletePart.Click
         If curPart Is Nothing Then Exit Sub
-        nudDiscountPc.Value = nudDiscount.Value * 100 / curPart.Price
+        MyOrder.PartList.Remove(MyOrder.PartList.Item(lwParts.SelectedItems.Item(0).Index))
+        lwParts.Items.RemoveAt(lwParts.SelectedIndices(0))
+        curPart = Nothing
+        CheckParts()
+        FillTotal()
+    End Sub
+
+    ''' <summary>
+    ''' Checks if there is any parts in MyOrder.PartList and Enables/Disables some controls on the form
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub CheckParts()
+        If MyOrder.PartList.Count = 0 Then
+            DisableDiscountControls()
+            txtTotal.Text = "0"
+        Else
+            EnableDiscountControls()
+        End If
+    End Sub
+
+    Private Sub DisableDiscountControls()
+        nudDiscount.Enabled = False
+        nudDiscount.Value = nudDiscount.Minimum
+        nudDiscountPc.Enabled = False
+        nudDiscountPc.Value = nudDiscountPc.Minimum
+    End Sub
+
+    Private Sub EnableDiscountControls()
+        nudDiscount.Enabled = True
+        nudDiscountPc.Enabled = True
     End Sub
 End Class

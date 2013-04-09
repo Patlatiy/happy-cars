@@ -6,6 +6,7 @@
     Const START_HOUR As UShort = 9, END_HOUR As UShort = 21 'Рабочий день
 
     Dim READ_ONLY_MODE As Boolean = True
+    Dim Random As New Random
 
     'Переменные текущих цен на мойку:
     Dim plexPrice As UInteger 'Цена за комплекс
@@ -3110,8 +3111,7 @@
         Dim tmp2Name As String
         Dim tmpPatron As String
         Dim tmpPhoneNumber As String
-        Randomize(My.Computer.Clock.LocalTime.Ticks)
-        Dim tmpRnd As Short = Math.Ceiling(Rnd() * 10)
+        Dim tmpRnd As Short = Math.Ceiling(Random.Next(1, 11))
         Select Case tmpRnd
             Case 1
                 tmpName = "Александр"
@@ -3135,7 +3135,7 @@
                 tmpName = "Илья"
         End Select
 
-        tmpRnd = Math.Ceiling(Rnd() * 10)
+        tmpRnd = Math.Ceiling(Random.Next(1, 11))
         Select Case tmpRnd
             Case 1
                 tmp2Name = "Пушкин"
@@ -3159,7 +3159,7 @@
                 tmp2Name = "Хрущёв"
         End Select
 
-        tmpRnd = Math.Ceiling(Rnd() * 10)
+        tmpRnd = Math.Ceiling(Random.Next(1, 11))
         Select Case tmpRnd
             Case 1
                 tmpPatron = "Александрович"
@@ -3183,7 +3183,7 @@
                 tmpPatron = "Ильич"
         End Select
 
-        tmpPhoneNumber = "+7 4852 " & CStr(Math.Ceiling(Rnd() * 900000 + 100000))
+        tmpPhoneNumber = "+7 4852 " & CStr(Math.Ceiling(Random.Next(100000, 1000000)))
 
         Dim testCustomer = New HCCustomer(tmpName, tmp2Name, tmpPatron, tmpPhoneNumber)
         dgvCustomers.Rows.Add(CStr(testCustomer.ID), testCustomer.GetFullName, testCustomer.Phone, "Заказы")
@@ -3194,15 +3194,14 @@
 
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
         Dim testPartList = New List(Of HCPart)
-        Dim newPart = New HCPart("Первая запчасть", 2, 1000, 10, 5)
-        testPartList.Add(newPart)
-        newPart = New HCPart("Вторая запчасть", 1, 100)
-        testPartList.Add(newPart)
-        Dim testCustomer = CustomerList(Math.Floor(Rnd() * CustomerList.Count))
-        Dim testOrder = New HCOrder(testCustomer, curDate, 1000, curDate, 100, curDate, testPartList)
-
-        Randomize(My.Computer.Clock.LocalTime.Ticks)
-        dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, "Подробно...", CBool(Math.Round(Rnd())))
+        'Dim newPart = New HCPart("Первая запчасть", 2, 1000, 250)
+        'testPartList.Add(newPart)
+        'newPart = New HCPart("Вторая запчасть", 1, 100)
+        'testPartList.Add(newPart)
+        Dim ind As Integer = Random.Next(CustomerList.Count)
+        Dim testCustomer = CustomerList(ind)
+        Dim testOrder = New HCOrder(testCustomer, curDate, 1000, curDate, 100, curDate, Math.Floor(Random.Next(1, 110)), testPartList)
+        dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, "Подробно...", CBool(Random.Next(2)))
         dgvOrders.FirstDisplayedScrollingRowIndex = dgvOrders.Rows.Count - 1
     End Sub
 

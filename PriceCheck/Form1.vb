@@ -3194,7 +3194,7 @@
 
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
         Dim testPartList = New List(Of HCPart)
-        Dim newPart = New HCPart("Первая запчасть", 2, 1000)
+        Dim newPart = New HCPart("Первая запчасть", 2, 1000, 10, 5)
         testPartList.Add(newPart)
         newPart = New HCPart("Вторая запчасть", 1, 100)
         testPartList.Add(newPart)

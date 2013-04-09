@@ -108,9 +108,7 @@
         End If
         curPart = MyOrder.PartList.Item(lwParts.SelectedItems.Item(0).Index)
         curPartPosition = lwParts.SelectedItems.Item(0).Index
-        txtPartName.Text = curPart.Name
-        nudPartCount.Value = curPart.Count
-        nudPartPrice.Value = curPart.Price
+        UpdatePart()
         EnablePartControls()
     End Sub
 
@@ -137,26 +135,87 @@
         If curPart.Count <> nudPartCount.Value Then
             curPart.Count = nudPartCount.Value
             lwParts.Items(curPartPosition).SubItems(1).Text = CStr(curPart.Count)
+            UpdatePart()
         End If
     End Sub
 
     Private Sub nudPartPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudPartPrice.ValueChanged
         If curPart Is Nothing Then Exit Sub
-        If curPart.Price <> nudPartPrice.Value Then curPart.Price = nudPartPrice.Value
+        If curPart.Price <> nudPartPrice.Value Then
+            curPart.Price = nudPartPrice.Value
+            UpdatePart()
+        End If
     End Sub
 
     Sub EnablePartControls()
         txtPartName.Enabled = True
         nudPartCount.Enabled = True
         nudPartPrice.Enabled = True
+        nudMargin.Enabled = True
+        nudMarginPc.Enabled = True
+        nudDiscount.Enabled = True
+        nudDiscountPc.Enabled = True
+        txtTotal.Enabled = True
     End Sub
 
     Sub DisablePartControls()
         txtPartName.Enabled = False
-        nudPartCount.Enabled = False
-        nudPartPrice.Enabled = False
         txtPartName.Text = ""
+        nudPartCount.Enabled = False
         nudPartCount.Value = 1
+        nudPartPrice.Enabled = False
         nudPartPrice.Value = 0
+        nudMarginPc.Enabled = False
+        nudMarginPc.Value = 0
+        nudMargin.Enabled = False
+        nudMargin.Value = 0
+        txtTotal.Enabled = False
+        txtTotal.Text = ""
+    End Sub
+
+    Sub UpdatePart()
+        If curPart Is Nothing Then Exit Sub
+        txtPartName.Text = curPart.Name
+        nudPartCount.Value = curPart.Count
+        nudPartPrice.Value = curPart.Price
+
+        'Чтобы не вызывать 2 раза подряд nudMargin_ValueChanged() и nudDiscount_ValueChanged() нужны If:
+        If nudMargin.Value = curPart.GetMargin Then
+            nudMargin_ValueChanged(nudMargin, e:=New EventArgs())
+        Else
+            nudMargin.Value = curPart.GetMargin
+        End If
+
+        If nudDiscount.Value = curPart.GetDiscount Then
+            nudDiscount_ValueChanged(nudDiscount, e:=New EventArgs())
+        Else
+            nudDiscount.Value = curPart.GetDiscount
+        End If
+
+        txtTotal.Text = CStr((curPart.Price + curPart.GetMargin - curPart.GetDiscount) * curPart.Count)
+    End Sub
+
+    Private Sub nudMarginPc_ValueChanged(sender As Object, e As EventArgs) Handles nudMarginPc.ValueChanged
+        If curPart Is Nothing Then Exit Sub
+        Dim dblMargin As Double = curPart.Price * nudMarginPc.Value / 100
+        nudMargin.Value = dblMargin
+        curPart.SetMargin(dblMargin)
+    End Sub
+
+    Private Sub nudMargin_ValueChanged(sender As Object, e As EventArgs) Handles nudMargin.ValueChanged
+        If curPart Is Nothing Then Exit Sub
+        nudMarginPc.Value = nudMargin.Value * 100 / curPart.Price
+    End Sub
+
+    Private Sub nudDiscountPc_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscountPc.ValueChanged
+        If curPart Is Nothing Then Exit Sub
+        Dim dblDiscount As Double = curPart.Price * nudDiscountPc.Value / 100
+        nudDiscount.Value = dblDiscount
+        curPart.SetDiscount(dblDiscount)
+    End Sub
+
+    Private Sub nudDiscount_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscount.ValueChanged
+        If curPart Is Nothing Then Exit Sub
+        nudDiscountPc.Value = nudDiscount.Value * 100 / curPart.Price
     End Sub
 End Class

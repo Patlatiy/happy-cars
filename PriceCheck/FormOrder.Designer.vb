@@ -50,8 +50,22 @@ Partial Class frmOrder
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape2 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
+        Me.lblMargin = New System.Windows.Forms.Label()
+        Me.nudMargin = New System.Windows.Forms.NumericUpDown()
+        Me.nudMarginPc = New System.Windows.Forms.NumericUpDown()
+        Me.lblMarginPc = New System.Windows.Forms.Label()
+        Me.lblDiscount = New System.Windows.Forms.Label()
+        Me.nudDiscount = New System.Windows.Forms.NumericUpDown()
+        Me.nudDiscountPc = New System.Windows.Forms.NumericUpDown()
+        Me.lblDiscountPc = New System.Windows.Forms.Label()
+        Me.lblTotal = New System.Windows.Forms.Label()
+        Me.txtTotal = New System.Windows.Forms.TextBox()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMarginPc, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDiscount, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDiscountPc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lwParts
@@ -253,6 +267,7 @@ Partial Class frmOrder
         '
         'nudPartPrice
         '
+        Me.nudPartPrice.DecimalPlaces = 2
         Me.nudPartPrice.Enabled = False
         Me.nudPartPrice.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudPartPrice.Location = New System.Drawing.Point(632, 77)
@@ -292,11 +307,116 @@ Partial Class frmOrder
         Me.RectangleShape1.Name = "RectangleShape1"
         Me.RectangleShape1.Size = New System.Drawing.Size(215, 49)
         '
+        'lblMargin
+        '
+        Me.lblMargin.AutoSize = True
+        Me.lblMargin.Location = New System.Drawing.Point(473, 105)
+        Me.lblMargin.Name = "lblMargin"
+        Me.lblMargin.Size = New System.Drawing.Size(42, 13)
+        Me.lblMargin.TabIndex = 10
+        Me.lblMargin.Text = "Маржа"
+        '
+        'nudMargin
+        '
+        Me.nudMargin.DecimalPlaces = 2
+        Me.nudMargin.Enabled = False
+        Me.nudMargin.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudMargin.Location = New System.Drawing.Point(649, 103)
+        Me.nudMargin.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudMargin.Name = "nudMargin"
+        Me.nudMargin.Size = New System.Drawing.Size(65, 20)
+        Me.nudMargin.TabIndex = 12
+        '
+        'nudMarginPc
+        '
+        Me.nudMarginPc.Enabled = False
+        Me.nudMarginPc.Location = New System.Drawing.Point(550, 103)
+        Me.nudMarginPc.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudMarginPc.Name = "nudMarginPc"
+        Me.nudMarginPc.Size = New System.Drawing.Size(65, 20)
+        Me.nudMarginPc.TabIndex = 12
+        '
+        'lblMarginPc
+        '
+        Me.lblMarginPc.AutoSize = True
+        Me.lblMarginPc.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblMarginPc.Location = New System.Drawing.Point(616, 106)
+        Me.lblMarginPc.Name = "lblMarginPc"
+        Me.lblMarginPc.Size = New System.Drawing.Size(15, 13)
+        Me.lblMarginPc.TabIndex = 14
+        Me.lblMarginPc.Text = "%"
+        '
+        'lblDiscount
+        '
+        Me.lblDiscount.AutoSize = True
+        Me.lblDiscount.Location = New System.Drawing.Point(473, 132)
+        Me.lblDiscount.Name = "lblDiscount"
+        Me.lblDiscount.Size = New System.Drawing.Size(44, 13)
+        Me.lblDiscount.TabIndex = 10
+        Me.lblDiscount.Text = "Скидка"
+        '
+        'nudDiscount
+        '
+        Me.nudDiscount.DecimalPlaces = 2
+        Me.nudDiscount.Enabled = False
+        Me.nudDiscount.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudDiscount.Location = New System.Drawing.Point(649, 130)
+        Me.nudDiscount.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudDiscount.Name = "nudDiscount"
+        Me.nudDiscount.Size = New System.Drawing.Size(65, 20)
+        Me.nudDiscount.TabIndex = 12
+        '
+        'nudDiscountPc
+        '
+        Me.nudDiscountPc.Enabled = False
+        Me.nudDiscountPc.Location = New System.Drawing.Point(550, 130)
+        Me.nudDiscountPc.Name = "nudDiscountPc"
+        Me.nudDiscountPc.Size = New System.Drawing.Size(65, 20)
+        Me.nudDiscountPc.TabIndex = 12
+        '
+        'lblDiscountPc
+        '
+        Me.lblDiscountPc.AutoSize = True
+        Me.lblDiscountPc.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblDiscountPc.Location = New System.Drawing.Point(616, 133)
+        Me.lblDiscountPc.Name = "lblDiscountPc"
+        Me.lblDiscountPc.Size = New System.Drawing.Size(15, 13)
+        Me.lblDiscountPc.TabIndex = 14
+        Me.lblDiscountPc.Text = "%"
+        '
+        'lblTotal
+        '
+        Me.lblTotal.AutoSize = True
+        Me.lblTotal.Location = New System.Drawing.Point(473, 185)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(82, 13)
+        Me.lblTotal.TabIndex = 15
+        Me.lblTotal.Text = "Итоговая цена"
+        '
+        'txtTotal
+        '
+        Me.txtTotal.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtTotal.Location = New System.Drawing.Point(614, 182)
+        Me.txtTotal.Name = "txtTotal"
+        Me.txtTotal.ReadOnly = True
+        Me.txtTotal.Size = New System.Drawing.Size(100, 20)
+        Me.txtTotal.TabIndex = 16
+        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(735, 224)
+        Me.Controls.Add(Me.txtTotal)
+        Me.Controls.Add(Me.lblTotal)
+        Me.Controls.Add(Me.lblDiscountPc)
+        Me.Controls.Add(Me.lblDiscount)
+        Me.Controls.Add(Me.nudDiscountPc)
+        Me.Controls.Add(Me.nudDiscount)
+        Me.Controls.Add(Me.lblMarginPc)
+        Me.Controls.Add(Me.nudMarginPc)
+        Me.Controls.Add(Me.nudMargin)
+        Me.Controls.Add(Me.lblMargin)
         Me.Controls.Add(Me.nudPartPrice)
         Me.Controls.Add(Me.nudPartCount)
         Me.Controls.Add(Me.lblPartPrice)
@@ -329,6 +449,10 @@ Partial Class frmOrder
         Me.Text = "Заказ № "
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMarginPc, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDiscount, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDiscountPc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -360,4 +484,14 @@ Partial Class frmOrder
     Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents RectangleShape1 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents RectangleShape2 As Microsoft.VisualBasic.PowerPacks.RectangleShape
+    Friend WithEvents lblMargin As System.Windows.Forms.Label
+    Friend WithEvents nudMargin As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudMarginPc As System.Windows.Forms.NumericUpDown
+    Friend WithEvents lblMarginPc As System.Windows.Forms.Label
+    Friend WithEvents lblDiscount As System.Windows.Forms.Label
+    Friend WithEvents nudDiscount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudDiscountPc As System.Windows.Forms.NumericUpDown
+    Friend WithEvents lblDiscountPc As System.Windows.Forms.Label
+    Friend WithEvents lblTotal As System.Windows.Forms.Label
+    Friend WithEvents txtTotal As System.Windows.Forms.TextBox
 End Class

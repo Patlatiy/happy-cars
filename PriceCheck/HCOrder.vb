@@ -11,6 +11,7 @@
     Public PartList As List(Of HCPart)
     Public Number As OrderNumber
     Public Shared OrderList As New List(Of HCOrder)
+    Public Completed As Boolean = False
 
     Structure OrderNumber
         Public Year As Short
@@ -50,7 +51,8 @@
             ByVal nAdvanceSum As ULong, _
             ByVal nAdvanceDate As Date, _
             ByVal nDiscount As Double, _
-            ByVal nParts As List(Of HCPart))
+            ByVal nParts As List(Of HCPart), _
+            ByVal nCompleted As Boolean)
         Customer = nCustomer
         Customer.MyOrderList.Add(Me)
         DeliveryDate = nDeliveryDate

@@ -3186,7 +3186,7 @@
         tmpPhoneNumber = "+7 4852 " & CStr(Math.Ceiling(Random.Next(100000, 1000000)))
 
         Dim testCustomer = New HCCustomer(tmpName, tmp2Name, tmpPatron, tmpPhoneNumber)
-        dgvCustomers.Rows.Add(CStr(testCustomer.ID), testCustomer.GetFullName, testCustomer.Phone, "Заказы")
+        dgvCustomers.Rows.Add(CStr(testCustomer.ID), testCustomer.GetFullName, testCustomer.Phone, "Клиент...", "Заказы >")
         dgvCustomers.FirstDisplayedScrollingRowIndex = dgvCustomers.Rows.Count - 1
 
         If Not Button21.Enabled Then Button21.Enabled = True
@@ -3200,21 +3200,20 @@
         'testPartList.Add(newPart)
         Dim ind As Integer = Random.Next(CustomerList.Count)
         Dim testCustomer = CustomerList(ind)
-        Dim testOrder = New HCOrder(testCustomer, curDate, 1000, curDate, 100, curDate, Math.Floor(Random.Next(1, 110)), testPartList)
-        dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, "Подробно...", CBool(Random.Next(2)))
+        Dim testOrder = New HCOrder(testCustomer, curDate, 0, curDate, 0, curDate, 0, testPartList, False)
+        dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, testOrder.Completed, "Открыть...")
         dgvOrders.FirstDisplayedScrollingRowIndex = dgvOrders.Rows.Count - 1
     End Sub
 
     Private Sub dgvOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOrders.CellContentClick
-        If e.ColumnIndex = 2 Then
-            Me.Enabled = False
+        If e.ColumnIndex = 3 Then
             NumberToFind = dgvOrders.Item(0, e.RowIndex).Value
-            frmOrder.Show(OrderList.Find(AddressOf FindOrderByNumber))
+            frmOrder.Show(OrderList.Find(AddressOf FindOrderByNumber), Me)
         End If
     End Sub
 
-    Dim NumberToFind As String
-    Private Function FindOrderByNumber(ByVal Order As HCOrder) As Boolean
+    Public NumberToFind As String
+    Public Function FindOrderByNumber(ByVal Order As HCOrder) As Boolean
         If Order.Number.GetFullNumber = NumberToFind Then
             Return True
         Else
@@ -3222,29 +3221,29 @@
         End If
     End Function
 
-    Sub RefreshOrders()
+    Public Sub RefreshOrders()
         dgvOrders.Rows.Clear()
         If curCustomer Is Nothing Then
             For Each Order As HCOrder In OrderList
-                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, "Подробно...", True)
+                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, Order.Completed, "Открыть...")
             Next
             btnShowAllOrders.Hide()
         Else
             For Each Order In curCustomer.MyOrderList
-                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, "Подробно...", True)
+                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, Order.Completed, "Открыть...")
             Next
             btnShowAllOrders.Show()
         End If
     End Sub
 
-    Sub RefreshCustomers()
+    Public Sub RefreshCustomers()
         dgvCustomers.Rows.Clear()
         For Each Customer As HCCustomer In CustomerList
-            dgvCustomers.Rows.Add(CStr(Customer.ID), Customer.GetFullName, Customer.Phone, "Заказы")
+            dgvCustomers.Rows.Add(CStr(Customer.ID), Customer.GetFullName, Customer.Phone, "Клиент...", "Заказы >")
         Next
     End Sub
 
-    Sub RefreshCustomersAndOrders()
+    Public Sub RefreshCustomersAndOrders()
         RefreshCustomers()
         RefreshOrders()
     End Sub
@@ -3256,9 +3255,15 @@
     End Sub
 
     Private Sub dgvCustomers_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCustomers.CellContentClick
-        If e.ColumnIndex = 3 Then
-            curCustomer = HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value))
-            RefreshOrders()
-        End If
+        Try
+            If e.ColumnIndex = 3 Then
+                FormCustomer.Show(HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value)), Me)
+            ElseIf e.ColumnIndex = 4 Then
+                curCustomer = HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value))
+                RefreshOrders()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
     End Sub
 End Class

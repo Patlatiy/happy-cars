@@ -4,10 +4,13 @@
     Dim txtPaymentLastValue As String
     Dim curPart As HCPart
     Dim curPartPosition As Integer
+    Dim MyParent As Object
 
-    Overloads Sub Show(ByRef Order As HCOrder)
+    Overloads Sub Show(ByRef Order As HCOrder, ByRef Parent As Object)
         Me.Show()
         MyOrder = Order
+        MyParent = Parent
+        MyParent.Enabled = False
         Me.Text = "Заказ № " & MyOrder.Number.GetFullNumber
 
         lwParts.Items.Clear()
@@ -28,6 +31,7 @@
         dtpAdvance.Value = MyOrder.AdvanceDate
         txtPayment.Text = CStr(MyOrder.PaymentSum)
         dtpPayment.Value = MyOrder.PaymentDate
+        boxCompleted.Checked = MyOrder.Completed
         FillDiscount()
         FillTotal()
     End Sub
@@ -47,20 +51,23 @@
     End Sub
 
     Private Sub frmOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        Form1.Enabled = True
+        Try
+            MyParent.RefreshOrders()
+        Catch ex As Exception
+        End Try
+        MyParent.Enabled = True
     End Sub
 
     Private Sub comboCustomers_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboCustomers.SelectedValueChanged
         Dim newCustomer As HCCustomer = HCCustomer.FindByID(comboCustomers.Items(comboCustomers.SelectedIndex).value)
         If newCustomer.ID = MyOrder.Customer.ID Then Exit Sub
         If newCustomer Is Nothing Then
-            MsgBox("Что-то пошло не так", MsgBoxStyle.Critical)
+            MsgBox("Что-то пошло не так...", MsgBoxStyle.Critical, "Ошибка!")
         Else
             MyOrder.Customer.MyOrderList.Remove(MyOrder)
             newCustomer.MyOrderList.Add(MyOrder)
             newCustomer.MyOrderList.Sort(AddressOf HCOrder.CompareByNumber)
             MyOrder.Customer = newCustomer
-            Form1.RefreshOrders()
         End If
     End Sub
 
@@ -233,7 +240,7 @@
     Private Sub nudMargin_ValueChanged(sender As Object, e As EventArgs) Handles nudMargin.ValueChanged
         If curPart Is Nothing Then Exit Sub
         If curPart.Price = 0 Then Exit Sub
-        Dim dblmargin As Double = Math.Round(nudMargin.Value * 100 / curPart.Price)
+        Dim dblmargin As Double = Math.Round((nudMargin.Value * 100) / (curPart.Price * curPart.Count))
         Silent_Change = True
         nudMarginPc.Value = dblmargin
         Silent_Change = False
@@ -297,5 +304,9 @@
     Private Sub txtSellPrice_TextChanged(sender As Object, e As EventArgs) Handles txtSellPrice.TextChanged
         If curPart Is Nothing Then Exit Sub
         lwParts.Items(curPartPosition).SubItems(3).Text = txtSellPrice.Text
+    End Sub
+
+    Private Sub boxCompleted_CheckedChanged(sender As Object, e As EventArgs) Handles boxCompleted.CheckedChanged
+        MyOrder.Completed = boxCompleted.Checked
     End Sub
 End Class

@@ -71,6 +71,7 @@ Partial Class frmOrder
         Me.lblTotalReceived = New System.Windows.Forms.Label()
         Me.txtTotalReceived = New System.Windows.Forms.TextBox()
         Me.btnDeletePart = New System.Windows.Forms.Button()
+        Me.boxCompleted = New System.Windows.Forms.CheckBox()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -312,12 +313,13 @@ Partial Class frmOrder
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2, Me.LineShape1, Me.RectangleShape2, Me.RectangleShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(841, 258)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(841, 254)
         Me.ShapeContainer1.TabIndex = 13
         Me.ShapeContainer1.TabStop = False
         '
         'LineShape2
         '
+        Me.LineShape2.Enabled = False
         Me.LineShape2.Name = "LineShape2"
         Me.LineShape2.X1 = 579
         Me.LineShape2.X2 = 819
@@ -326,6 +328,7 @@ Partial Class frmOrder
         '
         'LineShape1
         '
+        Me.LineShape1.Enabled = False
         Me.LineShape1.Name = "LineShape1"
         Me.LineShape1.X1 = 15
         Me.LineShape1.X2 = 233
@@ -334,12 +337,14 @@ Partial Class frmOrder
         '
         'RectangleShape2
         '
+        Me.RectangleShape2.Enabled = False
         Me.RectangleShape2.Location = New System.Drawing.Point(571, 10)
         Me.RectangleShape2.Name = "RectangleShape2"
         Me.RectangleShape2.Size = New System.Drawing.Size(259, 152)
         '
         'RectangleShape1
         '
+        Me.RectangleShape1.Enabled = False
         Me.RectangleShape1.Location = New System.Drawing.Point(250, 162)
         Me.RectangleShape1.Name = "RectangleShape1"
         Me.RectangleShape1.Size = New System.Drawing.Size(321, 49)
@@ -441,7 +446,7 @@ Partial Class frmOrder
         '
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblTotal.Location = New System.Drawing.Point(604, 227)
+        Me.lblTotal.Location = New System.Drawing.Point(606, 227)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(114, 13)
         Me.lblTotal.TabIndex = 15
@@ -450,7 +455,7 @@ Partial Class frmOrder
         'txtTotal
         '
         Me.txtTotal.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtTotal.Location = New System.Drawing.Point(728, 224)
+        Me.txtTotal.Location = New System.Drawing.Point(730, 224)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(100, 20)
@@ -506,11 +511,22 @@ Partial Class frmOrder
         Me.btnDeletePart.Text = "Удалить"
         Me.btnDeletePart.UseVisualStyleBackColor = True
         '
+        'boxCompleted
+        '
+        Me.boxCompleted.AutoSize = True
+        Me.boxCompleted.Location = New System.Drawing.Point(250, 227)
+        Me.boxCompleted.Name = "boxCompleted"
+        Me.boxCompleted.Size = New System.Drawing.Size(110, 17)
+        Me.boxCompleted.TabIndex = 18
+        Me.boxCompleted.Text = "Заказ завершён"
+        Me.boxCompleted.UseVisualStyleBackColor = True
+        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(841, 258)
+        Me.ClientSize = New System.Drawing.Size(841, 254)
+        Me.Controls.Add(Me.boxCompleted)
         Me.Controls.Add(Me.btnDeletePart)
         Me.Controls.Add(Me.txtTotalReceived)
         Me.Controls.Add(Me.lblTotalReceived)
@@ -616,4 +632,5 @@ Partial Class frmOrder
     Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents cmnNumber As System.Windows.Forms.ColumnHeader
     Friend WithEvents cmnPrice As System.Windows.Forms.ColumnHeader
+    Friend WithEvents boxCompleted As System.Windows.Forms.CheckBox
 End Class

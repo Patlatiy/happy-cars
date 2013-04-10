@@ -115,3 +115,4 @@ D:\Repos\happy-cars\PriceCheck\bin\Debug\Happy Cars.exe
 D:\Repos\happy-cars\PriceCheck\bin\Debug\Happy Cars.pdb
 D:\Repos\happy-cars\PriceCheck\bin\Debug\Happy Cars.xml
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmOrder.resources
+D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.FormCustomer.resources

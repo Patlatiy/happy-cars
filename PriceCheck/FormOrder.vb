@@ -12,7 +12,7 @@
 
         lwParts.Items.Clear()
         For Each Part As HCPart In MyOrder.PartList
-            AddPart(Part.Name, Part.Count)
+            AddPart(Part.Name, Part.Count, Part.GetSellPrice)
         Next
 
         comboCustomers.Items.Clear()
@@ -32,10 +32,18 @@
         FillTotal()
     End Sub
 
-    Sub AddPart(NewPartName As String, NewPartCount As UInteger)
-        Dim newArr() As String = {NewPartName, CStr(NewPartCount)}
+    Sub AddPart(NewPartName As String, NewPartCount As UInteger, NewPartPrice As Double)
+        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), NewPartName, CStr(NewPartCount), CStr(Math.Round(NewPartPrice, 2))}
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items.Add(newItem)
+    End Sub
+
+    Sub RecountParts()
+        Dim i = 1
+        For Each Part As ListViewItem In lwParts.Items
+            Part.Text = CStr(i)
+            i += 1
+        Next
     End Sub
 
     Private Sub frmOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -117,7 +125,7 @@
     Private Sub btnNewPart_Click(sender As Object, e As EventArgs) Handles btnNewPart.Click
         Dim newPart As New HCPart("Новая запчасть", 1, 0)
         MyOrder.PartList.Add(newPart)
-        AddPart(newPart.Name, newPart.Count)
+        AddPart(newPart.Name, newPart.Count, 0)
         lwParts.SelectedIndices.Clear()
         lwParts.SelectedIndices.Add(lwParts.Items.Count - 1)
         lwParts.Focus()
@@ -128,7 +136,7 @@
         If txtPartName.Text = "" Then Exit Sub
         If curPart.Name <> txtPartName.Text Then
             curPart.Name = txtPartName.Text
-            lwParts.Items(curPartPosition).Text = curPart.Name
+            lwParts.Items(curPartPosition).SubItems(1).Text = curPart.Name
         End If
     End Sub
 
@@ -136,7 +144,7 @@
         If curPart Is Nothing Then Exit Sub
         If curPart.Count <> nudPartCount.Value Then
             curPart.Count = nudPartCount.Value
-            lwParts.Items(curPartPosition).SubItems(1).Text = CStr(curPart.Count)
+            lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count)
             UpdatePart()
         End If
     End Sub
@@ -258,6 +266,7 @@
         curPart = Nothing
         CheckParts()
         FillTotal()
+        RecountParts()
     End Sub
 
     ''' <summary>
@@ -283,5 +292,10 @@
     Private Sub EnableDiscountControls()
         nudDiscount.Enabled = True
         nudDiscountPc.Enabled = True
+    End Sub
+
+    Private Sub txtSellPrice_TextChanged(sender As Object, e As EventArgs) Handles txtSellPrice.TextChanged
+        If curPart Is Nothing Then Exit Sub
+        lwParts.Items(curPartPosition).SubItems(3).Text = txtSellPrice.Text
     End Sub
 End Class

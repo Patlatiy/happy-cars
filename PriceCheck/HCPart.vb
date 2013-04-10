@@ -26,6 +26,6 @@
     End Sub
 
     Public Function GetSellPrice() As Double
-        Return (Price + GetMargin()) * Count
+        Return (Price * Count) + GetMargin()
     End Function
 End Class

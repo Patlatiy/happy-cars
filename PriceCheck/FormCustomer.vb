@@ -31,14 +31,8 @@
     End Sub
 
     Private Sub FormCustomer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If txt1stName.Text = "" And _
-           txtLastName.Text = "" And _
-           txtPatron.Text = "" And _
-           txtPhone.Text = "" And _
-           MyCustomer.MyOrderList.Count = 0 Then
-
+        If MyCustomer.IsEmpty Then
             HCCustomer.CustomerList.Remove(MyCustomer)
-
         End If
         If MyOwner Is Form1 Then Form1.RefreshCustomersAndOrders()
         MyOwner.Enabled = True
@@ -85,12 +79,15 @@
 
     Private Sub btnDeleteCustomer_Click(sender As Object, e As EventArgs) Handles btnDeleteCustomer.Click
         Dim Message As String
-        If MyCustomer.MyOrderList.Count = 0 Then
+        If MyCustomer.IsEmpty Then
+            GoTo Deletion
+        ElseIf MyCustomer.MyOrderList.Count = 0 Then
             Message = "Вы действительно хотите удалить клиента " & MyCustomer.GetFullName & "?"
         Else
             Message = "Вы действительно хотите удалить клиента " & MyCustomer.GetFullName & " и все его заказы (" & CStr(MyCustomer.MyOrderList.Count) & " шт.)?"
         End If
         If MsgBox(Message, MsgBoxStyle.YesNo, "Внимание!") = MsgBoxResult.Yes Then
+Deletion:
             For Each Order In MyCustomer.MyOrderList
                 HCOrder.OrderList.Remove(Order)
             Next

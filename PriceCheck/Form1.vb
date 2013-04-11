@@ -3174,7 +3174,7 @@
     End Sub
 
     Private Sub btnNewOrder_Click(sender As Object, e As EventArgs) Handles btnNewOrder.Click
-        If OrderList.Count = 0 Then
+        If CustomerList.Count = 0 Then
             MsgBox("Сначала добавьте хотя бы одного клиента", MsgBoxStyle.Information, "Info")
             Exit Sub
         End If

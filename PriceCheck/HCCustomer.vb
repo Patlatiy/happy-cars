@@ -1,10 +1,10 @@
 ﻿Public Class HCCustomer
     Public ID As UInteger
     Shared GlobalID As UInteger = 0
-    Public FirstName As String
-    Public LastName As String
-    Public Patron As String
-    Public Phone As String
+    Public FirstName As String = ""
+    Public LastName As String = ""
+    Public Patron As String = ""
+    Public Phone As String = ""
     Public MyOrderList As New List(Of HCOrder)
     Public Shared CustomerList As New List(Of HCCustomer)
 
@@ -27,5 +27,12 @@
             If Customer.ID = sID Then Return Customer
         Next
         Return Nothing
+    End Function
+
+    Public Function IsEmpty() As Boolean
+        If FirstName = "" And LastName = "" And Patron = "" And Phone = "" And MyOrderList.Count = 0 Then
+            Return True
+        End If
+        Return False
     End Function
 End Class

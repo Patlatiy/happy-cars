@@ -44,6 +44,19 @@
         End Sub
     End Structure
 
+    Sub New()
+        PartList = New List(Of HCPart)
+        Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
+        Customer = HCCustomer.CustomerList.Last
+        Customer.MyOrderList.Add(Me)
+        DeliveryDate = Form1.curDate
+        PaymentSum = 0
+        PaymentDate = Form1.curDate
+        AdvanceSum = 0
+        AdvanceDate = Form1.curDate
+        OrderList.Add(Me)
+    End Sub
+
     Sub New(ByRef nCustomer As HCCustomer, _
             ByVal nDeliveryDate As Date, _
             ByVal nPaymentSum As ULong, _

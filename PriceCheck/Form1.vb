@@ -3107,102 +3107,8 @@
     End Sub
 
     Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
-        Dim tmpName As String
-        Dim tmp2Name As String
-        Dim tmpPatron As String
-        Dim tmpPhoneNumber As String
-        Dim tmpRnd As Short = Math.Ceiling(Random.Next(1, 11))
-        Select Case tmpRnd
-            Case 1
-                tmpName = "Александр"
-            Case 2
-                tmpName = "Сергей"
-            Case 3
-                tmpName = "Алексей"
-            Case 4
-                tmpName = "Виталий"
-            Case 5
-                tmpName = "Василий"
-            Case 6
-                tmpName = "Константин"
-            Case 7
-                tmpName = "Владислав"
-            Case 8
-                tmpName = "Владимир"
-            Case 9
-                tmpName = "Никита"
-            Case Else
-                tmpName = "Илья"
-        End Select
-
-        tmpRnd = Math.Ceiling(Random.Next(1, 11))
-        Select Case tmpRnd
-            Case 1
-                tmp2Name = "Пушкин"
-            Case 2
-                tmp2Name = "Ломоносов"
-            Case 3
-                tmp2Name = "Достоевский"
-            Case 4
-                tmp2Name = "Шишкин"
-            Case 5
-                tmp2Name = "Павлов"
-            Case 6
-                tmp2Name = "Кутузов"
-            Case 7
-                tmp2Name = "Антонов"
-            Case 8
-                tmp2Name = "Даль"
-            Case 9
-                tmp2Name = "Шаляпин"
-            Case Else
-                tmp2Name = "Хрущёв"
-        End Select
-
-        tmpRnd = Math.Ceiling(Random.Next(1, 11))
-        Select Case tmpRnd
-            Case 1
-                tmpPatron = "Александрович"
-            Case 2
-                tmpPatron = "Сергеевич"
-            Case 3
-                tmpPatron = "Алексеевич"
-            Case 4
-                tmpPatron = "Витальевич"
-            Case 5
-                tmpPatron = "Васильевич"
-            Case 6
-                tmpPatron = "Константинович"
-            Case 7
-                tmpPatron = "Владиславович"
-            Case 8
-                tmpPatron = "Владимирович"
-            Case 9
-                tmpPatron = "Юрьевич"
-            Case Else
-                tmpPatron = "Ильич"
-        End Select
-
-        tmpPhoneNumber = "+7 4852 " & CStr(Math.Ceiling(Random.Next(100000, 1000000)))
-
-        Dim testCustomer = New HCCustomer(tmpName, tmp2Name, tmpPatron, tmpPhoneNumber)
-        dgvCustomers.Rows.Add(CStr(testCustomer.ID), testCustomer.GetFullName, testCustomer.Phone, "Клиент...", "Заказы >")
-        dgvCustomers.FirstDisplayedScrollingRowIndex = dgvCustomers.Rows.Count - 1
-
-        If Not Button21.Enabled Then Button21.Enabled = True
-    End Sub
-
-    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
-        Dim testPartList = New List(Of HCPart)
-        'Dim newPart = New HCPart("Первая запчасть", 2, 1000, 250)
-        'testPartList.Add(newPart)
-        'newPart = New HCPart("Вторая запчасть", 1, 100)
-        'testPartList.Add(newPart)
-        Dim ind As Integer = Random.Next(CustomerList.Count)
-        Dim testCustomer = CustomerList(ind)
-        Dim testOrder = New HCOrder(testCustomer, curDate, 0, curDate, 0, curDate, 0, testPartList, False)
-        dgvOrders.Rows.Add(testOrder.Number.GetFullNumber, testOrder.Customer.GetFullName, testOrder.Completed, "Открыть...")
-        dgvOrders.FirstDisplayedScrollingRowIndex = dgvOrders.Rows.Count - 1
+        Dim newCustomer = New HCCustomer("", "", "", "")
+        FormCustomer.Show(newCustomer, Me)
     End Sub
 
     Private Sub dgvOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOrders.CellContentClick
@@ -3265,5 +3171,14 @@
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
+    End Sub
+
+    Private Sub btnNewOrder_Click(sender As Object, e As EventArgs) Handles btnNewOrder.Click
+        If OrderList.Count = 0 Then
+            MsgBox("Сначала добавьте хотя бы одного клиента", MsgBoxStyle.Information, "Info")
+            Exit Sub
+        End If
+        Dim NewOrder As HCOrder = New HCOrder()
+        frmOrder.Show(NewOrder, Me)
     End Sub
 End Class

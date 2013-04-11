@@ -4,13 +4,13 @@
     Dim txtPaymentLastValue As String
     Dim curPart As HCPart
     Dim curPartPosition As Integer
-    Dim MyParent As Object
+    Dim MyOwner As Object
 
-    Overloads Sub Show(ByRef Order As HCOrder, ByRef Parent As Object)
-        Me.Show()
+    Overloads Sub Show(ByRef Order As HCOrder, ByRef Owner As System.Windows.Forms.IWin32Window)
+        Me.Show(Owner)
         MyOrder = Order
-        MyParent = Parent
-        MyParent.Enabled = False
+        MyOwner = Owner
+        MyOwner.Enabled = False
         Me.Text = "Заказ № " & MyOrder.Number.GetFullNumber
 
         lwParts.Items.Clear()
@@ -52,10 +52,10 @@
 
     Private Sub frmOrder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         Try
-            MyParent.RefreshOrders()
+            MyOwner.RefreshOrders()
         Catch ex As Exception
         End Try
-        MyParent.Enabled = True
+        MyOwner.Enabled = True
     End Sub
 
     Private Sub comboCustomers_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboCustomers.SelectedValueChanged
@@ -308,5 +308,13 @@
 
     Private Sub boxCompleted_CheckedChanged(sender As Object, e As EventArgs) Handles boxCompleted.CheckedChanged
         MyOrder.Completed = boxCompleted.Checked
+    End Sub
+
+    Private Sub btnDeleteOrder_Click(sender As Object, e As EventArgs) Handles btnDeleteOrder.Click
+        If MsgBox("Вы действительно хотите удалить этот заказ?", MsgBoxStyle.YesNo, "Внимание!") = MsgBoxResult.Yes Then
+            HCOrder.OrderList.Remove(MyOrder)
+            MyOrder.Customer.MyOrderList.Remove(MyOrder)
+            Me.Close()
+        End If
     End Sub
 End Class

@@ -72,6 +72,7 @@ Partial Class frmOrder
         Me.txtTotalReceived = New System.Windows.Forms.TextBox()
         Me.btnDeletePart = New System.Windows.Forms.Button()
         Me.boxCompleted = New System.Windows.Forms.CheckBox()
+        Me.btnDeleteOrder = New System.Windows.Forms.Button()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -243,11 +244,11 @@ Partial Class frmOrder
         '
         'btnNewPart
         '
-        Me.btnNewPart.Location = New System.Drawing.Point(346, 175)
+        Me.btnNewPart.Location = New System.Drawing.Point(306, 177)
         Me.btnNewPart.Name = "btnNewPart"
-        Me.btnNewPart.Size = New System.Drawing.Size(62, 22)
+        Me.btnNewPart.Size = New System.Drawing.Size(99, 22)
         Me.btnNewPart.TabIndex = 7
-        Me.btnNewPart.Text = "Новая"
+        Me.btnNewPart.Text = "Новая запчасть"
         Me.btnNewPart.UseVisualStyleBackColor = True
         '
         'txtPartName
@@ -504,9 +505,9 @@ Partial Class frmOrder
         '
         'btnDeletePart
         '
-        Me.btnDeletePart.Location = New System.Drawing.Point(414, 175)
+        Me.btnDeletePart.Location = New System.Drawing.Point(411, 177)
         Me.btnDeletePart.Name = "btnDeletePart"
-        Me.btnDeletePart.Size = New System.Drawing.Size(62, 22)
+        Me.btnDeletePart.Size = New System.Drawing.Size(99, 22)
         Me.btnDeletePart.TabIndex = 7
         Me.btnDeletePart.Text = "Удалить"
         Me.btnDeletePart.UseVisualStyleBackColor = True
@@ -514,18 +515,31 @@ Partial Class frmOrder
         'boxCompleted
         '
         Me.boxCompleted.AutoSize = True
-        Me.boxCompleted.Location = New System.Drawing.Point(250, 227)
+        Me.boxCompleted.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.boxCompleted.Location = New System.Drawing.Point(250, 226)
         Me.boxCompleted.Name = "boxCompleted"
-        Me.boxCompleted.Size = New System.Drawing.Size(110, 17)
+        Me.boxCompleted.Size = New System.Drawing.Size(124, 17)
         Me.boxCompleted.TabIndex = 18
         Me.boxCompleted.Text = "Заказ завершён"
         Me.boxCompleted.UseVisualStyleBackColor = True
+        '
+        'btnDeleteOrder
+        '
+        Me.btnDeleteOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.btnDeleteOrder.ForeColor = System.Drawing.Color.Red
+        Me.btnDeleteOrder.Location = New System.Drawing.Point(426, 224)
+        Me.btnDeleteOrder.Name = "btnDeleteOrder"
+        Me.btnDeleteOrder.Size = New System.Drawing.Size(137, 23)
+        Me.btnDeleteOrder.TabIndex = 19
+        Me.btnDeleteOrder.Text = "Удалить заказ"
+        Me.btnDeleteOrder.UseVisualStyleBackColor = True
         '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(841, 254)
+        Me.Controls.Add(Me.btnDeleteOrder)
         Me.Controls.Add(Me.boxCompleted)
         Me.Controls.Add(Me.btnDeletePart)
         Me.Controls.Add(Me.txtTotalReceived)
@@ -633,4 +647,5 @@ Partial Class frmOrder
     Friend WithEvents cmnNumber As System.Windows.Forms.ColumnHeader
     Friend WithEvents cmnPrice As System.Windows.Forms.ColumnHeader
     Friend WithEvents boxCompleted As System.Windows.Forms.CheckBox
+    Friend WithEvents btnDeleteOrder As System.Windows.Forms.Button
 End Class

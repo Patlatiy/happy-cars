@@ -30,12 +30,14 @@ Partial Class FormCustomer
         Me.lblPatron = New System.Windows.Forms.Label()
         Me.txtPatron = New System.Windows.Forms.TextBox()
         Me.dgvCustomerOrders = New System.Windows.Forms.DataGridView()
-        Me.txtPhone = New System.Windows.Forms.TextBox()
-        Me.lblPhone = New System.Windows.Forms.Label()
         Me.cmnCustomerOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmnCustomerOrderSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmnCustomerDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.cmnCustomerEdit = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.txtPhone = New System.Windows.Forms.TextBox()
+        Me.lblPhone = New System.Windows.Forms.Label()
+        Me.btnNewOrder = New System.Windows.Forms.Button()
+        Me.btnDeleteCustomer = New System.Windows.Forms.Button()
         CType(Me.dgvCustomerOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -98,24 +100,8 @@ Partial Class FormCustomer
         Me.dgvCustomerOrders.Name = "dgvCustomerOrders"
         Me.dgvCustomerOrders.RowHeadersVisible = False
         Me.dgvCustomerOrders.RowTemplate.Height = 21
-        Me.dgvCustomerOrders.Size = New System.Drawing.Size(352, 429)
+        Me.dgvCustomerOrders.Size = New System.Drawing.Size(352, 410)
         Me.dgvCustomerOrders.TabIndex = 8
-        '
-        'txtPhone
-        '
-        Me.txtPhone.Location = New System.Drawing.Point(90, 90)
-        Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.Size = New System.Drawing.Size(137, 20)
-        Me.txtPhone.TabIndex = 3
-        '
-        'lblPhone
-        '
-        Me.lblPhone.AutoSize = True
-        Me.lblPhone.Location = New System.Drawing.Point(12, 93)
-        Me.lblPhone.Name = "lblPhone"
-        Me.lblPhone.Size = New System.Drawing.Size(52, 13)
-        Me.lblPhone.TabIndex = 0
-        Me.lblPhone.Text = "Телефон"
         '
         'cmnCustomerOrderNumber
         '
@@ -144,11 +130,49 @@ Partial Class FormCustomer
         Me.cmnCustomerEdit.ReadOnly = True
         Me.cmnCustomerEdit.Width = 75
         '
+        'txtPhone
+        '
+        Me.txtPhone.Location = New System.Drawing.Point(90, 90)
+        Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.Size = New System.Drawing.Size(137, 20)
+        Me.txtPhone.TabIndex = 3
+        '
+        'lblPhone
+        '
+        Me.lblPhone.AutoSize = True
+        Me.lblPhone.Location = New System.Drawing.Point(12, 93)
+        Me.lblPhone.Name = "lblPhone"
+        Me.lblPhone.Size = New System.Drawing.Size(52, 13)
+        Me.lblPhone.TabIndex = 0
+        Me.lblPhone.Text = "Телефон"
+        '
+        'btnNewOrder
+        '
+        Me.btnNewOrder.Location = New System.Drawing.Point(378, 428)
+        Me.btnNewOrder.Name = "btnNewOrder"
+        Me.btnNewOrder.Size = New System.Drawing.Size(97, 23)
+        Me.btnNewOrder.TabIndex = 9
+        Me.btnNewOrder.Text = "Новый заказ"
+        Me.btnNewOrder.UseVisualStyleBackColor = True
+        '
+        'btnDeleteCustomer
+        '
+        Me.btnDeleteCustomer.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.btnDeleteCustomer.ForeColor = System.Drawing.Color.Red
+        Me.btnDeleteCustomer.Location = New System.Drawing.Point(12, 416)
+        Me.btnDeleteCustomer.Name = "btnDeleteCustomer"
+        Me.btnDeleteCustomer.Size = New System.Drawing.Size(132, 35)
+        Me.btnDeleteCustomer.TabIndex = 10
+        Me.btnDeleteCustomer.Text = "Удалить клиента"
+        Me.btnDeleteCustomer.UseVisualStyleBackColor = True
+        '
         'FormCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(619, 453)
+        Me.ClientSize = New System.Drawing.Size(619, 459)
+        Me.Controls.Add(Me.btnDeleteCustomer)
+        Me.Controls.Add(Me.btnNewOrder)
         Me.Controls.Add(Me.txtPhone)
         Me.Controls.Add(Me.dgvCustomerOrders)
         Me.Controls.Add(Me.txtPatron)
@@ -164,7 +188,7 @@ Partial Class FormCustomer
         Me.MinimizeBox = False
         Me.Name = "FormCustomer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FormCustomer"
+        Me.Text = "Клиент"
         CType(Me.dgvCustomerOrders, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -183,4 +207,6 @@ Partial Class FormCustomer
     Friend WithEvents cmnCustomerOrderSum As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cmnCustomerDone As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents cmnCustomerEdit As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents btnNewOrder As System.Windows.Forms.Button
+    Friend WithEvents btnDeleteCustomer As System.Windows.Forms.Button
 End Class

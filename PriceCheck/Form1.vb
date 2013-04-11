@@ -570,9 +570,9 @@
                 tFile.SetDelimiters("|")
                 Dim curType As Integer
                 While Not tFile.EndOfData
-                    curRow = tFile.ReadFields
-                    If curRow.Length = 1 Then
-                        Select Case curRow(0)
+                    CurRow = tFile.ReadFields
+                    If CurRow.Length = 1 Then
+                        Select Case CurRow(0)
                             Case "[Advance]"
                                 curType = 1
                             Case "[Bonus]"
@@ -585,13 +585,13 @@
                     Else
                         Select Case curType
                             Case 1
-                                Worker.FindByID(CInt(curRow(0))).wAdvance = CDbl(curRow(1))
+                                Worker.FindByID(CInt(CurRow(0))).wAdvance = CDbl(CurRow(1))
                             Case 2
-                                Worker.FindByID(CInt(curRow(0))).wBonus = CDbl(curRow(1))
+                                Worker.FindByID(CInt(CurRow(0))).wBonus = CDbl(CurRow(1))
                             Case 3
-                                Worker.FindByID(CInt(curRow(0))).wOtherPayments = CDbl(curRow(1))
+                                Worker.FindByID(CInt(CurRow(0))).wOtherPayments = CDbl(CurRow(1))
                             Case 4
-                                Worker.FindByID(CInt(curRow(0))).wOtherCharges = CDbl(curRow(1))
+                                Worker.FindByID(CInt(CurRow(0))).wOtherCharges = CDbl(CurRow(1))
                         End Select
                     End If
                 End While
@@ -605,13 +605,13 @@
             Using dFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(dPath & "\Debts.ini")
                 dFile.TextFieldType = FileIO.FieldType.Delimited
                 dFile.SetDelimiters("|")
-                curRow = dFile.ReadFields
-                NextDebtID = CInt(curRow(0))
+                CurRow = dFile.ReadFields
+                NextDebtID = CInt(CurRow(0))
                 Dim i As Integer = 0
                 While Not dFile.EndOfData
-                    curRow = dFile.ReadFields
-                    DebtID(i, 0) = CInt(curRow(0))
-                    DebtID(i, 1) = CInt(curRow(1))
+                    CurRow = dFile.ReadFields
+                    DebtID(i, 0) = CInt(CurRow(0))
+                    DebtID(i, 1) = CInt(CurRow(1))
                     i += 1
                 End While
             End Using
@@ -648,6 +648,38 @@
                 comboExecutor.Items.Add(w.FullName)
             End If
         Next
+    End Sub
+
+    Sub LoadCustomersAndOrders()
+        HCOrder.KillAll()
+        HCCustomer.KillAll()
+        Dim curRow As String()
+        Using cFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Customers.ini")
+            cFile.TextFieldType = FileIO.FieldType.Delimited
+            cFile.SetDelimiters("|")
+            While Not cFile.EndOfData
+                curRow = cFile.ReadFields
+                Dim newCustomer = New HCCustomer(CUInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4))
+            End While
+        End Using
+        Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Orders.ini")
+            oFile.TextFieldType = FileIO.FieldType.Delimited
+            oFile.SetDelimiters("|")
+            While Not oFile.EndOfData
+                curRow = oFile.ReadFields
+                Dim PartList = New List(Of HCPart)
+                For i = 10 To curRow.Length - 1 Step 4
+                    Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), CULng(curRow(i + 2)), CDbl(curRow(i + 3)))
+                    PartList.Add(newPart)
+                Next
+                Dim newOrder = New HCOrder(HCCustomer.FindByID(CUInt(curRow(1))), Date.Parse(curRow(6)), CLng(curRow(5)), Date.Parse(curRow(4)), CULng(curRow(3)), Date.Parse(curRow(2)), 0, PartList, CBool(curRow(7)))
+                newOrder.Number.SetFullNumber(curRow(0))
+                newOrder.SetDiscount(CDbl(curRow(8)))
+                newOrder.Comment = curRow(9)
+            End While
+        End Using
+        HCCustomer.SettleGlobalID()
+        HCOrder.SettleGlobalID()
     End Sub
 
     ''' <summary>
@@ -704,6 +736,7 @@
             LoadTable()
             LoadAdvance()
             LoadDebts()
+            LoadCustomersAndOrders()
         Else
             If Not READ_ONLY_MODE Then My.Computer.FileSystem.CreateDirectory(dPath)
         End If
@@ -1407,6 +1440,10 @@
         SaveState()
         SaveAdvance()
         SaveDebts()
+        SaveCustomersAndOrders()
+        'SavePrincess()
+        'SaveWorld()
+        'SaveYourself()
     End Sub
 
     Public Sub SaveWash()
@@ -1614,6 +1651,32 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\State.ini")
             StateHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+    End Sub
+
+    Sub SaveCustomersAndOrders()
+        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        Dim TextToWrite As String = ""
+        For Each Customer In CustomerList
+            TextToWrite &= Customer.ID.ToString & "|"
+            TextToWrite &= Customer.LastName & "|" & Customer.FirstName & "|" & Customer.Patron & "|"
+            TextToWrite &= Customer.Phone & vbNewLine
+        Next
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Customers.ini", TextToWrite, False)
+        TextToWrite = ""
+        For Each Order In OrderList
+            TextToWrite &= Order.Number.GetFullNumber & "|"
+            TextToWrite &= CStr(Order.Customer.ID) & "|"
+            TextToWrite &= Order.AdvanceDate.ToString & "|" & CStr(Order.AdvanceSum) & "|"
+            TextToWrite &= Order.PaymentDate.ToString & "|" & CStr(Order.PaymentSum) & "|"
+            TextToWrite &= Order.DeliveryDate.ToString & "|" & CInt(Order.Completed) & "|"
+            TextToWrite &= CStr(Order.GetDiscount) & "|" & Order.Comment & "|"
+            For Each Part In Order.PartList
+                TextToWrite &= Part.Name & "|" & CStr(Part.Count) & "|" & CStr(Part.Price) & "|" & CStr(Part.GetMargin) & "|"
+            Next
+            TextToWrite = TextToWrite.Remove(TextToWrite.Length - 1)
+            TextToWrite &= vbNewLine
+        Next
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Orders.ini", TextToWrite, False)
     End Sub
 
     Private Sub txtNumber_Enter(sender As Object, e As System.EventArgs) Handles txtNumber.Enter
@@ -2215,7 +2278,7 @@
                 Outcome += CULng(dCash.Item(5, i).Value)
                 i += 1
             Loop
-        AddCash("xxx", "День закрыт", curDate.ToString("dd.MM.yyyy"), FormattedTime, CStr(Income) & " р.", CStr(Outcome) & " р.", "В кассе: " & CStr(cSum))
+            AddCash("xxx", "День закрыт", curDate.ToString("dd.MM.yyyy"), FormattedTime, CStr(Income) & " р.", CStr(Outcome) & " р.", "В кассе: " & CStr(cSum))
         End If
         SaveCash()
         Form2.LoadCash()
@@ -3180,5 +3243,13 @@
         End If
         Dim NewOrder As HCOrder = New HCOrder()
         frmOrder.Show(NewOrder, Me)
+    End Sub
+
+    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
+        SaveCustomersAndOrders()
+    End Sub
+
+    Private Sub TabPage10_Enter(sender As Object, e As EventArgs) Handles TabPage10.Enter
+        RefreshCustomersAndOrders()
     End Sub
 End Class

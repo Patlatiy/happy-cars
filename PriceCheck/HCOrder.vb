@@ -13,12 +13,12 @@
     Public Shared OrderList As New List(Of HCOrder)
     Public Completed As Boolean = False
     Public Comment As String = "Комментарий"
+    Public Shared GlobalID As UInteger = 1
 
     Structure OrderNumber
         Public Year As Short
         Public Month As Short
         Public ID As UInteger
-        Public Shared GlobalID As UInteger = 1
 
         Function GetFullNumber()
             Dim tmpMonth As String
@@ -36,6 +36,12 @@
             End Select
             Return CStr(Year) & "-" & tmpMonth & "-" & tmpID
         End Function
+
+        Sub SetFullNumber(FullNumber As String)
+            Year = CShort(FullNumber(0).ToString & FullNumber(1).ToString & FullNumber(2).ToString & FullNumber(3).ToString)
+            Month = CShort(FullNumber(5).ToString & FullNumber(6).ToString)
+            ID = CUInt(FullNumber(8).ToString & FullNumber(9).ToString & FullNumber(10).ToString & FullNumber(11).ToString)
+        End Sub
 
         Sub New(ByVal nYear As Short, ByVal nMonth As UShort)
             Year = nYear
@@ -131,4 +137,17 @@
         TotalOrderPrice = Math.Round(TotalOrderPrice, 2)
         Return TotalOrderPrice
     End Function
+
+    Public Shared Sub KillAll()
+        GlobalID = 1
+        OrderList.Clear()
+    End Sub
+
+    Shared Sub SettleGlobalID()
+        Dim MaxID As UInteger = 0
+        For Each Order In OrderList
+            If Order.Number.ID > MaxID Then MaxID = Order.Number.ID
+        Next
+        GlobalID = MaxID + 1
+    End Sub
 End Class

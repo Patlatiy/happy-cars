@@ -311,6 +311,7 @@ Partial Class Form1
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.btnNewOrder = New System.Windows.Forms.Button()
         Me.btnShowAllOrders = New System.Windows.Forms.Button()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
@@ -336,7 +337,7 @@ Partial Class Form1
         Me.lblNightWorkers = New System.Windows.Forms.Label()
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.btnNewOrder = New System.Windows.Forms.Button()
+        Me.Button21 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -3278,6 +3279,7 @@ Partial Class Form1
         '
         'TabPage10
         '
+        Me.TabPage10.Controls.Add(Me.Button21)
         Me.TabPage10.Controls.Add(Me.btnNewOrder)
         Me.TabPage10.Controls.Add(Me.btnShowAllOrders)
         Me.TabPage10.Controls.Add(Me.Label26)
@@ -3291,6 +3293,15 @@ Partial Class Form1
         Me.TabPage10.TabIndex = 9
         Me.TabPage10.Text = "Клиенты и заказы"
         Me.TabPage10.UseVisualStyleBackColor = True
+        '
+        'btnNewOrder
+        '
+        Me.btnNewOrder.Location = New System.Drawing.Point(597, 462)
+        Me.btnNewOrder.Name = "btnNewOrder"
+        Me.btnNewOrder.Size = New System.Drawing.Size(102, 23)
+        Me.btnNewOrder.TabIndex = 10
+        Me.btnNewOrder.Text = "Новый заказ"
+        Me.btnNewOrder.UseVisualStyleBackColor = True
         '
         'btnShowAllOrders
         '
@@ -3508,14 +3519,14 @@ Partial Class Form1
         '
         Me.ScheduleTimer.Interval = 1000
         '
-        'btnNewOrder
+        'Button21
         '
-        Me.btnNewOrder.Location = New System.Drawing.Point(597, 462)
-        Me.btnNewOrder.Name = "btnNewOrder"
-        Me.btnNewOrder.Size = New System.Drawing.Size(102, 23)
-        Me.btnNewOrder.TabIndex = 10
-        Me.btnNewOrder.Text = "Новый заказ"
-        Me.btnNewOrder.UseVisualStyleBackColor = True
+        Me.Button21.Location = New System.Drawing.Point(789, 462)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(75, 23)
+        Me.Button21.TabIndex = 11
+        Me.Button21.Text = "Button21"
+        Me.Button21.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -3941,5 +3952,6 @@ Partial Class Form1
     Friend WithEvents cmnOpen As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents ColumnOrders As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents btnNewOrder As System.Windows.Forms.Button
+    Friend WithEvents Button21 As System.Windows.Forms.Button
 
 End Class

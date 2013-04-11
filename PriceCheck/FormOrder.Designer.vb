@@ -73,6 +73,7 @@ Partial Class frmOrder
         Me.btnDeletePart = New System.Windows.Forms.Button()
         Me.boxCompleted = New System.Windows.Forms.CheckBox()
         Me.btnDeleteOrder = New System.Windows.Forms.Button()
+        Me.txtComment = New System.Windows.Forms.TextBox()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -244,7 +245,7 @@ Partial Class frmOrder
         '
         'btnNewPart
         '
-        Me.btnNewPart.Location = New System.Drawing.Point(306, 177)
+        Me.btnNewPart.Location = New System.Drawing.Point(306, 165)
         Me.btnNewPart.Name = "btnNewPart"
         Me.btnNewPart.Size = New System.Drawing.Size(99, 22)
         Me.btnNewPart.TabIndex = 7
@@ -314,7 +315,7 @@ Partial Class frmOrder
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2, Me.LineShape1, Me.RectangleShape2, Me.RectangleShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(841, 254)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(841, 255)
         Me.ShapeContainer1.TabIndex = 13
         Me.ShapeContainer1.TabStop = False
         '
@@ -348,7 +349,7 @@ Partial Class frmOrder
         Me.RectangleShape1.Enabled = False
         Me.RectangleShape1.Location = New System.Drawing.Point(250, 162)
         Me.RectangleShape1.Name = "RectangleShape1"
-        Me.RectangleShape1.Size = New System.Drawing.Size(321, 49)
+        Me.RectangleShape1.Size = New System.Drawing.Size(321, 27)
         '
         'lblMargin
         '
@@ -505,7 +506,7 @@ Partial Class frmOrder
         '
         'btnDeletePart
         '
-        Me.btnDeletePart.Location = New System.Drawing.Point(411, 177)
+        Me.btnDeletePart.Location = New System.Drawing.Point(411, 165)
         Me.btnDeletePart.Name = "btnDeletePart"
         Me.btnDeletePart.Size = New System.Drawing.Size(99, 22)
         Me.btnDeletePart.TabIndex = 7
@@ -534,11 +535,20 @@ Partial Class frmOrder
         Me.btnDeleteOrder.Text = "Удалить заказ"
         Me.btnDeleteOrder.UseVisualStyleBackColor = True
         '
+        'txtComment
+        '
+        Me.txtComment.Location = New System.Drawing.Point(250, 195)
+        Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(322, 20)
+        Me.txtComment.TabIndex = 20
+        Me.txtComment.Text = "Комментарий"
+        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(841, 254)
+        Me.ClientSize = New System.Drawing.Size(841, 255)
+        Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.btnDeleteOrder)
         Me.Controls.Add(Me.boxCompleted)
         Me.Controls.Add(Me.btnDeletePart)
@@ -648,4 +658,5 @@ Partial Class frmOrder
     Friend WithEvents cmnPrice As System.Windows.Forms.ColumnHeader
     Friend WithEvents boxCompleted As System.Windows.Forms.CheckBox
     Friend WithEvents btnDeleteOrder As System.Windows.Forms.Button
+    Friend WithEvents txtComment As System.Windows.Forms.TextBox
 End Class

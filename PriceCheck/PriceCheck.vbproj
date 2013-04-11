@@ -139,6 +139,12 @@
     <Compile Include="FormOrder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPrintOrder.Designer.vb">
+      <DependentUpon>frmPrintOrder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintOrder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HCCustomer.vb" />
     <Compile Include="DebtForm.Designer.vb">
       <DependentUpon>DebtForm.vb</DependentUpon>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOrder.resx">
       <DependentUpon>FormOrder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintOrder.resx">
+      <DependentUpon>frmPrintOrder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StateForm.resx">
       <DependentUpon>StateForm.vb</DependentUpon>

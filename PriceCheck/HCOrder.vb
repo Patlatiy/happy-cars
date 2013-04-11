@@ -12,6 +12,7 @@
     Public Number As OrderNumber
     Public Shared OrderList As New List(Of HCOrder)
     Public Completed As Boolean = False
+    Public Comment As String = "Комментарий"
 
     Structure OrderNumber
         Public Year As Short

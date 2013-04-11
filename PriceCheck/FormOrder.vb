@@ -31,6 +31,7 @@
         dtpAdvance.Value = MyOrder.AdvanceDate
         txtPayment.Text = CStr(MyOrder.PaymentSum)
         dtpPayment.Value = MyOrder.PaymentDate
+        txtComment.Text = MyOrder.Comment
         boxCompleted.Checked = MyOrder.Completed
         FillDiscount()
         FillTotal()
@@ -115,6 +116,11 @@
 
     Private Sub dtpPayment_ValueChanged(sender As Object, e As EventArgs) Handles dtpPayment.ValueChanged
         If MyOrder.PaymentDate <> dtpPayment.Value Then MyOrder.PaymentDate = dtpPayment.Value
+    End Sub
+
+    Private Sub txtComment_TextChanged(sender As Object, e As EventArgs) Handles txtComment.TextChanged
+        If MyOrder Is Nothing Then Exit Sub
+        MyOrder.Comment = txtComment.Text
     End Sub
 
     Private Sub lwParts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lwParts.SelectedIndexChanged

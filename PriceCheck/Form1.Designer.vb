@@ -311,6 +311,7 @@ Partial Class Form1
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.Button21 = New System.Windows.Forms.Button()
         Me.btnNewOrder = New System.Windows.Forms.Button()
         Me.btnShowAllOrders = New System.Windows.Forms.Button()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -337,7 +338,6 @@ Partial Class Form1
         Me.lblNightWorkers = New System.Windows.Forms.Label()
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.Button21 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -3294,6 +3294,15 @@ Partial Class Form1
         Me.TabPage10.Text = "Клиенты и заказы"
         Me.TabPage10.UseVisualStyleBackColor = True
         '
+        'Button21
+        '
+        Me.Button21.Location = New System.Drawing.Point(1044, 462)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(102, 23)
+        Me.Button21.TabIndex = 11
+        Me.Button21.Text = "Сохранить всё"
+        Me.Button21.UseVisualStyleBackColor = True
+        '
         'btnNewOrder
         '
         Me.btnNewOrder.Location = New System.Drawing.Point(597, 462)
@@ -3518,15 +3527,6 @@ Partial Class Form1
         'ScheduleTimer
         '
         Me.ScheduleTimer.Interval = 1000
-        '
-        'Button21
-        '
-        Me.Button21.Location = New System.Drawing.Point(789, 462)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(75, 23)
-        Me.Button21.TabIndex = 11
-        Me.Button21.Text = "Button21"
-        Me.Button21.UseVisualStyleBackColor = True
         '
         'Form1
         '

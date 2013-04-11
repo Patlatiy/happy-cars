@@ -86,6 +86,19 @@
     Dim DayWorkerCount(3, 32) As Integer
     Dim DayPercent(3, 32) As Integer
 
+    Dim WashHashCode As Byte()
+    Dim MountHashCode As Byte()
+    Dim ServiceHashCode As Byte()
+    Dim CashHashCode As Byte()
+    Dim sc1HashCode As Byte()
+    Dim sc2HashCode As Byte()
+    Dim TableHashCode As Byte()
+    Dim AdvanceHashCode As Byte()
+    Dim DebtsHashCode As Byte()
+    Dim StateHashCode As Byte()
+    Dim CustomersHashCode As Byte()
+    Dim OrdersHashCode As Byte()
+
     Dim ServiceMode As Integer = 0 '0 - Автомойка, 1 - Шиномонтаж
     Dim DayMode As Boolean = True 'Дневной/ночной режим
     Dim CurSche As Integer = 1 'Текущая запись
@@ -680,6 +693,7 @@
         End Using
         HCCustomer.SettleGlobalID()
         HCOrder.SettleGlobalID()
+        If TabControl1.SelectedTab Is TabPage10 Then RefreshCustomersAndOrders()
     End Sub
 
     ''' <summary>
@@ -846,6 +860,16 @@
         If My.Computer.FileSystem.FileExists(Application.StartupPath & "\data\State.ini") Then
             Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\State.ini")
                 StateHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(Application.StartupPath & "\data\Customers.ini") Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Customers.ini")
+                CustomersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+            End Using
+        End If
+        If My.Computer.FileSystem.FileExists(Application.StartupPath & "\data\Orders.ini") Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
+                OrdersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
             End Using
         End If
         'Завершающие процедуры:
@@ -1677,6 +1701,12 @@
             TextToWrite &= vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Orders.ini", TextToWrite, False)
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Customers.ini")
+            CustomersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
+            OrdersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        End Using
     End Sub
 
     Private Sub txtNumber_Enter(sender As Object, e As System.EventArgs) Handles txtNumber.Enter
@@ -3024,17 +3054,6 @@
         AppDirWatcher.EnableRaisingEvents = True
     End Sub
 
-    Dim WashHashCode As Byte()
-    Dim MountHashCode As Byte()
-    Dim ServiceHashCode As Byte()
-    Dim CashHashCode As Byte()
-    Dim sc1HashCode As Byte()
-    Dim sc2HashCode As Byte()
-    Dim TableHashCode As Byte()
-    Dim AdvanceHashCode As Byte()
-    Dim DebtsHashCode As Byte()
-    Dim StateHashCode As Byte()
-
     Sub SomethingChanged(source As Object, e As System.IO.FileSystemEventArgs)
         If ClosingNow Then Exit Sub
         On Error Resume Next
@@ -3130,6 +3149,22 @@
                 End Using
                 Me.Invoke(Sub() LoadState())
                 StateHashCode = HashCode
+            Case "Customers"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Customers.ini")
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, CustomersHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadCustomersAndOrders())
+                CustomersHashCode = HashCode
+            Case "Orders"
+                Dim HashCode As Byte()
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
+                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If HashCodeEquals(HashCode, OrdersHashCode) Then Exit Sub
+                End Using
+                Me.Invoke(Sub() LoadCustomersAndOrders())
+                OrdersHashCode = HashCode
         End Select
     End Sub
 

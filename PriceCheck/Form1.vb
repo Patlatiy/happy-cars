@@ -3149,22 +3149,27 @@
                 End Using
                 Me.Invoke(Sub() LoadState())
                 StateHashCode = HashCode
-            Case "Customers"
-                Dim HashCode As Byte()
+            Case "Customers", "Orders"
+                Dim cHashCode As Byte()
+                Dim fQuit As Boolean = True 'quit flag
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Customers.ini")
-                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
-                    If HashCodeEquals(HashCode, CustomersHashCode) Then Exit Sub
+                    cHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If Not HashCodeEquals(cHashCode, CustomersHashCode) Then
+                        CustomersHashCode = cHashCode
+                        fQuit = False
+                    End If
+
                 End Using
-                Me.Invoke(Sub() LoadCustomersAndOrders())
-                CustomersHashCode = HashCode
-            Case "Orders"
-                Dim HashCode As Byte()
+                Dim oHashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
-                    HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
-                    If HashCodeEquals(HashCode, OrdersHashCode) Then Exit Sub
+                    oHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+                    If Not HashCodeEquals(oHashCode, OrdersHashCode) Then
+                        OrdersHashCode = oHashCode
+                        fQuit = False
+                    End If
                 End Using
+                If fQuit Then Exit Sub 'if nothing really changed there is no need to reload, so exit sub
                 Me.Invoke(Sub() LoadCustomersAndOrders())
-                OrdersHashCode = HashCode
         End Select
     End Sub
 

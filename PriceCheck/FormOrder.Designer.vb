@@ -74,6 +74,7 @@ Partial Class frmOrder
         Me.boxCompleted = New System.Windows.Forms.CheckBox()
         Me.btnDeleteOrder = New System.Windows.Forms.Button()
         Me.txtComment = New System.Windows.Forms.TextBox()
+        Me.btnPrintOrder = New System.Windows.Forms.Button()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -541,13 +542,24 @@ Partial Class frmOrder
         Me.txtComment.Name = "txtComment"
         Me.txtComment.Size = New System.Drawing.Size(322, 20)
         Me.txtComment.TabIndex = 20
-        Me.txtComment.Text = "Комментарий"
+        Me.txtComment.Text = "txtComment"
+        '
+        'btnPrintOrder
+        '
+        Me.btnPrintOrder.BackColor = System.Drawing.SystemColors.Control
+        Me.btnPrintOrder.Image = CType(resources.GetObject("btnPrintOrder.Image"), System.Drawing.Image)
+        Me.btnPrintOrder.Location = New System.Drawing.Point(807, -2)
+        Me.btnPrintOrder.Name = "btnPrintOrder"
+        Me.btnPrintOrder.Size = New System.Drawing.Size(34, 30)
+        Me.btnPrintOrder.TabIndex = 21
+        Me.btnPrintOrder.UseVisualStyleBackColor = False
         '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(841, 255)
+        Me.Controls.Add(Me.btnPrintOrder)
         Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.btnDeleteOrder)
         Me.Controls.Add(Me.boxCompleted)
@@ -659,4 +671,5 @@ Partial Class frmOrder
     Friend WithEvents boxCompleted As System.Windows.Forms.CheckBox
     Friend WithEvents btnDeleteOrder As System.Windows.Forms.Button
     Friend WithEvents txtComment As System.Windows.Forms.TextBox
+    Friend WithEvents btnPrintOrder As System.Windows.Forms.Button
 End Class

@@ -323,4 +323,8 @@
             Me.Close()
         End If
     End Sub
+
+    Private Sub btnPrintOrder_Click(sender As Object, e As EventArgs) Handles btnPrintOrder.Click
+        frmPrintOrder.Show(MyOrder)
+    End Sub
 End Class

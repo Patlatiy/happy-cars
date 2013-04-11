@@ -83,6 +83,10 @@
     End Sub
 
     Private Sub btnNewOrder_Click(sender As Object, e As EventArgs) Handles btnNewOrder.Click
+        If MyCustomer.IsEmpty Then
+            MsgBox("Нельзя создавать заказы для пустого клиента", MsgBoxStyle.Critical, "Извините")
+            Exit Sub
+        End If
         Dim testPartList = New List(Of HCPart)
         Dim testOrder = New HCOrder(MyCustomer, Form1.curDate, 0, Form1.curDate, 0, Form1.curDate, 0, testPartList, False)
         dgvCustomerOrders.Rows.Add(testOrder.Number.GetFullNumber, CStr(testOrder.GetTotalPrice), testOrder.Completed, "Открыть...")

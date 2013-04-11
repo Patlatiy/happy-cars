@@ -46,26 +46,39 @@
         End If
     End Sub
 
+    Dim Silently As Boolean = False
     Private Sub txtLastName_TextChanged(sender As Object, e As EventArgs) Handles txtLastName.TextChanged
-        If MyCustomer Is Nothing Then Exit Sub
+        If MyCustomer Is Nothing Or Silently Then Exit Sub
+        silently = True
+        txtLastName.Text = txtLastName.Text.Trim()
+        Silently = False
         MyCustomer.LastName = txtLastName.Text
-        Me.Text = MyCustomer.GetFullName
+        Me.Text = MyCustomer.GetShortName
     End Sub
 
     Private Sub txt1stName_TextChanged(sender As Object, e As EventArgs) Handles txt1stName.TextChanged
-        If MyCustomer Is Nothing Then Exit Sub
+        If MyCustomer Is Nothing Or Silently Then Exit Sub
+        Silently = True
+        txt1stName.Text = txt1stName.Text.Trim()
+        Silently = False
         MyCustomer.FirstName = txt1stName.Text
-        Me.Text = MyCustomer.GetFullName
+        Me.Text = MyCustomer.GetShortName
     End Sub
 
     Private Sub txtPatron_TextChanged(sender As Object, e As EventArgs) Handles txtPatron.TextChanged
-        If MyCustomer Is Nothing Then Exit Sub
+        If MyCustomer Is Nothing Or Silently Then Exit Sub
+        Silently = True
+        txtPatron.Text = txtPatron.Text.Trim()
+        Silently = False
         MyCustomer.Patron = txtPatron.Text
-        Me.Text = MyCustomer.GetFullName
+        Me.Text = MyCustomer.GetShortName
     End Sub
 
     Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
-        If MyCustomer Is Nothing Then Exit Sub
+        If MyCustomer Is Nothing Or Silently Then Exit Sub
+        Silently = True
+        txtPatron.Text = txtPatron.Text.Trim()
+        Silently = False
         MyCustomer.Phone = txtPhone.Text
     End Sub
 

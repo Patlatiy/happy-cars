@@ -230,7 +230,7 @@
     End Sub
 
     Private Sub nudMarginPc_ValueChanged(sender As Object, e As EventArgs) Handles nudMarginPc.ValueChanged
-        If Silent_Change Then Exit Sub
+        If Silently Then Exit Sub
         If curPart Is Nothing Then Exit Sub
         Dim dblMargin As Double = Math.Round(curPart.Price * nudMarginPc.Value / 100, 2)
         nudMargin.Value = dblMargin
@@ -241,17 +241,17 @@
         If curPart Is Nothing Then Exit Sub
         If curPart.Price = 0 Then Exit Sub
         Dim dblmargin As Double = Math.Round((nudMargin.Value * 100) / (curPart.Price * curPart.Count))
-        Silent_Change = True
+        Silently = True
         nudMarginPc.Value = dblmargin
-        Silent_Change = False
+        Silently = False
         curPart.SetMargin(nudMargin.Value)
         FillSellPrice()
         FillTotal()
     End Sub
 
-    Dim Silent_Change As Boolean = False
+    Dim Silently As Boolean = False
     Private Sub nudDiscountPc_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscountPc.ValueChanged
-        If Silent_Change Then Exit Sub
+        If Silently Then Exit Sub
         Dim dblDiscount As Double = MyOrder.GetTotalPrice * nudDiscountPc.Value / 100
         nudDiscount.Value = dblDiscount
     End Sub
@@ -259,9 +259,9 @@
     Private Sub nudDiscount_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscount.ValueChanged
         Dim newValue = Math.Round(nudDiscount.Value * 100 / MyOrder.GetTotalPrice)
         If newValue >= nudDiscountPc.Minimum And newValue <= nudDiscountPc.Maximum Then
-            Silent_Change = True
+            Silently = True
             nudDiscountPc.Value = newValue
-            Silent_Change = False
+            Silently = False
             MyOrder.SetDiscount(nudDiscount.Value)
         End If
     End Sub

@@ -518,9 +518,9 @@ Partial Class frmOrder
         Me.boxCompleted.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.boxCompleted.Location = New System.Drawing.Point(250, 226)
         Me.boxCompleted.Name = "boxCompleted"
-        Me.boxCompleted.Size = New System.Drawing.Size(124, 17)
+        Me.boxCompleted.Size = New System.Drawing.Size(122, 17)
         Me.boxCompleted.TabIndex = 18
-        Me.boxCompleted.Text = "Заказ завершён"
+        Me.boxCompleted.Text = "Заказ исполнен"
         Me.boxCompleted.UseVisualStyleBackColor = True
         '
         'btnDeleteOrder
@@ -587,7 +587,7 @@ Partial Class frmOrder
         Me.MinimizeBox = False
         Me.Name = "frmOrder"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Заказ № "
+        Me.Text = "Заказ"
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).EndInit()

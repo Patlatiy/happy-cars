@@ -3131,12 +3131,12 @@
         dgvOrders.Rows.Clear()
         If curCustomer Is Nothing Then
             For Each Order As HCOrder In OrderList
-                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, Order.Completed, "Открыть...")
+                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetShortName, Order.Completed, "Открыть...")
             Next
             btnShowAllOrders.Hide()
         Else
             For Each Order In curCustomer.MyOrderList
-                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetFullName, Order.Completed, "Открыть...")
+                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetShortName, Order.Completed, "Открыть...")
             Next
             btnShowAllOrders.Show()
         End If

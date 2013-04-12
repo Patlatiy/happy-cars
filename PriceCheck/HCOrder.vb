@@ -129,11 +129,14 @@
     End Sub
 
     Public Function GetTotalPrice() As Double
+        Return Math.Round(Me.GetRawPrice() - Me.GetDiscount(), 2)
+    End Function
+
+    Public Function GetRawPrice() As Double
         Dim TotalOrderPrice As Double = 0
         For Each Part In PartList
             TotalOrderPrice += Part.GetSellPrice()
         Next
-        TotalOrderPrice = TotalOrderPrice - Me.GetDiscount()
         TotalOrderPrice = Math.Round(TotalOrderPrice, 2)
         Return TotalOrderPrice
     End Function

@@ -3158,7 +3158,6 @@
                         CustomersHashCode = cHashCode
                         fQuit = False
                     End If
-
                 End Using
                 Dim oHashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
@@ -3168,7 +3167,7 @@
                         fQuit = False
                     End If
                 End Using
-                If fQuit Then Exit Sub 'if nothing really changed there is no need to reload, so exit sub
+                If fQuit Then Exit Sub 'if nothing really changed - there is no need to reload, so exit sub
                 Me.Invoke(Sub() LoadCustomersAndOrders())
         End Select
     End Sub

@@ -263,13 +263,14 @@
     End Sub
 
     Private Sub nudDiscount_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscount.ValueChanged
-        Dim newValue = Math.Round(nudDiscount.Value * 100 / MyOrder.GetTotalPrice)
+        MyOrder.SetDiscount(nudDiscount.Value)
+        Dim newValue = Math.Round(nudDiscount.Value * 100 / MyOrder.GetRawPrice)
         If newValue >= nudDiscountPc.Minimum And newValue <= nudDiscountPc.Maximum Then
             Silently = True
             nudDiscountPc.Value = newValue
             Silently = False
-            MyOrder.SetDiscount(nudDiscount.Value)
         End If
+        FillTotal()
     End Sub
 
     Private Sub btnDeletePart_Click(sender As Object, e As EventArgs) Handles btnDeletePart.Click

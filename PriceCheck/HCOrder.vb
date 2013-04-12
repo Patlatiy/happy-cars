@@ -128,10 +128,20 @@
         Discount = CULng(sDiscount * 100)
     End Sub
 
+    ''' <summary>
+    ''' Returns price of whole order, including discount
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetTotalPrice() As Double
         Return Math.Round(Me.GetRawPrice() - Me.GetDiscount(), 2)
     End Function
 
+    ''' <summary>
+    ''' Returns price of whole order, without discount
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetRawPrice() As Double
         Dim TotalOrderPrice As Double = 0
         For Each Part In PartList
@@ -141,11 +151,19 @@
         Return TotalOrderPrice
     End Function
 
+    ''' <summary>
+    ''' Prepares the class for reload
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Shared Sub KillAll()
         GlobalID = 1
         OrderList.Clear()
     End Sub
 
+    ''' <summary>
+    ''' Sets GlobalID to the maximum ID + 1 value
+    ''' </summary>
+    ''' <remarks></remarks>
     Shared Sub SettleGlobalID()
         Dim MaxID As UInteger = 0
         For Each Order In OrderList

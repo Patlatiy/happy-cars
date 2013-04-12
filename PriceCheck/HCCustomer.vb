@@ -29,10 +29,20 @@
         CustomerList.Add(Me)
     End Sub
 
+    ''' <summary>
+    ''' Returns last name, first name and patronage
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetFullName() As String
         Return (Me.LastName & " " & Me.FirstName & " " & Me.Patron).Trim()
     End Function
 
+    ''' <summary>
+    ''' Returns last name with the initials
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetShortName() As String
         If LastName = "" Then Return GetFullName()
         If FirstName = "" And Patron = "" Then Return LastName
@@ -41,6 +51,12 @@
         Return (Me.LastName & " " & Me.FirstName(0) & ". " & Me.Patron(0) & ".")
     End Function
 
+    ''' <summary>
+    ''' Returns an instance with given ID
+    ''' </summary>
+    ''' <param name="sID"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Shared Function FindByID(sID As UInteger) As HCCustomer
         For Each Customer As HCCustomer In CustomerList
             If Customer.ID = sID Then Return Customer
@@ -48,6 +64,11 @@
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' Tells if this instance is empty
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function IsEmpty() As Boolean
         If FirstName = "" And LastName = "" And Patron = "" And Phone = "" And MyOrderList.Count = 0 Then
             Return True
@@ -55,11 +76,19 @@
         Return False
     End Function
 
+    ''' <summary>
+    ''' Prepares the class for reload
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Shared Sub KillAll()
         GlobalID = 1
         CustomerList.Clear()
     End Sub
 
+    ''' <summary>
+    ''' Sets GlobalID to the maximum ID + 1 value
+    ''' </summary>
+    ''' <remarks></remarks>
     Shared Sub SettleGlobalID()
         Dim MaxID As UInteger = 0
         For Each Customer In CustomerList

@@ -5,7 +5,7 @@
     Const GLOBAL_PASSWORD As String = "***" 'Пароль для смены глобального режима
     Const START_HOUR As UShort = 9, END_HOUR As UShort = 21 'Рабочий день
 
-    Dim READ_ONLY_MODE As Boolean = True
+    Public WriteRight As WriteRights = WriteRights.Read_Only
     Dim Random As New Random
 
     'Переменные текущих цен на мойку:
@@ -111,6 +111,15 @@
     Dim CustomerList As List(Of HCCustomer) = HCCustomer.CustomerList
     Dim OrderList As List(Of HCOrder) = HCOrder.OrderList
     Dim curCustomer As HCCustomer
+    Dim HiddenPages As New List(Of TabPage)
+
+
+    Public Enum WriteRights
+        Read_Only = 0
+        Master = 1
+        The_Girl = 2
+        Bookkeeper = 3
+    End Enum
 
     ''' <summary>
     ''' Процедура пересчёта цен
@@ -260,13 +269,31 @@
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'Unused tabs atm:
+        EnablePage(tabTable, False)
+        EnablePage(tabZP, False)
+
+        'Parsing command line args:
         For Each tmpSTR In My.Application.CommandLineArgs()
             tmpSTR = tmpSTR.ToLower
-            If tmpSTR = "-write" Then
-                READ_ONLY_MODE = False
-            End If
+            Select Case tmpSTR
+                Case "-write", "-bk", "-bookkeeper", "-bookeeper"
+                    WriteRight = WriteRights.Bookkeeper
+                Case "-master"
+                    WriteRight = WriteRights.Master
+                    EnablePage(tabWash, False)
+                    EnablePage(tabMount, False)
+                    EnablePage(tabService, False)
+                    EnablePage(tabCash, False)
+                    EnablePage(tabAnalytics, False)
+                    EnablePage(tabStats, False)
+                Case "-thegirl"
+                    WriteRight = WriteRights.The_Girl
+                    EnablePage(tabAnalytics, False)
+                    EnablePage(tabStats, False)
+            End Select
         Next
-        If READ_ONLY_MODE Then
+        If WriteRight = WriteRights.Read_Only Then
             'ComboBox1.Hide()
             'txtNumber.Hide()
             'Button1.Hide()
@@ -682,18 +709,18 @@
                 curRow = oFile.ReadFields
                 Dim PartList = New List(Of HCPart)
                 For i = 10 To curRow.Length - 1 Step 4
-                    Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), CULng(curRow(i + 2)), CDbl(curRow(i + 3)))
+                    Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), CDbl(curRow(i + 2)), CDbl(curRow(i + 3)))
                     PartList.Add(newPart)
                 Next
                 Dim newOrder = New HCOrder(HCCustomer.FindByID(CUInt(curRow(1))), Date.Parse(curRow(6)), CLng(curRow(5)), Date.Parse(curRow(4)), CULng(curRow(3)), Date.Parse(curRow(2)), 0, PartList, CBool(curRow(7)))
                 newOrder.Number.SetFullNumber(curRow(0))
-                newOrder.SetDiscount(CDbl(curRow(8)))
+                newOrder.Discount = CDbl(curRow(8))
                 newOrder.Comment = curRow(9)
             End While
         End Using
         HCCustomer.SettleGlobalID()
         HCOrder.SettleGlobalID()
-        If TabControl1.SelectedTab Is TabPage10 Then RefreshCustomersAndOrders()
+        If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
     End Sub
 
     ''' <summary>
@@ -752,11 +779,9 @@
             LoadDebts()
             LoadCustomersAndOrders()
         Else
-            If Not READ_ONLY_MODE Then My.Computer.FileSystem.CreateDirectory(dPath)
+            If Not WriteRight = WriteRights.Read_Only Then My.Computer.FileSystem.CreateDirectory(dPath)
         End If
-        If Not My.Computer.FileSystem.DirectoryExists(nddPath) Then
-            My.Computer.FileSystem.CreateDirectory(nddPath)
-        End If
+        If Not My.Computer.FileSystem.DirectoryExists(nddPath) And Not WriteRight = WriteRights.Read_Only Then My.Computer.FileSystem.CreateDirectory(nddPath)
         'Считываем цены:
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\GroupsPrice.ini")
             MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -1454,7 +1479,7 @@
     ''' Сохраняет списки оказанных услуг в файлы fPath и fmPath
     ''' </summary>
     Public Sub SaveAll()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         SaveWash()
         SaveMount()
         SaveService()
@@ -1471,7 +1496,7 @@
     End Sub
 
     Public Sub SaveWash()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         RecountRows()
         Dim tmpSTR As String = ""
         If Not DayMode Then tmpSTR = CStr(CurNightWorkerID) & vbNewLine
@@ -1493,7 +1518,7 @@
     End Sub
 
     Public Sub SaveMount()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         RecountRows()
         Dim tmpSTR As String = ""
         For i = 0 To dataDayMount.RowCount - 2
@@ -1514,7 +1539,7 @@
     End Sub
 
     Public Sub SaveService()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         RecountRows()
         Dim tmpSTR As String = ""
         For i = 0 To dataService.RowCount - 2
@@ -1532,7 +1557,7 @@
     End Sub
 
     Public Sub SaveCash()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Dim tmpSTR As String = CStr(curID) & vbNewLine
         For i = 0 To dCash.RowCount - 2
             For j = 0 To dCash.ColumnCount - 1
@@ -1553,7 +1578,7 @@
     Dim ScheduleSaving As Boolean = False
 
     Public Sub SaveSchedule()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Dim tmpSTR As String = ""
         For i = 0 To dSchedule1.RowCount - 1
             For j = 0 To dSchedule1.ColumnCount - 1
@@ -1579,7 +1604,7 @@
 
     Public Sub SaveTable()
         Exit Sub
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Dim tmpSTR As String = ""
         For i = 0 To dTable.RowCount - 1
             tmpSTR = tmpSTR & dTable.Item("dTable_ID", i).Value & "|"
@@ -1597,7 +1622,7 @@
     End Sub
 
     Public Sub SaveAdvance()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Dim tmpSTR As String = "[Advance]" & vbNewLine
         For Each w In Worker.AllOfThem
             If w.wAdvance <> 0 Then
@@ -1630,7 +1655,7 @@
     End Sub
 
     Public Sub SaveDebts()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Dim ReduceFor As Integer = 0
         Dim tmpSTR As String = CStr(NextDebtID) & vbNewLine
         For i = 0 To NextDebtID - 1
@@ -1653,7 +1678,7 @@
     End Sub
 
     Public Sub SaveState()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Dim tmpSTR As String = CStr(Worker.nextID) & vbNewLine
         For i = 0 To 2
             Select Case i
@@ -1678,7 +1703,7 @@
     End Sub
 
     Sub SaveCustomersAndOrders()
-        If READ_ONLY_MODE Or LoadProcedureRunning Then Exit Sub
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Dim TextToWrite As String = ""
         For Each Customer In CustomerList
             TextToWrite &= Customer.ID.ToString & "|"
@@ -1693,9 +1718,9 @@
             TextToWrite &= Order.AdvanceDate.ToString & "|" & CStr(Order.AdvanceSum) & "|"
             TextToWrite &= Order.PaymentDate.ToString & "|" & CStr(Order.PaymentSum) & "|"
             TextToWrite &= Order.DeliveryDate.ToString & "|" & CInt(Order.Completed) & "|"
-            TextToWrite &= CStr(Order.GetDiscount) & "|" & Order.Comment & "|"
+            TextToWrite &= CStr(Order.Discount) & "|" & Order.Comment & "|"
             For Each Part In Order.PartList
-                TextToWrite &= Part.Name & "|" & CStr(Part.Count) & "|" & CStr(Part.Price) & "|" & CStr(Part.GetMargin) & "|"
+                TextToWrite &= Part.Name & "|" & CStr(Part.Count) & "|" & CStr(Part.Price) & "|" & CStr(Part.Margin) & "|"
             Next
             TextToWrite = TextToWrite.Remove(TextToWrite.Length - 1)
             TextToWrite &= vbNewLine
@@ -1816,7 +1841,7 @@
     End Sub
 
     Private Sub ComboBox1_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ComboBox1.TextChanged
-        If ComboBox1.Text = GLOBAL_PASSWORD And Not READ_ONLY_MODE Then
+        If ComboBox1.Text = GLOBAL_PASSWORD And WriteRight <> WriteRights.Read_Only Then
             Static Title As String
             ComboBox1.Text = "Введите марку машины..."
             ComboBox1.SelectAll()
@@ -2055,8 +2080,7 @@
     End Sub
 
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
-        ServiceMode = TabControl1.SelectedIndex
-        If READ_ONLY_MODE Then GoTo 0
+        If WriteRight = WriteRights.Read_Only Then GoTo 0
         Select Case ServiceMode
             Case 0
                 Label12.Show()
@@ -2065,14 +2089,7 @@
                     lblNightWorkers.Show()
                     ComboNightWorkers.Show()
                 End If
-            Case 3, 4, 5, 6
-                'Label12.Hide()
-                'Label1.Hide()
-                lblNightWorkers.Hide()
-                ComboNightWorkers.Hide()
             Case Else
-                'Label12.Show()
-                'Label1.Show()
                 lblNightWorkers.Hide()
                 ComboNightWorkers.Hide()
         End Select
@@ -2128,8 +2145,8 @@
         If Not LoadProcedureRunning Then SaveWash()
         DayMode = Not NightBox.Checked
         lblDOW.Text = DOW(curDatePicker.Value)
-        lblNightWorkers.Visible = Not DayMode And Not READ_ONLY_MODE
-        ComboNightWorkers.Visible = Not DayMode And Not READ_ONLY_MODE
+        lblNightWorkers.Visible = Not DayMode And WriteRight <> WriteRights.Read_Only
+        ComboNightWorkers.Visible = Not DayMode And WriteRight <> WriteRights.Read_Only
         If LoadProcedureRunning Then Exit Sub
         If DayMode Then
             fPath = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & ".ini"
@@ -2391,7 +2408,7 @@
         SaveCash()
     End Sub
 
-    Private Sub ClearAllSelection(sender As System.Object, e As System.EventArgs) Handles TabPage1.Click, TabPage2.Click, TabPage3.Click, TabPage4.Click, Me.Click
+    Private Sub ClearAllSelection(sender As System.Object, e As System.EventArgs) Handles tabWash.Click, tabMount.Click, tabCash.Click, tabService.Click, Me.Click
         dataDay.ClearSelection()
         dataDayMount.ClearSelection()
         dataService.ClearSelection()
@@ -3209,8 +3226,11 @@
     End Sub
 
     Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
-        Dim newCustomer = New HCCustomer("", "", "", "")
-        FormCustomer.Show(newCustomer, Me)
+        Select Case WriteRight
+            Case WriteRights.Bookkeeper, WriteRights.Master
+                Dim newCustomer = New HCCustomer("", "", "", "")
+                FormCustomer.Show(newCustomer, Me)
+        End Select
     End Sub
 
     Private Sub dgvOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOrders.CellContentClick
@@ -3247,7 +3267,7 @@
     Public Sub RefreshCustomers()
         dgvCustomers.Rows.Clear()
         For Each Customer As HCCustomer In CustomerList
-            dgvCustomers.Rows.Add(CStr(Customer.ID), Customer.GetFullName, Customer.Phone, "Клиент...", "Заказы >")
+            dgvCustomers.Rows.Add(CStr(Customer.ID), Customer.FullName, Customer.Phone, "Клиент...", "Заказы >")
         Next
     End Sub
 
@@ -3288,7 +3308,29 @@
         SaveCustomersAndOrders()
     End Sub
 
-    Private Sub TabPage10_Enter(sender As Object, e As EventArgs) Handles TabPage10.Enter
+    Private Sub TabPage10_Enter(sender As Object, e As EventArgs) Handles tabCustomersOrders.Enter
         RefreshCustomersAndOrders()
+    End Sub
+
+    Private Sub EnablePage(ByRef Page As TabPage, Enable As Boolean)
+        If Enable Then
+            TabControl1.TabPages.Add(Page)
+            HiddenPages.Remove(Page)
+        Else
+            HiddenPages.Add(Page)
+            TabControl1.TabPages.Remove(Page)
+        End If
+    End Sub
+
+    Private Sub tabWash_Enter(sender As Object, e As EventArgs) Handles tabWash.Enter
+        ServiceMode = 0
+    End Sub
+
+    Private Sub tabMount_Enter(sender As Object, e As EventArgs) Handles tabMount.Enter
+        ServiceMode = 1
+    End Sub
+
+    Private Sub tabService_Enter(sender As Object, e As EventArgs) Handles tabService.Enter
+        ServiceMode = 2
     End Sub
 End Class

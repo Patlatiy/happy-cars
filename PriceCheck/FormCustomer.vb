@@ -1,8 +1,8 @@
 ﻿Public Class FormCustomer
     Dim MyCustomer As HCCustomer
-    Dim MyOwner As Object
+    Dim MyOwner As Windows.Forms.Form
 
-    Overloads Sub Show(Customer As HCCustomer, ByRef Owner As Object)
+    Overloads Sub Show(Customer As HCCustomer, ByRef Owner As Windows.Forms.Form)
         Me.Show(Owner)
         MyCustomer = Customer
         MyOwner = Owner
@@ -15,7 +15,7 @@
         txtLastName.Text = MyCustomer.LastName
         txtPatron.Text = MyCustomer.Patron
         txtPhone.Text = MyCustomer.Phone
-        Me.Text = MyCustomer.GetFullName
+        Me.Text = MyCustomer.FullName
         RefreshOrders()
     End Sub
 
@@ -87,11 +87,21 @@
             MsgBox("Нельзя создавать заказы для пустого клиента", MsgBoxStyle.Critical, "Извините")
             Exit Sub
         End If
-        Dim testPartList = New List(Of HCPart)
-        Dim testOrder = New HCOrder(MyCustomer, Form1.curDate, 0, Form1.curDate, 0, Form1.curDate, 0, testPartList, False)
-        dgvCustomerOrders.Rows.Add(testOrder.Number.GetFullNumber, CStr(testOrder.GetTotalPrice), testOrder.Completed, "Открыть...")
-        dgvCustomerOrders.FirstDisplayedScrollingRowIndex = dgvCustomerOrders.Rows.Count - 1
-        frmOrder.Show(testOrder, Me)
+        Select Case Form1.WriteRight
+            Case Form1.WriteRights.Bookkeeper
+                Dim testPartList = New List(Of HCPart)
+                Dim testOrder = New HCOrder(MyCustomer, Form1.curDate, 0, Form1.curDate, 0, Form1.curDate, 0, testPartList, False)
+                dgvCustomerOrders.Rows.Add(testOrder.Number.GetFullNumber, CStr(testOrder.GetTotalPrice), testOrder.Completed, "Открыть...")
+                dgvCustomerOrders.FirstDisplayedScrollingRowIndex = dgvCustomerOrders.Rows.Count - 1
+                frmOrder.Show(testOrder, Me)
+            Case Form1.WriteRights.Master
+                If MyCustomer.IsIncomplete Then
+                    MsgBox("Пожалуйста, заполните все поля", MsgBoxStyle.Critical, "Внимание")
+                Else
+                    frmNewOrder.Show(MyCustomer, Me)
+                End If
+
+        End Select
     End Sub
 
     Private Sub btnDeleteCustomer_Click(sender As Object, e As EventArgs) Handles btnDeleteCustomer.Click
@@ -99,9 +109,9 @@
         If MyCustomer.IsEmpty Then
             GoTo Deletion
         ElseIf MyCustomer.MyOrderList.Count = 0 Then
-            Message = "Вы действительно хотите удалить клиента " & MyCustomer.GetFullName & "?"
+            Message = "Вы действительно хотите удалить клиента " & MyCustomer.FullName & "?"
         Else
-            Message = "Вы действительно хотите удалить клиента " & MyCustomer.GetFullName & " и все его заказы (" & CStr(MyCustomer.MyOrderList.Count) & " шт.)?"
+            Message = "Вы действительно хотите удалить клиента " & MyCustomer.FullName & " и все его заказы (" & CStr(MyCustomer.MyOrderList.Count) & " шт.)?"
         End If
         If MsgBox(Message, MsgBoxStyle.YesNo, "Внимание!") = MsgBoxResult.Yes Then
 Deletion:
@@ -111,5 +121,12 @@ Deletion:
             HCCustomer.CustomerList.Remove(MyCustomer)
             Me.Close()
         End If
+    End Sub
+
+    Private Sub FormCustomer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Select Case Form1.WriteRight
+            Case Form1.WriteRights.Master
+                btnDeleteCustomer.Hide()
+        End Select
     End Sub
 End Class

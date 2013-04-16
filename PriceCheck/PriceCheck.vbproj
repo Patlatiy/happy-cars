@@ -139,6 +139,24 @@
     <Compile Include="FormOrder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmExecutor.Designer.vb">
+      <DependentUpon>frmExecutor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmExecutor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewOrder.Designer.vb">
+      <DependentUpon>frmNewOrder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewOrder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewPart.Designer.vb">
+      <DependentUpon>frmNewPart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewPart.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrintOrder.Designer.vb">
       <DependentUpon>frmPrintOrder.vb</DependentUpon>
     </Compile>
@@ -152,6 +170,7 @@
     <Compile Include="DebtForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HCExecutor.vb" />
     <Compile Include="HCListItem.vb" />
     <Compile Include="HCOrder.vb" />
     <Compile Include="HCPart.vb" />
@@ -219,6 +238,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOrder.resx">
       <DependentUpon>FormOrder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExecutor.resx">
+      <DependentUpon>frmExecutor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewOrder.resx">
+      <DependentUpon>frmNewOrder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewPart.resx">
+      <DependentUpon>frmNewPart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintOrder.resx">
       <DependentUpon>frmPrintOrder.vb</DependentUpon>

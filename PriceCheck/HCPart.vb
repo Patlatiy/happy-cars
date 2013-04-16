@@ -1,31 +1,39 @@
 ﻿Public Class HCPart
     Public Name As String
     Public Count As UInteger
-    Public Price As ULong
-    Private Margin As ULong = 0
+    Private _Price As ULong
+    Public Property Price As Double
+        Get
+            Return Math.Round(CDbl(_Price / 100), 2)
+        End Get
+        Set(value As Double)
+            _Price = Math.Round(value * 100)
+        End Set
+    End Property
+    Private _Margin As ULong = 0
+    Public Property Margin As Double
+        Get
+            Return Math.Round(_Margin / 100, 2)
+        End Get
+        Set(value As Double)
+            _Margin = CULng(value * 100)
+        End Set
+    End Property
 
-    Sub New(nName As String, nCount As UInteger, nPrice As ULong)
+    Sub New(nName As String, nCount As UInteger, nPrice As Double)
         Name = nName
         Count = nCount
         Price = nPrice
     End Sub
 
-    Sub New(nName As String, nCount As UInteger, nPrice As UInteger, nMargin As Double)
+    Sub New(nName As String, nCount As UInteger, nPrice As Double, nMargin As Double)
         Name = nName
         Count = nCount
         Price = nPrice
-        SetMargin(nMargin)
-    End Sub
-
-    Public Function GetMargin() As Double
-        Return Math.Round(Margin / 100, 2)
-    End Function
-
-    Public Sub SetMargin(sMargin As Double)
-        Margin = CULng(sMargin * 100)
+        Margin = nMargin
     End Sub
 
     Public Function GetSellPrice() As Double
-        Return (Price * Count) + GetMargin()
+        Return (Price * Count) + Margin
     End Function
 End Class

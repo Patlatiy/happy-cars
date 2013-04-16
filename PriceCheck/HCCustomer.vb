@@ -8,6 +8,11 @@
     Public MyOrderList As New List(Of HCOrder)
     Public MyOrderIDList As New List(Of String)
     Public Shared CustomerList As New List(Of HCCustomer)
+    Public ReadOnly Property FullName
+        Get
+            Return (Me.LastName & " " & Me.FirstName & " " & Me.Patron).Trim()
+        End Get
+    End Property
 
     Sub New()
         Me.New("", "", "", "")
@@ -30,21 +35,12 @@
     End Sub
 
     ''' <summary>
-    ''' Returns last name, first name and patronage
-    ''' </summary>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function GetFullName() As String
-        Return (Me.LastName & " " & Me.FirstName & " " & Me.Patron).Trim()
-    End Function
-
-    ''' <summary>
     ''' Returns last name with the initials
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function GetShortName() As String
-        If LastName = "" Then Return GetFullName()
+        If LastName = "" Then Return FullName
         If FirstName = "" And Patron = "" Then Return LastName
         If FirstName = "" Then Return LastName
         If Patron = "" Then Return (LastName & " " & FirstName(0).ToString & ".")
@@ -71,6 +67,18 @@
     ''' <remarks></remarks>
     Public Function IsEmpty() As Boolean
         If FirstName = "" And LastName = "" And Patron = "" And Phone = "" And MyOrderList.Count = 0 Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' Tells if this instance has one or more empty fields
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function IsIncomplete() As Boolean
+        If FirstName = "" Or LastName = "" Or Patron = "" Or Phone = "" Then
             Return True
         End If
         Return False

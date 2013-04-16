@@ -4,14 +4,21 @@
     Dim txtPaymentLastValue As String
     Dim curPart As HCPart
     Dim curPartPosition As Integer
-    Dim MyOwner As Object
+    Dim MyOwner As Object 'Not Windows.Forms.Form because of the error with the RefreshOrders() procedure in FormClosing event handler. I will fix it eventually
 
-    Overloads Sub Show(ByRef Order As HCOrder, ByRef Owner As System.Windows.Forms.IWin32Window)
+    Overloads Sub Show(ByRef Order As HCOrder, ByRef Owner As Windows.Forms.Form)
         Me.Show(Owner)
         MyOrder = Order
         MyOwner = Owner
         MyOwner.Enabled = False
         Me.Text = "Заказ № " & MyOrder.Number.GetFullNumber
+
+        If Form1.WriteRight <> Form1.WriteRights.Bookkeeper Then
+            For Each obj In Me.Controls
+                If obj Is btnPrintOrder And Form1.WriteRight = Form1.WriteRights.The_Girl Then Continue For
+                obj.Enabled = False
+            Next
+        End If
 
         lwParts.Items.Clear()
         For Each Part As HCPart In MyOrder.PartList
@@ -20,7 +27,7 @@
 
         comboCustomers.Items.Clear()
         For Each Customer As HCCustomer In HCCustomer.CustomerList
-            Dim newItem = New HCListItem(Customer.GetFullName, Customer.ID)
+            Dim newItem = New HCListItem(Customer.FullName, Customer.ID)
             comboCustomers.Items.Add(newItem)
             If Customer.ID = MyOrder.Customer.ID Then comboCustomers.SelectedItem = newItem
         Next
@@ -201,10 +208,10 @@
         nudPartPrice.Value = curPart.Price
 
         'Чтобы не вызывать 2 раза подряд nudMargin_ValueChanged() нужно условие:
-        If nudMargin.Value = curPart.GetMargin Then
+        If nudMargin.Value = curPart.Margin Then
             nudMargin_ValueChanged(nudMargin, e:=New EventArgs())
         Else
-            nudMargin.Value = curPart.GetMargin
+            nudMargin.Value = curPart.Margin
         End If
 
         FillDiscount()
@@ -228,19 +235,19 @@
     Sub FillDiscount()
         CheckParts()
         'Чтобы не вызывать 2 раза подряд nudDiscount_ValueChanged() нужно условие:
-        If nudDiscount.Value = MyOrder.GetDiscount Then
+        If nudDiscount.Value = MyOrder.Discount Then
             nudDiscount_ValueChanged(nudDiscount, e:=New EventArgs())
         Else
-            nudDiscount.Value = MyOrder.GetDiscount
+            nudDiscount.Value = MyOrder.Discount
         End If
     End Sub
 
     Private Sub nudMarginPc_ValueChanged(sender As Object, e As EventArgs) Handles nudMarginPc.ValueChanged
         If Silently Then Exit Sub
         If curPart Is Nothing Then Exit Sub
-        Dim dblMargin As Double = Math.Round(curPart.Price * nudMarginPc.Value / 100, 2)
+        Dim dblMargin As Double = Math.Round(curPart.Price * curPart.Count * nudMarginPc.Value / 100, 2)
         nudMargin.Value = dblMargin
-        curPart.SetMargin(dblMargin)
+        curPart.Margin = dblMargin
     End Sub
 
     Private Sub nudMargin_ValueChanged(sender As Object, e As EventArgs) Handles nudMargin.ValueChanged
@@ -250,7 +257,7 @@
         Silently = True
         nudMarginPc.Value = dblmargin
         Silently = False
-        curPart.SetMargin(nudMargin.Value)
+        curPart.Margin = nudMargin.Value
         FillSellPrice()
         FillTotal()
     End Sub
@@ -258,12 +265,12 @@
     Dim Silently As Boolean = False
     Private Sub nudDiscountPc_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscountPc.ValueChanged
         If Silently Then Exit Sub
-        Dim dblDiscount As Double = MyOrder.GetTotalPrice * nudDiscountPc.Value / 100
+        Dim dblDiscount As Double = MyOrder.GetRawPrice * nudDiscountPc.Value / 100
         nudDiscount.Value = dblDiscount
     End Sub
 
     Private Sub nudDiscount_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscount.ValueChanged
-        MyOrder.SetDiscount(nudDiscount.Value)
+        MyOrder.Discount = nudDiscount.Value
         Dim newValue = Math.Round(nudDiscount.Value * 100 / MyOrder.GetRawPrice)
         If newValue >= nudDiscountPc.Minimum And newValue <= nudDiscountPc.Maximum Then
             Silently = True
@@ -304,6 +311,7 @@
     End Sub
 
     Private Sub EnableDiscountControls()
+        If Form1.WriteRight <> Form1.WriteRights.Bookkeeper Then Exit Sub
         nudDiscount.Enabled = True
         nudDiscountPc.Enabled = True
     End Sub

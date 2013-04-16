@@ -27,7 +27,7 @@
         lblComment.Text = ""
         lblExecutor.Text = ""
         lblExecutorPhone.Text = ""
-        lblRecipient.Text = Order.Customer.GetFullName
+        lblRecipient.Text = Order.Customer.FullName
         lblRecipientPhone.Text = Order.Customer.Phone
         lblRecipientAddress.Text = ""
     End Sub

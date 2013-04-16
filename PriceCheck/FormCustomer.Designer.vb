@@ -44,7 +44,7 @@ Partial Class FormCustomer
         'lbl1stName
         '
         Me.lbl1stName.AutoSize = True
-        Me.lbl1stName.Location = New System.Drawing.Point(12, 41)
+        Me.lbl1stName.Location = New System.Drawing.Point(12, 43)
         Me.lbl1stName.Name = "lbl1stName"
         Me.lbl1stName.Size = New System.Drawing.Size(29, 13)
         Me.lbl1stName.TabIndex = 0
@@ -52,7 +52,7 @@ Partial Class FormCustomer
         '
         'txt1stName
         '
-        Me.txt1stName.Location = New System.Drawing.Point(90, 38)
+        Me.txt1stName.Location = New System.Drawing.Point(90, 40)
         Me.txt1stName.Name = "txt1stName"
         Me.txt1stName.Size = New System.Drawing.Size(137, 20)
         Me.txt1stName.TabIndex = 1
@@ -60,7 +60,7 @@ Partial Class FormCustomer
         'lblLastName
         '
         Me.lblLastName.AutoSize = True
-        Me.lblLastName.Location = New System.Drawing.Point(12, 15)
+        Me.lblLastName.Location = New System.Drawing.Point(12, 17)
         Me.lblLastName.Name = "lblLastName"
         Me.lblLastName.Size = New System.Drawing.Size(56, 13)
         Me.lblLastName.TabIndex = 0
@@ -68,7 +68,7 @@ Partial Class FormCustomer
         '
         'txtLastName
         '
-        Me.txtLastName.Location = New System.Drawing.Point(90, 12)
+        Me.txtLastName.Location = New System.Drawing.Point(90, 14)
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.Size = New System.Drawing.Size(137, 20)
         Me.txtLastName.TabIndex = 0
@@ -76,7 +76,7 @@ Partial Class FormCustomer
         'lblPatron
         '
         Me.lblPatron.AutoSize = True
-        Me.lblPatron.Location = New System.Drawing.Point(12, 67)
+        Me.lblPatron.Location = New System.Drawing.Point(12, 69)
         Me.lblPatron.Name = "lblPatron"
         Me.lblPatron.Size = New System.Drawing.Size(54, 13)
         Me.lblPatron.TabIndex = 0
@@ -84,7 +84,7 @@ Partial Class FormCustomer
         '
         'txtPatron
         '
-        Me.txtPatron.Location = New System.Drawing.Point(90, 64)
+        Me.txtPatron.Location = New System.Drawing.Point(90, 66)
         Me.txtPatron.Name = "txtPatron"
         Me.txtPatron.Size = New System.Drawing.Size(137, 20)
         Me.txtPatron.TabIndex = 2
@@ -94,13 +94,15 @@ Partial Class FormCustomer
         Me.dgvCustomerOrders.AllowUserToAddRows = False
         Me.dgvCustomerOrders.AllowUserToDeleteRows = False
         Me.dgvCustomerOrders.AllowUserToResizeRows = False
+        Me.dgvCustomerOrders.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.dgvCustomerOrders.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.dgvCustomerOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCustomerOrders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnCustomerOrderNumber, Me.cmnCustomerOrderSum, Me.cmnCustomerDone, Me.cmnCustomerEdit})
         Me.dgvCustomerOrders.Location = New System.Drawing.Point(255, 12)
         Me.dgvCustomerOrders.Name = "dgvCustomerOrders"
         Me.dgvCustomerOrders.RowHeadersVisible = False
         Me.dgvCustomerOrders.RowTemplate.Height = 21
-        Me.dgvCustomerOrders.Size = New System.Drawing.Size(352, 410)
+        Me.dgvCustomerOrders.Size = New System.Drawing.Size(352, 287)
         Me.dgvCustomerOrders.TabIndex = 8
         '
         'cmnCustomerOrderNumber
@@ -132,7 +134,7 @@ Partial Class FormCustomer
         '
         'txtPhone
         '
-        Me.txtPhone.Location = New System.Drawing.Point(90, 90)
+        Me.txtPhone.Location = New System.Drawing.Point(90, 92)
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.Size = New System.Drawing.Size(137, 20)
         Me.txtPhone.TabIndex = 3
@@ -140,7 +142,7 @@ Partial Class FormCustomer
         'lblPhone
         '
         Me.lblPhone.AutoSize = True
-        Me.lblPhone.Location = New System.Drawing.Point(12, 93)
+        Me.lblPhone.Location = New System.Drawing.Point(12, 95)
         Me.lblPhone.Name = "lblPhone"
         Me.lblPhone.Size = New System.Drawing.Size(52, 13)
         Me.lblPhone.TabIndex = 0
@@ -148,7 +150,7 @@ Partial Class FormCustomer
         '
         'btnNewOrder
         '
-        Me.btnNewOrder.Location = New System.Drawing.Point(378, 428)
+        Me.btnNewOrder.Location = New System.Drawing.Point(378, 305)
         Me.btnNewOrder.Name = "btnNewOrder"
         Me.btnNewOrder.Size = New System.Drawing.Size(97, 23)
         Me.btnNewOrder.TabIndex = 9
@@ -159,9 +161,9 @@ Partial Class FormCustomer
         '
         Me.btnDeleteCustomer.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btnDeleteCustomer.ForeColor = System.Drawing.Color.Red
-        Me.btnDeleteCustomer.Location = New System.Drawing.Point(12, 416)
+        Me.btnDeleteCustomer.Location = New System.Drawing.Point(59, 303)
         Me.btnDeleteCustomer.Name = "btnDeleteCustomer"
-        Me.btnDeleteCustomer.Size = New System.Drawing.Size(132, 35)
+        Me.btnDeleteCustomer.Size = New System.Drawing.Size(132, 26)
         Me.btnDeleteCustomer.TabIndex = 10
         Me.btnDeleteCustomer.Text = "Удалить клиента"
         Me.btnDeleteCustomer.UseVisualStyleBackColor = True
@@ -170,7 +172,7 @@ Partial Class FormCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(619, 459)
+        Me.ClientSize = New System.Drawing.Size(619, 336)
         Me.Controls.Add(Me.btnDeleteCustomer)
         Me.Controls.Add(Me.btnNewOrder)
         Me.Controls.Add(Me.txtPhone)

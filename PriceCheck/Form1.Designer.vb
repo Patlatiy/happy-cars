@@ -98,7 +98,7 @@ Partial Class Form1
         Me.NightBox = New System.Windows.Forms.CheckBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tabWash = New System.Windows.Forms.TabPage()
         Me.btnDebt1 = New System.Windows.Forms.Button()
         Me.OweBox = New System.Windows.Forms.CheckBox()
         Me.dataDay = New System.Windows.Forms.DataGridView()
@@ -110,7 +110,7 @@ Partial Class Form1
         Me.cmnGroup = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmnSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tabMount = New System.Windows.Forms.TabPage()
         Me.btnDebt2 = New System.Windows.Forms.Button()
         Me.OweBox2 = New System.Windows.Forms.CheckBox()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -173,7 +173,7 @@ Partial Class Form1
         Me.mGroup = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.tabService = New System.Windows.Forms.TabPage()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.btnDebt3 = New System.Windows.Forms.Button()
         Me.OweBox3 = New System.Windows.Forms.CheckBox()
@@ -208,7 +208,7 @@ Partial Class Form1
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.tabSchedule = New System.Windows.Forms.TabPage()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.RadioButton22 = New System.Windows.Forms.RadioButton()
         Me.RadioButton21 = New System.Windows.Forms.RadioButton()
@@ -232,7 +232,7 @@ Partial Class Form1
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.tabCash = New System.Windows.Forms.TabPage()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.AddCashButton = New System.Windows.Forms.Button()
         Me.AddCommentBox = New System.Windows.Forms.TextBox()
@@ -252,7 +252,7 @@ Partial Class Form1
         Me.cashIncome = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cashOutcome = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cashComment = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.tabStats = New System.Windows.Forms.TabPage()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -265,7 +265,7 @@ Partial Class Form1
         Me.Button8 = New System.Windows.Forms.Button()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.tabAnalytics = New System.Windows.Forms.TabPage()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.comboFilter = New System.Windows.Forms.ComboBox()
@@ -281,7 +281,7 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.tabTable = New System.Windows.Forms.TabPage()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.nudHoursToAdd = New System.Windows.Forms.NumericUpDown()
@@ -293,7 +293,7 @@ Partial Class Form1
         Me.Button13 = New System.Windows.Forms.Button()
         Me.ComboWorkshops = New System.Windows.Forms.ComboBox()
         Me.dTable = New System.Windows.Forms.DataGridView()
-        Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.tabZP = New System.Windows.Forms.TabPage()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
@@ -310,7 +310,7 @@ Partial Class Form1
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.tabCustomersOrders = New System.Windows.Forms.TabPage()
         Me.Button21 = New System.Windows.Forms.Button()
         Me.btnNewOrder = New System.Windows.Forms.Button()
         Me.btnShowAllOrders = New System.Windows.Forms.Button()
@@ -351,9 +351,9 @@ Partial Class Form1
         CType(Me.udy, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.udx, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
+        Me.tabWash.SuspendLayout()
         CType(Me.dataDay, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
+        Me.tabMount.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.OtherNUD2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -376,26 +376,26 @@ Partial Class Form1
         CType(Me.nud4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nud2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dataDayMount, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage4.SuspendLayout()
+        Me.tabService.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.dataService, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage6.SuspendLayout()
+        Me.tabSchedule.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         CType(Me.dSchedule2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dSchedule1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage3.SuspendLayout()
+        Me.tabCash.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         CType(Me.dCash, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage5.SuspendLayout()
+        Me.tabStats.SuspendLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage9.SuspendLayout()
+        Me.tabAnalytics.SuspendLayout()
         CType(Me.dgvAnalytics, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage7.SuspendLayout()
+        Me.tabTable.SuspendLayout()
         CType(Me.nudHoursToAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dTable, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage8.SuspendLayout()
+        Me.tabZP.SuspendLayout()
         CType(Me.dSalary, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage10.SuspendLayout()
+        Me.tabCustomersOrders.SuspendLayout()
         CType(Me.dgvOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1136,39 +1136,39 @@ Partial Class Form1
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage6)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage5)
-        Me.TabControl1.Controls.Add(Me.TabPage9)
-        Me.TabControl1.Controls.Add(Me.TabPage7)
-        Me.TabControl1.Controls.Add(Me.TabPage8)
-        Me.TabControl1.Controls.Add(Me.TabPage10)
+        Me.TabControl1.Controls.Add(Me.tabWash)
+        Me.TabControl1.Controls.Add(Me.tabMount)
+        Me.TabControl1.Controls.Add(Me.tabService)
+        Me.TabControl1.Controls.Add(Me.tabSchedule)
+        Me.TabControl1.Controls.Add(Me.tabCash)
+        Me.TabControl1.Controls.Add(Me.tabStats)
+        Me.TabControl1.Controls.Add(Me.tabAnalytics)
+        Me.TabControl1.Controls.Add(Me.tabTable)
+        Me.TabControl1.Controls.Add(Me.tabZP)
+        Me.TabControl1.Controls.Add(Me.tabCustomersOrders)
         Me.TabControl1.Location = New System.Drawing.Point(12, 40)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1172, 514)
         Me.TabControl1.TabIndex = 13
         '
-        'TabPage1
+        'tabWash
         '
-        Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage1.Controls.Add(Me.btnDebt1)
-        Me.TabPage1.Controls.Add(Me.OweBox)
-        Me.TabPage1.Controls.Add(Me.GroupBox1)
-        Me.TabPage1.Controls.Add(Me.NightBox)
-        Me.TabPage1.Controls.Add(Me.dataDay)
-        Me.TabPage1.Controls.Add(Me.Button1)
-        Me.TabPage1.Controls.Add(Me.GroupBox2)
-        Me.TabPage1.Controls.Add(Me.GroupBox4)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Мойка"
+        Me.tabWash.BackColor = System.Drawing.SystemColors.Control
+        Me.tabWash.Controls.Add(Me.btnDebt1)
+        Me.tabWash.Controls.Add(Me.OweBox)
+        Me.tabWash.Controls.Add(Me.GroupBox1)
+        Me.tabWash.Controls.Add(Me.NightBox)
+        Me.tabWash.Controls.Add(Me.dataDay)
+        Me.tabWash.Controls.Add(Me.Button1)
+        Me.tabWash.Controls.Add(Me.GroupBox2)
+        Me.tabWash.Controls.Add(Me.GroupBox4)
+        Me.tabWash.Location = New System.Drawing.Point(4, 22)
+        Me.tabWash.Name = "tabWash"
+        Me.tabWash.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabWash.Size = New System.Drawing.Size(1164, 488)
+        Me.tabWash.TabIndex = 0
+        Me.tabWash.Text = "Мойка"
         '
         'btnDebt1
         '
@@ -1269,20 +1269,20 @@ Partial Class Form1
         Me.Column9.Name = "Column9"
         Me.Column9.Visible = False
         '
-        'TabPage2
+        'tabMount
         '
-        Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage2.Controls.Add(Me.btnDebt2)
-        Me.TabPage2.Controls.Add(Me.OweBox2)
-        Me.TabPage2.Controls.Add(Me.Button4)
-        Me.TabPage2.Controls.Add(Me.GroupBox5)
-        Me.TabPage2.Controls.Add(Me.dataDayMount)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Шиномонтаж"
+        Me.tabMount.BackColor = System.Drawing.SystemColors.Control
+        Me.tabMount.Controls.Add(Me.btnDebt2)
+        Me.tabMount.Controls.Add(Me.OweBox2)
+        Me.tabMount.Controls.Add(Me.Button4)
+        Me.tabMount.Controls.Add(Me.GroupBox5)
+        Me.tabMount.Controls.Add(Me.dataDayMount)
+        Me.tabMount.Location = New System.Drawing.Point(4, 22)
+        Me.tabMount.Name = "tabMount"
+        Me.tabMount.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabMount.Size = New System.Drawing.Size(1164, 488)
+        Me.tabMount.TabIndex = 1
+        Me.tabMount.Text = "Шиномонтаж"
         '
         'btnDebt2
         '
@@ -1946,19 +1946,19 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
         Me.DataGridViewTextBoxColumn10.Visible = False
         '
-        'TabPage4
+        'tabService
         '
-        Me.TabPage4.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage4.Controls.Add(Me.Button7)
-        Me.TabPage4.Controls.Add(Me.btnDebt3)
-        Me.TabPage4.Controls.Add(Me.OweBox3)
-        Me.TabPage4.Controls.Add(Me.GroupBox6)
-        Me.TabPage4.Controls.Add(Me.dataService)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Сервис"
+        Me.tabService.BackColor = System.Drawing.SystemColors.Control
+        Me.tabService.Controls.Add(Me.Button7)
+        Me.tabService.Controls.Add(Me.btnDebt3)
+        Me.tabService.Controls.Add(Me.OweBox3)
+        Me.tabService.Controls.Add(Me.GroupBox6)
+        Me.tabService.Controls.Add(Me.dataService)
+        Me.tabService.Location = New System.Drawing.Point(4, 22)
+        Me.tabService.Name = "tabService"
+        Me.tabService.Size = New System.Drawing.Size(1164, 488)
+        Me.tabService.TabIndex = 3
+        Me.tabService.Text = "Сервис"
         '
         'Button7
         '
@@ -2267,23 +2267,23 @@ Partial Class Form1
         Me.Column10.Name = "Column10"
         Me.Column10.Visible = False
         '
-        'TabPage6
+        'tabSchedule
         '
-        Me.TabPage6.Controls.Add(Me.GroupBox8)
-        Me.TabPage6.Controls.Add(Me.ComboTLS2)
-        Me.TabPage6.Controls.Add(Me.Button12)
-        Me.TabPage6.Controls.Add(Me.comboTLS)
-        Me.TabPage6.Controls.Add(Me.Button11)
-        Me.TabPage6.Controls.Add(Me.lblTomorrow)
-        Me.TabPage6.Controls.Add(Me.lblToday)
-        Me.TabPage6.Controls.Add(Me.dSchedule2)
-        Me.TabPage6.Controls.Add(Me.dSchedule1)
-        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage6.TabIndex = 5
-        Me.TabPage6.Text = "Запись"
-        Me.TabPage6.UseVisualStyleBackColor = True
+        Me.tabSchedule.Controls.Add(Me.GroupBox8)
+        Me.tabSchedule.Controls.Add(Me.ComboTLS2)
+        Me.tabSchedule.Controls.Add(Me.Button12)
+        Me.tabSchedule.Controls.Add(Me.comboTLS)
+        Me.tabSchedule.Controls.Add(Me.Button11)
+        Me.tabSchedule.Controls.Add(Me.lblTomorrow)
+        Me.tabSchedule.Controls.Add(Me.lblToday)
+        Me.tabSchedule.Controls.Add(Me.dSchedule2)
+        Me.tabSchedule.Controls.Add(Me.dSchedule1)
+        Me.tabSchedule.Location = New System.Drawing.Point(4, 22)
+        Me.tabSchedule.Name = "tabSchedule"
+        Me.tabSchedule.Size = New System.Drawing.Size(1164, 488)
+        Me.tabSchedule.TabIndex = 5
+        Me.tabSchedule.Text = "Запись"
+        Me.tabSchedule.UseVisualStyleBackColor = True
         '
         'GroupBox8
         '
@@ -2495,18 +2495,18 @@ Partial Class Form1
         Me.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.Column8.Width = 25
         '
-        'TabPage3
+        'tabCash
         '
-        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage3.Controls.Add(Me.GroupBox7)
-        Me.TabPage3.Controls.Add(Me.Button5)
-        Me.TabPage3.Controls.Add(Me.Button6)
-        Me.TabPage3.Controls.Add(Me.dCash)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Касса"
+        Me.tabCash.BackColor = System.Drawing.SystemColors.Control
+        Me.tabCash.Controls.Add(Me.GroupBox7)
+        Me.tabCash.Controls.Add(Me.Button5)
+        Me.tabCash.Controls.Add(Me.Button6)
+        Me.tabCash.Controls.Add(Me.dCash)
+        Me.tabCash.Location = New System.Drawing.Point(4, 22)
+        Me.tabCash.Name = "tabCash"
+        Me.tabCash.Size = New System.Drawing.Size(1164, 488)
+        Me.tabCash.TabIndex = 2
+        Me.tabCash.Text = "Касса"
         '
         'GroupBox7
         '
@@ -2683,26 +2683,26 @@ Partial Class Form1
         Me.cashComment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.cashComment.Width = 325
         '
-        'TabPage5
+        'tabStats
         '
-        Me.TabPage5.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage5.Controls.Add(Me.Label19)
-        Me.TabPage5.Controls.Add(Me.Label18)
-        Me.TabPage5.Controls.Add(Me.Label17)
-        Me.TabPage5.Controls.Add(Me.comboYear)
-        Me.TabPage5.Controls.Add(Me.comboMonth)
-        Me.TabPage5.Controls.Add(Me.comboDayTo)
-        Me.TabPage5.Controls.Add(Me.comboDayFrom)
-        Me.TabPage5.Controls.Add(Me.valuesBox)
-        Me.TabPage5.Controls.Add(Me.Button9)
-        Me.TabPage5.Controls.Add(Me.Button8)
-        Me.TabPage5.Controls.Add(Me.ComboBox2)
-        Me.TabPage5.Controls.Add(Me.Chart1)
-        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Статистика"
+        Me.tabStats.BackColor = System.Drawing.SystemColors.Control
+        Me.tabStats.Controls.Add(Me.Label19)
+        Me.tabStats.Controls.Add(Me.Label18)
+        Me.tabStats.Controls.Add(Me.Label17)
+        Me.tabStats.Controls.Add(Me.comboYear)
+        Me.tabStats.Controls.Add(Me.comboMonth)
+        Me.tabStats.Controls.Add(Me.comboDayTo)
+        Me.tabStats.Controls.Add(Me.comboDayFrom)
+        Me.tabStats.Controls.Add(Me.valuesBox)
+        Me.tabStats.Controls.Add(Me.Button9)
+        Me.tabStats.Controls.Add(Me.Button8)
+        Me.tabStats.Controls.Add(Me.ComboBox2)
+        Me.tabStats.Controls.Add(Me.Chart1)
+        Me.tabStats.Location = New System.Drawing.Point(4, 22)
+        Me.tabStats.Name = "tabStats"
+        Me.tabStats.Size = New System.Drawing.Size(1164, 488)
+        Me.tabStats.TabIndex = 4
+        Me.tabStats.Text = "Статистика"
         '
         'Label19
         '
@@ -2822,22 +2822,22 @@ Partial Class Form1
         Me.Chart1.TabIndex = 0
         Me.Chart1.Text = "Chart1"
         '
-        'TabPage9
+        'tabAnalytics
         '
-        Me.TabPage9.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage9.Controls.Add(Me.Label24)
-        Me.TabPage9.Controls.Add(Me.Label23)
-        Me.TabPage9.Controls.Add(Me.comboFilter)
-        Me.TabPage9.Controls.Add(Me.btnClearAnalytics)
-        Me.TabPage9.Controls.Add(Me.btnLoadAnalytics)
-        Me.TabPage9.Controls.Add(Me.dtpTo)
-        Me.TabPage9.Controls.Add(Me.dtpFrom)
-        Me.TabPage9.Controls.Add(Me.dgvAnalytics)
-        Me.TabPage9.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage9.TabIndex = 8
-        Me.TabPage9.Text = "Аналитика"
+        Me.tabAnalytics.BackColor = System.Drawing.SystemColors.Control
+        Me.tabAnalytics.Controls.Add(Me.Label24)
+        Me.tabAnalytics.Controls.Add(Me.Label23)
+        Me.tabAnalytics.Controls.Add(Me.comboFilter)
+        Me.tabAnalytics.Controls.Add(Me.btnClearAnalytics)
+        Me.tabAnalytics.Controls.Add(Me.btnLoadAnalytics)
+        Me.tabAnalytics.Controls.Add(Me.dtpTo)
+        Me.tabAnalytics.Controls.Add(Me.dtpFrom)
+        Me.tabAnalytics.Controls.Add(Me.dgvAnalytics)
+        Me.tabAnalytics.Location = New System.Drawing.Point(4, 22)
+        Me.tabAnalytics.Name = "tabAnalytics"
+        Me.tabAnalytics.Size = New System.Drawing.Size(1164, 488)
+        Me.tabAnalytics.TabIndex = 8
+        Me.tabAnalytics.Text = "Аналитика"
         '
         'Label24
         '
@@ -2975,25 +2975,25 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn17.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.DataGridViewTextBoxColumn17.Width = 400
         '
-        'TabPage7
+        'tabTable
         '
-        Me.TabPage7.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage7.Controls.Add(Me.Label21)
-        Me.TabPage7.Controls.Add(Me.Button19)
-        Me.TabPage7.Controls.Add(Me.nudHoursToAdd)
-        Me.TabPage7.Controls.Add(Me.Button15)
-        Me.TabPage7.Controls.Add(Me.ColorCommitButton)
-        Me.TabPage7.Controls.Add(Me.Button14)
-        Me.TabPage7.Controls.Add(Me.ColorPanel)
-        Me.TabPage7.Controls.Add(Me.Label20)
-        Me.TabPage7.Controls.Add(Me.Button13)
-        Me.TabPage7.Controls.Add(Me.ComboWorkshops)
-        Me.TabPage7.Controls.Add(Me.dTable)
-        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage7.TabIndex = 6
-        Me.TabPage7.Text = "Табель"
+        Me.tabTable.BackColor = System.Drawing.SystemColors.Control
+        Me.tabTable.Controls.Add(Me.Label21)
+        Me.tabTable.Controls.Add(Me.Button19)
+        Me.tabTable.Controls.Add(Me.nudHoursToAdd)
+        Me.tabTable.Controls.Add(Me.Button15)
+        Me.tabTable.Controls.Add(Me.ColorCommitButton)
+        Me.tabTable.Controls.Add(Me.Button14)
+        Me.tabTable.Controls.Add(Me.ColorPanel)
+        Me.tabTable.Controls.Add(Me.Label20)
+        Me.tabTable.Controls.Add(Me.Button13)
+        Me.tabTable.Controls.Add(Me.ComboWorkshops)
+        Me.tabTable.Controls.Add(Me.dTable)
+        Me.tabTable.Location = New System.Drawing.Point(4, 22)
+        Me.tabTable.Name = "tabTable"
+        Me.tabTable.Size = New System.Drawing.Size(1164, 488)
+        Me.tabTable.TabIndex = 6
+        Me.tabTable.Text = "Табель"
         '
         'Label21
         '
@@ -3124,21 +3124,21 @@ Partial Class Form1
         Me.dTable.TabIndex = 101
         Me.dTable.TabStop = False
         '
-        'TabPage8
+        'tabZP
         '
-        Me.TabPage8.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage8.Controls.Add(Me.Label22)
-        Me.TabPage8.Controls.Add(Me.Button18)
-        Me.TabPage8.Controls.Add(Me.Button17)
-        Me.TabPage8.Controls.Add(Me.Button16)
-        Me.TabPage8.Controls.Add(Me.zpWorkers)
-        Me.TabPage8.Controls.Add(Me.zpWorkshops)
-        Me.TabPage8.Controls.Add(Me.dSalary)
-        Me.TabPage8.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage8.Name = "TabPage8"
-        Me.TabPage8.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage8.TabIndex = 7
-        Me.TabPage8.Text = "Зарплата"
+        Me.tabZP.BackColor = System.Drawing.SystemColors.Control
+        Me.tabZP.Controls.Add(Me.Label22)
+        Me.tabZP.Controls.Add(Me.Button18)
+        Me.tabZP.Controls.Add(Me.Button17)
+        Me.tabZP.Controls.Add(Me.Button16)
+        Me.tabZP.Controls.Add(Me.zpWorkers)
+        Me.tabZP.Controls.Add(Me.zpWorkshops)
+        Me.tabZP.Controls.Add(Me.dSalary)
+        Me.tabZP.Location = New System.Drawing.Point(4, 22)
+        Me.tabZP.Name = "tabZP"
+        Me.tabZP.Size = New System.Drawing.Size(1164, 488)
+        Me.tabZP.TabIndex = 7
+        Me.tabZP.Text = "Зарплата"
         '
         'Label22
         '
@@ -3277,22 +3277,22 @@ Partial Class Form1
         Me.Column17.Name = "Column17"
         Me.Column17.ReadOnly = True
         '
-        'TabPage10
+        'tabCustomersOrders
         '
-        Me.TabPage10.Controls.Add(Me.Button21)
-        Me.TabPage10.Controls.Add(Me.btnNewOrder)
-        Me.TabPage10.Controls.Add(Me.btnShowAllOrders)
-        Me.TabPage10.Controls.Add(Me.Label26)
-        Me.TabPage10.Controls.Add(Me.Label25)
-        Me.TabPage10.Controls.Add(Me.dgvOrders)
-        Me.TabPage10.Controls.Add(Me.dgvCustomers)
-        Me.TabPage10.Controls.Add(Me.Button20)
-        Me.TabPage10.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage10.Name = "TabPage10"
-        Me.TabPage10.Size = New System.Drawing.Size(1164, 488)
-        Me.TabPage10.TabIndex = 9
-        Me.TabPage10.Text = "Клиенты и заказы"
-        Me.TabPage10.UseVisualStyleBackColor = True
+        Me.tabCustomersOrders.Controls.Add(Me.Button21)
+        Me.tabCustomersOrders.Controls.Add(Me.btnNewOrder)
+        Me.tabCustomersOrders.Controls.Add(Me.btnShowAllOrders)
+        Me.tabCustomersOrders.Controls.Add(Me.Label26)
+        Me.tabCustomersOrders.Controls.Add(Me.Label25)
+        Me.tabCustomersOrders.Controls.Add(Me.dgvOrders)
+        Me.tabCustomersOrders.Controls.Add(Me.dgvCustomers)
+        Me.tabCustomersOrders.Controls.Add(Me.Button20)
+        Me.tabCustomersOrders.Location = New System.Drawing.Point(4, 22)
+        Me.tabCustomersOrders.Name = "tabCustomersOrders"
+        Me.tabCustomersOrders.Size = New System.Drawing.Size(1164, 488)
+        Me.tabCustomersOrders.TabIndex = 9
+        Me.tabCustomersOrders.Text = "Клиенты и заказы"
+        Me.tabCustomersOrders.UseVisualStyleBackColor = True
         '
         'Button21
         '
@@ -3350,6 +3350,8 @@ Partial Class Form1
         Me.dgvOrders.AllowUserToAddRows = False
         Me.dgvOrders.AllowUserToDeleteRows = False
         Me.dgvOrders.AllowUserToResizeRows = False
+        Me.dgvOrders.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.dgvOrders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvOrders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnOrderNumber, Me.cmnCustomer, Me.cmnDone, Me.cmnEdit})
         Me.dgvOrders.Location = New System.Drawing.Point(597, 27)
@@ -3392,6 +3394,8 @@ Partial Class Form1
         Me.dgvCustomers.AllowUserToAddRows = False
         Me.dgvCustomers.AllowUserToDeleteRows = False
         Me.dgvCustomers.AllowUserToResizeRows = False
+        Me.dgvCustomers.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.dgvCustomers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCustomers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnID, Me.ColumnName, Me.ColumnPhone, Me.cmnOpen, Me.ColumnOrders})
         Me.dgvCustomers.Location = New System.Drawing.Point(15, 27)
@@ -3575,11 +3579,11 @@ Partial Class Form1
         CType(Me.udy, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.udx, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
+        Me.tabWash.ResumeLayout(False)
+        Me.tabWash.PerformLayout()
         CType(Me.dataDay, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
+        Me.tabMount.ResumeLayout(False)
+        Me.tabMount.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.Panel4.ResumeLayout(False)
@@ -3605,36 +3609,36 @@ Partial Class Form1
         CType(Me.nud4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nud2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dataDayMount, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage4.ResumeLayout(False)
-        Me.TabPage4.PerformLayout()
+        Me.tabService.ResumeLayout(False)
+        Me.tabService.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         CType(Me.dataService, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage6.ResumeLayout(False)
-        Me.TabPage6.PerformLayout()
+        Me.tabSchedule.ResumeLayout(False)
+        Me.tabSchedule.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         CType(Me.dSchedule2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dSchedule1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage3.ResumeLayout(False)
+        Me.tabCash.ResumeLayout(False)
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
         CType(Me.dCash, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage5.ResumeLayout(False)
-        Me.TabPage5.PerformLayout()
+        Me.tabStats.ResumeLayout(False)
+        Me.tabStats.PerformLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage9.ResumeLayout(False)
-        Me.TabPage9.PerformLayout()
+        Me.tabAnalytics.ResumeLayout(False)
+        Me.tabAnalytics.PerformLayout()
         CType(Me.dgvAnalytics, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage7.ResumeLayout(False)
-        Me.TabPage7.PerformLayout()
+        Me.tabTable.ResumeLayout(False)
+        Me.tabTable.PerformLayout()
         CType(Me.nudHoursToAdd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dTable, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage8.ResumeLayout(False)
-        Me.TabPage8.PerformLayout()
+        Me.tabZP.ResumeLayout(False)
+        Me.tabZP.PerformLayout()
         CType(Me.dSalary, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage10.ResumeLayout(False)
-        Me.TabPage10.PerformLayout()
+        Me.tabCustomersOrders.ResumeLayout(False)
+        Me.tabCustomersOrders.PerformLayout()
         CType(Me.dgvOrders, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvCustomers, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3697,8 +3701,8 @@ Partial Class Form1
     Friend WithEvents NightBox As System.Windows.Forms.CheckBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents tabWash As System.Windows.Forms.TabPage
+    Friend WithEvents tabMount As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents RadioButton12 As System.Windows.Forms.RadioButton
@@ -3746,7 +3750,7 @@ Partial Class Form1
     Friend WithEvents serviceBox6 As System.Windows.Forms.CheckBox
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents dataDayMount As System.Windows.Forms.DataGridView
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents tabCash As System.Windows.Forms.TabPage
     Friend WithEvents dCash As System.Windows.Forms.DataGridView
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
@@ -3754,7 +3758,7 @@ Partial Class Form1
     Friend WithEvents OweBox2 As System.Windows.Forms.CheckBox
     Friend WithEvents nud16 As System.Windows.Forms.NumericUpDown
     Friend WithEvents ServiceBox16 As System.Windows.Forms.CheckBox
-    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents tabService As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents dataService As System.Windows.Forms.DataGridView
@@ -3789,7 +3793,7 @@ Partial Class Form1
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents AddComboBox As System.Windows.Forms.ComboBox
-    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Friend WithEvents tabStats As System.Windows.Forms.TabPage
     Friend WithEvents Chart1 As System.Windows.Forms.DataVisualization.Charting.Chart
     Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
     Friend WithEvents Button8 As System.Windows.Forms.Button
@@ -3815,7 +3819,7 @@ Partial Class Form1
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents napCarpetsBox As System.Windows.Forms.CheckBox
     Friend WithEvents chemCarpetsBox As System.Windows.Forms.CheckBox
-    Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
+    Friend WithEvents tabSchedule As System.Windows.Forms.TabPage
     Friend WithEvents dSchedule1 As System.Windows.Forms.DataGridView
     Friend WithEvents dSchedule2 As System.Windows.Forms.DataGridView
     Friend WithEvents lblTomorrow As System.Windows.Forms.Label
@@ -3858,7 +3862,7 @@ Partial Class Form1
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents Column8 As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents TabPage7 As System.Windows.Forms.TabPage
+    Friend WithEvents tabTable As System.Windows.Forms.TabPage
     Friend WithEvents dTable As System.Windows.Forms.DataGridView
     Friend WithEvents ComboWorkshops As System.Windows.Forms.ComboBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
@@ -3868,7 +3872,7 @@ Partial Class Form1
     Friend WithEvents ColorDialog1 As System.Windows.Forms.ColorDialog
     Friend WithEvents ColorCommitButton As System.Windows.Forms.Button
     Friend WithEvents Button15 As System.Windows.Forms.Button
-    Friend WithEvents TabPage8 As System.Windows.Forms.TabPage
+    Friend WithEvents tabZP As System.Windows.Forms.TabPage
     Friend WithEvents dSalary As System.Windows.Forms.DataGridView
     Friend WithEvents zpWorkshops As System.Windows.Forms.ComboBox
     Friend WithEvents zpWorkers As System.Windows.Forms.ComboBox
@@ -3899,7 +3903,7 @@ Partial Class Form1
     Friend WithEvents Column16 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column17 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button18 As System.Windows.Forms.Button
-    Friend WithEvents TabPage9 As System.Windows.Forms.TabPage
+    Friend WithEvents tabAnalytics As System.Windows.Forms.TabPage
     Friend WithEvents btnLoadAnalytics As System.Windows.Forms.Button
     Friend WithEvents dtpTo As System.Windows.Forms.DateTimePicker
     Friend WithEvents dtpFrom As System.Windows.Forms.DateTimePicker
@@ -3933,7 +3937,7 @@ Partial Class Form1
     Friend WithEvents btnAddExecutor As System.Windows.Forms.Button
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents TabPage10 As System.Windows.Forms.TabPage
+    Friend WithEvents tabCustomersOrders As System.Windows.Forms.TabPage
     Friend WithEvents Button20 As System.Windows.Forms.Button
     Friend WithEvents dgvCustomers As System.Windows.Forms.DataGridView
     Friend WithEvents dgvOrders As System.Windows.Forms.DataGridView

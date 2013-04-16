@@ -7,7 +7,17 @@
 
     Public AdvanceSum As ULong
     Public AdvanceDate As Date
-    Private Discount As ULong = 0
+
+    Private _Discount As Double
+    Public Property Discount As Double
+        Get
+            Return _Discount / 100
+        End Get
+        Set(value As Double)
+            _Discount = CULng(value * 100)
+        End Set
+    End Property
+
     Public PartList As List(Of HCPart)
     Public Number As OrderNumber
     Public Shared OrderList As New List(Of HCOrder)
@@ -82,7 +92,7 @@
         AdvanceDate = nAdvanceDate
         PartList = nParts
         Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
-        Me.SetDiscount(nDiscount)
+        Discount = nDiscount
         OrderList.Add(Me)
     End Sub
 
@@ -120,13 +130,6 @@
         End If
     End Function
 
-    Public Function GetDiscount() As Double
-        Return Discount / 100
-    End Function
-
-    Public Sub SetDiscount(sDiscount As Double)
-        Discount = CULng(sDiscount * 100)
-    End Sub
 
     ''' <summary>
     ''' Returns price of whole order, including discount
@@ -134,7 +137,7 @@
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function GetTotalPrice() As Double
-        Return Math.Round(Me.GetRawPrice() - Me.GetDiscount(), 2)
+        Return Math.Round(Me.GetRawPrice() - Discount, 2)
     End Function
 
     ''' <summary>

@@ -11,6 +11,41 @@ HappyCars
  Checks if there is any parts in MyOrder.PartList and Enables/Disables some controls on the form
  </summary>
 	<remarks></remarks>
+</member><member name="M:HappyCars.HCCustomer.GetShortName">
+	<summary>
+ Returns last name with the initials
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCCustomer.FindByID(System.UInt32)">
+	<summary>
+ Returns an instance with given ID
+ </summary>
+	<param name="sID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCCustomer.IsEmpty">
+	<summary>
+ Tells if this instance is empty
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCCustomer.IsIncomplete">
+	<summary>
+ Tells if this instance has one or more empty fields
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCCustomer.KillAll">
+	<summary>
+ Prepares the class for reload
+ </summary>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCCustomer.SettleGlobalID">
+	<summary>
+ Sets GlobalID to the maximum ID + 1 value
+ </summary>
+	<remarks></remarks>
 </member><member name="P:HappyCars.My.Resources.Resources.ResourceManager">
 	<summary>
   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
@@ -87,6 +122,28 @@ HappyCars
 </member><member name="M:HappyCars.Form1.Clear">
 	<summary>
  Сбрасывает все "галочки" на форме
+ </summary>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCOrder.GetTotalPrice">
+	<summary>
+ Returns price of whole order, including discount
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCOrder.GetRawPrice">
+	<summary>
+ Returns price of whole order, without discount
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCOrder.KillAll">
+	<summary>
+ Prepares the class for reload
+ </summary>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCOrder.SettleGlobalID">
+	<summary>
+ Sets GlobalID to the maximum ID + 1 value
  </summary>
 	<remarks></remarks>
 </member>

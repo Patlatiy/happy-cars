@@ -133,10 +133,10 @@
     <Compile Include="FormCustomer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOrder.Designer.vb">
-      <DependentUpon>FormOrder.vb</DependentUpon>
+    <Compile Include="frmOrder.Designer.vb">
+      <DependentUpon>frmOrder.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormOrder.vb">
+    <Compile Include="frmOrder.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmExecutor.Designer.vb">
@@ -236,8 +236,8 @@
     <EmbeddedResource Include="FormCustomer.resx">
       <DependentUpon>FormCustomer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOrder.resx">
-      <DependentUpon>FormOrder.vb</DependentUpon>
+    <EmbeddedResource Include="frmOrder.resx">
+      <DependentUpon>frmOrder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmExecutor.resx">
       <DependentUpon>frmExecutor.vb</DependentUpon>

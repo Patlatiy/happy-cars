@@ -24,15 +24,29 @@
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+        Dim newOrder = New HCOrder(MyCustomer, MyExecutor, Date.Now, 0, Date.Now, 0, Date.Now, nudDiscount.Value, MyPartList, False)
+        If MyOwner Is FormCustomer Then FormCustomer.RefreshOrders()
         Close()
     End Sub
 
     Public Sub AddPart(pName As String, pCount As UInteger, pPrice As Double, pMargin As Double)
         Dim newPart As HCPart = New HCPart(pName, pCount, pPrice, pMargin)
         MyPartList.Add(newPart)
-        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), pName, CStr(pCount), CStr(Math.Round(pPrice, 2))}
+        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), pName, CStr(pCount), CStr(newPart.GetSellPrice)}
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items.Add(newItem)
+        FillTotal()
+    End Sub
+
+    Public Sub UpdatePart(pName As String, pCount As UInteger, pPrice As Double, pMargin As Double)
+        CurPart.Name = pName
+        CurPart.Count = pCount
+        CurPart.Price = pPrice
+        CurPart.Margin = pMargin
+        Dim newArr() As String = {CStr(CurPartPosition), pName, CStr(pCount), CStr(CurPart.GetSellPrice)}
+        Dim newItem As New ListViewItem(newArr)
+        lwParts.Items(lwParts.SelectedIndices(0)) = newItem
+        FillTotal()
     End Sub
 
     Private Sub lwParts_ItemActivate(sender As Object, e As EventArgs) Handles lwParts.ItemActivate
@@ -48,16 +62,6 @@
             CurPartPosition = lwParts.SelectedIndices(0)
             CurPart = MyPartList.Item(lwParts.SelectedIndices(0))
         End If
-    End Sub
-
-    Public Sub UpdatePart(pName As String, pCount As UInteger, pPrice As Double, pMargin As Double)
-        CurPart.Name = pName
-        CurPart.Count = pCount
-        CurPart.Price = pPrice
-        CurPart.Margin = pMargin
-        Dim newArr() As String = {CStr(CurPartPosition), pName, CStr(pCount), CStr(Math.Round(pPrice, 2))}
-        Dim newItem As New ListViewItem(newArr)
-        lwParts.Items(lwParts.SelectedIndices(0)) = newItem
     End Sub
 
     Private Sub btnShowExecutor_Click(sender As Object, e As EventArgs) Handles btnShowExecutor.Click
@@ -76,8 +80,10 @@
         For Each Exec As HCExecutor In HCExecutor.ExecList
             Dim newItem = New HCListItem(Exec.FullName, Exec.ID)
             comboExecutor.Items.Add(newItem)
-            If Not Selected Is Nothing And Selected.ID = newItem.Value Then
-                comboExecutor.SelectedItem = newItem
+            If Not Selected Is Nothing Then
+                If Selected.ID = newItem.Value Then
+                    comboExecutor.SelectedItem = newItem
+                End If
             End If
         Next
         Dim newExecItem = New HCListItem("(Новый исполнитель)", (-1))
@@ -100,5 +106,35 @@
         Else
             MyExecutor = HCExecutor.GetById(comboExecutor.SelectedItem.Value)
         End If
+    End Sub
+
+    Private Function GetRawPrice() As Double
+        Dim TotalOrderPrice As Double = 0
+        For Each Part In MyPartList
+            TotalOrderPrice += Part.GetSellPrice()
+        Next
+        TotalOrderPrice = Math.Round(TotalOrderPrice, 2)
+        Return TotalOrderPrice
+    End Function
+
+    Dim Silently As Boolean = False
+    Private Sub nudDiscountPc_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscountPc.ValueChanged
+        If Silently Then Exit Sub
+        Dim dblDiscount As Double = GetRawPrice() * nudDiscountPc.Value / 100
+        nudDiscount.Value = dblDiscount
+    End Sub
+
+    Private Sub nudDiscount_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscount.ValueChanged
+        Dim newValue = Math.Round(nudDiscount.Value * 100 / GetRawPrice())
+        If newValue >= nudDiscountPc.Minimum And newValue <= nudDiscountPc.Maximum Then
+            Silently = True
+            nudDiscountPc.Value = newValue
+            Silently = False
+        End If
+        FillTotal()
+    End Sub
+
+    Private Sub FillTotal()
+        txtTotal.Text = CStr(Math.Round(GetRawPrice() - nudDiscount.Value, 2))
     End Sub
 End Class

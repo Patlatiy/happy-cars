@@ -784,7 +784,7 @@ Partial Class frmPrintOrder
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmPrintOrder"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmPrintOrder"
         Me.ResumeLayout(False)
         Me.PerformLayout()

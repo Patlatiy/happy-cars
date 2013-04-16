@@ -25,9 +25,9 @@
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         If MyOwner Is frmNewOrder Then
             If CreateNew Then
-                frmNewOrder.AddPart(txtPartName.Text, CInt(nudPartCount.Value), (nudPartPrice.Value * nudPartCount.Value) + nudMargin.Value, nudMargin.Value)
+                frmNewOrder.AddPart(txtPartName.Text, CInt(nudPartCount.Value), nudPartPrice.Value, nudMargin.Value)
             Else
-                frmNewOrder.UpdatePart(txtPartName.Text, CInt(nudPartCount.Value), (nudPartPrice.Value * nudPartCount.Value) + nudMargin.Value, nudMargin.Value)
+                frmNewOrder.UpdatePart(txtPartName.Text, CInt(nudPartCount.Value), nudPartPrice.Value, nudMargin.Value)
             End If
         End If
         Close()

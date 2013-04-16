@@ -1,5 +1,6 @@
 ﻿Public Class HCOrder
     Public Customer As HCCustomer
+    Public Executor As HCExecutor
     Public DeliveryDate As Date
 
     Public PaymentSum As ULong
@@ -30,11 +31,15 @@
         Public Month As Short
         Public ID As UInteger
 
-        Function GetFullNumber()
+        Function GetDate() As String
             Dim tmpMonth As String
-            Dim tmpID As String
             tmpMonth = CStr(Month)
             If Month < 10 Then tmpMonth = "0" & tmpMonth
+            Return CStr(Year) & "-" & tmpMonth
+        End Function
+
+        Function GetID() As String
+            Dim tmpID As String
             tmpID = CStr(ID)
             Select Case ID
                 Case Is < 10
@@ -44,7 +49,11 @@
                 Case Is < 1000
                     tmpID = "0" & tmpID
             End Select
-            Return CStr(Year) & "-" & tmpMonth & "-" & tmpID
+            Return tmpID
+        End Function
+
+        Function GetFullNumber() As String
+            Return GetDate() & "-" & GetID()
         End Function
 
         Sub SetFullNumber(FullNumber As String)
@@ -74,16 +83,15 @@
         OrderList.Add(Me)
     End Sub
 
-    Sub New(ByRef nCustomer As HCCustomer, _
-            ByVal nDeliveryDate As Date, _
-            ByVal nPaymentSum As ULong, _
-            ByVal nPaymentDate As Date, _
-            ByVal nAdvanceSum As ULong, _
-            ByVal nAdvanceDate As Date, _
-            ByVal nDiscount As Double, _
-            ByVal nParts As List(Of HCPart), _
-            ByVal nCompleted As Boolean)
+    Sub New(ByRef nCustomer As HCCustomer, ByVal nDeliveryDate As Date, ByVal nPaymentSum As ULong, ByVal nPaymentDate As Date, _
+            ByVal nAdvanceSum As ULong, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
+        Me.New(nCustomer, Nothing, nDeliveryDate, nPaymentSum, nPaymentDate, nAdvanceSum, nAdvanceDate, nDiscount, nParts, nCompleted)
+    End Sub
+
+    Sub New(ByRef nCustomer As HCCustomer, ByRef nExecutor As HCExecutor, ByVal nDeliveryDate As Date, ByVal nPaymentSum As ULong, ByVal nPaymentDate As Date, _
+            ByVal nAdvanceSum As ULong, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
         Customer = nCustomer
+        Executor = nExecutor
         Customer.MyOrderList.Add(Me)
         DeliveryDate = nDeliveryDate
         PaymentSum = nPaymentSum

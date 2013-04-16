@@ -36,11 +36,20 @@ Partial Class frmNewOrder
         Me.btnAddPart = New System.Windows.Forms.Button()
         Me.btnDeletePart = New System.Windows.Forms.Button()
         Me.btnShowExecutor = New System.Windows.Forms.Button()
+        Me.lblDiscountRbl = New System.Windows.Forms.Label()
+        Me.lblDiscountPc = New System.Windows.Forms.Label()
+        Me.lblDiscount = New System.Windows.Forms.Label()
+        Me.nudDiscountPc = New System.Windows.Forms.NumericUpDown()
+        Me.nudDiscount = New System.Windows.Forms.NumericUpDown()
+        Me.txtTotal = New System.Windows.Forms.TextBox()
+        Me.lblTotal = New System.Windows.Forms.Label()
+        CType(Me.nudDiscountPc, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDiscount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(290, 362)
+        Me.btnOK.Location = New System.Drawing.Point(290, 318)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
         Me.btnOK.TabIndex = 0
@@ -147,11 +156,83 @@ Partial Class frmNewOrder
         Me.btnShowExecutor.Text = "..."
         Me.btnShowExecutor.UseVisualStyleBackColor = True
         '
+        'lblDiscountRbl
+        '
+        Me.lblDiscountRbl.AutoSize = True
+        Me.lblDiscountRbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblDiscountRbl.Location = New System.Drawing.Point(283, 274)
+        Me.lblDiscountRbl.Name = "lblDiscountRbl"
+        Me.lblDiscountRbl.Size = New System.Drawing.Size(16, 13)
+        Me.lblDiscountRbl.TabIndex = 18
+        Me.lblDiscountRbl.Text = "р."
+        '
+        'lblDiscountPc
+        '
+        Me.lblDiscountPc.AutoSize = True
+        Me.lblDiscountPc.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblDiscountPc.Location = New System.Drawing.Point(190, 275)
+        Me.lblDiscountPc.Name = "lblDiscountPc"
+        Me.lblDiscountPc.Size = New System.Drawing.Size(15, 13)
+        Me.lblDiscountPc.TabIndex = 19
+        Me.lblDiscountPc.Text = "%"
+        '
+        'lblDiscount
+        '
+        Me.lblDiscount.AutoSize = True
+        Me.lblDiscount.Location = New System.Drawing.Point(78, 274)
+        Me.lblDiscount.Name = "lblDiscount"
+        Me.lblDiscount.Size = New System.Drawing.Size(44, 13)
+        Me.lblDiscount.TabIndex = 15
+        Me.lblDiscount.Text = "Скидка"
+        '
+        'nudDiscountPc
+        '
+        Me.nudDiscountPc.Location = New System.Drawing.Point(124, 271)
+        Me.nudDiscountPc.Name = "nudDiscountPc"
+        Me.nudDiscountPc.Size = New System.Drawing.Size(65, 20)
+        Me.nudDiscountPc.TabIndex = 16
+        '
+        'nudDiscount
+        '
+        Me.nudDiscount.DecimalPlaces = 2
+        Me.nudDiscount.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudDiscount.Location = New System.Drawing.Point(215, 272)
+        Me.nudDiscount.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudDiscount.Name = "nudDiscount"
+        Me.nudDiscount.Size = New System.Drawing.Size(65, 20)
+        Me.nudDiscount.TabIndex = 17
+        '
+        'txtTotal
+        '
+        Me.txtTotal.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtTotal.Location = New System.Drawing.Point(132, 321)
+        Me.txtTotal.Name = "txtTotal"
+        Me.txtTotal.ReadOnly = True
+        Me.txtTotal.Size = New System.Drawing.Size(100, 20)
+        Me.txtTotal.TabIndex = 21
+        '
+        'lblTotal
+        '
+        Me.lblTotal.AutoSize = True
+        Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblTotal.Location = New System.Drawing.Point(8, 324)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(114, 13)
+        Me.lblTotal.TabIndex = 20
+        Me.lblTotal.Text = "Общая стоимость"
+        '
         'frmNewOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(377, 397)
+        Me.ClientSize = New System.Drawing.Size(377, 350)
+        Me.Controls.Add(Me.txtTotal)
+        Me.Controls.Add(Me.lblTotal)
+        Me.Controls.Add(Me.lblDiscountRbl)
+        Me.Controls.Add(Me.lblDiscountPc)
+        Me.Controls.Add(Me.lblDiscount)
+        Me.Controls.Add(Me.nudDiscountPc)
+        Me.Controls.Add(Me.nudDiscount)
         Me.Controls.Add(Me.btnShowExecutor)
         Me.Controls.Add(Me.btnDeletePart)
         Me.Controls.Add(Me.btnAddPart)
@@ -167,6 +248,8 @@ Partial Class frmNewOrder
         Me.Name = "frmNewOrder"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Новый заказ"
+        CType(Me.nudDiscountPc, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDiscount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -184,4 +267,11 @@ Partial Class frmNewOrder
     Friend WithEvents btnAddPart As System.Windows.Forms.Button
     Friend WithEvents btnDeletePart As System.Windows.Forms.Button
     Friend WithEvents btnShowExecutor As System.Windows.Forms.Button
+    Friend WithEvents lblDiscountRbl As System.Windows.Forms.Label
+    Friend WithEvents lblDiscountPc As System.Windows.Forms.Label
+    Friend WithEvents lblDiscount As System.Windows.Forms.Label
+    Friend WithEvents nudDiscountPc As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudDiscount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents txtTotal As System.Windows.Forms.TextBox
+    Friend WithEvents lblTotal As System.Windows.Forms.Label
 End Class

@@ -34,6 +34,6 @@
     End Sub
 
     Public Function GetSellPrice() As Double
-        Return (Price * Count) + Margin
+        Return Math.Round((Price * Count) + Margin, 2)
     End Function
 End Class

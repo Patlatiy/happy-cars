@@ -690,9 +690,10 @@
         Next
     End Sub
 
-    Sub LoadCustomersAndOrders()
+    Sub LoadCustomers()
         HCOrder.KillAll()
         HCCustomer.KillAll()
+        LoadExecutors()
         Dim curRow As String()
         Using cFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Customers.ini")
             cFile.TextFieldType = FileIO.FieldType.Delimited
@@ -708,19 +709,32 @@
             While Not oFile.EndOfData
                 curRow = oFile.ReadFields
                 Dim PartList = New List(Of HCPart)
-                For i = 10 To curRow.Length - 1 Step 4
+                For i = 11 To curRow.Length - 1 Step 4
                     Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), CDbl(curRow(i + 2)), CDbl(curRow(i + 3)))
                     PartList.Add(newPart)
                 Next
-                Dim newOrder = New HCOrder(HCCustomer.FindByID(CUInt(curRow(1))), Date.Parse(curRow(6)), CLng(curRow(5)), Date.Parse(curRow(4)), CULng(curRow(3)), Date.Parse(curRow(2)), 0, PartList, CBool(curRow(7)))
+                Dim newOrder = New HCOrder(HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CUInt(curRow(2))), Date.Parse(curRow(7)), CLng(curRow(6)), Date.Parse(curRow(5)), CULng(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
                 newOrder.Number.SetFullNumber(curRow(0))
-                newOrder.Discount = CDbl(curRow(8))
-                newOrder.Comment = curRow(9)
+                newOrder.Discount = CDbl(curRow(9))
+                newOrder.Comment = curRow(10)
             End While
         End Using
-        HCCustomer.SettleGlobalID()
-        HCOrder.SettleGlobalID()
+        HCCustomer.SettleGlobalID() 'It looks like this function does nothing
+        HCOrder.SettleGlobalID() 'This one too. I will look into it some time later
         If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
+    End Sub
+
+    Sub LoadExecutors()
+        HCExecutor.KillAll()
+        Dim curRow As String()
+        Using eFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Executors.ini")
+            eFile.TextFieldType = FileIO.FieldType.Delimited
+            eFile.SetDelimiters("|")
+            While Not eFile.EndOfData
+                curRow = eFile.ReadFields
+                Dim newExec = New HCExecutor(CUInt(curRow(0)), curRow(1), curRow(2), curRow(3), curRow(4))
+            End While
+        End Using
     End Sub
 
     ''' <summary>
@@ -777,7 +791,7 @@
             LoadTable()
             LoadAdvance()
             LoadDebts()
-            LoadCustomersAndOrders()
+            LoadCustomers()
         Else
             If Not WriteRight = WriteRights.Read_Only Then My.Computer.FileSystem.CreateDirectory(dPath)
         End If
@@ -1489,7 +1503,7 @@
         SaveState()
         SaveAdvance()
         SaveDebts()
-        SaveCustomersAndOrders()
+        SaveCustomers()
         'SavePrincess()
         'SaveWorld()
         'SaveYourself()
@@ -1702,7 +1716,8 @@
         End Using
     End Sub
 
-    Sub SaveCustomersAndOrders()
+    Sub SaveCustomers()
+        SaveExecutors()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Dim TextToWrite As String = ""
         For Each Customer In CustomerList
@@ -1715,6 +1730,7 @@
         For Each Order In OrderList
             TextToWrite &= Order.Number.GetFullNumber & "|"
             TextToWrite &= CStr(Order.Customer.ID) & "|"
+            TextToWrite &= CStr(Order.Executor.ID) & "|"
             TextToWrite &= Order.AdvanceDate.ToString & "|" & CStr(Order.AdvanceSum) & "|"
             TextToWrite &= Order.PaymentDate.ToString & "|" & CStr(Order.PaymentSum) & "|"
             TextToWrite &= Order.DeliveryDate.ToString & "|" & CInt(Order.Completed) & "|"
@@ -1732,6 +1748,19 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
             OrdersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+    End Sub
+
+    Sub SaveExecutors()
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Dim ttw As String = ""
+        For Each exec As HCExecutor In HCExecutor.ExecList
+            ttw &= exec.ID.ToString & "|"
+            ttw &= exec.LastName & "|"
+            ttw &= exec.FirstName & "|"
+            ttw &= exec.Patronage & "|"
+            ttw &= exec.Phone & vbNewLine
+        Next
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Executors.ini", ttw, False)
     End Sub
 
     Private Sub txtNumber_Enter(sender As Object, e As System.EventArgs) Handles txtNumber.Enter
@@ -3185,7 +3214,7 @@
                     End If
                 End Using
                 If fQuit Then Exit Sub 'if nothing really changed - there is no need to reload, so exit sub
-                Me.Invoke(Sub() LoadCustomersAndOrders())
+                Me.Invoke(Sub() LoadCustomers())
         End Select
     End Sub
 
@@ -3305,7 +3334,7 @@
     End Sub
 
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
-        SaveCustomersAndOrders()
+        SaveCustomers()
     End Sub
 
     Private Sub TabPage10_Enter(sender As Object, e As EventArgs) Handles tabCustomersOrders.Enter

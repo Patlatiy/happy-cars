@@ -15,7 +15,8 @@
 
         If Form1.WriteRight <> Form1.WriteRights.Bookkeeper Then
             For Each obj In Me.Controls
-                If obj Is btnPrintOrder And Form1.WriteRight = Form1.WriteRights.The_Girl Then Continue For
+                If obj Is MenuStrip1 Then Continue For
+                If obj Is lwParts Then Continue For
                 obj.Enabled = False
             Next
         End If
@@ -26,13 +27,21 @@
         Next
 
         comboCustomers.Items.Clear()
-        For Each Customer As HCCustomer In HCCustomer.CustomerList
+        For Each Customer In HCCustomer.CustomerList
             Dim newItem = New HCListItem(Customer.FullName, Customer.ID)
             comboCustomers.Items.Add(newItem)
             If Customer.ID = MyOrder.Customer.ID Then comboCustomers.SelectedItem = newItem
         Next
 
-        txtOrderNumber.Text = MyOrder.Number.GetFullNumber
+        comboExecutor.Items.Clear()
+        For Each Executor In HCExecutor.ExecList
+            Dim newItem = New HCListItem(Executor.ShortName, Executor.ID)
+            comboExecutor.Items.Add(newItem)
+            If Executor.ID = MyOrder.Executor.ID Then comboExecutor.SelectedItem = newItem
+        Next
+
+        txtOrderDate.Text = MyOrder.Number.GetDate
+        txtOrderNumber.Text = MyOrder.Number.GetID
         dtpDelivery.Value = Order.DeliveryDate
         txtAdvance.Text = CStr(MyOrder.AdvanceSum)
         dtpAdvance.Value = MyOrder.AdvanceDate
@@ -67,15 +76,25 @@
     End Sub
 
     Private Sub comboCustomers_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboCustomers.SelectedValueChanged
-        Dim newCustomer As HCCustomer = HCCustomer.FindByID(comboCustomers.Items(comboCustomers.SelectedIndex).value)
-        If newCustomer.ID = MyOrder.Customer.ID Then Exit Sub
+        Dim newCustomer As HCCustomer = HCCustomer.FindByID(comboCustomers.Items(comboCustomers.SelectedIndex).Value)
         If newCustomer Is Nothing Then
             MsgBox("Что-то пошло не так...", MsgBoxStyle.Critical, "Ошибка!")
         Else
+            If newCustomer.ID = MyOrder.Customer.ID Then Exit Sub
             MyOrder.Customer.MyOrderList.Remove(MyOrder)
             newCustomer.MyOrderList.Add(MyOrder)
             newCustomer.MyOrderList.Sort(AddressOf HCOrder.CompareByNumber)
             MyOrder.Customer = newCustomer
+        End If
+    End Sub
+
+    Private Sub comboExecutor_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboExecutor.SelectedValueChanged
+        Dim newExecutor = HCExecutor.GetById(comboExecutor.Items(comboExecutor.SelectedIndex).Value)
+        If newExecutor Is Nothing Then
+            MsgBox("Что-то пошло не так...", MsgBoxStyle.Critical, "Ошибка!")
+        Else
+            If newExecutor.ID = MyOrder.Executor.ID Then Exit Sub
+            MyOrder.Executor = newExecutor
         End If
     End Sub
 
@@ -178,6 +197,7 @@
     End Sub
 
     Sub EnablePartControls()
+        If Form1.WriteRight <> Form1.WriteRights.Bookkeeper Then Exit Sub
         txtPartName.Enabled = True
         nudPartCount.Enabled = True
         nudPartPrice.Enabled = True
@@ -325,15 +345,20 @@
         MyOrder.Completed = boxCompleted.Checked
     End Sub
 
-    Private Sub btnDeleteOrder_Click(sender As Object, e As EventArgs) Handles btnDeleteOrder.Click
+    Private Sub ПечатьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПечатьToolStripMenuItem.Click
+        frmPrintOrder.Show(MyOrder)
+    End Sub
+
+    Private Sub УдалитьЗаказToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles УдалитьЗаказToolStripMenuItem.Click
+        If Form1.WriteRight <> Form1.WriteRights.Bookkeeper Then
+            MsgBox("У вас недостаточно прав чтобы сделать это.", MsgBoxStyle.Critical, "Извините")
+            Exit Sub
+        End If
+
         If MsgBox("Вы действительно хотите удалить этот заказ?", MsgBoxStyle.YesNo, "Внимание!") = MsgBoxResult.Yes Then
             HCOrder.OrderList.Remove(MyOrder)
             MyOrder.Customer.MyOrderList.Remove(MyOrder)
             Me.Close()
         End If
-    End Sub
-
-    Private Sub btnPrintOrder_Click(sender As Object, e As EventArgs) Handles btnPrintOrder.Click
-        frmPrintOrder.Show(MyOrder)
     End Sub
 End Class

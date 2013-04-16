@@ -6,12 +6,7 @@ HappyCars
 </name>
 </assembly>
 <members>
-<member name="M:HappyCars.frmOrder.CheckParts">
-	<summary>
- Checks if there is any parts in MyOrder.PartList and Enables/Disables some controls on the form
- </summary>
-	<remarks></remarks>
-</member><member name="M:HappyCars.HCCustomer.GetShortName">
+<member name="M:HappyCars.HCCustomer.GetShortName">
 	<summary>
  Returns last name with the initials
  </summary>
@@ -44,6 +39,11 @@ HappyCars
 </member><member name="M:HappyCars.HCCustomer.SettleGlobalID">
 	<summary>
  Sets GlobalID to the maximum ID + 1 value
+ </summary>
+	<remarks></remarks>
+</member><member name="M:HappyCars.frmOrder.CheckParts">
+	<summary>
+ Checks if there is any parts in MyOrder.PartList and Enables/Disables some controls on the form
  </summary>
 	<remarks></remarks>
 </member><member name="P:HappyCars.My.Resources.Resources.ResourceManager">

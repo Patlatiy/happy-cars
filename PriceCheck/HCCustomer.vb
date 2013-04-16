@@ -1,12 +1,11 @@
 ﻿Public Class HCCustomer
     Public ID As UInteger
-    Shared GlobalID As UInteger = 1
+    Public Shared GlobalID As UInteger = 1
     Public FirstName As String = ""
     Public LastName As String = ""
     Public Patron As String = ""
     Public Phone As String = ""
     Public MyOrderList As New List(Of HCOrder)
-    Public MyOrderIDList As New List(Of String)
     Public Shared CustomerList As New List(Of HCCustomer)
     Public ReadOnly Property FullName
         Get
@@ -19,8 +18,12 @@
     End Sub
 
     Sub New(nID As UInteger, nFirstName As String, nLastName As String, nPatron As String, nPhone As String)
-        Me.New(nFirstName, nLastName, nPatron, nPhone)
-        Me.ID = nID
+        FirstName = nFirstName.Trim
+        LastName = nLastName.Trim
+        Patron = nPatron.Trim
+        Phone = nPhone.Trim
+        CustomerList.Add(Me)
+        ID = nID
         If GlobalID <= nID Then GlobalID = nID + 1
     End Sub
 

@@ -287,6 +287,7 @@
                     EnablePage(tabCash, False)
                     EnablePage(tabAnalytics, False)
                     EnablePage(tabStats, False)
+                    cmnPayment.Visible = False
                 Case "-thegirl"
                     WriteRight = WriteRights.The_Girl
                     EnablePage(tabAnalytics, False)
@@ -700,7 +701,11 @@
             cFile.SetDelimiters("|")
             While Not cFile.EndOfData
                 curRow = cFile.ReadFields
-                Dim newCustomer = New HCCustomer(CUInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4))
+                If curRow.Count = 1 Then
+                    HCCustomer.GlobalID = CUInt(curRow(0))
+                Else
+                    Dim newCustomer = New HCCustomer(CUInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4))
+                End If
             End While
         End Using
         Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Orders.ini")
@@ -708,19 +713,20 @@
             oFile.SetDelimiters("|")
             While Not oFile.EndOfData
                 curRow = oFile.ReadFields
-                Dim PartList = New List(Of HCPart)
-                For i = 11 To curRow.Length - 1 Step 4
-                    Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), CDbl(curRow(i + 2)), CDbl(curRow(i + 3)))
-                    PartList.Add(newPart)
-                Next
-                Dim newOrder = New HCOrder(HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CUInt(curRow(2))), Date.Parse(curRow(7)), CLng(curRow(6)), Date.Parse(curRow(5)), CULng(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
-                newOrder.Number.SetFullNumber(curRow(0))
-                newOrder.Discount = CDbl(curRow(9))
-                newOrder.Comment = curRow(10)
+                If curRow.Count = 1 Then
+                    HCOrder.GlobalID = CUInt(curRow(0))
+                Else
+                    Dim PartList = New List(Of HCPart)
+                    For i = 11 To curRow.Length - 1 Step 4
+                        Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), CDbl(curRow(i + 2)), CDbl(curRow(i + 3)))
+                        PartList.Add(newPart)
+                    Next
+                    Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CUInt(curRow(2))), Date.Parse(curRow(7)), CLng(curRow(6)), Date.Parse(curRow(5)), CULng(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
+                    newOrder.Discount = CDbl(curRow(9))
+                    newOrder.Comment = curRow(10)
+                End If
             End While
         End Using
-        HCCustomer.SettleGlobalID() 'It looks like this function does nothing
-        HCOrder.SettleGlobalID() 'This one too. I will look into it some time later
         If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
     End Sub
 
@@ -1719,14 +1725,14 @@
     Sub SaveCustomers()
         SaveExecutors()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
-        Dim TextToWrite As String = ""
+        Dim TextToWrite As String = CStr(HCCustomer.GlobalID) & vbNewLine
         For Each Customer In CustomerList
             TextToWrite &= Customer.ID.ToString & "|"
             TextToWrite &= Customer.LastName & "|" & Customer.FirstName & "|" & Customer.Patron & "|"
             TextToWrite &= Customer.Phone & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Customers.ini", TextToWrite, False)
-        TextToWrite = ""
+        TextToWrite = CStr(HCOrder.GlobalID) & vbNewLine
         For Each Order In OrderList
             TextToWrite &= Order.Number.GetFullNumber & "|"
             TextToWrite &= CStr(Order.Customer.ID) & "|"
@@ -1742,6 +1748,7 @@
             TextToWrite &= vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Orders.ini", TextToWrite, False)
+
         Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Customers.ini")
             CustomersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
@@ -3263,7 +3270,7 @@
     End Sub
 
     Private Sub dgvOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOrders.CellContentClick
-        If e.ColumnIndex = 3 Then
+        If e.ColumnIndex = cmnEdit.Index Then
             NumberToFind = dgvOrders.Item(0, e.RowIndex).Value
             frmOrder.Show(OrderList.Find(AddressOf FindOrderByNumber), Me)
         End If
@@ -3282,12 +3289,12 @@
         dgvOrders.Rows.Clear()
         If curCustomer Is Nothing Then
             For Each Order As HCOrder In OrderList
-                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetShortName, Order.Completed, "Открыть...")
+                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetShortName, Order.Completed, "Оплата...", "Открыть...")
             Next
             btnShowAllOrders.Hide()
         Else
             For Each Order In curCustomer.MyOrderList
-                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetShortName, Order.Completed, "Открыть...")
+                dgvOrders.Rows.Add(Order.Number.GetFullNumber, Order.Customer.GetShortName, Order.Completed, "Оплата...", "Открыть...")
             Next
             btnShowAllOrders.Show()
         End If
@@ -3313,9 +3320,9 @@
 
     Private Sub dgvCustomers_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCustomers.CellContentClick
         Try
-            If e.ColumnIndex = 3 Then
+            If e.ColumnIndex = cmnOpen.Index Then
                 FormCustomer.Show(HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value)), Me)
-            ElseIf e.ColumnIndex = 4 Then
+            ElseIf e.ColumnIndex = ColumnOrders.Index Then
                 curCustomer = HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value))
                 RefreshOrders()
             End If

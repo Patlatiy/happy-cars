@@ -37,7 +37,9 @@
         For Each Executor In HCExecutor.ExecList
             Dim newItem = New HCListItem(Executor.ShortName, Executor.ID)
             comboExecutor.Items.Add(newItem)
-            If Executor.ID = MyOrder.Executor.ID Then comboExecutor.SelectedItem = newItem
+            If Not MyOrder.Executor Is Nothing Then
+                If Executor.ID = MyOrder.Executor.ID Then comboExecutor.SelectedItem = newItem
+            End If
         Next
 
         txtOrderDate.Text = MyOrder.Number.GetDate
@@ -93,7 +95,9 @@
         If newExecutor Is Nothing Then
             MsgBox("Что-то пошло не так...", MsgBoxStyle.Critical, "Ошибка!")
         Else
-            If newExecutor.ID = MyOrder.Executor.ID Then Exit Sub
+            If Not MyOrder.Executor Is Nothing Then
+                If newExecutor.ID = MyOrder.Executor.ID Then Exit Sub
+            End If
             MyOrder.Executor = newExecutor
         End If
     End Sub

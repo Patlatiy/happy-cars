@@ -1,7 +1,7 @@
 ﻿Public Class HCExecutor
     Public Shared ExecList As New List(Of HCExecutor)
     Public ID As UInteger
-    Private Shared GlobalID As UInteger = 1
+    Public Shared GlobalID As UInteger = 1
     Public LastName As String
     Public FirstName As String
     Public Patronage As String

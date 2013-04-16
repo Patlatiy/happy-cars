@@ -13,6 +13,7 @@
         MyCustomer = Customer
         RefreshCustomers(MyCustomer)
         RefreshExecutors()
+        dtpDelivery.Value = Date.Now
     End Sub
 
     Private Sub btnAddPart_Click(sender As Object, e As EventArgs) Handles btnAddPart.Click
@@ -24,7 +25,7 @@
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
-        Dim newOrder = New HCOrder(MyCustomer, MyExecutor, Date.Now, 0, Date.Now, 0, Date.Now, nudDiscount.Value, MyPartList, False)
+        Dim newOrder = New HCOrder(MyCustomer, MyExecutor, dtpDelivery.Value, 0, Date.Now, 0, Date.Now, nudDiscount.Value, MyPartList, False)
         If MyOwner Is FormCustomer Then FormCustomer.RefreshOrders()
         Close()
     End Sub

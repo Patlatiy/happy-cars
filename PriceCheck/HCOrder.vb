@@ -60,6 +60,7 @@
             Year = CShort(FullNumber(0).ToString & FullNumber(1).ToString & FullNumber(2).ToString & FullNumber(3).ToString)
             Month = CShort(FullNumber(5).ToString & FullNumber(6).ToString)
             ID = CUInt(FullNumber(8).ToString & FullNumber(9).ToString & FullNumber(10).ToString & FullNumber(11).ToString)
+            If GlobalID <= ID Then GlobalID = ID + 1
         End Sub
 
         Sub New(ByVal nYear As Short, ByVal nMonth As UShort)
@@ -67,6 +68,12 @@
             Month = nMonth
             ID = GlobalID
             GlobalID += 1
+        End Sub
+
+        Sub New(nID As UInteger, ByVal nYear As Short, ByVal nMonth As UShort)
+            Year = nYear
+            Month = nMonth
+            ID = nID
         End Sub
     End Structure
 
@@ -100,6 +107,23 @@
         AdvanceDate = nAdvanceDate
         PartList = nParts
         Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
+        Discount = nDiscount
+        OrderList.Add(Me)
+    End Sub
+
+    Sub New(nNumber As String, ByRef nCustomer As HCCustomer, ByRef nExecutor As HCExecutor, ByVal nDeliveryDate As Date, ByVal nPaymentSum As ULong, ByVal nPaymentDate As Date, _
+            ByVal nAdvanceSum As ULong, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
+        Customer = nCustomer
+        Executor = nExecutor
+        Customer.MyOrderList.Add(Me)
+        DeliveryDate = nDeliveryDate
+        PaymentSum = nPaymentSum
+        PaymentDate = nPaymentDate
+        AdvanceSum = nAdvanceSum
+        AdvanceDate = nAdvanceDate
+        PartList = nParts
+        Number = New OrderNumber(0, 0, 0)
+        Number.SetFullNumber(nNumber)
         Discount = nDiscount
         OrderList.Add(Me)
     End Sub

@@ -317,10 +317,6 @@ Partial Class Form1
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.dgvOrders = New System.Windows.Forms.DataGridView()
-        Me.cmnOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnCustomer = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.cmnEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.dgvCustomers = New System.Windows.Forms.DataGridView()
         Me.cmnID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColumnName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -338,6 +334,11 @@ Partial Class Form1
         Me.lblNightWorkers = New System.Windows.Forms.Label()
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.cmnOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnCustomer = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.cmnPayment = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.cmnEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -3353,41 +3354,13 @@ Partial Class Form1
         Me.dgvOrders.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.dgvOrders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvOrders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnOrderNumber, Me.cmnCustomer, Me.cmnDone, Me.cmnEdit})
+        Me.dgvOrders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnOrderNumber, Me.cmnCustomer, Me.cmnDone, Me.cmnPayment, Me.cmnEdit})
         Me.dgvOrders.Location = New System.Drawing.Point(597, 27)
         Me.dgvOrders.Name = "dgvOrders"
         Me.dgvOrders.RowHeadersVisible = False
         Me.dgvOrders.RowTemplate.Height = 30
         Me.dgvOrders.Size = New System.Drawing.Size(549, 429)
         Me.dgvOrders.TabIndex = 7
-        '
-        'cmnOrderNumber
-        '
-        Me.cmnOrderNumber.HeaderText = "Номер"
-        Me.cmnOrderNumber.Name = "cmnOrderNumber"
-        Me.cmnOrderNumber.ReadOnly = True
-        Me.cmnOrderNumber.Width = 75
-        '
-        'cmnCustomer
-        '
-        Me.cmnCustomer.HeaderText = "Клиент"
-        Me.cmnCustomer.Name = "cmnCustomer"
-        Me.cmnCustomer.ReadOnly = True
-        Me.cmnCustomer.Width = 220
-        '
-        'cmnDone
-        '
-        Me.cmnDone.HeaderText = "Исполнен?"
-        Me.cmnDone.Name = "cmnDone"
-        Me.cmnDone.ReadOnly = True
-        Me.cmnDone.Width = 70
-        '
-        'cmnEdit
-        '
-        Me.cmnEdit.HeaderText = "Подробно"
-        Me.cmnEdit.Name = "cmnEdit"
-        Me.cmnEdit.ReadOnly = True
-        Me.cmnEdit.Width = 75
         '
         'dgvCustomers
         '
@@ -3531,6 +3504,41 @@ Partial Class Form1
         'ScheduleTimer
         '
         Me.ScheduleTimer.Interval = 1000
+        '
+        'cmnOrderNumber
+        '
+        Me.cmnOrderNumber.HeaderText = "Номер"
+        Me.cmnOrderNumber.Name = "cmnOrderNumber"
+        Me.cmnOrderNumber.ReadOnly = True
+        Me.cmnOrderNumber.Width = 75
+        '
+        'cmnCustomer
+        '
+        Me.cmnCustomer.HeaderText = "Клиент"
+        Me.cmnCustomer.Name = "cmnCustomer"
+        Me.cmnCustomer.ReadOnly = True
+        Me.cmnCustomer.Width = 220
+        '
+        'cmnDone
+        '
+        Me.cmnDone.HeaderText = "Исполнен?"
+        Me.cmnDone.Name = "cmnDone"
+        Me.cmnDone.ReadOnly = True
+        Me.cmnDone.Width = 70
+        '
+        'cmnPayment
+        '
+        Me.cmnPayment.HeaderText = "Оплата"
+        Me.cmnPayment.Name = "cmnPayment"
+        Me.cmnPayment.ReadOnly = True
+        Me.cmnPayment.Width = 75
+        '
+        'cmnEdit
+        '
+        Me.cmnEdit.HeaderText = "Подробно"
+        Me.cmnEdit.Name = "cmnEdit"
+        Me.cmnEdit.ReadOnly = True
+        Me.cmnEdit.Width = 75
         '
         'Form1
         '
@@ -3946,10 +3954,6 @@ Partial Class Form1
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents btnShowAllOrders As System.Windows.Forms.Button
-    Friend WithEvents cmnOrderNumber As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cmnCustomer As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cmnDone As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents cmnEdit As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents cmnID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColumnName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColumnPhone As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -3957,5 +3961,10 @@ Partial Class Form1
     Friend WithEvents ColumnOrders As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents btnNewOrder As System.Windows.Forms.Button
     Friend WithEvents Button21 As System.Windows.Forms.Button
+    Friend WithEvents cmnOrderNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cmnCustomer As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cmnDone As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents cmnPayment As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents cmnEdit As System.Windows.Forms.DataGridViewButtonColumn
 
 End Class

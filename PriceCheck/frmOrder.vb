@@ -1,7 +1,5 @@
 ﻿Public Class frmOrder
     Dim MyOrder As HCOrder
-    Dim txtAdvanceLastValue As String
-    Dim txtPaymentLastValue As String
     Dim curPart As HCPart
     Dim curPartPosition As Integer
     Dim MyOwner As Object 'Not Windows.Forms.Form because of the error with the RefreshOrders() procedure in FormClosing event handler. I will fix it eventually
@@ -23,7 +21,7 @@
 
         lwParts.Items.Clear()
         For Each Part As HCPart In MyOrder.PartList
-            AddPart(Part.Name, Part.Count, Part.GetSellPrice)
+            AddPart(Part.Name, Part.Count, Part.Units, Part.GetSellPrice)
         Next
 
         comboCustomers.Items.Clear()
@@ -42,12 +40,17 @@
             End If
         Next
 
+        comboUnits.Items.Clear()
+        For Each Unit In HCPart.UnitsList
+            comboUnits.Items.Add(Unit)
+        Next
+
         txtOrderDate.Text = MyOrder.Number.GetDate
         txtOrderNumber.Text = MyOrder.Number.GetID
         dtpDelivery.Value = Order.DeliveryDate
-        txtAdvance.Text = CStr(MyOrder.AdvanceSum)
+        nudAdvance.Value = MyOrder.AdvanceSum
         dtpAdvance.Value = MyOrder.AdvanceDate
-        txtPayment.Text = CStr(MyOrder.PaymentSum)
+        nudPayment.Value = MyOrder.PaymentSum
         dtpPayment.Value = MyOrder.PaymentDate
         txtComment.Text = MyOrder.Comment
         boxCompleted.Checked = MyOrder.Completed
@@ -55,8 +58,8 @@
         FillTotal()
     End Sub
 
-    Sub AddPart(NewPartName As String, NewPartCount As UInteger, NewPartPrice As Double)
-        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), NewPartName, CStr(NewPartCount), CStr(Math.Round(NewPartPrice, 2))}
+    Sub AddPart(NewPartName As String, NewPartCount As UInteger, NewPartUnits As String, NewPartPrice As Double)
+        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), NewPartName, CStr(NewPartCount) & " " & NewPartUnits, CStr(Math.Round(NewPartPrice, 2))}
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items.Add(newItem)
     End Sub
@@ -106,40 +109,6 @@
         If MyOrder.DeliveryDate <> dtpDelivery.Value Then MyOrder.DeliveryDate = dtpDelivery.Value
     End Sub
 
-    Private Sub txtAdvance_TextChanged(sender As Object, e As EventArgs) Handles txtAdvance.TextChanged
-        If txtAdvance.Text = txtAdvanceLastValue Then Exit Sub
-        Try
-            MyOrder.AdvanceSum = CULng(txtAdvance.Text)
-            txtAdvanceLastValue = txtAdvance.Text
-            FillTotalReceived()
-        Catch ex As Exception
-            If txtAdvance.Text = "" Then
-                txtAdvance.Text = 0
-                txtAdvance.SelectAll()
-                Exit Sub
-            End If
-            txtAdvance.Text = txtAdvanceLastValue
-            txtAdvance.Select(txtAdvance.MaxLength, 0)
-        End Try
-    End Sub
-
-    Private Sub txtPayment_TextChanged(sender As Object, e As EventArgs) Handles txtPayment.TextChanged
-        If txtPayment.Text = txtPaymentLastValue Then Exit Sub
-        Try
-            MyOrder.PaymentSum = CULng(txtPayment.Text)
-            txtPaymentLastValue = txtPayment.Text
-            FillTotalReceived()
-        Catch ex As Exception
-            If txtPayment.Text = "" Then
-                txtPayment.Text = 0
-                txtPayment.SelectAll()
-                Exit Sub
-            End If
-            txtPayment.Text = txtPaymentLastValue
-            txtPayment.Select(txtPayment.MaxLength, 0)
-        End Try
-    End Sub
-
     Private Sub dtpAdvance_ValueChanged(sender As Object, e As EventArgs) Handles dtpAdvance.ValueChanged
         If MyOrder.AdvanceDate <> dtpAdvance.Value Then MyOrder.AdvanceDate = dtpAdvance.Value
     End Sub
@@ -166,9 +135,9 @@
     End Sub
 
     Private Sub btnNewPart_Click(sender As Object, e As EventArgs) Handles btnNewPart.Click
-        Dim newPart As New HCPart("Новая запчасть", 1, 0)
+        Dim newPart As New HCPart("Новая запчасть", 1, "шт.", 0)
         MyOrder.PartList.Add(newPart)
-        AddPart(newPart.Name, newPart.Count, 0)
+        AddPart(newPart.Name, newPart.Count, newPart.Units, 0)
         lwParts.SelectedIndices.Clear()
         lwParts.SelectedIndices.Add(lwParts.Items.Count - 1)
         lwParts.Focus()
@@ -208,6 +177,7 @@
         nudMargin.Enabled = True
         nudMarginPc.Enabled = True
         txtSellPrice.Enabled = True
+        comboUnits.Enabled = True
     End Sub
 
     Sub DisablePartControls()
@@ -223,6 +193,8 @@
         nudMargin.Value = 0
         txtSellPrice.Enabled = False
         txtSellPrice.Text = ""
+        comboUnits.Enabled = False
+        comboUnits.Text = "шт."
     End Sub
 
     Sub UpdatePart()
@@ -230,6 +202,7 @@
         txtPartName.Text = curPart.Name
         nudPartCount.Value = curPart.Count
         nudPartPrice.Value = curPart.Price
+        comboUnits.Text = curPart.Units
 
         'Чтобы не вызывать 2 раза подряд nudMargin_ValueChanged() нужно условие:
         If nudMargin.Value = curPart.Margin Then
@@ -253,7 +226,7 @@
     End Sub
 
     Sub FillTotalReceived()
-        txtTotalReceived.Text = CStr(CDbl(txtAdvance.Text) + CDbl(txtPayment.Text))
+        txtTotalReceived.Text = CStr(nudAdvance.Value + nudPayment.Value)
     End Sub
 
     Sub FillDiscount()
@@ -364,5 +337,15 @@
             MyOrder.Customer.MyOrderList.Remove(MyOrder)
             Me.Close()
         End If
+    End Sub
+
+    Private Sub nudPayment_ValueChanged(sender As Object, e As EventArgs) Handles nudPayment.ValueChanged
+        MyOrder.PaymentSum = nudPayment.Value
+        FillTotalReceived()
+    End Sub
+
+    Private Sub nudAdvance_ValueChanged(sender As Object, e As EventArgs) Handles nudAdvance.ValueChanged
+        MyOrder.AdvanceSum = nudAdvance.Value
+        FillTotalReceived()
     End Sub
 End Class

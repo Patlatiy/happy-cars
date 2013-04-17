@@ -53,7 +53,7 @@ Partial Class frmPrintOrder
         Me.lblLine1 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblOrderNumber = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblPrintDate = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -76,9 +76,8 @@ Partial Class frmPrintOrder
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
+        Me.lblCustomerFullName = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label29 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Label32 = New System.Windows.Forms.Label()
@@ -334,22 +333,22 @@ Partial Class frmPrintOrder
         Me.Label2.Text = "ул. Папанина 5а"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
-        'Label3
+        'lblOrderNumber
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label3.Location = New System.Drawing.Point(229, 60)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(138, 16)
-        Me.Label3.TabIndex = 12
-        Me.Label3.Text = "Заявка на поставку"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblOrderNumber.AutoSize = True
+        Me.lblOrderNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblOrderNumber.Location = New System.Drawing.Point(210, 60)
+        Me.lblOrderNumber.Name = "lblOrderNumber"
+        Me.lblOrderNumber.Size = New System.Drawing.Size(141, 16)
+        Me.lblOrderNumber.TabIndex = 12
+        Me.lblOrderNumber.Text = "Заявка на поставку "
+        Me.lblOrderNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label4.Location = New System.Drawing.Point(143, 79)
+        Me.Label4.Location = New System.Drawing.Point(169, 79)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(201, 16)
         Me.Label4.TabIndex = 12
@@ -361,11 +360,11 @@ Partial Class frmPrintOrder
         Me.lblPrintDate.AutoSize = True
         Me.lblPrintDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.lblPrintDate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblPrintDate.Location = New System.Drawing.Point(350, 79)
+        Me.lblPrintDate.Location = New System.Drawing.Point(366, 79)
         Me.lblPrintDate.Name = "lblPrintDate"
-        Me.lblPrintDate.Size = New System.Drawing.Size(99, 16)
+        Me.lblPrintDate.Size = New System.Drawing.Size(57, 16)
         Me.lblPrintDate.TabIndex = 12
-        Me.lblPrintDate.Text = "_____________"
+        Me.lblPrintDate.Text = "_______"
         Me.lblPrintDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label6
@@ -588,16 +587,16 @@ Partial Class frmPrintOrder
         Me.Label26.Text = "Клиент ____________________"
         Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label27
+        'lblCustomerFullName
         '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label27.Location = New System.Drawing.Point(317, 551)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(211, 16)
-        Me.Label27.TabIndex = 12
-        Me.Label27.Text = "_____________________________"
-        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblCustomerFullName.AutoSize = True
+        Me.lblCustomerFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblCustomerFullName.Location = New System.Drawing.Point(216, 551)
+        Me.lblCustomerFullName.Name = "lblCustomerFullName"
+        Me.lblCustomerFullName.Size = New System.Drawing.Size(162, 16)
+        Me.lblCustomerFullName.TabIndex = 12
+        Me.lblCustomerFullName.Text = "Фамилия Имя Отчество"
+        Me.lblCustomerFullName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label28
         '
@@ -609,17 +608,6 @@ Partial Class frmPrintOrder
         Me.Label28.TabIndex = 12
         Me.Label28.Text = "(подпись)"
         Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label29.Location = New System.Drawing.Point(395, 567)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(53, 16)
-        Me.Label29.TabIndex = 12
-        Me.Label29.Text = "(Ф.И.О)"
-        Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label30
         '
@@ -747,9 +735,8 @@ Partial Class frmPrintOrder
         Me.Controls.Add(Me.Label32)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label31)
-        Me.Controls.Add(Me.Label29)
         Me.Controls.Add(Me.Label28)
-        Me.Controls.Add(Me.Label27)
+        Me.Controls.Add(Me.lblCustomerFullName)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.Label24)
@@ -772,7 +759,7 @@ Partial Class frmPrintOrder
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lblPrintDate)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lblOrderNumber)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblLine1)
@@ -794,7 +781,7 @@ Partial Class frmPrintOrder
     Friend WithEvents PrintForm1 As Microsoft.VisualBasic.PowerPacks.Printing.PrintForm
     Friend WithEvents lblPrintDate As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblOrderNumber As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lblLine1 As System.Windows.Forms.Label
@@ -809,9 +796,8 @@ Partial Class frmPrintOrder
     Friend WithEvents Label32 As System.Windows.Forms.Label
     Friend WithEvents Label30 As System.Windows.Forms.Label
     Friend WithEvents Label31 As System.Windows.Forms.Label
-    Friend WithEvents Label29 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
-    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents lblCustomerFullName As System.Windows.Forms.Label
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents Label24 As System.Windows.Forms.Label

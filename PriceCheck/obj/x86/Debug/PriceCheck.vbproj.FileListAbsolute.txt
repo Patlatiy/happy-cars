@@ -120,3 +120,4 @@ D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmPrintOrder.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmNewOrder.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmNewPart.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmExecutor.resources
+D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmAddCash.resources

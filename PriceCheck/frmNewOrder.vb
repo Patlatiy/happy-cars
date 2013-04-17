@@ -25,15 +25,29 @@
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+        If MyCustomer Is Nothing Then
+            MsgBox("Пожалуйста, выберите заказчика.", MsgBoxStyle.Critical, "Внимание!")
+            Exit Sub
+        ElseIf MyExecutor Is Nothing Then
+            MsgBox("Пожалуйста, выберите исполнителя.", MsgBoxStyle.Critical, "Внимание!")
+            Exit Sub
+        ElseIf MyPartList.Count = 0 Then
+            MsgBox("Пожалуйста, добавьте к заказу хотя бы одну запчасть.", MsgBoxStyle.Critical, "Внимание!")
+            Exit Sub
+        End If
         Dim newOrder = New HCOrder(MyCustomer, MyExecutor, dtpDelivery.Value, 0, Date.Now, 0, Date.Now, nudDiscount.Value, MyPartList, False)
-        If MyOwner Is FormCustomer Then FormCustomer.RefreshOrders()
+        If MyOwner Is FormCustomer Then
+            FormCustomer.RefreshOrders()
+        ElseIf MyOwner Is Form1 Then
+            Form1.RefreshOrders()
+        End If
         Close()
     End Sub
 
-    Public Sub AddPart(pName As String, pCount As UInteger, pPrice As Double, pMargin As Double)
-        Dim newPart As HCPart = New HCPart(pName, pCount, pPrice, pMargin)
+    Public Sub AddPart(pName As String, pCount As UInteger, pUnits As String, pPrice As Double, pMargin As Double)
+        Dim newPart As HCPart = New HCPart(pName, pCount, pUnits, pPrice, pMargin)
         MyPartList.Add(newPart)
-        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), pName, CStr(pCount), CStr(newPart.GetSellPrice)}
+        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), pName, CStr(pCount) & " " & pUnits, CStr(newPart.GetSellPrice)}
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items.Add(newItem)
         FillTotal()
@@ -96,6 +110,7 @@
         For Each cust As HCCustomer In HCCustomer.CustomerList
             Dim newItem = New HCListItem(cust.FullName, cust.ID)
             comboCustomer.Items.Add(newItem)
+            If Selected Is Nothing Then Continue For
             If cust.ID = Selected.ID Then comboCustomer.SelectedItem = newItem
         Next
     End Sub
@@ -137,5 +152,9 @@
 
     Private Sub FillTotal()
         txtTotal.Text = CStr(Math.Round(GetRawPrice() - nudDiscount.Value, 2))
+    End Sub
+
+    Private Sub comboCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboCustomer.SelectedIndexChanged
+        MyCustomer = HCCustomer.FindByID(comboCustomer.SelectedItem.Value)
     End Sub
 End Class

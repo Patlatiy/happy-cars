@@ -19,16 +19,33 @@
             _Margin = CULng(value * 100)
         End Set
     End Property
+    Public Shared UnitsList As New List(Of String)
+    Private _Units As String
+    Public Property Units As String
+        Get
+            Return _Units
+        End Get
+        Set(value As String)
+            _Units = value
+            Dim found As Boolean = False
+            For Each tStr As String In UnitsList
+                If tStr = value Then found = True
+            Next
+            If Not found Then UnitsList.Add(value)
+        End Set
+    End Property
 
-    Sub New(nName As String, nCount As UInteger, nPrice As Double)
+    Sub New(nName As String, nCount As UInteger, nUnits As String, nPrice As Double)
         Name = nName
         Count = nCount
+        Units = nUnits
         Price = nPrice
     End Sub
 
-    Sub New(nName As String, nCount As UInteger, nPrice As Double, nMargin As Double)
+    Sub New(nName As String, nCount As UInteger, nUnits As String, nPrice As Double, nMargin As Double)
         Name = nName
         Count = nCount
+        Units = nUnits
         Price = nPrice
         Margin = nMargin
     End Sub

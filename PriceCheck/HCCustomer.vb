@@ -5,6 +5,7 @@
     Public LastName As String = ""
     Public Patron As String = ""
     Public Phone As String = ""
+    Public Address As String = ""
     Public MyOrderList As New List(Of HCOrder)
     Public Shared CustomerList As New List(Of HCCustomer)
     Public ReadOnly Property FullName
@@ -14,24 +15,26 @@
     End Property
 
     Sub New()
-        Me.New("", "", "", "")
+        Me.New("", "", "", "", "")
     End Sub
 
-    Sub New(nID As UInteger, nFirstName As String, nLastName As String, nPatron As String, nPhone As String)
+    Sub New(nID As UInteger, nFirstName As String, nLastName As String, nPatron As String, nPhone As String, nAddress As String)
         FirstName = nFirstName.Trim
         LastName = nLastName.Trim
         Patron = nPatron.Trim
         Phone = nPhone.Trim
+        Address = nAddress.Trim
         CustomerList.Add(Me)
         ID = nID
         If GlobalID <= nID Then GlobalID = nID + 1
     End Sub
 
-    Sub New(nFirstName As String, nLastName As String, nPatron As String, nPhone As String)
+    Sub New(nFirstName As String, nLastName As String, nPatron As String, nPhone As String, nAddress As String)
         FirstName = nFirstName.Trim
         LastName = nLastName.Trim
         Patron = nPatron.Trim
         Phone = nPhone.Trim
+        Address = nAddress.Trim
         ID = GlobalID
         GlobalID += 1
         CustomerList.Add(Me)
@@ -69,7 +72,7 @@
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function IsEmpty() As Boolean
-        If FirstName = "" And LastName = "" And Patron = "" And Phone = "" And MyOrderList.Count = 0 Then
+        If FirstName = "" And LastName = "" And Patron = "" And Phone = "" And Address = "" And MyOrderList.Count = 0 Then
             Return True
         End If
         Return False

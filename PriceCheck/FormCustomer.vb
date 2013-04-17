@@ -11,6 +11,7 @@
     End Sub
 
     Sub FillForm()
+        If MyCustomer Is Nothing Then Exit Sub
         txt1stName.Text = MyCustomer.FirstName
         txtLastName.Text = MyCustomer.LastName
         txtPatron.Text = MyCustomer.Patron
@@ -46,10 +47,16 @@
         End If
     End Sub
 
+    Sub CreateCustomer()
+        Dim newCustomer As HCCustomer = New HCCustomer()
+        MyCustomer = newCustomer
+    End Sub
+
     Dim Silently As Boolean = False
     Private Sub txtLastName_TextChanged(sender As Object, e As EventArgs) Handles txtLastName.TextChanged
-        If MyCustomer Is Nothing Or Silently Then Exit Sub
-        silently = True
+        If Silently Then Exit Sub
+        If MyCustomer Is Nothing Then CreateCustomer()
+        Silently = True
         txtLastName.Text = txtLastName.Text.Trim()
         Silently = False
         MyCustomer.LastName = txtLastName.Text
@@ -57,7 +64,8 @@
     End Sub
 
     Private Sub txt1stName_TextChanged(sender As Object, e As EventArgs) Handles txt1stName.TextChanged
-        If MyCustomer Is Nothing Or Silently Then Exit Sub
+        If Silently Then Exit Sub
+        If MyCustomer Is Nothing Then CreateCustomer()
         Silently = True
         txt1stName.Text = txt1stName.Text.Trim()
         Silently = False
@@ -66,7 +74,8 @@
     End Sub
 
     Private Sub txtPatron_TextChanged(sender As Object, e As EventArgs) Handles txtPatron.TextChanged
-        If MyCustomer Is Nothing Or Silently Then Exit Sub
+        If Silently Then Exit Sub
+        If MyCustomer Is Nothing Then CreateCustomer()
         Silently = True
         txtPatron.Text = txtPatron.Text.Trim()
         Silently = False
@@ -75,15 +84,31 @@
     End Sub
 
     Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
-        If MyCustomer Is Nothing Or Silently Then Exit Sub
+        If Silently Then Exit Sub
+        If MyCustomer Is Nothing Then CreateCustomer()
         Silently = True
         txtPatron.Text = txtPatron.Text.Trim()
         Silently = False
         MyCustomer.Phone = txtPhone.Text
     End Sub
 
+    Private Sub txtAddress_TextChanged(sender As Object, e As EventArgs) Handles txtAddress.TextChanged
+        If Silently Then Exit Sub
+        If MyCustomer Is Nothing Then CreateCustomer()
+        Silently = True
+        txtAddress.Text = txtAddress.Text.Trim()
+        Silently = False
+        MyCustomer.Address = txtAddress.Text
+    End Sub
+
     Private Sub btnNewOrder_Click(sender As Object, e As EventArgs) Handles btnNewOrder.Click
-        If MyCustomer.IsEmpty Then
+        Dim flag_empty As Boolean = False
+        If MyCustomer Is Nothing Then
+            flag_empty = True
+        ElseIf MyCustomer.IsEmpty Then
+            flag_empty = True
+        End If
+        If flag_empty Then
             MsgBox("Нельзя создавать заказы для пустого клиента", MsgBoxStyle.Critical, "Извините")
             Exit Sub
         End If
@@ -105,6 +130,7 @@
     End Sub
 
     Private Sub btnDeleteCustomer_Click(sender As Object, e As EventArgs) Handles btnDeleteCustomer.Click
+        If Form1.WriteRight <> Form1.WriteRights.Bookkeeper Or MyCustomer Is Nothing Then Exit Sub
         Dim Message As String
         If MyCustomer.IsEmpty Then
             GoTo Deletion
@@ -114,10 +140,10 @@
             Message = "Вы действительно хотите удалить клиента " & MyCustomer.FullName & " и все его заказы (" & CStr(MyCustomer.MyOrderList.Count) & " шт.)?"
         End If
         If MsgBox(Message, MsgBoxStyle.YesNo, "Внимание!") = MsgBoxResult.Yes Then
-Deletion:
             For Each Order In MyCustomer.MyOrderList
                 HCOrder.OrderList.Remove(Order)
             Next
+Deletion:
             HCCustomer.CustomerList.Remove(MyCustomer)
             Me.Close()
         End If
@@ -127,6 +153,9 @@ Deletion:
         Select Case Form1.WriteRight
             Case Form1.WriteRights.Master
                 btnDeleteCustomer.Hide()
+            Case Form1.WriteRights.The_Girl
+                btnDeleteCustomer.Hide()
+                btnNewOrder.Hide()
         End Select
     End Sub
 End Class

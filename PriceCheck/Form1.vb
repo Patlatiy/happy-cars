@@ -704,7 +704,7 @@
                 If curRow.Count = 1 Then
                     HCCustomer.GlobalID = CUInt(curRow(0))
                 Else
-                    Dim newCustomer = New HCCustomer(CUInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4))
+                    Dim newCustomer = New HCCustomer(CUInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4), curRow(5))
                 End If
             End While
         End Using
@@ -717,11 +717,11 @@
                     HCOrder.GlobalID = CUInt(curRow(0))
                 Else
                     Dim PartList = New List(Of HCPart)
-                    For i = 11 To curRow.Length - 1 Step 4
-                        Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), CDbl(curRow(i + 2)), CDbl(curRow(i + 3)))
+                    For i = 11 To curRow.Length - 1 Step 5
+                        Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), curRow(i + 2), CDbl(curRow(i + 3)), CDbl(curRow(i + 4)))
                         PartList.Add(newPart)
                     Next
-                    Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CUInt(curRow(2))), Date.Parse(curRow(7)), CLng(curRow(6)), Date.Parse(curRow(5)), CULng(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
+                    Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
                     newOrder.Discount = CDbl(curRow(9))
                     newOrder.Comment = curRow(10)
                 End If
@@ -743,6 +743,18 @@
         End Using
     End Sub
 
+    Sub LoadUnits()
+        HCPart.UnitsList.Clear()
+        Dim curRow As String()
+        Using uFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Units.ini")
+            uFile.TextFieldType = FileIO.FieldType.Delimited
+            uFile.SetDelimiters("|")
+            While Not uFile.EndOfData
+                curRow = uFile.ReadFields
+                HCPart.UnitsList.Add(curRow(0))
+            End While
+        End Using
+    End Sub
     ''' <summary>
     ''' Процедура загрузки формы
     ''' </summary>
@@ -1729,20 +1741,24 @@
         For Each Customer In CustomerList
             TextToWrite &= Customer.ID.ToString & "|"
             TextToWrite &= Customer.LastName & "|" & Customer.FirstName & "|" & Customer.Patron & "|"
-            TextToWrite &= Customer.Phone & vbNewLine
+            TextToWrite &= Customer.Phone & "|" & Customer.Address & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Customers.ini", TextToWrite, False)
         TextToWrite = CStr(HCOrder.GlobalID) & vbNewLine
         For Each Order In OrderList
             TextToWrite &= Order.Number.GetFullNumber & "|"
             TextToWrite &= CStr(Order.Customer.ID) & "|"
-            TextToWrite &= CStr(Order.Executor.ID) & "|"
+            If Order.Executor Is Nothing Then
+                TextToWrite &= "-1|"
+            Else
+                TextToWrite &= CStr(Order.Executor.ID) & "|"
+            End If
             TextToWrite &= Order.AdvanceDate.ToString & "|" & CStr(Order.AdvanceSum) & "|"
             TextToWrite &= Order.PaymentDate.ToString & "|" & CStr(Order.PaymentSum) & "|"
             TextToWrite &= Order.DeliveryDate.ToString & "|" & CInt(Order.Completed) & "|"
             TextToWrite &= CStr(Order.Discount) & "|" & Order.Comment & "|"
             For Each Part In Order.PartList
-                TextToWrite &= Part.Name & "|" & CStr(Part.Count) & "|" & CStr(Part.Price) & "|" & CStr(Part.Margin) & "|"
+                TextToWrite &= Part.Name & "|" & CStr(Part.Count) & "|" & Part.Units & "|" & CStr(Part.Price) & "|" & CStr(Part.Margin) & "|"
             Next
             TextToWrite = TextToWrite.Remove(TextToWrite.Length - 1)
             TextToWrite &= vbNewLine
@@ -1768,6 +1784,15 @@
             ttw &= exec.Phone & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Executors.ini", ttw, False)
+    End Sub
+
+    Sub SaveUnits()
+        If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Dim ttw As String = ""
+        For Each Unit As String In HCPart.UnitsList
+            ttw &= Unit & vbNewLine
+        Next
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Units.ini", ttw, False)
     End Sub
 
     Private Sub txtNumber_Enter(sender As Object, e As System.EventArgs) Handles txtNumber.Enter
@@ -3261,11 +3286,11 @@
         listExecutors.Items.Add(comboExecutor.Text)
     End Sub
 
-    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
+    Private Sub btnNewCustomer_Click(sender As Object, e As EventArgs) Handles btnNewCustomer.Click
         Select Case WriteRight
             Case WriteRights.Bookkeeper, WriteRights.Master
-                Dim newCustomer = New HCCustomer("", "", "", "")
-                FormCustomer.Show(newCustomer, Me)
+                'Dim newCustomer = New HCCustomer("", "", "", "")
+                FormCustomer.Show(Nothing, Me)
         End Select
     End Sub
 
@@ -3273,6 +3298,9 @@
         If e.ColumnIndex = cmnEdit.Index Then
             NumberToFind = dgvOrders.Item(0, e.RowIndex).Value
             frmOrder.Show(OrderList.Find(AddressOf FindOrderByNumber), Me)
+        ElseIf e.ColumnIndex = cmnPayment.Index Then
+            NumberToFind = dgvOrders.Item(0, e.RowIndex).Value
+            frmAddCash.Show(OrderList.Find(AddressOf FindOrderByNumber), Me)
         End If
     End Sub
 
@@ -3336,8 +3364,12 @@
             MsgBox("Сначала добавьте хотя бы одного клиента", MsgBoxStyle.Information, "Info")
             Exit Sub
         End If
-        Dim NewOrder As HCOrder = New HCOrder()
-        frmOrder.Show(NewOrder, Me)
+        If WriteRight = WriteRights.Bookkeeper Then
+            Dim NewOrder As HCOrder = New HCOrder()
+            frmOrder.Show(NewOrder, Me)
+        ElseIf WriteRight = WriteRights.Master Then
+            frmNewOrder.Show(Nothing, Me)
+        End If
     End Sub
 
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click

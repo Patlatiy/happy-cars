@@ -35,11 +35,9 @@ Partial Class frmOrder
         Me.lblAdvanceDate = New System.Windows.Forms.Label()
         Me.dtpAdvance = New System.Windows.Forms.DateTimePicker()
         Me.lblAdvance = New System.Windows.Forms.Label()
-        Me.txtAdvance = New System.Windows.Forms.TextBox()
         Me.lblPaymentDate = New System.Windows.Forms.Label()
         Me.lblPayment = New System.Windows.Forms.Label()
         Me.dtpPayment = New System.Windows.Forms.DateTimePicker()
-        Me.txtPayment = New System.Windows.Forms.TextBox()
         Me.lblOrderNumber = New System.Windows.Forms.Label()
         Me.txtOrderNumber = New System.Windows.Forms.TextBox()
         Me.btnNewPart = New System.Windows.Forms.Button()
@@ -82,6 +80,9 @@ Partial Class frmOrder
         Me.ПечатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.УдалитьЗаказToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblCompleted = New System.Windows.Forms.Label()
+        Me.nudPayment = New System.Windows.Forms.NumericUpDown()
+        Me.nudAdvance = New System.Windows.Forms.NumericUpDown()
+        Me.comboUnits = New System.Windows.Forms.ComboBox()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,6 +90,8 @@ Partial Class frmOrder
         CType(Me.nudDiscount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDiscountPc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        CType(Me.nudPayment, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudAdvance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lwParts
@@ -188,15 +191,6 @@ Partial Class frmOrder
         Me.lblAdvance.TabIndex = 3
         Me.lblAdvance.Text = "Аванс:"
         '
-        'txtAdvance
-        '
-        Me.txtAdvance.Location = New System.Drawing.Point(147, 148)
-        Me.txtAdvance.Name = "txtAdvance"
-        Me.txtAdvance.Size = New System.Drawing.Size(88, 20)
-        Me.txtAdvance.TabIndex = 5
-        Me.txtAdvance.Text = "0"
-        Me.txtAdvance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'lblPaymentDate
         '
         Me.lblPaymentDate.AutoSize = True
@@ -222,15 +216,6 @@ Partial Class frmOrder
         Me.dtpPayment.Name = "dtpPayment"
         Me.dtpPayment.Size = New System.Drawing.Size(88, 20)
         Me.dtpPayment.TabIndex = 4
-        '
-        'txtPayment
-        '
-        Me.txtPayment.Location = New System.Drawing.Point(147, 208)
-        Me.txtPayment.Name = "txtPayment"
-        Me.txtPayment.Size = New System.Drawing.Size(88, 20)
-        Me.txtPayment.TabIndex = 5
-        Me.txtPayment.Text = "0"
-        Me.txtPayment.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblOrderNumber
         '
@@ -290,7 +275,7 @@ Partial Class frmOrder
         'nudPartCount
         '
         Me.nudPartCount.Enabled = False
-        Me.nudPartCount.Location = New System.Drawing.Point(773, 67)
+        Me.nudPartCount.Location = New System.Drawing.Point(696, 68)
         Me.nudPartCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudPartCount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudPartCount.Name = "nudPartCount"
@@ -324,7 +309,7 @@ Partial Class frmOrder
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2, Me.LineShape1, Me.RectangleShape2, Me.RectangleShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(841, 305)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(841, 301)
         Me.ShapeContainer1.TabIndex = 13
         Me.ShapeContainer1.TabStop = False
         '
@@ -332,10 +317,10 @@ Partial Class frmOrder
         '
         Me.LineShape2.Enabled = False
         Me.LineShape2.Name = "LineShape2"
-        Me.LineShape2.X1 = 580
-        Me.LineShape2.X2 = 820
-        Me.LineShape2.Y1 = 170
-        Me.LineShape2.Y2 = 170
+        Me.LineShape2.X1 = 572
+        Me.LineShape2.X2 = 829
+        Me.LineShape2.Y1 = 177
+        Me.LineShape2.Y2 = 177
         '
         'LineShape1
         '
@@ -598,13 +583,13 @@ Partial Class frmOrder
         'ПечатьToolStripMenuItem
         '
         Me.ПечатьToolStripMenuItem.Name = "ПечатьToolStripMenuItem"
-        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.ПечатьToolStripMenuItem.Text = "Печать..."
         '
         'УдалитьЗаказToolStripMenuItem
         '
         Me.УдалитьЗаказToolStripMenuItem.Name = "УдалитьЗаказToolStripMenuItem"
-        Me.УдалитьЗаказToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.УдалитьЗаказToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.УдалитьЗаказToolStripMenuItem.Text = "Удалить заказ"
         '
         'lblCompleted
@@ -617,11 +602,44 @@ Partial Class frmOrder
         Me.lblCompleted.TabIndex = 15
         Me.lblCompleted.Text = "Заказ выполнен:"
         '
+        'nudPayment
+        '
+        Me.nudPayment.DecimalPlaces = 2
+        Me.nudPayment.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudPayment.Location = New System.Drawing.Point(146, 211)
+        Me.nudPayment.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudPayment.Name = "nudPayment"
+        Me.nudPayment.Size = New System.Drawing.Size(88, 20)
+        Me.nudPayment.TabIndex = 24
+        '
+        'nudAdvance
+        '
+        Me.nudAdvance.DecimalPlaces = 2
+        Me.nudAdvance.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudAdvance.Location = New System.Drawing.Point(147, 151)
+        Me.nudAdvance.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudAdvance.Name = "nudAdvance"
+        Me.nudAdvance.Size = New System.Drawing.Size(88, 20)
+        Me.nudAdvance.TabIndex = 24
+        '
+        'comboUnits
+        '
+        Me.comboUnits.Enabled = False
+        Me.comboUnits.FormattingEnabled = True
+        Me.comboUnits.Location = New System.Drawing.Point(747, 68)
+        Me.comboUnits.Name = "comboUnits"
+        Me.comboUnits.Size = New System.Drawing.Size(72, 21)
+        Me.comboUnits.TabIndex = 31
+        Me.comboUnits.Text = "шт."
+        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(841, 305)
+        Me.ClientSize = New System.Drawing.Size(841, 301)
+        Me.Controls.Add(Me.comboUnits)
+        Me.Controls.Add(Me.nudAdvance)
+        Me.Controls.Add(Me.nudPayment)
         Me.Controls.Add(Me.lblCompleted)
         Me.Controls.Add(Me.lblExecutor)
         Me.Controls.Add(Me.comboExecutor)
@@ -653,9 +671,7 @@ Partial Class frmOrder
         Me.Controls.Add(Me.lblPartName)
         Me.Controls.Add(Me.txtPartName)
         Me.Controls.Add(Me.btnNewPart)
-        Me.Controls.Add(Me.txtPayment)
         Me.Controls.Add(Me.txtOrderNumber)
-        Me.Controls.Add(Me.txtAdvance)
         Me.Controls.Add(Me.dtpPayment)
         Me.Controls.Add(Me.dtpAdvance)
         Me.Controls.Add(Me.dtpDelivery)
@@ -686,6 +702,8 @@ Partial Class frmOrder
         CType(Me.nudDiscountPc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        CType(Me.nudPayment, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudAdvance, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -700,11 +718,9 @@ Partial Class frmOrder
     Friend WithEvents lblAdvanceDate As System.Windows.Forms.Label
     Friend WithEvents dtpAdvance As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblAdvance As System.Windows.Forms.Label
-    Friend WithEvents txtAdvance As System.Windows.Forms.TextBox
     Friend WithEvents lblPaymentDate As System.Windows.Forms.Label
     Friend WithEvents lblPayment As System.Windows.Forms.Label
     Friend WithEvents dtpPayment As System.Windows.Forms.DateTimePicker
-    Friend WithEvents txtPayment As System.Windows.Forms.TextBox
     Friend WithEvents lblOrderNumber As System.Windows.Forms.Label
     Friend WithEvents txtOrderNumber As System.Windows.Forms.TextBox
     Friend WithEvents btnNewPart As System.Windows.Forms.Button
@@ -749,4 +765,7 @@ Partial Class frmOrder
     Friend WithEvents ПечатьToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents УдалитьЗаказToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblCompleted As System.Windows.Forms.Label
+    Friend WithEvents nudPayment As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudAdvance As System.Windows.Forms.NumericUpDown
+    Friend WithEvents comboUnits As System.Windows.Forms.ComboBox
 End Class

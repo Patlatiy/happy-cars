@@ -39,6 +39,7 @@ Partial Class frmNewPart
         Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.btnOK = New System.Windows.Forms.Button()
+        Me.comboUnits = New System.Windows.Forms.ComboBox()
         CType(Me.nudMarginPc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -138,7 +139,7 @@ Partial Class frmNewPart
         '
         'nudPartCount
         '
-        Me.nudPartCount.Location = New System.Drawing.Point(304, 33)
+        Me.nudPartCount.Location = New System.Drawing.Point(225, 32)
         Me.nudPartCount.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudPartCount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudPartCount.Name = "nudPartCount"
@@ -192,11 +193,21 @@ Partial Class frmNewPart
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
+        'comboUnits
+        '
+        Me.comboUnits.FormattingEnabled = True
+        Me.comboUnits.Location = New System.Drawing.Point(277, 32)
+        Me.comboUnits.Name = "comboUnits"
+        Me.comboUnits.Size = New System.Drawing.Size(72, 21)
+        Me.comboUnits.TabIndex = 30
+        Me.comboUnits.Text = "шт."
+        '
         'frmNewPart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(360, 162)
+        Me.Controls.Add(Me.comboUnits)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.lblMarginRbl)
         Me.Controls.Add(Me.txtSellPrice)
@@ -242,4 +253,5 @@ Partial Class frmNewPart
     Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents btnOK As System.Windows.Forms.Button
+    Friend WithEvents comboUnits As System.Windows.Forms.ComboBox
 End Class

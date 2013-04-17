@@ -39,7 +39,8 @@
         ExecList.Add(Me)
     End Sub
 
-    Public Shared Function GetById(sID As UInteger) As HCExecutor
+    Public Shared Function GetById(sID As Integer) As HCExecutor
+        If sID < 0 Then Return Nothing
         For Each Exec In ExecList
             If Exec.ID = sID Then Return Exec
         Next

@@ -51,7 +51,7 @@ Partial Class frmNewOrder
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(290, 383)
+        Me.btnOK.Location = New System.Drawing.Point(290, 389)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
         Me.btnOK.TabIndex = 0
@@ -162,7 +162,7 @@ Partial Class frmNewOrder
         '
         Me.lblDiscountRbl.AutoSize = True
         Me.lblDiscountRbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblDiscountRbl.Location = New System.Drawing.Point(283, 274)
+        Me.lblDiscountRbl.Location = New System.Drawing.Point(350, 277)
         Me.lblDiscountRbl.Name = "lblDiscountRbl"
         Me.lblDiscountRbl.Size = New System.Drawing.Size(16, 13)
         Me.lblDiscountRbl.TabIndex = 18
@@ -172,7 +172,7 @@ Partial Class frmNewOrder
         '
         Me.lblDiscountPc.AutoSize = True
         Me.lblDiscountPc.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblDiscountPc.Location = New System.Drawing.Point(190, 275)
+        Me.lblDiscountPc.Location = New System.Drawing.Point(235, 277)
         Me.lblDiscountPc.Name = "lblDiscountPc"
         Me.lblDiscountPc.Size = New System.Drawing.Size(15, 13)
         Me.lblDiscountPc.TabIndex = 19
@@ -181,7 +181,7 @@ Partial Class frmNewOrder
         'lblDiscount
         '
         Me.lblDiscount.AutoSize = True
-        Me.lblDiscount.Location = New System.Drawing.Point(78, 274)
+        Me.lblDiscount.Location = New System.Drawing.Point(24, 276)
         Me.lblDiscount.Name = "lblDiscount"
         Me.lblDiscount.Size = New System.Drawing.Size(44, 13)
         Me.lblDiscount.TabIndex = 15
@@ -189,35 +189,35 @@ Partial Class frmNewOrder
         '
         'nudDiscountPc
         '
-        Me.nudDiscountPc.Location = New System.Drawing.Point(124, 271)
+        Me.nudDiscountPc.Location = New System.Drawing.Point(191, 273)
         Me.nudDiscountPc.Name = "nudDiscountPc"
-        Me.nudDiscountPc.Size = New System.Drawing.Size(65, 20)
+        Me.nudDiscountPc.Size = New System.Drawing.Size(45, 20)
         Me.nudDiscountPc.TabIndex = 16
         '
         'nudDiscount
         '
         Me.nudDiscount.DecimalPlaces = 2
         Me.nudDiscount.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudDiscount.Location = New System.Drawing.Point(215, 272)
+        Me.nudDiscount.Location = New System.Drawing.Point(263, 273)
         Me.nudDiscount.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudDiscount.Name = "nudDiscount"
-        Me.nudDiscount.Size = New System.Drawing.Size(65, 20)
+        Me.nudDiscount.Size = New System.Drawing.Size(86, 20)
         Me.nudDiscount.TabIndex = 17
         '
         'txtTotal
         '
         Me.txtTotal.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtTotal.Location = New System.Drawing.Point(132, 386)
+        Me.txtTotal.Location = New System.Drawing.Point(262, 347)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
-        Me.txtTotal.Size = New System.Drawing.Size(100, 20)
+        Me.txtTotal.Size = New System.Drawing.Size(88, 20)
         Me.txtTotal.TabIndex = 21
         '
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblTotal.Location = New System.Drawing.Point(8, 389)
+        Me.lblTotal.Location = New System.Drawing.Point(24, 350)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(114, 13)
         Me.lblTotal.TabIndex = 20
@@ -226,7 +226,7 @@ Partial Class frmNewOrder
         'dtpDelivery
         '
         Me.dtpDelivery.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDelivery.Location = New System.Drawing.Point(175, 307)
+        Me.dtpDelivery.Location = New System.Drawing.Point(262, 308)
         Me.dtpDelivery.Name = "dtpDelivery"
         Me.dtpDelivery.Size = New System.Drawing.Size(88, 20)
         Me.dtpDelivery.TabIndex = 23
@@ -234,7 +234,7 @@ Partial Class frmNewOrder
         'lblDelivery
         '
         Me.lblDelivery.AutoSize = True
-        Me.lblDelivery.Location = New System.Drawing.Point(113, 310)
+        Me.lblDelivery.Location = New System.Drawing.Point(24, 314)
         Me.lblDelivery.Name = "lblDelivery"
         Me.lblDelivery.Size = New System.Drawing.Size(60, 13)
         Me.lblDelivery.TabIndex = 22
@@ -244,13 +244,12 @@ Partial Class frmNewOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(377, 446)
+        Me.ClientSize = New System.Drawing.Size(377, 424)
         Me.Controls.Add(Me.dtpDelivery)
         Me.Controls.Add(Me.lblDelivery)
         Me.Controls.Add(Me.txtTotal)
         Me.Controls.Add(Me.lblTotal)
         Me.Controls.Add(Me.lblDiscountRbl)
-        Me.Controls.Add(Me.lblDiscountPc)
         Me.Controls.Add(Me.lblDiscount)
         Me.Controls.Add(Me.nudDiscountPc)
         Me.Controls.Add(Me.nudDiscount)
@@ -263,6 +262,7 @@ Partial Class frmNewOrder
         Me.Controls.Add(Me.lblExecutor)
         Me.Controls.Add(Me.lblCustomers)
         Me.Controls.Add(Me.btnOK)
+        Me.Controls.Add(Me.lblDiscountPc)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False

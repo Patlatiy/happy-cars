@@ -317,13 +317,18 @@ Partial Class Form1
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.dgvOrders = New System.Windows.Forms.DataGridView()
+        Me.cmnOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnCustomer = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.cmnPayment = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.cmnEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.dgvCustomers = New System.Windows.Forms.DataGridView()
         Me.cmnID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColumnName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColumnPhone = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmnOpen = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.ColumnOrders = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Button20 = New System.Windows.Forms.Button()
+        Me.btnNewCustomer = New System.Windows.Forms.Button()
         Me.lblDaySum = New System.Windows.Forms.Label()
         Me.curDatePicker = New System.Windows.Forms.DateTimePicker()
         Me.lblDOW = New System.Windows.Forms.Label()
@@ -334,11 +339,6 @@ Partial Class Form1
         Me.lblNightWorkers = New System.Windows.Forms.Label()
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.cmnOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnCustomer = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.cmnPayment = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.cmnEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -3287,7 +3287,7 @@ Partial Class Form1
         Me.tabCustomersOrders.Controls.Add(Me.Label25)
         Me.tabCustomersOrders.Controls.Add(Me.dgvOrders)
         Me.tabCustomersOrders.Controls.Add(Me.dgvCustomers)
-        Me.tabCustomersOrders.Controls.Add(Me.Button20)
+        Me.tabCustomersOrders.Controls.Add(Me.btnNewCustomer)
         Me.tabCustomersOrders.Location = New System.Drawing.Point(4, 22)
         Me.tabCustomersOrders.Name = "tabCustomersOrders"
         Me.tabCustomersOrders.Size = New System.Drawing.Size(1164, 488)
@@ -3362,6 +3362,41 @@ Partial Class Form1
         Me.dgvOrders.Size = New System.Drawing.Size(549, 429)
         Me.dgvOrders.TabIndex = 7
         '
+        'cmnOrderNumber
+        '
+        Me.cmnOrderNumber.HeaderText = "Номер"
+        Me.cmnOrderNumber.Name = "cmnOrderNumber"
+        Me.cmnOrderNumber.ReadOnly = True
+        Me.cmnOrderNumber.Width = 75
+        '
+        'cmnCustomer
+        '
+        Me.cmnCustomer.HeaderText = "Клиент"
+        Me.cmnCustomer.Name = "cmnCustomer"
+        Me.cmnCustomer.ReadOnly = True
+        Me.cmnCustomer.Width = 220
+        '
+        'cmnDone
+        '
+        Me.cmnDone.HeaderText = "Исполнен?"
+        Me.cmnDone.Name = "cmnDone"
+        Me.cmnDone.ReadOnly = True
+        Me.cmnDone.Width = 70
+        '
+        'cmnPayment
+        '
+        Me.cmnPayment.HeaderText = "Оплата"
+        Me.cmnPayment.Name = "cmnPayment"
+        Me.cmnPayment.ReadOnly = True
+        Me.cmnPayment.Width = 75
+        '
+        'cmnEdit
+        '
+        Me.cmnEdit.HeaderText = "Подробно"
+        Me.cmnEdit.Name = "cmnEdit"
+        Me.cmnEdit.ReadOnly = True
+        Me.cmnEdit.Width = 75
+        '
         'dgvCustomers
         '
         Me.dgvCustomers.AllowUserToAddRows = False
@@ -3415,12 +3450,12 @@ Partial Class Form1
         '
         'Button20
         '
-        Me.Button20.Location = New System.Drawing.Point(462, 462)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(102, 23)
-        Me.Button20.TabIndex = 0
-        Me.Button20.Text = "Новый клиент"
-        Me.Button20.UseVisualStyleBackColor = True
+        Me.btnNewCustomer.Location = New System.Drawing.Point(462, 462)
+        Me.btnNewCustomer.Name = "Button20"
+        Me.btnNewCustomer.Size = New System.Drawing.Size(102, 23)
+        Me.btnNewCustomer.TabIndex = 0
+        Me.btnNewCustomer.Text = "Новый клиент"
+        Me.btnNewCustomer.UseVisualStyleBackColor = True
         '
         'lblDaySum
         '
@@ -3504,41 +3539,6 @@ Partial Class Form1
         'ScheduleTimer
         '
         Me.ScheduleTimer.Interval = 1000
-        '
-        'cmnOrderNumber
-        '
-        Me.cmnOrderNumber.HeaderText = "Номер"
-        Me.cmnOrderNumber.Name = "cmnOrderNumber"
-        Me.cmnOrderNumber.ReadOnly = True
-        Me.cmnOrderNumber.Width = 75
-        '
-        'cmnCustomer
-        '
-        Me.cmnCustomer.HeaderText = "Клиент"
-        Me.cmnCustomer.Name = "cmnCustomer"
-        Me.cmnCustomer.ReadOnly = True
-        Me.cmnCustomer.Width = 220
-        '
-        'cmnDone
-        '
-        Me.cmnDone.HeaderText = "Исполнен?"
-        Me.cmnDone.Name = "cmnDone"
-        Me.cmnDone.ReadOnly = True
-        Me.cmnDone.Width = 70
-        '
-        'cmnPayment
-        '
-        Me.cmnPayment.HeaderText = "Оплата"
-        Me.cmnPayment.Name = "cmnPayment"
-        Me.cmnPayment.ReadOnly = True
-        Me.cmnPayment.Width = 75
-        '
-        'cmnEdit
-        '
-        Me.cmnEdit.HeaderText = "Подробно"
-        Me.cmnEdit.Name = "cmnEdit"
-        Me.cmnEdit.ReadOnly = True
-        Me.cmnEdit.Width = 75
         '
         'Form1
         '
@@ -3946,7 +3946,7 @@ Partial Class Form1
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label22 As System.Windows.Forms.Label
     Friend WithEvents tabCustomersOrders As System.Windows.Forms.TabPage
-    Friend WithEvents Button20 As System.Windows.Forms.Button
+    Friend WithEvents btnNewCustomer As System.Windows.Forms.Button
     Friend WithEvents dgvCustomers As System.Windows.Forms.DataGridView
     Friend WithEvents dgvOrders As System.Windows.Forms.DataGridView
     Friend WithEvents Label24 As System.Windows.Forms.Label

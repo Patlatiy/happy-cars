@@ -38,6 +38,8 @@ Partial Class FormCustomer
         Me.lblPhone = New System.Windows.Forms.Label()
         Me.btnNewOrder = New System.Windows.Forms.Button()
         Me.btnDeleteCustomer = New System.Windows.Forms.Button()
+        Me.lblAddress = New System.Windows.Forms.Label()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
         CType(Me.dgvCustomerOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -168,6 +170,22 @@ Partial Class FormCustomer
         Me.btnDeleteCustomer.Text = "Удалить клиента"
         Me.btnDeleteCustomer.UseVisualStyleBackColor = True
         '
+        'lblAddress
+        '
+        Me.lblAddress.AutoSize = True
+        Me.lblAddress.Location = New System.Drawing.Point(12, 121)
+        Me.lblAddress.Name = "lblAddress"
+        Me.lblAddress.Size = New System.Drawing.Size(38, 13)
+        Me.lblAddress.TabIndex = 0
+        Me.lblAddress.Text = "Адрес"
+        '
+        'txtAddress
+        '
+        Me.txtAddress.Location = New System.Drawing.Point(90, 118)
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.Size = New System.Drawing.Size(137, 20)
+        Me.txtAddress.TabIndex = 3
+        '
         'FormCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -175,10 +193,12 @@ Partial Class FormCustomer
         Me.ClientSize = New System.Drawing.Size(619, 336)
         Me.Controls.Add(Me.btnDeleteCustomer)
         Me.Controls.Add(Me.btnNewOrder)
+        Me.Controls.Add(Me.txtAddress)
         Me.Controls.Add(Me.txtPhone)
         Me.Controls.Add(Me.dgvCustomerOrders)
         Me.Controls.Add(Me.txtPatron)
         Me.Controls.Add(Me.txtLastName)
+        Me.Controls.Add(Me.lblAddress)
         Me.Controls.Add(Me.lblPhone)
         Me.Controls.Add(Me.lblPatron)
         Me.Controls.Add(Me.txt1stName)
@@ -211,4 +231,6 @@ Partial Class FormCustomer
     Friend WithEvents cmnCustomerEdit As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents btnNewOrder As System.Windows.Forms.Button
     Friend WithEvents btnDeleteCustomer As System.Windows.Forms.Button
+    Friend WithEvents lblAddress As System.Windows.Forms.Label
+    Friend WithEvents txtAddress As System.Windows.Forms.TextBox
 End Class

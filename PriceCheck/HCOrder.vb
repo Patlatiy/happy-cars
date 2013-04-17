@@ -3,13 +3,29 @@
     Public Executor As HCExecutor
     Public DeliveryDate As Date
 
-    Public PaymentSum As ULong
+    Public _PaymentSum As ULong
     Public PaymentDate As Date
+    Public Property PaymentSum As Double
+        Get
+            Return _PaymentSum / 100
+        End Get
+        Set(value As Double)
+            _PaymentSum = CULng(value * 100)
+        End Set
+    End Property
 
-    Public AdvanceSum As ULong
+    Public _AdvanceSum As ULong
     Public AdvanceDate As Date
+    Public Property AdvanceSum As Double
+        Get
+            Return _AdvanceSum / 100
+        End Get
+        Set(value As Double)
+            _AdvanceSum = CULng(value * 100)
+        End Set
+    End Property
 
-    Private _Discount As Double
+    Private _Discount As ULong
     Public Property Discount As Double
         Get
             Return _Discount / 100
@@ -90,13 +106,13 @@
         OrderList.Add(Me)
     End Sub
 
-    Sub New(ByRef nCustomer As HCCustomer, ByVal nDeliveryDate As Date, ByVal nPaymentSum As ULong, ByVal nPaymentDate As Date, _
-            ByVal nAdvanceSum As ULong, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
+    Sub New(ByRef nCustomer As HCCustomer, ByVal nDeliveryDate As Date, ByVal nPaymentSum As Double, ByVal nPaymentDate As Date, _
+            ByVal nAdvanceSum As Double, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
         Me.New(nCustomer, Nothing, nDeliveryDate, nPaymentSum, nPaymentDate, nAdvanceSum, nAdvanceDate, nDiscount, nParts, nCompleted)
     End Sub
 
-    Sub New(ByRef nCustomer As HCCustomer, ByRef nExecutor As HCExecutor, ByVal nDeliveryDate As Date, ByVal nPaymentSum As ULong, ByVal nPaymentDate As Date, _
-            ByVal nAdvanceSum As ULong, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
+    Sub New(ByRef nCustomer As HCCustomer, ByRef nExecutor As HCExecutor, ByVal nDeliveryDate As Date, ByVal nPaymentSum As Double, ByVal nPaymentDate As Date, _
+            ByVal nAdvanceSum As Double, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
         Customer = nCustomer
         Executor = nExecutor
         Customer.MyOrderList.Add(Me)
@@ -111,8 +127,8 @@
         OrderList.Add(Me)
     End Sub
 
-    Sub New(nNumber As String, ByRef nCustomer As HCCustomer, ByRef nExecutor As HCExecutor, ByVal nDeliveryDate As Date, ByVal nPaymentSum As ULong, ByVal nPaymentDate As Date, _
-            ByVal nAdvanceSum As ULong, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
+    Sub New(nNumber As String, ByRef nCustomer As HCCustomer, ByRef nExecutor As HCExecutor, ByVal nDeliveryDate As Date, ByVal nPaymentSum As Double, ByVal nPaymentDate As Date, _
+            ByVal nAdvanceSum As Double, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
         Customer = nCustomer
         Executor = nExecutor
         Customer.MyOrderList.Add(Me)

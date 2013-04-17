@@ -124,6 +124,7 @@
         PartList = nParts
         Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
         Discount = nDiscount
+        Completed = nCompleted
         OrderList.Add(Me)
     End Sub
 
@@ -141,6 +142,7 @@
         Number = New OrderNumber(0, 0, 0)
         Number.SetFullNumber(nNumber)
         Discount = nDiscount
+        Completed = nCompleted
         OrderList.Add(Me)
     End Sub
 

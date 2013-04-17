@@ -36,8 +36,9 @@
             Exit Sub
         End If
         Dim newOrder = New HCOrder(MyCustomer, MyExecutor, dtpDelivery.Value, 0, Date.Now, 0, Date.Now, nudDiscount.Value, MyPartList, False)
-        If MyOwner Is FormCustomer Then
-            FormCustomer.RefreshOrders()
+        newOrder.Comment = txtComment.Text
+        If MyOwner Is frmCustomer Then
+            frmCustomer.RefreshOrders()
         ElseIf MyOwner Is Form1 Then
             Form1.RefreshOrders()
         End If

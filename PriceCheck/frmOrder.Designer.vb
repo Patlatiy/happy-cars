@@ -28,7 +28,7 @@ Partial Class frmOrder
         Me.cmnPartName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cmnPartCount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cmnPrice = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.comboCustomers = New System.Windows.Forms.ComboBox()
+        Me.comboCustomer = New System.Windows.Forms.ComboBox()
         Me.lblCustomer = New System.Windows.Forms.Label()
         Me.lblDelivery = New System.Windows.Forms.Label()
         Me.dtpDelivery = New System.Windows.Forms.DateTimePicker()
@@ -129,15 +129,15 @@ Partial Class frmOrder
         Me.cmnPrice.Text = "Цена"
         Me.cmnPrice.Width = 75
         '
-        'comboCustomers
+        'comboCustomer
         '
-        Me.comboCustomers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.comboCustomers.FormattingEnabled = True
-        Me.comboCustomers.Location = New System.Drawing.Point(64, 52)
-        Me.comboCustomers.Name = "comboCustomers"
-        Me.comboCustomers.Size = New System.Drawing.Size(171, 21)
-        Me.comboCustomers.Sorted = True
-        Me.comboCustomers.TabIndex = 1
+        Me.comboCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.comboCustomer.FormattingEnabled = True
+        Me.comboCustomer.Location = New System.Drawing.Point(64, 52)
+        Me.comboCustomer.Name = "comboCustomer"
+        Me.comboCustomer.Size = New System.Drawing.Size(171, 21)
+        Me.comboCustomer.Sorted = True
+        Me.comboCustomer.TabIndex = 1
         '
         'lblCustomer
         '
@@ -682,7 +682,7 @@ Partial Class frmOrder
         Me.Controls.Add(Me.lblAdvanceDate)
         Me.Controls.Add(Me.lblDelivery)
         Me.Controls.Add(Me.lblCustomer)
-        Me.Controls.Add(Me.comboCustomers)
+        Me.Controls.Add(Me.comboCustomer)
         Me.Controls.Add(Me.lwParts)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.ShapeContainer1)
@@ -711,7 +711,7 @@ Partial Class frmOrder
     Friend WithEvents lwParts As System.Windows.Forms.ListView
     Friend WithEvents cmnPartName As System.Windows.Forms.ColumnHeader
     Friend WithEvents cmnPartCount As System.Windows.Forms.ColumnHeader
-    Friend WithEvents comboCustomers As System.Windows.Forms.ComboBox
+    Friend WithEvents comboCustomer As System.Windows.Forms.ComboBox
     Friend WithEvents lblCustomer As System.Windows.Forms.Label
     Friend WithEvents lblDelivery As System.Windows.Forms.Label
     Friend WithEvents dtpDelivery As System.Windows.Forms.DateTimePicker

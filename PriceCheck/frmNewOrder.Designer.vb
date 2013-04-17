@@ -45,6 +45,7 @@ Partial Class frmNewOrder
         Me.lblTotal = New System.Windows.Forms.Label()
         Me.dtpDelivery = New System.Windows.Forms.DateTimePicker()
         Me.lblDelivery = New System.Windows.Forms.Label()
+        Me.txtComment = New System.Windows.Forms.TextBox()
         CType(Me.nudDiscountPc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDiscount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -162,7 +163,7 @@ Partial Class frmNewOrder
         '
         Me.lblDiscountRbl.AutoSize = True
         Me.lblDiscountRbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblDiscountRbl.Location = New System.Drawing.Point(350, 277)
+        Me.lblDiscountRbl.Location = New System.Drawing.Point(350, 275)
         Me.lblDiscountRbl.Name = "lblDiscountRbl"
         Me.lblDiscountRbl.Size = New System.Drawing.Size(16, 13)
         Me.lblDiscountRbl.TabIndex = 18
@@ -207,7 +208,7 @@ Partial Class frmNewOrder
         'txtTotal
         '
         Me.txtTotal.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtTotal.Location = New System.Drawing.Point(262, 347)
+        Me.txtTotal.Location = New System.Drawing.Point(262, 351)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(88, 20)
@@ -217,7 +218,7 @@ Partial Class frmNewOrder
         '
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblTotal.Location = New System.Drawing.Point(24, 350)
+        Me.lblTotal.Location = New System.Drawing.Point(24, 354)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(114, 13)
         Me.lblTotal.TabIndex = 20
@@ -226,7 +227,7 @@ Partial Class frmNewOrder
         'dtpDelivery
         '
         Me.dtpDelivery.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDelivery.Location = New System.Drawing.Point(262, 308)
+        Me.dtpDelivery.Location = New System.Drawing.Point(262, 299)
         Me.dtpDelivery.Name = "dtpDelivery"
         Me.dtpDelivery.Size = New System.Drawing.Size(88, 20)
         Me.dtpDelivery.TabIndex = 23
@@ -234,17 +235,26 @@ Partial Class frmNewOrder
         'lblDelivery
         '
         Me.lblDelivery.AutoSize = True
-        Me.lblDelivery.Location = New System.Drawing.Point(24, 314)
+        Me.lblDelivery.Location = New System.Drawing.Point(24, 305)
         Me.lblDelivery.Name = "lblDelivery"
         Me.lblDelivery.Size = New System.Drawing.Size(60, 13)
         Me.lblDelivery.TabIndex = 22
         Me.lblDelivery.Text = "Доставка:"
+        '
+        'txtComment
+        '
+        Me.txtComment.Location = New System.Drawing.Point(27, 325)
+        Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(323, 20)
+        Me.txtComment.TabIndex = 24
+        Me.txtComment.Text = "Комментарий"
         '
         'frmNewOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(377, 424)
+        Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.dtpDelivery)
         Me.Controls.Add(Me.lblDelivery)
         Me.Controls.Add(Me.txtTotal)
@@ -297,4 +307,5 @@ Partial Class frmNewOrder
     Friend WithEvents lblTotal As System.Windows.Forms.Label
     Friend WithEvents dtpDelivery As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblDelivery As System.Windows.Forms.Label
+    Friend WithEvents txtComment As System.Windows.Forms.TextBox
 End Class

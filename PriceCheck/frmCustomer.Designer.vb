@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormCustomer
+Partial Class frmCustomer
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
@@ -22,7 +22,7 @@ Partial Class FormCustomer
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCustomer))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCustomer))
         Me.lbl1stName = New System.Windows.Forms.Label()
         Me.txt1stName = New System.Windows.Forms.TextBox()
         Me.lblLastName = New System.Windows.Forms.Label()
@@ -30,16 +30,16 @@ Partial Class FormCustomer
         Me.lblPatron = New System.Windows.Forms.Label()
         Me.txtPatron = New System.Windows.Forms.TextBox()
         Me.dgvCustomerOrders = New System.Windows.Forms.DataGridView()
-        Me.cmnCustomerOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnCustomerOrderSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnCustomerDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.cmnCustomerEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.lblPhone = New System.Windows.Forms.Label()
         Me.btnNewOrder = New System.Windows.Forms.Button()
         Me.btnDeleteCustomer = New System.Windows.Forms.Button()
         Me.lblAddress = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.cmnCustomerOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnCustomerOrderSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnCustomerDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.cmnCustomerEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         CType(Me.dgvCustomerOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -107,33 +107,6 @@ Partial Class FormCustomer
         Me.dgvCustomerOrders.Size = New System.Drawing.Size(352, 287)
         Me.dgvCustomerOrders.TabIndex = 8
         '
-        'cmnCustomerOrderNumber
-        '
-        Me.cmnCustomerOrderNumber.HeaderText = "Номер"
-        Me.cmnCustomerOrderNumber.Name = "cmnCustomerOrderNumber"
-        Me.cmnCustomerOrderNumber.ReadOnly = True
-        Me.cmnCustomerOrderNumber.Width = 75
-        '
-        'cmnCustomerOrderSum
-        '
-        Me.cmnCustomerOrderSum.HeaderText = "Сумма"
-        Me.cmnCustomerOrderSum.Name = "cmnCustomerOrderSum"
-        Me.cmnCustomerOrderSum.ReadOnly = True
-        '
-        'cmnCustomerDone
-        '
-        Me.cmnCustomerDone.HeaderText = "Исполнен?"
-        Me.cmnCustomerDone.Name = "cmnCustomerDone"
-        Me.cmnCustomerDone.ReadOnly = True
-        Me.cmnCustomerDone.Width = 70
-        '
-        'cmnCustomerEdit
-        '
-        Me.cmnCustomerEdit.HeaderText = "Подробно"
-        Me.cmnCustomerEdit.Name = "cmnCustomerEdit"
-        Me.cmnCustomerEdit.ReadOnly = True
-        Me.cmnCustomerEdit.Width = 75
-        '
         'txtPhone
         '
         Me.txtPhone.Location = New System.Drawing.Point(90, 92)
@@ -186,7 +159,34 @@ Partial Class FormCustomer
         Me.txtAddress.Size = New System.Drawing.Size(137, 20)
         Me.txtAddress.TabIndex = 3
         '
-        'FormCustomer
+        'cmnCustomerOrderNumber
+        '
+        Me.cmnCustomerOrderNumber.HeaderText = "Номер"
+        Me.cmnCustomerOrderNumber.Name = "cmnCustomerOrderNumber"
+        Me.cmnCustomerOrderNumber.ReadOnly = True
+        Me.cmnCustomerOrderNumber.Width = 75
+        '
+        'cmnCustomerOrderSum
+        '
+        Me.cmnCustomerOrderSum.HeaderText = "Сумма"
+        Me.cmnCustomerOrderSum.Name = "cmnCustomerOrderSum"
+        Me.cmnCustomerOrderSum.ReadOnly = True
+        '
+        'cmnCustomerDone
+        '
+        Me.cmnCustomerDone.HeaderText = "Выполнен"
+        Me.cmnCustomerDone.Name = "cmnCustomerDone"
+        Me.cmnCustomerDone.ReadOnly = True
+        Me.cmnCustomerDone.Width = 70
+        '
+        'cmnCustomerEdit
+        '
+        Me.cmnCustomerEdit.HeaderText = "Подробно"
+        Me.cmnCustomerEdit.Name = "cmnCustomerEdit"
+        Me.cmnCustomerEdit.ReadOnly = True
+        Me.cmnCustomerEdit.Width = 75
+        '
+        'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -208,7 +208,7 @@ Partial Class FormCustomer
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "FormCustomer"
+        Me.Name = "frmCustomer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Клиент"
         CType(Me.dgvCustomerOrders, System.ComponentModel.ISupportInitialize).EndInit()
@@ -225,12 +225,12 @@ Partial Class FormCustomer
     Friend WithEvents dgvCustomerOrders As System.Windows.Forms.DataGridView
     Friend WithEvents txtPhone As System.Windows.Forms.TextBox
     Friend WithEvents lblPhone As System.Windows.Forms.Label
-    Friend WithEvents cmnCustomerOrderNumber As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cmnCustomerOrderSum As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cmnCustomerDone As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents cmnCustomerEdit As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents btnNewOrder As System.Windows.Forms.Button
     Friend WithEvents btnDeleteCustomer As System.Windows.Forms.Button
     Friend WithEvents lblAddress As System.Windows.Forms.Label
     Friend WithEvents txtAddress As System.Windows.Forms.TextBox
+    Friend WithEvents cmnCustomerOrderNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cmnCustomerOrderSum As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cmnCustomerDone As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents cmnCustomerEdit As System.Windows.Forms.DataGridViewButtonColumn
 End Class

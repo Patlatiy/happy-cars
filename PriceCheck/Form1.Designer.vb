@@ -317,11 +317,6 @@ Partial Class Form1
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.dgvOrders = New System.Windows.Forms.DataGridView()
-        Me.cmnOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnCustomer = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.cmnPayment = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.cmnEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.dgvCustomers = New System.Windows.Forms.DataGridView()
         Me.cmnID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColumnName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -339,6 +334,11 @@ Partial Class Form1
         Me.lblNightWorkers = New System.Windows.Forms.Label()
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.cmnOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnCustomer = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.cmnPayment = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.cmnEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -3362,41 +3362,6 @@ Partial Class Form1
         Me.dgvOrders.Size = New System.Drawing.Size(549, 429)
         Me.dgvOrders.TabIndex = 7
         '
-        'cmnOrderNumber
-        '
-        Me.cmnOrderNumber.HeaderText = "Номер"
-        Me.cmnOrderNumber.Name = "cmnOrderNumber"
-        Me.cmnOrderNumber.ReadOnly = True
-        Me.cmnOrderNumber.Width = 75
-        '
-        'cmnCustomer
-        '
-        Me.cmnCustomer.HeaderText = "Клиент"
-        Me.cmnCustomer.Name = "cmnCustomer"
-        Me.cmnCustomer.ReadOnly = True
-        Me.cmnCustomer.Width = 220
-        '
-        'cmnDone
-        '
-        Me.cmnDone.HeaderText = "Исполнен?"
-        Me.cmnDone.Name = "cmnDone"
-        Me.cmnDone.ReadOnly = True
-        Me.cmnDone.Width = 70
-        '
-        'cmnPayment
-        '
-        Me.cmnPayment.HeaderText = "Оплата"
-        Me.cmnPayment.Name = "cmnPayment"
-        Me.cmnPayment.ReadOnly = True
-        Me.cmnPayment.Width = 75
-        '
-        'cmnEdit
-        '
-        Me.cmnEdit.HeaderText = "Подробно"
-        Me.cmnEdit.Name = "cmnEdit"
-        Me.cmnEdit.ReadOnly = True
-        Me.cmnEdit.Width = 75
-        '
         'dgvCustomers
         '
         Me.dgvCustomers.AllowUserToAddRows = False
@@ -3448,10 +3413,10 @@ Partial Class Form1
         Me.ColumnOrders.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.ColumnOrders.Width = 65
         '
-        'Button20
+        'btnNewCustomer
         '
         Me.btnNewCustomer.Location = New System.Drawing.Point(462, 462)
-        Me.btnNewCustomer.Name = "Button20"
+        Me.btnNewCustomer.Name = "btnNewCustomer"
         Me.btnNewCustomer.Size = New System.Drawing.Size(102, 23)
         Me.btnNewCustomer.TabIndex = 0
         Me.btnNewCustomer.Text = "Новый клиент"
@@ -3539,6 +3504,41 @@ Partial Class Form1
         'ScheduleTimer
         '
         Me.ScheduleTimer.Interval = 1000
+        '
+        'cmnOrderNumber
+        '
+        Me.cmnOrderNumber.HeaderText = "Номер"
+        Me.cmnOrderNumber.Name = "cmnOrderNumber"
+        Me.cmnOrderNumber.ReadOnly = True
+        Me.cmnOrderNumber.Width = 75
+        '
+        'cmnCustomer
+        '
+        Me.cmnCustomer.HeaderText = "Клиент"
+        Me.cmnCustomer.Name = "cmnCustomer"
+        Me.cmnCustomer.ReadOnly = True
+        Me.cmnCustomer.Width = 220
+        '
+        'cmnDone
+        '
+        Me.cmnDone.HeaderText = "Выполнен"
+        Me.cmnDone.Name = "cmnDone"
+        Me.cmnDone.ReadOnly = True
+        Me.cmnDone.Width = 70
+        '
+        'cmnPayment
+        '
+        Me.cmnPayment.HeaderText = "Оплата"
+        Me.cmnPayment.Name = "cmnPayment"
+        Me.cmnPayment.ReadOnly = True
+        Me.cmnPayment.Width = 75
+        '
+        'cmnEdit
+        '
+        Me.cmnEdit.HeaderText = "Подробно"
+        Me.cmnEdit.Name = "cmnEdit"
+        Me.cmnEdit.ReadOnly = True
+        Me.cmnEdit.Width = 75
         '
         'Form1
         '

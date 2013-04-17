@@ -115,9 +115,9 @@ D:\Repos\happy-cars\PriceCheck\bin\Debug\Happy Cars.exe
 D:\Repos\happy-cars\PriceCheck\bin\Debug\Happy Cars.pdb
 D:\Repos\happy-cars\PriceCheck\bin\Debug\Happy Cars.xml
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmOrder.resources
-D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.FormCustomer.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmPrintOrder.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmNewOrder.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmNewPart.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmExecutor.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmAddCash.resources
+D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmCustomer.resources

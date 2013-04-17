@@ -14,6 +14,14 @@
         dtpAdvance.Value = MyOrder.AdvanceDate
         nudPayment.Value = MyOrder.PaymentSum
         dtpPayment.Value = MyOrder.PaymentDate
+        If MyOrder.AdvanceSum <> 0 Then
+            nudAdvance.Enabled = False
+            dtpAdvance.Enabled = False
+        End If
+        If MyOrder.PaymentSum <> 0 Then
+            nudPayment.Enabled = False
+            dtpPayment.Enabled = False
+        End If
     End Sub
 
     Private Sub frmAddCash_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing

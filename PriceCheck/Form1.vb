@@ -759,6 +759,7 @@
                 End While
             End Using
         Catch ex As Exception
+            MsgBox("Something went wrong")
         End Try
         If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
     End Sub
@@ -1805,7 +1806,7 @@
             End If
             TextToWrite &= Order.AdvanceDate.ToString & "|" & CStr(Order.AdvanceSum) & "|"
             TextToWrite &= Order.PaymentDate.ToString & "|" & CStr(Order.PaymentSum) & "|"
-            TextToWrite &= Order.DeliveryDate.ToString & "|" & CInt(Order.Completed) & "|"
+            TextToWrite &= Order.DeliveryDate.ToString & "|" & CStr(Order.Completed) & "|"
             TextToWrite &= CStr(Order.Discount) & "|" & Order.Comment & "|"
             For Each Part In Order.PartList
                 TextToWrite &= Part.Name & "|" & CStr(Part.Count) & "|" & Part.Units & "|" & CStr(Part.Price) & "|" & CStr(Part.Margin) & "|"
@@ -3340,7 +3341,7 @@
         Select Case WriteRight
             Case WriteRights.Bookkeeper, WriteRights.Master
                 'Dim newCustomer = New HCCustomer("", "", "", "")
-                FormCustomer.Show(Nothing, Me)
+                frmCustomer.Show(Nothing, Me)
         End Select
     End Sub
 
@@ -3399,7 +3400,7 @@
     Private Sub dgvCustomers_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCustomers.CellContentClick
         Try
             If e.ColumnIndex = cmnOpen.Index Then
-                FormCustomer.Show(HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value)), Me)
+                frmCustomer.Show(HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value)), Me)
             ElseIf e.ColumnIndex = ColumnOrders.Index Then
                 curCustomer = HCCustomer.FindByID(CUInt(dgvCustomers.Rows(e.RowIndex).Cells("cmnID").Value))
                 RefreshOrders()

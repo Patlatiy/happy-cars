@@ -11,24 +11,26 @@
         MyOwner.Enabled = False
         Me.Text = "Заказ № " & MyOrder.Number.GetFullNumber
 
-        If Form1.WriteRight <> Form1.WriteRights.Bookkeeper Then
-            For Each obj In Me.Controls
-                If obj Is MenuStrip1 Then Continue For
-                If obj Is lwParts Then Continue For
-                obj.Enabled = False
-            Next
-        End If
+        Select Case Form1.WriteRight
+            Case Form1.WriteRights.Master
+                boxCompleted.Enabled = False
+                nudAdvance.Enabled = False
+                dtpAdvance.Enabled = False
+                nudPayment.Enabled = False
+                dtpPayment.Enabled = False
+
+        End Select
 
         lwParts.Items.Clear()
         For Each Part As HCPart In MyOrder.PartList
             AddPart(Part.Name, Part.Count, Part.Units, Part.GetSellPrice)
         Next
 
-        comboCustomers.Items.Clear()
+        comboCustomer.Items.Clear()
         For Each Customer In HCCustomer.CustomerList
             Dim newItem = New HCListItem(Customer.FullName, Customer.ID)
-            comboCustomers.Items.Add(newItem)
-            If Customer.ID = MyOrder.Customer.ID Then comboCustomers.SelectedItem = newItem
+            comboCustomer.Items.Add(newItem)
+            If Customer.ID = MyOrder.Customer.ID Then comboCustomer.SelectedItem = newItem
         Next
 
         comboExecutor.Items.Clear()
@@ -40,10 +42,7 @@
             End If
         Next
 
-        comboUnits.Items.Clear()
-        For Each Unit In HCPart.UnitsList
-            comboUnits.Items.Add(Unit)
-        Next
+        RefreshUnits()
 
         txtOrderDate.Text = MyOrder.Number.GetDate
         txtOrderNumber.Text = MyOrder.Number.GetID
@@ -80,8 +79,8 @@
         MyOwner.Enabled = True
     End Sub
 
-    Private Sub comboCustomers_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboCustomers.SelectedValueChanged
-        Dim newCustomer As HCCustomer = HCCustomer.FindByID(comboCustomers.Items(comboCustomers.SelectedIndex).Value)
+    Private Sub comboCustomers_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboCustomer.SelectedValueChanged
+        Dim newCustomer As HCCustomer = HCCustomer.FindByID(comboCustomer.Items(comboCustomer.SelectedIndex).Value)
         If newCustomer Is Nothing Then
             MsgBox("Что-то пошло не так...", MsgBoxStyle.Critical, "Ошибка!")
         Else
@@ -170,7 +169,7 @@
     End Sub
 
     Sub EnablePartControls()
-        If Form1.WriteRight <> Form1.WriteRights.Bookkeeper Then Exit Sub
+        If (Form1.WriteRight = Form1.WriteRights.The_Girl) Or (Form1.WriteRight = Form1.WriteRights.Read_Only) Or MyOrder.Completed Then Exit Sub
         txtPartName.Enabled = True
         nudPartCount.Enabled = True
         nudPartPrice.Enabled = True
@@ -259,6 +258,19 @@
         FillTotal()
     End Sub
 
+    Private Sub RefreshUnits()
+        comboUnits.Items.Clear()
+        For Each Unit In HCPart.UnitsList
+            comboUnits.Items.Add(Unit)
+        Next
+    End Sub
+
+    Private Sub comboUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboUnits.SelectedIndexChanged, comboUnits.Leave, Me.FormClosing
+        If curPart Is Nothing Then Exit Sub
+        curPart.Units = comboUnits.Text
+        If Not TypeOf (e) Is FormClosingEventArgs Then RefreshUnits()
+    End Sub
+
     Dim Silently As Boolean = False
     Private Sub nudDiscountPc_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscountPc.ValueChanged
         If Silently Then Exit Sub
@@ -320,6 +332,22 @@
 
     Private Sub boxCompleted_CheckedChanged(sender As Object, e As EventArgs) Handles boxCompleted.CheckedChanged
         MyOrder.Completed = boxCompleted.Checked
+
+        Dim BkOrMaster As Boolean = (Not MyOrder.Completed) And (Form1.WriteRight = Form1.WriteRights.Bookkeeper Or Form1.WriteRight = Form1.WriteRights.Master)
+        Dim BkOrTheGirl As Boolean = (Not MyOrder.Completed) And (Form1.WriteRight = Form1.WriteRights.Bookkeeper Or Form1.WriteRight = Form1.WriteRights.The_Girl)
+        Dim Bk As Boolean = (Not MyOrder.Completed) And (Form1.WriteRight = Form1.WriteRights.Bookkeeper)
+        comboCustomer.Enabled = BkOrMaster
+        comboExecutor.Enabled = BkOrMaster
+        dtpDelivery.Enabled = BkOrMaster
+        nudAdvance.Enabled = Bk
+        dtpAdvance.Enabled = Bk
+        nudPayment.Enabled = Bk
+        dtpPayment.Enabled = Bk
+        btnDeletePart.Enabled = BkOrMaster
+        btnNewPart.Enabled = BkOrMaster
+        nudDiscount.Enabled = BkOrMaster
+        nudDiscountPc.Enabled = BkOrMaster
+        txtComment.Enabled = BkOrMaster
     End Sub
 
     Private Sub ПечатьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПечатьToolStripMenuItem.Click

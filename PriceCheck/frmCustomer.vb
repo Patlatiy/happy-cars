@@ -1,4 +1,4 @@
-﻿Public Class FormCustomer
+﻿Public Class frmCustomer
     Dim MyCustomer As HCCustomer
     Dim MyOwner As Windows.Forms.Form
 

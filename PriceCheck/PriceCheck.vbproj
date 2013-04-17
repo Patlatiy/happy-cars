@@ -127,10 +127,10 @@
     <Compile Include="AdvanceForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCustomer.Designer.vb">
-      <DependentUpon>FormCustomer.vb</DependentUpon>
+    <Compile Include="frmCustomer.Designer.vb">
+      <DependentUpon>frmCustomer.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormCustomer.vb">
+    <Compile Include="frmCustomer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAddCash.Designer.vb">
@@ -239,8 +239,8 @@
     <EmbeddedResource Include="AdvanceForm.resx">
       <DependentUpon>AdvanceForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormCustomer.resx">
-      <DependentUpon>FormCustomer.vb</DependentUpon>
+    <EmbeddedResource Include="frmCustomer.resx">
+      <DependentUpon>frmCustomer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddCash.resx">
       <DependentUpon>frmAddCash.vb</DependentUpon>

@@ -708,25 +708,29 @@
                 End If
             End While
         End Using
-        Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Orders.ini")
-            oFile.TextFieldType = FileIO.FieldType.Delimited
-            oFile.SetDelimiters("|")
-            While Not oFile.EndOfData
-                curRow = oFile.ReadFields
-                If curRow.Count = 1 Then
-                    HCOrder.GlobalID = CUInt(curRow(0))
-                Else
-                    Dim PartList = New List(Of HCPart)
-                    For i = 11 To curRow.Length - 1 Step 5
-                        Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), curRow(i + 2), CDbl(curRow(i + 3)), CDbl(curRow(i + 4)))
-                        PartList.Add(newPart)
-                    Next
-                    Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
-                    newOrder.Discount = CDbl(curRow(9))
-                    newOrder.Comment = curRow(10)
-                End If
-            End While
-        End Using
+        Try
+            Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
+                oFile.TextFieldType = FileIO.FieldType.Delimited
+                oFile.SetDelimiters("|")
+                While Not oFile.EndOfData
+                    curRow = oFile.ReadFields
+                    If curRow.Count = 1 Then
+                        HCOrder.GlobalID = CUInt(curRow(0))
+                    Else
+                        Dim PartList = New List(Of HCPart)
+                        For i = 11 To curRow.Length - 1 Step 5
+                            Dim newPart = New HCPart(curRow(i), CUInt(curRow(i + 1)), curRow(i + 2), CDbl(curRow(i + 3)), CDbl(curRow(i + 4)))
+                            PartList.Add(newPart)
+                        Next
+                        Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
+                        newOrder.Discount = CDbl(curRow(9))
+                        newOrder.Comment = curRow(10)
+                    End If
+                End While
+            End Using
+        Catch ex As Exception
+
+        End Try
         If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
     End Sub
 
@@ -924,8 +928,8 @@
                 CustomersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
             End Using
         End If
-        If My.Computer.FileSystem.FileExists(Application.StartupPath & "\data\Orders.ini") Then
-            Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
+        If My.Computer.FileSystem.FileExists(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini") Then
+            Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
                 OrdersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
             End Using
         End If
@@ -1763,12 +1767,12 @@
             TextToWrite = TextToWrite.Remove(TextToWrite.Length - 1)
             TextToWrite &= vbNewLine
         Next
-        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Orders.ini", TextToWrite, False)
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini", TextToWrite, False)
 
         Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Customers.ini")
             CustomersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
-        Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
+        Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
             OrdersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
     End Sub
@@ -3238,7 +3242,7 @@
                     End If
                 End Using
                 Dim oHashCode As Byte()
-                Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Orders.ini")
+                Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
                     oHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If Not HashCodeEquals(oHashCode, OrdersHashCode) Then
                         OrdersHashCode = oHashCode

@@ -27,6 +27,7 @@ Partial Class frmPrintOrder
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PrintForm1 = New Microsoft.VisualBasic.PowerPacks.Printing.PrintForm(Me.components)
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
+        Me.RectangleShape19 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.LineShape5 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape4 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape3 = New Microsoft.VisualBasic.PowerPacks.LineShape()
@@ -88,9 +89,9 @@ Partial Class frmPrintOrder
         Me.Label37 = New System.Windows.Forms.Label()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.lblParts = New System.Windows.Forms.Label()
-        Me.RectangleShape19 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.lblUnits = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblGlobalDate = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Button1
@@ -121,6 +122,12 @@ Partial Class frmPrintOrder
         Me.ShapeContainer1.TabIndex = 11
         Me.ShapeContainer1.TabStop = False
         '
+        'RectangleShape19
+        '
+        Me.RectangleShape19.Location = New System.Drawing.Point(503, 141)
+        Me.RectangleShape19.Name = "RectangleShape19"
+        Me.RectangleShape19.Size = New System.Drawing.Size(82, 130)
+        '
         'LineShape5
         '
         Me.LineShape5.Name = "LineShape5"
@@ -132,8 +139,8 @@ Partial Class frmPrintOrder
         'LineShape4
         '
         Me.LineShape4.Name = "LineShape4"
-        Me.LineShape4.X1 = 27
-        Me.LineShape4.X2 = 153
+        Me.LineShape4.X1 = 49
+        Me.LineShape4.X2 = 129
         Me.LineShape4.Y1 = 893
         Me.LineShape4.Y2 = 893
         '
@@ -722,12 +729,6 @@ Partial Class frmPrintOrder
         Me.lblParts.TabIndex = 12
         Me.lblParts.Text = "(запчасти)"
         '
-        'RectangleShape19
-        '
-        Me.RectangleShape19.Location = New System.Drawing.Point(503, 141)
-        Me.RectangleShape19.Name = "RectangleShape19"
-        Me.RectangleShape19.Size = New System.Drawing.Size(82, 130)
-        '
         'lblUnits
         '
         Me.lblUnits.AutoSize = True
@@ -750,12 +751,24 @@ Partial Class frmPrintOrder
         Me.Label3.Text = "запасных частей"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblGlobalDate
+        '
+        Me.lblGlobalDate.AutoSize = True
+        Me.lblGlobalDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblGlobalDate.Location = New System.Drawing.Point(54, 877)
+        Me.lblGlobalDate.Name = "lblGlobalDate"
+        Me.lblGlobalDate.Size = New System.Drawing.Size(47, 16)
+        Me.lblGlobalDate.TabIndex = 12
+        Me.lblGlobalDate.Text = "(дата)"
+        Me.lblGlobalDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmPrintOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(593, 940)
+        Me.Controls.Add(Me.lblGlobalDate)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblParts)
         Me.Controls.Add(Me.Label38)
@@ -877,4 +890,5 @@ Partial Class frmPrintOrder
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents lblUnits As System.Windows.Forms.Label
     Friend WithEvents RectangleShape19 As Microsoft.VisualBasic.PowerPacks.RectangleShape
+    Friend WithEvents lblGlobalDate As System.Windows.Forms.Label
 End Class

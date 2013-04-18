@@ -42,11 +42,14 @@
         ElseIf MyOwner Is Form1 Then
             Form1.RefreshOrders()
         End If
+        Form1.SaveCustomers()
+        Form1.SaveProviders()
+        Form1.SaveExecutors()
         Close()
     End Sub
 
-    Public Sub AddPart(pName As String, pCount As UInteger, pUnits As String, pPrice As Double, pMargin As Double)
-        Dim newPart As HCPart = New HCPart(pName, pCount, pUnits, pPrice, pMargin)
+    Public Sub AddPart(pName As String, pCount As UInteger, pUnits As String, pPrice As Double, pMargin As Double, ByRef pProvider As HCProvider)
+        Dim newPart As HCPart = New HCPart(pName, pCount, pUnits, pPrice, pMargin, Nothing, pProvider)
         MyPartList.Add(newPart)
         Dim newArr() As String = {CStr(lwParts.Items.Count + 1), pName, CStr(pCount) & " " & pUnits, CStr(newPart.GetSellPrice)}
         Dim newItem As New ListViewItem(newArr)
@@ -54,11 +57,12 @@
         FillTotal()
     End Sub
 
-    Public Sub UpdatePart(pName As String, pCount As UInteger, pPrice As Double, pMargin As Double)
+    Public Sub UpdatePart(pName As String, pCount As UInteger, pPrice As Double, pMargin As Double, ByRef pProvider As HCProvider)
         CurPart.Name = pName
         CurPart.Count = pCount
         CurPart.Price = pPrice
         CurPart.Margin = pMargin
+        CurPart.Provider = pProvider
         Dim newArr() As String = {CStr(CurPartPosition), pName, CStr(pCount), CStr(CurPart.GetSellPrice)}
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items(lwParts.SelectedIndices(0)) = newItem

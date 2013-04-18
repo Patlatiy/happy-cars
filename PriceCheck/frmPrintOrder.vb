@@ -21,7 +21,6 @@
         Next
         lblParts.Text = lblParts.Text.Trim(vbNewLine.ToCharArray)
         lblUnits.Text = lblUnits.Text.Trim(vbNewLine.ToCharArray)
-        lblPrintDate.Text = Order.Number.GetDate
         lblPrice.Text = ToMoney(Order.GetTotalPrice)
         lblDate.Text = Order.DeliveryDate.ToString("dd.MM.yyyy")
         lblComment.Text = ""
@@ -37,5 +36,11 @@
         lblCustomerFullName.Text = Order.Customer.FullName
         lblRecipientAddress.Text = ""
         lblTicketNumber.Text = "Квитанция " & Order.Number.GetFullNumber
+        Dim strMonth As String = Order.Number.Month.ToString
+        If Order.Number.Month < 10 Then strMonth = "0" & strMonth
+        Dim strDay As String = Order.Number.Day.ToString
+        If Order.Number.Day < 10 Then strDay = "0" & strDay
+        lblPrintDate.Text = strDay & "." & strMonth & "." & Order.Number.Year.ToString
+        lblGlobalDate.Text = strDay & "." & strMonth & "." & Order.Number.Year.ToString
     End Sub
 End Class

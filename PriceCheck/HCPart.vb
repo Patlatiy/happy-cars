@@ -1,6 +1,12 @@
 ﻿Public Class HCPart
     Public Name As String
     Public Count As UInteger
+    Public Provider As HCProvider
+    Public Order As HCOrder
+    Public Shared UnitsList As New List(Of String)
+    Public Shared GlobalID As Integer
+    Public ID As Integer
+
     Private _Price As ULong
     Public Property Price As Double
         Get
@@ -10,6 +16,7 @@
             _Price = Math.Round(value * 100)
         End Set
     End Property
+
     Private _Margin As ULong = 0
     Public Property Margin As Double
         Get
@@ -19,7 +26,7 @@
             _Margin = CULng(value * 100)
         End Set
     End Property
-    Public Shared UnitsList As New List(Of String)
+
     Private _Units As String
     Public Property Units As String
         Get
@@ -35,19 +42,26 @@
         End Set
     End Property
 
-    Sub New(nName As String, nCount As UInteger, nUnits As String, nPrice As Double)
-        Name = nName
-        Count = nCount
-        Units = nUnits
-        Price = nPrice
+    Sub New(nName As String, nCount As UInteger, nUnits As String, nPrice As Double, ByRef nOrder As HCOrder, ByRef nProvider As HCProvider)
+        Me.New(nName, nCount, nUnits, nPrice, 0, nOrder, nProvider)
     End Sub
 
-    Sub New(nName As String, nCount As UInteger, nUnits As String, nPrice As Double, nMargin As Double)
+    Sub New(nName As String, nCount As UInteger, nUnits As String, nPrice As Double, nMargin As Double, ByRef nOrder As HCOrder, ByRef nProvider As HCProvider)
+        Me.New(GlobalID, nName, nCount, nUnits, nPrice, nMargin, nOrder, nProvider)
+        If GlobalID = ID Then GlobalID += 1
+    End Sub
+
+    Sub New(nID As Integer, nName As String, nCount As UInteger, nUnits As String, nPrice As Double, nMargin As Double, ByRef nOrder As HCOrder, ByRef nProvider As HCProvider)
+        ID = nID
         Name = nName
         Count = nCount
         Units = nUnits
         Price = nPrice
         Margin = nMargin
+        Provider = nProvider
+        Order = nOrder
+        If Not Provider Is Nothing Then Provider.PartList.Add(Me)
+        If GlobalID <= ID Then GlobalID = ID + 1
     End Sub
 
     Public Function GetSellPrice() As Double

@@ -37,6 +37,7 @@
         End If
         If MyOwner Is Form1 Then Form1.RefreshCustomersAndOrders()
         MyOwner.Enabled = True
+        Form1.SaveCustomers()
     End Sub
 
     Private Sub dgvCustomerOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCustomerOrders.CellContentClick

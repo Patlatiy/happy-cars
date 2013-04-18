@@ -100,11 +100,11 @@ Partial Class frmCustomer
         Me.dgvCustomerOrders.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.dgvCustomerOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCustomerOrders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnCustomerOrderNumber, Me.cmnCustomerOrderSum, Me.cmnCustomerDone, Me.cmnCustomerEdit})
-        Me.dgvCustomerOrders.Location = New System.Drawing.Point(255, 12)
+        Me.dgvCustomerOrders.Location = New System.Drawing.Point(260, 12)
         Me.dgvCustomerOrders.Name = "dgvCustomerOrders"
         Me.dgvCustomerOrders.RowHeadersVisible = False
         Me.dgvCustomerOrders.RowTemplate.Height = 21
-        Me.dgvCustomerOrders.Size = New System.Drawing.Size(352, 287)
+        Me.dgvCustomerOrders.Size = New System.Drawing.Size(375, 287)
         Me.dgvCustomerOrders.TabIndex = 8
         '
         'txtPhone
@@ -125,7 +125,7 @@ Partial Class frmCustomer
         '
         'btnNewOrder
         '
-        Me.btnNewOrder.Location = New System.Drawing.Point(378, 305)
+        Me.btnNewOrder.Location = New System.Drawing.Point(399, 305)
         Me.btnNewOrder.Name = "btnNewOrder"
         Me.btnNewOrder.Size = New System.Drawing.Size(97, 23)
         Me.btnNewOrder.TabIndex = 9
@@ -164,7 +164,7 @@ Partial Class frmCustomer
         Me.cmnCustomerOrderNumber.HeaderText = "Номер"
         Me.cmnCustomerOrderNumber.Name = "cmnCustomerOrderNumber"
         Me.cmnCustomerOrderNumber.ReadOnly = True
-        Me.cmnCustomerOrderNumber.Width = 75
+        Me.cmnCustomerOrderNumber.Width = 105
         '
         'cmnCustomerOrderSum
         '
@@ -190,7 +190,7 @@ Partial Class frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(619, 336)
+        Me.ClientSize = New System.Drawing.Size(647, 336)
         Me.Controls.Add(Me.btnDeleteCustomer)
         Me.Controls.Add(Me.btnNewOrder)
         Me.Controls.Add(Me.txtAddress)

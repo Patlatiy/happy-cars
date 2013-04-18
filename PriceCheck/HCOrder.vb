@@ -129,7 +129,11 @@
         AdvanceSum = nAdvanceSum
         AdvanceDate = nAdvanceDate
         PartList = nParts
+        For Each Part In PartList
+            Part.Order = Me
+        Next
         Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month, Form1.curDate.Day)
+        Form1.RegisterPartList(PartList)
         Discount = nDiscount
         Completed = nCompleted
         OrderList.Add(Me)
@@ -146,6 +150,10 @@
         AdvanceSum = nAdvanceSum
         AdvanceDate = nAdvanceDate
         PartList = nParts
+        For Each Part In PartList
+            Part.Order = Me
+        Next
+        'Form1.RegisterPartList(PartList)
         Number = New OrderNumber(0, 0, 0, 0)
         Number.SetFullNumber(nNumber)
         Discount = nDiscount

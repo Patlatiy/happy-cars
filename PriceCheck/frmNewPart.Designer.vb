@@ -40,6 +40,8 @@ Partial Class frmNewPart
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.comboUnits = New System.Windows.Forms.ComboBox()
+        Me.comboProvider = New System.Windows.Forms.ComboBox()
+        Me.lblProvider = New System.Windows.Forms.Label()
         CType(Me.nudMarginPc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,7 +68,7 @@ Partial Class frmNewPart
         '
         Me.lblMarginRbl.AutoSize = True
         Me.lblMarginRbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblMarginRbl.Location = New System.Drawing.Point(333, 88)
+        Me.lblMarginRbl.Location = New System.Drawing.Point(332, 114)
         Me.lblMarginRbl.Name = "lblMarginRbl"
         Me.lblMarginRbl.Size = New System.Drawing.Size(16, 13)
         Me.lblMarginRbl.TabIndex = 24
@@ -75,7 +77,7 @@ Partial Class frmNewPart
         'txtSellPrice
         '
         Me.txtSellPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtSellPrice.Location = New System.Drawing.Point(148, 133)
+        Me.txtSellPrice.Location = New System.Drawing.Point(147, 167)
         Me.txtSellPrice.Name = "txtSellPrice"
         Me.txtSellPrice.ReadOnly = True
         Me.txtSellPrice.Size = New System.Drawing.Size(100, 20)
@@ -84,7 +86,7 @@ Partial Class frmNewPart
         'lblSellPrice
         '
         Me.lblSellPrice.AutoSize = True
-        Me.lblSellPrice.Location = New System.Drawing.Point(13, 136)
+        Me.lblSellPrice.Location = New System.Drawing.Point(12, 170)
         Me.lblSellPrice.Name = "lblSellPrice"
         Me.lblSellPrice.Size = New System.Drawing.Size(80, 13)
         Me.lblSellPrice.TabIndex = 26
@@ -94,7 +96,7 @@ Partial Class frmNewPart
         '
         Me.lblMarginPc.AutoSize = True
         Me.lblMarginPc.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblMarginPc.Location = New System.Drawing.Point(222, 89)
+        Me.lblMarginPc.Location = New System.Drawing.Point(221, 115)
         Me.lblMarginPc.Name = "lblMarginPc"
         Me.lblMarginPc.Size = New System.Drawing.Size(15, 13)
         Me.lblMarginPc.TabIndex = 25
@@ -102,7 +104,7 @@ Partial Class frmNewPart
         '
         'nudMarginPc
         '
-        Me.nudMarginPc.Location = New System.Drawing.Point(156, 85)
+        Me.nudMarginPc.Location = New System.Drawing.Point(155, 111)
         Me.nudMarginPc.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudMarginPc.Name = "nudMarginPc"
         Me.nudMarginPc.Size = New System.Drawing.Size(65, 20)
@@ -112,7 +114,7 @@ Partial Class frmNewPart
         '
         Me.nudMargin.DecimalPlaces = 2
         Me.nudMargin.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudMargin.Location = New System.Drawing.Point(267, 85)
+        Me.nudMargin.Location = New System.Drawing.Point(266, 111)
         Me.nudMargin.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudMargin.Name = "nudMargin"
         Me.nudMargin.Size = New System.Drawing.Size(65, 20)
@@ -121,7 +123,7 @@ Partial Class frmNewPart
         'lblMargin
         '
         Me.lblMargin.AutoSize = True
-        Me.lblMargin.Location = New System.Drawing.Point(10, 87)
+        Me.lblMargin.Location = New System.Drawing.Point(9, 113)
         Me.lblMargin.Name = "lblMargin"
         Me.lblMargin.Size = New System.Drawing.Size(42, 13)
         Me.lblMargin.TabIndex = 17
@@ -131,7 +133,7 @@ Partial Class frmNewPart
         '
         Me.nudPartPrice.DecimalPlaces = 2
         Me.nudPartPrice.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudPartPrice.Location = New System.Drawing.Point(267, 59)
+        Me.nudPartPrice.Location = New System.Drawing.Point(266, 85)
         Me.nudPartPrice.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudPartPrice.Name = "nudPartPrice"
         Me.nudPartPrice.Size = New System.Drawing.Size(82, 20)
@@ -150,7 +152,7 @@ Partial Class frmNewPart
         'lblPartPrice
         '
         Me.lblPartPrice.AutoSize = True
-        Me.lblPartPrice.Location = New System.Drawing.Point(10, 61)
+        Me.lblPartPrice.Location = New System.Drawing.Point(9, 87)
         Me.lblPartPrice.Name = "lblPartPrice"
         Me.lblPartPrice.Size = New System.Drawing.Size(77, 13)
         Me.lblPartPrice.TabIndex = 18
@@ -169,10 +171,10 @@ Partial Class frmNewPart
         '
         Me.LineShape2.Enabled = False
         Me.LineShape2.Name = "LineShape2"
-        Me.LineShape2.X1 = 15
-        Me.LineShape2.X2 = 346
-        Me.LineShape2.Y1 = 118
-        Me.LineShape2.Y2 = 118
+        Me.LineShape2.X1 = 16
+        Me.LineShape2.X2 = 347
+        Me.LineShape2.Y1 = 155
+        Me.LineShape2.Y2 = 155
         '
         'ShapeContainer1
         '
@@ -180,13 +182,13 @@ Partial Class frmNewPart
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(360, 162)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(360, 200)
         Me.ShapeContainer1.TabIndex = 28
         Me.ShapeContainer1.TabStop = False
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(304, 131)
+        Me.btnOK.Location = New System.Drawing.Point(303, 165)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(46, 23)
         Me.btnOK.TabIndex = 29
@@ -202,11 +204,30 @@ Partial Class frmNewPart
         Me.comboUnits.TabIndex = 30
         Me.comboUnits.Text = "шт."
         '
+        'comboProvider
+        '
+        Me.comboProvider.FormattingEnabled = True
+        Me.comboProvider.Location = New System.Drawing.Point(172, 59)
+        Me.comboProvider.Name = "comboProvider"
+        Me.comboProvider.Size = New System.Drawing.Size(176, 21)
+        Me.comboProvider.TabIndex = 31
+        '
+        'lblProvider
+        '
+        Me.lblProvider.AutoSize = True
+        Me.lblProvider.Location = New System.Drawing.Point(10, 62)
+        Me.lblProvider.Name = "lblProvider"
+        Me.lblProvider.Size = New System.Drawing.Size(65, 13)
+        Me.lblProvider.TabIndex = 19
+        Me.lblProvider.Text = "Поставщик"
+        '
         'frmNewPart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(360, 162)
+        Me.ClientSize = New System.Drawing.Size(360, 200)
+        Me.Controls.Add(Me.lblProvider)
+        Me.Controls.Add(Me.comboProvider)
         Me.Controls.Add(Me.comboUnits)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.lblMarginRbl)
@@ -254,4 +275,6 @@ Partial Class frmNewPart
     Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents comboUnits As System.Windows.Forms.ComboBox
+    Friend WithEvents comboProvider As System.Windows.Forms.ComboBox
+    Friend WithEvents lblProvider As System.Windows.Forms.Label
 End Class

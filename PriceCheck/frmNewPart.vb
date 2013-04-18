@@ -12,12 +12,18 @@
         For Each Unit In HCPart.UnitsList
             comboUnits.Items.Add(Unit)
         Next
+        For Each prov In HCProvider.ProviderList
+            Dim newItem As New HCListItem(prov.Name, prov.ID)
+            comboProvider.Items.Add(newItem)
+        Next
+
         If Not Part Is Nothing Then
             txtPartName.Text = Part.Name
             nudPartCount.Value = Part.Count
             nudPartPrice.Value = Part.Price
             nudMargin.Value = Part.Margin
             comboUnits.Text = Part.Units
+            If Not Part.Provider Is Nothing Then comboProvider.Text = Part.Provider.Name
             FillPrice()
         End If
     End Sub
@@ -30,9 +36,9 @@
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         If MyOwner Is frmNewOrder Then
             If CreateNew Then
-                frmNewOrder.AddPart(txtPartName.Text, CInt(nudPartCount.Value), comboUnits.Text, nudPartPrice.Value, nudMargin.Value)
+                frmNewOrder.AddPart(txtPartName.Text, CInt(nudPartCount.Value), comboUnits.Text, nudPartPrice.Value, nudMargin.Value, HCProvider.GetByName(comboProvider.Text))
             Else
-                frmNewOrder.UpdatePart(txtPartName.Text, CInt(nudPartCount.Value), nudPartPrice.Value, nudMargin.Value)
+                frmNewOrder.UpdatePart(txtPartName.Text, CInt(nudPartCount.Value), nudPartPrice.Value, nudMargin.Value, HCProvider.GetByName(comboProvider.Text))
             End If
         End If
         Close()

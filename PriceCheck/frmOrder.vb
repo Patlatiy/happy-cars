@@ -155,7 +155,7 @@
         If curPart Is Nothing Then Exit Sub
         If curPart.Count <> nudPartCount.Value Then
             curPart.Count = nudPartCount.Value
-            lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count)
+            lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count) & " " & curPart.Units
             UpdatePart()
         End If
     End Sub
@@ -216,16 +216,16 @@
     End Sub
 
     Sub FillSellPrice()
-        txtSellPrice.Text = CStr(curPart.GetSellPrice())
+        txtSellPrice.Text = ToMoney(curPart.GetSellPrice())
     End Sub
 
     Sub FillTotal()
         CheckParts()
-        txtTotal.Text = CStr(MyOrder.GetTotalPrice)
+        txtTotal.Text = ToMoney(MyOrder.GetTotalPrice)
     End Sub
 
     Sub FillTotalReceived()
-        txtTotalReceived.Text = CStr(nudAdvance.Value + nudPayment.Value)
+        txtTotalReceived.Text = ToMoney(nudAdvance.Value + nudPayment.Value)
     End Sub
 
     Sub FillDiscount()
@@ -265,10 +265,25 @@
         Next
     End Sub
 
-    Private Sub comboUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboUnits.SelectedIndexChanged, comboUnits.Leave, Me.FormClosing
+    Private Sub comboUnits_KeyDown(sender As Object, e As KeyEventArgs) Handles comboUnits.KeyDown
+        If curPart Is Nothing Then Exit Sub
+        If e.KeyCode = Keys.Enter Then
+            curPart.Units = comboUnits.Text
+            lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count) & " " & curPart.Units
+        End If
+    End Sub
+
+    Private Sub comboUnits_Leave(sender As Object, e As EventArgs) Handles comboUnits.Leave, Me.FormClosing
         If curPart Is Nothing Then Exit Sub
         curPart.Units = comboUnits.Text
-        If Not TypeOf (e) Is FormClosingEventArgs Then RefreshUnits()
+        lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count) & " " & curPart.Units
+    End Sub
+
+    Private Sub comboUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboUnits.SelectedIndexChanged
+        If curPart Is Nothing Then Exit Sub
+        comboUnits.Text = comboUnits.SelectedItem
+        curPart.Units = comboUnits.Text
+        lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count) & " " & curPart.Units
     End Sub
 
     Dim Silently As Boolean = False

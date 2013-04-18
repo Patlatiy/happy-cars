@@ -52,10 +52,10 @@ Partial Class frmAddCash
         'txtOrderDate
         '
         Me.txtOrderDate.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtOrderDate.Location = New System.Drawing.Point(157, 17)
+        Me.txtOrderDate.Location = New System.Drawing.Point(137, 17)
         Me.txtOrderDate.Name = "txtOrderDate"
         Me.txtOrderDate.ReadOnly = True
-        Me.txtOrderDate.Size = New System.Drawing.Size(50, 20)
+        Me.txtOrderDate.Size = New System.Drawing.Size(70, 20)
         Me.txtOrderDate.TabIndex = 24
         Me.txtOrderDate.Text = "0"
         Me.txtOrderDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right

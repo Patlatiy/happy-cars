@@ -45,13 +45,17 @@
     Structure OrderNumber
         Public Year As Short
         Public Month As Short
+        Public Day As Short
         Public ID As UInteger
 
         Function GetDate() As String
             Dim tmpMonth As String
             tmpMonth = CStr(Month)
             If Month < 10 Then tmpMonth = "0" & tmpMonth
-            Return CStr(Year) & "-" & tmpMonth
+            Dim tmpDay As String
+            tmpDay = CStr(Day)
+            If Day < 10 Then tmpDay = "0" & tmpDay
+            Return CStr(Year) & "." & tmpMonth & "." & tmpDay
         End Function
 
         Function GetID() As String
@@ -75,27 +79,30 @@
         Sub SetFullNumber(FullNumber As String)
             Year = CShort(FullNumber(0).ToString & FullNumber(1).ToString & FullNumber(2).ToString & FullNumber(3).ToString)
             Month = CShort(FullNumber(5).ToString & FullNumber(6).ToString)
-            ID = CUInt(FullNumber(8).ToString & FullNumber(9).ToString & FullNumber(10).ToString & FullNumber(11).ToString)
+            Day = CShort(FullNumber(8).ToString & FullNumber(9).ToString)
+            ID = CUInt(FullNumber(11).ToString & FullNumber(12).ToString & FullNumber(13).ToString & FullNumber(14).ToString)
             If GlobalID <= ID Then GlobalID = ID + 1
         End Sub
 
-        Sub New(ByVal nYear As Short, ByVal nMonth As UShort)
+        Sub New(ByVal nYear As Short, ByVal nMonth As Short, ByVal nDay As Short)
             Year = nYear
             Month = nMonth
+            Day = nDay
             ID = GlobalID
             GlobalID += 1
         End Sub
 
-        Sub New(nID As UInteger, ByVal nYear As Short, ByVal nMonth As UShort)
+        Sub New(nID As UInteger, ByVal nYear As Short, ByVal nMonth As Short, ByVal nDay As Short)
             Year = nYear
             Month = nMonth
+            Day = nDay
             ID = nID
         End Sub
     End Structure
 
     Sub New()
         PartList = New List(Of HCPart)
-        Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
+        Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month, Form1.curDate.Day)
         Customer = HCCustomer.CustomerList.Last
         Customer.MyOrderList.Add(Me)
         DeliveryDate = Form1.curDate
@@ -122,7 +129,7 @@
         AdvanceSum = nAdvanceSum
         AdvanceDate = nAdvanceDate
         PartList = nParts
-        Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month)
+        Number = New OrderNumber(Form1.curDate.Year, Form1.curDate.Month, Form1.curDate.Day)
         Discount = nDiscount
         Completed = nCompleted
         OrderList.Add(Me)
@@ -139,7 +146,7 @@
         AdvanceSum = nAdvanceSum
         AdvanceDate = nAdvanceDate
         PartList = nParts
-        Number = New OrderNumber(0, 0, 0)
+        Number = New OrderNumber(0, 0, 0, 0)
         Number.SetFullNumber(nNumber)
         Discount = nDiscount
         Completed = nCompleted

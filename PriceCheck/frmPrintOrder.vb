@@ -14,15 +14,15 @@
         Me.Show()
         lblOrderNumber.Text = "Заявка на поставку № " & Order.Number.GetID
         lblParts.Text = ""
+        lblUnits.Text = ""
         For Each Part In Order.PartList
-            If Part.Count = 1 Then
-                lblParts.Text &= Part.Name & vbNewLine
-            Else
-                lblParts.Text &= Part.Name & " (" & CStr(Part.Count) & " шт.)" & vbNewLine
-            End If
+            lblParts.Text &= vbNewLine & Part.Name
+            lblUnits.Text &= vbNewLine & CStr(Part.Count) & " " & Part.Units
         Next
-        lblPrintDate.Text = Date.Now.ToString("dd.MM.yyyy")
-        lblPrice.Text = CStr(Order.GetTotalPrice & " р.")
+        lblParts.Text = lblParts.Text.Trim(vbNewLine.ToCharArray)
+        lblUnits.Text = lblUnits.Text.Trim(vbNewLine.ToCharArray)
+        lblPrintDate.Text = Order.Number.GetDate
+        lblPrice.Text = ToMoney(Order.GetTotalPrice)
         lblDate.Text = Order.DeliveryDate.ToString("dd.MM.yyyy")
         lblComment.Text = ""
         If Order.Executor Is Nothing Then
@@ -36,5 +36,6 @@
         lblRecipientPhone.Text = Order.Customer.Phone
         lblCustomerFullName.Text = Order.Customer.FullName
         lblRecipientAddress.Text = ""
+        lblTicketNumber.Text = "Квитанция " & Order.Number.GetFullNumber
     End Sub
 End Class

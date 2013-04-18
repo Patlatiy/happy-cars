@@ -528,10 +528,10 @@ Partial Class frmOrder
         'txtOrderDate
         '
         Me.txtOrderDate.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtOrderDate.Location = New System.Drawing.Point(139, 25)
+        Me.txtOrderDate.Location = New System.Drawing.Point(117, 25)
         Me.txtOrderDate.Name = "txtOrderDate"
         Me.txtOrderDate.ReadOnly = True
-        Me.txtOrderDate.Size = New System.Drawing.Size(50, 20)
+        Me.txtOrderDate.Size = New System.Drawing.Size(72, 20)
         Me.txtOrderDate.TabIndex = 5
         Me.txtOrderDate.Text = "0"
         Me.txtOrderDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right

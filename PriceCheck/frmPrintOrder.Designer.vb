@@ -81,13 +81,16 @@ Partial Class frmPrintOrder
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label33 = New System.Windows.Forms.Label()
+        Me.lblTicketNumber = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.lblParts = New System.Windows.Forms.Label()
+        Me.RectangleShape19 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
+        Me.lblUnits = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Button1
@@ -113,7 +116,7 @@ Partial Class frmPrintOrder
         Me.ShapeContainer1.Location = New System.Drawing.Point(0, 0)
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
-        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape5, Me.LineShape4, Me.LineShape3, Me.LineShape2, Me.LineShape1, Me.RectangleShape18, Me.RectangleShape17, Me.RectangleShape16, Me.RectangleShape15, Me.RectangleShape14, Me.RectangleShape13, Me.RectangleShape12, Me.RectangleShape11, Me.RectangleShape10, Me.RectangleShape9, Me.RectangleShape8, Me.RectangleShape7, Me.RectangleShape6, Me.RectangleShape5, Me.RectangleShape4, Me.RectangleShape3, Me.RectangleShape2, Me.RectangleShape1})
+        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.RectangleShape19, Me.LineShape5, Me.LineShape4, Me.LineShape3, Me.LineShape2, Me.LineShape1, Me.RectangleShape18, Me.RectangleShape17, Me.RectangleShape16, Me.RectangleShape15, Me.RectangleShape14, Me.RectangleShape13, Me.RectangleShape12, Me.RectangleShape11, Me.RectangleShape10, Me.RectangleShape9, Me.RectangleShape8, Me.RectangleShape7, Me.RectangleShape6, Me.RectangleShape5, Me.RectangleShape4, Me.RectangleShape3, Me.RectangleShape2, Me.RectangleShape1})
         Me.ShapeContainer1.Size = New System.Drawing.Size(593, 940)
         Me.ShapeContainer1.TabIndex = 11
         Me.ShapeContainer1.TabStop = False
@@ -164,141 +167,141 @@ Partial Class frmPrintOrder
         '
         Me.RectangleShape18.BackColor = System.Drawing.Color.White
         Me.RectangleShape18.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape18.Location = New System.Drawing.Point(246, 451)
+        Me.RectangleShape18.Location = New System.Drawing.Point(225, 488)
         Me.RectangleShape18.Name = "RectangleShape2"
-        Me.RectangleShape18.Size = New System.Drawing.Size(339, 31)
+        Me.RectangleShape18.Size = New System.Drawing.Size(360, 31)
         '
         'RectangleShape17
         '
         Me.RectangleShape17.BackColor = System.Drawing.Color.White
         Me.RectangleShape17.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape17.Location = New System.Drawing.Point(8, 451)
+        Me.RectangleShape17.Location = New System.Drawing.Point(8, 488)
         Me.RectangleShape17.Name = "RectangleShape1"
-        Me.RectangleShape17.Size = New System.Drawing.Size(238, 31)
+        Me.RectangleShape17.Size = New System.Drawing.Size(217, 31)
         '
         'RectangleShape16
         '
         Me.RectangleShape16.BackColor = System.Drawing.Color.White
         Me.RectangleShape16.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape16.Location = New System.Drawing.Point(246, 420)
+        Me.RectangleShape16.Location = New System.Drawing.Point(225, 457)
         Me.RectangleShape16.Name = "RectangleShape2"
-        Me.RectangleShape16.Size = New System.Drawing.Size(339, 31)
+        Me.RectangleShape16.Size = New System.Drawing.Size(360, 31)
         '
         'RectangleShape15
         '
         Me.RectangleShape15.BackColor = System.Drawing.Color.White
         Me.RectangleShape15.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape15.Location = New System.Drawing.Point(8, 420)
+        Me.RectangleShape15.Location = New System.Drawing.Point(8, 457)
         Me.RectangleShape15.Name = "RectangleShape1"
-        Me.RectangleShape15.Size = New System.Drawing.Size(238, 31)
+        Me.RectangleShape15.Size = New System.Drawing.Size(217, 31)
         '
         'RectangleShape14
         '
         Me.RectangleShape14.BackColor = System.Drawing.Color.White
         Me.RectangleShape14.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape14.Location = New System.Drawing.Point(246, 389)
+        Me.RectangleShape14.Location = New System.Drawing.Point(225, 426)
         Me.RectangleShape14.Name = "RectangleShape2"
-        Me.RectangleShape14.Size = New System.Drawing.Size(339, 31)
+        Me.RectangleShape14.Size = New System.Drawing.Size(360, 31)
         '
         'RectangleShape13
         '
         Me.RectangleShape13.BackColor = System.Drawing.Color.White
         Me.RectangleShape13.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape13.Location = New System.Drawing.Point(8, 389)
+        Me.RectangleShape13.Location = New System.Drawing.Point(8, 426)
         Me.RectangleShape13.Name = "RectangleShape1"
-        Me.RectangleShape13.Size = New System.Drawing.Size(238, 31)
+        Me.RectangleShape13.Size = New System.Drawing.Size(217, 31)
         '
         'RectangleShape12
         '
         Me.RectangleShape12.BackColor = System.Drawing.Color.White
         Me.RectangleShape12.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape12.Location = New System.Drawing.Point(246, 358)
+        Me.RectangleShape12.Location = New System.Drawing.Point(225, 395)
         Me.RectangleShape12.Name = "RectangleShape2"
-        Me.RectangleShape12.Size = New System.Drawing.Size(339, 31)
+        Me.RectangleShape12.Size = New System.Drawing.Size(360, 31)
         '
         'RectangleShape11
         '
         Me.RectangleShape11.BackColor = System.Drawing.Color.White
         Me.RectangleShape11.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape11.Location = New System.Drawing.Point(8, 358)
+        Me.RectangleShape11.Location = New System.Drawing.Point(8, 395)
         Me.RectangleShape11.Name = "RectangleShape1"
-        Me.RectangleShape11.Size = New System.Drawing.Size(238, 31)
+        Me.RectangleShape11.Size = New System.Drawing.Size(217, 31)
         '
         'RectangleShape10
         '
         Me.RectangleShape10.BackColor = System.Drawing.Color.White
         Me.RectangleShape10.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape10.Location = New System.Drawing.Point(246, 327)
+        Me.RectangleShape10.Location = New System.Drawing.Point(225, 364)
         Me.RectangleShape10.Name = "RectangleShape2"
-        Me.RectangleShape10.Size = New System.Drawing.Size(339, 31)
+        Me.RectangleShape10.Size = New System.Drawing.Size(360, 31)
         '
         'RectangleShape9
         '
         Me.RectangleShape9.BackColor = System.Drawing.Color.White
         Me.RectangleShape9.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape9.Location = New System.Drawing.Point(8, 327)
+        Me.RectangleShape9.Location = New System.Drawing.Point(8, 364)
         Me.RectangleShape9.Name = "RectangleShape1"
-        Me.RectangleShape9.Size = New System.Drawing.Size(238, 31)
+        Me.RectangleShape9.Size = New System.Drawing.Size(217, 31)
         '
         'RectangleShape8
         '
         Me.RectangleShape8.BackColor = System.Drawing.Color.White
         Me.RectangleShape8.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape8.Location = New System.Drawing.Point(246, 296)
+        Me.RectangleShape8.Location = New System.Drawing.Point(225, 333)
         Me.RectangleShape8.Name = "RectangleShape2"
-        Me.RectangleShape8.Size = New System.Drawing.Size(339, 31)
+        Me.RectangleShape8.Size = New System.Drawing.Size(360, 31)
         '
         'RectangleShape7
         '
         Me.RectangleShape7.BackColor = System.Drawing.Color.White
         Me.RectangleShape7.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape7.Location = New System.Drawing.Point(8, 296)
+        Me.RectangleShape7.Location = New System.Drawing.Point(8, 333)
         Me.RectangleShape7.Name = "RectangleShape1"
-        Me.RectangleShape7.Size = New System.Drawing.Size(238, 31)
+        Me.RectangleShape7.Size = New System.Drawing.Size(217, 31)
         '
         'RectangleShape6
         '
         Me.RectangleShape6.BackColor = System.Drawing.Color.White
         Me.RectangleShape6.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape6.Location = New System.Drawing.Point(246, 265)
+        Me.RectangleShape6.Location = New System.Drawing.Point(225, 302)
         Me.RectangleShape6.Name = "RectangleShape2"
-        Me.RectangleShape6.Size = New System.Drawing.Size(339, 31)
+        Me.RectangleShape6.Size = New System.Drawing.Size(360, 31)
         '
         'RectangleShape5
         '
         Me.RectangleShape5.BackColor = System.Drawing.Color.White
         Me.RectangleShape5.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape5.Location = New System.Drawing.Point(8, 265)
+        Me.RectangleShape5.Location = New System.Drawing.Point(8, 302)
         Me.RectangleShape5.Name = "RectangleShape1"
-        Me.RectangleShape5.Size = New System.Drawing.Size(238, 31)
+        Me.RectangleShape5.Size = New System.Drawing.Size(217, 31)
         '
         'RectangleShape4
         '
         Me.RectangleShape4.BackColor = System.Drawing.Color.White
         Me.RectangleShape4.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape4.Location = New System.Drawing.Point(246, 234)
+        Me.RectangleShape4.Location = New System.Drawing.Point(225, 271)
         Me.RectangleShape4.Name = "RectangleShape2"
-        Me.RectangleShape4.Size = New System.Drawing.Size(339, 31)
+        Me.RectangleShape4.Size = New System.Drawing.Size(360, 31)
         '
         'RectangleShape3
         '
         Me.RectangleShape3.BackColor = System.Drawing.Color.White
         Me.RectangleShape3.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RectangleShape3.Location = New System.Drawing.Point(8, 234)
+        Me.RectangleShape3.Location = New System.Drawing.Point(8, 271)
         Me.RectangleShape3.Name = "RectangleShape1"
-        Me.RectangleShape3.Size = New System.Drawing.Size(238, 31)
+        Me.RectangleShape3.Size = New System.Drawing.Size(217, 31)
         '
         'RectangleShape2
         '
-        Me.RectangleShape2.Location = New System.Drawing.Point(246, 141)
+        Me.RectangleShape2.Location = New System.Drawing.Point(225, 141)
         Me.RectangleShape2.Name = "RectangleShape2"
-        Me.RectangleShape2.Size = New System.Drawing.Size(339, 93)
+        Me.RectangleShape2.Size = New System.Drawing.Size(278, 130)
         '
         'RectangleShape1
         '
         Me.RectangleShape1.Location = New System.Drawing.Point(8, 141)
         Me.RectangleShape1.Name = "RectangleShape1"
-        Me.RectangleShape1.Size = New System.Drawing.Size(238, 93)
+        Me.RectangleShape1.Size = New System.Drawing.Size(217, 130)
         '
         'lblLine1
         '
@@ -373,16 +376,16 @@ Partial Class frmPrintOrder
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.Label6.Location = New System.Drawing.Point(12, 147)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(220, 16)
+        Me.Label6.Size = New System.Drawing.Size(106, 16)
         Me.Label6.TabIndex = 12
-        Me.Label6.Text = "Наименования запасных частей"
+        Me.Label6.Text = "Наименования"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label8.Location = New System.Drawing.Point(12, 242)
+        Me.Label8.Location = New System.Drawing.Point(12, 279)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(122, 16)
         Me.Label8.TabIndex = 12
@@ -393,7 +396,7 @@ Partial Class frmPrintOrder
         '
         Me.lblPrice.AutoSize = True
         Me.lblPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblPrice.Location = New System.Drawing.Point(252, 242)
+        Me.lblPrice.Location = New System.Drawing.Point(229, 279)
         Me.lblPrice.Name = "lblPrice"
         Me.lblPrice.Size = New System.Drawing.Size(48, 16)
         Me.lblPrice.TabIndex = 12
@@ -404,7 +407,7 @@ Partial Class frmPrintOrder
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label10.Location = New System.Drawing.Point(12, 273)
+        Me.Label10.Location = New System.Drawing.Point(12, 310)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(104, 16)
         Me.Label10.TabIndex = 12
@@ -415,7 +418,7 @@ Partial Class frmPrintOrder
         '
         Me.lblDate.AutoSize = True
         Me.lblDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblDate.Location = New System.Drawing.Point(252, 273)
+        Me.lblDate.Location = New System.Drawing.Point(229, 310)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(47, 16)
         Me.lblDate.TabIndex = 12
@@ -426,7 +429,7 @@ Partial Class frmPrintOrder
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label12.Location = New System.Drawing.Point(12, 304)
+        Me.Label12.Location = New System.Drawing.Point(12, 341)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(177, 16)
         Me.Label12.TabIndex = 12
@@ -437,7 +440,7 @@ Partial Class frmPrintOrder
         '
         Me.lblComment.AutoSize = True
         Me.lblComment.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblComment.Location = New System.Drawing.Point(252, 304)
+        Me.lblComment.Location = New System.Drawing.Point(229, 341)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(70, 16)
         Me.lblComment.TabIndex = 12
@@ -448,7 +451,7 @@ Partial Class frmPrintOrder
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label14.Location = New System.Drawing.Point(12, 335)
+        Me.Label14.Location = New System.Drawing.Point(12, 372)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(209, 16)
         Me.Label14.TabIndex = 12
@@ -459,7 +462,7 @@ Partial Class frmPrintOrder
         '
         Me.lblExecutor.AutoSize = True
         Me.lblExecutor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblExecutor.Location = New System.Drawing.Point(252, 335)
+        Me.lblExecutor.Location = New System.Drawing.Point(229, 372)
         Me.lblExecutor.Name = "lblExecutor"
         Me.lblExecutor.Size = New System.Drawing.Size(47, 16)
         Me.lblExecutor.TabIndex = 12
@@ -470,7 +473,7 @@ Partial Class frmPrintOrder
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label16.Location = New System.Drawing.Point(12, 366)
+        Me.Label16.Location = New System.Drawing.Point(12, 403)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(200, 16)
         Me.Label16.TabIndex = 12
@@ -481,7 +484,7 @@ Partial Class frmPrintOrder
         '
         Me.lblExecutorPhone.AutoSize = True
         Me.lblExecutorPhone.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblExecutorPhone.Location = New System.Drawing.Point(252, 366)
+        Me.lblExecutorPhone.Location = New System.Drawing.Point(229, 403)
         Me.lblExecutorPhone.Name = "lblExecutorPhone"
         Me.lblExecutorPhone.Size = New System.Drawing.Size(83, 16)
         Me.lblExecutorPhone.TabIndex = 12
@@ -492,7 +495,7 @@ Partial Class frmPrintOrder
         '
         Me.lblRecipientLabel.AutoSize = True
         Me.lblRecipientLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblRecipientLabel.Location = New System.Drawing.Point(12, 397)
+        Me.lblRecipientLabel.Location = New System.Drawing.Point(12, 434)
         Me.lblRecipientLabel.Name = "lblRecipientLabel"
         Me.lblRecipientLabel.Size = New System.Drawing.Size(202, 16)
         Me.lblRecipientLabel.TabIndex = 12
@@ -503,7 +506,7 @@ Partial Class frmPrintOrder
         '
         Me.lblRecipient.AutoSize = True
         Me.lblRecipient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblRecipient.Location = New System.Drawing.Point(252, 397)
+        Me.lblRecipient.Location = New System.Drawing.Point(229, 434)
         Me.lblRecipient.Name = "lblRecipient"
         Me.lblRecipient.Size = New System.Drawing.Size(47, 16)
         Me.lblRecipient.TabIndex = 12
@@ -514,7 +517,7 @@ Partial Class frmPrintOrder
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label20.Location = New System.Drawing.Point(12, 428)
+        Me.Label20.Location = New System.Drawing.Point(12, 465)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(193, 16)
         Me.Label20.TabIndex = 12
@@ -525,7 +528,7 @@ Partial Class frmPrintOrder
         '
         Me.lblRecipientPhone.AutoSize = True
         Me.lblRecipientPhone.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblRecipientPhone.Location = New System.Drawing.Point(252, 428)
+        Me.lblRecipientPhone.Location = New System.Drawing.Point(229, 465)
         Me.lblRecipientPhone.Name = "lblRecipientPhone"
         Me.lblRecipientPhone.Size = New System.Drawing.Size(83, 16)
         Me.lblRecipientPhone.TabIndex = 12
@@ -536,7 +539,7 @@ Partial Class frmPrintOrder
         '
         Me.Label22.AutoSize = True
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label22.Location = New System.Drawing.Point(12, 459)
+        Me.Label22.Location = New System.Drawing.Point(12, 496)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(129, 16)
         Me.Label22.TabIndex = 12
@@ -547,7 +550,7 @@ Partial Class frmPrintOrder
         '
         Me.lblRecipientAddress.AutoSize = True
         Me.lblRecipientAddress.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblRecipientAddress.Location = New System.Drawing.Point(252, 459)
+        Me.lblRecipientAddress.Location = New System.Drawing.Point(229, 496)
         Me.lblRecipientAddress.Name = "lblRecipientAddress"
         Me.lblRecipientAddress.Size = New System.Drawing.Size(55, 16)
         Me.lblRecipientAddress.TabIndex = 12
@@ -558,7 +561,7 @@ Partial Class frmPrintOrder
         '
         Me.Label24.AutoSize = True
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label24.Location = New System.Drawing.Point(12, 491)
+        Me.Label24.Location = New System.Drawing.Point(12, 529)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(420, 16)
         Me.Label24.TabIndex = 12
@@ -569,7 +572,7 @@ Partial Class frmPrintOrder
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label25.Location = New System.Drawing.Point(12, 526)
+        Me.Label25.Location = New System.Drawing.Point(12, 552)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(394, 16)
         Me.Label25.TabIndex = 12
@@ -580,7 +583,7 @@ Partial Class frmPrintOrder
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label26.Location = New System.Drawing.Point(12, 551)
+        Me.Label26.Location = New System.Drawing.Point(12, 577)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(198, 16)
         Me.Label26.TabIndex = 12
@@ -591,7 +594,7 @@ Partial Class frmPrintOrder
         '
         Me.lblCustomerFullName.AutoSize = True
         Me.lblCustomerFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblCustomerFullName.Location = New System.Drawing.Point(216, 551)
+        Me.lblCustomerFullName.Location = New System.Drawing.Point(216, 577)
         Me.lblCustomerFullName.Name = "lblCustomerFullName"
         Me.lblCustomerFullName.Size = New System.Drawing.Size(162, 16)
         Me.lblCustomerFullName.TabIndex = 12
@@ -602,7 +605,7 @@ Partial Class frmPrintOrder
         '
         Me.Label28.AutoSize = True
         Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label28.Location = New System.Drawing.Point(100, 567)
+        Me.Label28.Location = New System.Drawing.Point(100, 593)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(70, 16)
         Me.Label28.TabIndex = 12
@@ -642,16 +645,16 @@ Partial Class frmPrintOrder
         Me.Label32.Text = "ООО «Пилот»"
         Me.Label32.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
-        'Label33
+        'lblTicketNumber
         '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label33.Location = New System.Drawing.Point(243, 736)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(109, 16)
-        Me.Label33.TabIndex = 12
-        Me.Label33.Text = "Квитанция ____"
-        Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblTicketNumber.AutoSize = True
+        Me.lblTicketNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblTicketNumber.Location = New System.Drawing.Point(213, 736)
+        Me.lblTicketNumber.Name = "lblTicketNumber"
+        Me.lblTicketNumber.Size = New System.Drawing.Size(167, 16)
+        Me.lblTicketNumber.TabIndex = 12
+        Me.lblTicketNumber.Text = "Квитанция xx.xx.xxxx-0001"
+        Me.lblTicketNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label34
         '
@@ -713,11 +716,39 @@ Partial Class frmPrintOrder
         '
         Me.lblParts.AutoSize = True
         Me.lblParts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblParts.Location = New System.Drawing.Point(252, 147)
+        Me.lblParts.Location = New System.Drawing.Point(229, 147)
         Me.lblParts.Name = "lblParts"
         Me.lblParts.Size = New System.Drawing.Size(78, 16)
         Me.lblParts.TabIndex = 12
         Me.lblParts.Text = "(запчасти)"
+        '
+        'RectangleShape19
+        '
+        Me.RectangleShape19.Location = New System.Drawing.Point(503, 141)
+        Me.RectangleShape19.Name = "RectangleShape19"
+        Me.RectangleShape19.Size = New System.Drawing.Size(82, 130)
+        '
+        'lblUnits
+        '
+        Me.lblUnits.AutoSize = True
+        Me.lblUnits.BackColor = System.Drawing.Color.White
+        Me.lblUnits.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblUnits.Location = New System.Drawing.Point(505, 147)
+        Me.lblUnits.Name = "lblUnits"
+        Me.lblUnits.Size = New System.Drawing.Size(80, 16)
+        Me.lblUnits.TabIndex = 12
+        Me.lblUnits.Text = "(100500 шт.)"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Label3.Location = New System.Drawing.Point(12, 163)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(119, 16)
+        Me.Label3.TabIndex = 12
+        Me.Label3.Text = "запасных частей"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'frmPrintOrder
         '
@@ -725,13 +756,14 @@ Partial Class frmPrintOrder
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(593, 940)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblParts)
         Me.Controls.Add(Me.Label38)
         Me.Controls.Add(Me.Label37)
         Me.Controls.Add(Me.Label36)
         Me.Controls.Add(Me.Label35)
         Me.Controls.Add(Me.Label34)
-        Me.Controls.Add(Me.Label33)
+        Me.Controls.Add(Me.lblTicketNumber)
         Me.Controls.Add(Me.Label32)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label31)
@@ -764,6 +796,7 @@ Partial Class frmPrintOrder
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblLine1)
         Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.lblUnits)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -792,7 +825,7 @@ Partial Class frmPrintOrder
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents Label35 As System.Windows.Forms.Label
     Friend WithEvents Label34 As System.Windows.Forms.Label
-    Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents lblTicketNumber As System.Windows.Forms.Label
     Friend WithEvents Label32 As System.Windows.Forms.Label
     Friend WithEvents Label30 As System.Windows.Forms.Label
     Friend WithEvents Label31 As System.Windows.Forms.Label
@@ -841,4 +874,7 @@ Partial Class frmPrintOrder
     Friend WithEvents RectangleShape3 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents RectangleShape2 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents lblParts As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblUnits As System.Windows.Forms.Label
+    Friend WithEvents RectangleShape19 As Microsoft.VisualBasic.PowerPacks.RectangleShape
 End Class

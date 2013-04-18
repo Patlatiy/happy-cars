@@ -30,7 +30,7 @@
 
     Private Sub FillPrice()
         '(Price * Count) + Margin
-        txtSellPrice.Text = CStr((nudPartPrice.Value * nudPartCount.Value) + nudMargin.Value)
+        txtSellPrice.Text = ToMoney((nudPartPrice.Value * nudPartCount.Value) + nudMargin.Value)
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click

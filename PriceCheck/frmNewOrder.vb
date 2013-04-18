@@ -156,7 +156,7 @@
     End Sub
 
     Private Sub FillTotal()
-        txtTotal.Text = CStr(Math.Round(GetRawPrice() - nudDiscount.Value, 2))
+        txtTotal.Text = ToMoney(Math.Round(GetRawPrice() - nudDiscount.Value, 2))
     End Sub
 
     Private Sub comboCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboCustomer.SelectedIndexChanged

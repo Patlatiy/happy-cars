@@ -23,11 +23,11 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.RadioButton5 = New System.Windows.Forms.RadioButton()
@@ -95,10 +95,8 @@ Partial Class Form1
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.txtNumber = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.midnightTimer = New System.Windows.Forms.Timer(Me.components)
         Me.NightBox = New System.Windows.Forms.CheckBox()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabWash = New System.Windows.Forms.TabPage()
         Me.btnDebt1 = New System.Windows.Forms.Button()
@@ -313,7 +311,6 @@ Partial Class Form1
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabCustomersOrders = New System.Windows.Forms.TabPage()
-        Me.Button21 = New System.Windows.Forms.Button()
         Me.btnNewOrder = New System.Windows.Forms.Button()
         Me.btnShowAllOrders = New System.Windows.Forms.Button()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -375,6 +372,23 @@ Partial Class Form1
         Me.ComboNightWorkers = New System.Windows.Forms.ComboBox()
         Me.ScheduleTimer = New System.Windows.Forms.Timer(Me.components)
         Me.tmrSavePayments = New System.Windows.Forms.Timer(Me.components)
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДневнойОтчётToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДневнойОтчётToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.МесячныйОтчётToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.МесячныйОтчётToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДневнойОтчётToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.МесячныйОтчётToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.СервисToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДневнойОтчётToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.МесячныйОтчётToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КассаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ДневнойОтчётToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.МесячныйОтчётToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ЗаписьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.МагазинToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПринятыеПлатежиToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -440,6 +454,7 @@ Partial Class Form1
         Me.tabPayments.SuspendLayout()
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -1100,7 +1115,7 @@ Partial Class Form1
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label12.Location = New System.Drawing.Point(353, 557)
+        Me.Label12.Location = New System.Drawing.Point(353, 582)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(63, 24)
         Me.Label12.TabIndex = 3
@@ -1110,7 +1125,7 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label1.Location = New System.Drawing.Point(422, 557)
+        Me.Label1.Location = New System.Drawing.Point(422, 582)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(45, 24)
         Me.Label1.TabIndex = 2
@@ -1122,7 +1137,7 @@ Partial Class Form1
         Me.ComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(12, 2)
+        Me.ComboBox1.Location = New System.Drawing.Point(12, 27)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(259, 32)
         Me.ComboBox1.Sorted = True
@@ -1137,20 +1152,11 @@ Partial Class Form1
         'txtNumber
         '
         Me.txtNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.txtNumber.Location = New System.Drawing.Point(277, 2)
+        Me.txtNumber.Location = New System.Drawing.Point(277, 27)
         Me.txtNumber.Name = "txtNumber"
         Me.txtNumber.Size = New System.Drawing.Size(176, 29)
         Me.txtNumber.TabIndex = 7
         Me.txtNumber.Text = "... и номер машины"
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(939, 6)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(113, 22)
-        Me.Button2.TabIndex = 8
-        Me.Button2.Text = "Дневной отчёт"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'midnightTimer
         '
@@ -1166,15 +1172,6 @@ Partial Class Form1
         Me.NightBox.Text = "Ночь"
         Me.NightBox.UseVisualStyleBackColor = True
         '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(1058, 6)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(113, 22)
-        Me.Button3.TabIndex = 12
-        Me.Button3.Text = "Месячный отчёт"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.tabWash)
@@ -1189,7 +1186,7 @@ Partial Class Form1
         Me.TabControl1.Controls.Add(Me.tabCustomersOrders)
         Me.TabControl1.Controls.Add(Me.tabProviders)
         Me.TabControl1.Controls.Add(Me.tabPayments)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 40)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 65)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1172, 514)
@@ -2851,14 +2848,14 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea2.AxisX.Interval = 1.0R
-        ChartArea2.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount
-        ChartArea2.AxisX.Minimum = 1.0R
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea2)
-        Legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom
-        Legend2.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend2)
+        ChartArea1.AxisX.Interval = 1.0R
+        ChartArea1.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount
+        ChartArea1.AxisX.Minimum = 1.0R
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(13, 53)
         Me.Chart1.Name = "Chart1"
         Me.Chart1.Size = New System.Drawing.Size(1139, 402)
@@ -3154,10 +3151,10 @@ Partial Class Form1
         Me.dTable.Location = New System.Drawing.Point(0, 33)
         Me.dTable.Name = "dTable"
         Me.dTable.RowHeadersVisible = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Cyan
-        Me.dTable.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Cyan
+        Me.dTable.RowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dTable.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White
         Me.dTable.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black
         Me.dTable.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -3322,7 +3319,6 @@ Partial Class Form1
         '
         'tabCustomersOrders
         '
-        Me.tabCustomersOrders.Controls.Add(Me.Button21)
         Me.tabCustomersOrders.Controls.Add(Me.btnNewOrder)
         Me.tabCustomersOrders.Controls.Add(Me.btnShowAllOrders)
         Me.tabCustomersOrders.Controls.Add(Me.Label26)
@@ -3337,18 +3333,9 @@ Partial Class Form1
         Me.tabCustomersOrders.Text = "Клиенты и заказы"
         Me.tabCustomersOrders.UseVisualStyleBackColor = True
         '
-        'Button21
-        '
-        Me.Button21.Location = New System.Drawing.Point(1044, 462)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(102, 23)
-        Me.Button21.TabIndex = 11
-        Me.Button21.Text = "Сохранить всё"
-        Me.Button21.UseVisualStyleBackColor = True
-        '
         'btnNewOrder
         '
-        Me.btnNewOrder.Location = New System.Drawing.Point(597, 462)
+        Me.btnNewOrder.Location = New System.Drawing.Point(794, 462)
         Me.btnNewOrder.Name = "btnNewOrder"
         Me.btnNewOrder.Size = New System.Drawing.Size(102, 23)
         Me.btnNewOrder.TabIndex = 10
@@ -3360,7 +3347,7 @@ Partial Class Form1
         Me.btnShowAllOrders.BackColor = System.Drawing.Color.Transparent
         Me.btnShowAllOrders.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btnShowAllOrders.ForeColor = System.Drawing.Color.Sienna
-        Me.btnShowAllOrders.Location = New System.Drawing.Point(680, 3)
+        Me.btnShowAllOrders.Location = New System.Drawing.Point(656, 3)
         Me.btnShowAllOrders.Name = "btnShowAllOrders"
         Me.btnShowAllOrders.Size = New System.Drawing.Size(100, 21)
         Me.btnShowAllOrders.TabIndex = 9
@@ -3372,7 +3359,7 @@ Partial Class Form1
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label26.Location = New System.Drawing.Point(11, 0)
+        Me.Label26.Location = New System.Drawing.Point(47, 0)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(95, 24)
         Me.Label26.TabIndex = 8
@@ -3382,7 +3369,7 @@ Partial Class Form1
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label25.Location = New System.Drawing.Point(593, 0)
+        Me.Label25.Location = New System.Drawing.Point(569, 0)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(81, 24)
         Me.Label25.TabIndex = 8
@@ -3393,15 +3380,17 @@ Partial Class Form1
         Me.dgvOrders.AllowUserToAddRows = False
         Me.dgvOrders.AllowUserToDeleteRows = False
         Me.dgvOrders.AllowUserToResizeRows = False
-        Me.dgvOrders.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.dgvOrders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.dgvOrders.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvOrders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnOrderNumber, Me.cmnCustomer, Me.cmnDone, Me.cmnPayment, Me.cmnEdit, Me.cmnPrint})
-        Me.dgvOrders.Location = New System.Drawing.Point(597, 27)
+        Me.dgvOrders.Location = New System.Drawing.Point(573, 27)
         Me.dgvOrders.Name = "dgvOrders"
         Me.dgvOrders.RowHeadersVisible = False
+        Me.dgvOrders.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.ControlLight
+        Me.dgvOrders.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.ControlText
         Me.dgvOrders.RowTemplate.Height = 30
-        Me.dgvOrders.Size = New System.Drawing.Size(549, 429)
+        Me.dgvOrders.Size = New System.Drawing.Size(545, 429)
         Me.dgvOrders.TabIndex = 7
         '
         'cmnOrderNumber
@@ -3450,15 +3439,17 @@ Partial Class Form1
         Me.dgvCustomers.AllowUserToAddRows = False
         Me.dgvCustomers.AllowUserToDeleteRows = False
         Me.dgvCustomers.AllowUserToResizeRows = False
-        Me.dgvCustomers.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.dgvCustomers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgvCustomers.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.dgvCustomers.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCustomers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cmnID, Me.ColumnName, Me.ColumnPhone, Me.cmnOpen, Me.ColumnOrders})
-        Me.dgvCustomers.Location = New System.Drawing.Point(15, 27)
+        Me.dgvCustomers.Location = New System.Drawing.Point(51, 27)
         Me.dgvCustomers.Name = "dgvCustomers"
         Me.dgvCustomers.RowHeadersVisible = False
+        Me.dgvCustomers.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.ControlLight
+        Me.dgvCustomers.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.ControlText
         Me.dgvCustomers.RowTemplate.Height = 30
-        Me.dgvCustomers.Size = New System.Drawing.Size(549, 429)
+        Me.dgvCustomers.Size = New System.Drawing.Size(500, 429)
         Me.dgvCustomers.TabIndex = 2
         '
         'cmnID
@@ -3498,7 +3489,7 @@ Partial Class Form1
         '
         'btnNewCustomer
         '
-        Me.btnNewCustomer.Location = New System.Drawing.Point(462, 462)
+        Me.btnNewCustomer.Location = New System.Drawing.Point(250, 462)
         Me.btnNewCustomer.Name = "btnNewCustomer"
         Me.btnNewCustomer.Size = New System.Drawing.Size(102, 23)
         Me.btnNewCustomer.TabIndex = 0
@@ -3711,7 +3702,7 @@ Partial Class Form1
         'lblProviderFilet
         '
         Me.lblProviderFilet.AutoSize = True
-        Me.lblProviderFilet.Location = New System.Drawing.Point(957, 17)
+        Me.lblProviderFilet.Location = New System.Drawing.Point(957, 35)
         Me.lblProviderFilet.Name = "lblProviderFilet"
         Me.lblProviderFilet.Size = New System.Drawing.Size(50, 13)
         Me.lblProviderFilet.TabIndex = 108
@@ -3721,7 +3712,7 @@ Partial Class Form1
         '
         Me.comboProviderFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.comboProviderFilter.FormattingEnabled = True
-        Me.comboProviderFilter.Location = New System.Drawing.Point(1013, 14)
+        Me.comboProviderFilter.Location = New System.Drawing.Point(1013, 32)
         Me.comboProviderFilter.Name = "comboProviderFilter"
         Me.comboProviderFilter.Size = New System.Drawing.Size(142, 21)
         Me.comboProviderFilter.TabIndex = 107
@@ -3789,8 +3780,8 @@ Partial Class Form1
         '
         'cmnDebit
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.cmnDebit.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.cmnDebit.DefaultCellStyle = DataGridViewCellStyle2
         Me.cmnDebit.HeaderText = "Дебет"
         Me.cmnDebit.Name = "cmnDebit"
         Me.cmnDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -3798,8 +3789,8 @@ Partial Class Form1
         '
         'cmnCredit
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.cmnCredit.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.cmnCredit.DefaultCellStyle = DataGridViewCellStyle3
         Me.cmnCredit.HeaderText = "Кредит"
         Me.cmnCredit.Name = "cmnCredit"
         Me.cmnCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -3816,7 +3807,7 @@ Partial Class Form1
         '
         Me.lblDaySum.AutoSize = True
         Me.lblDaySum.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblDaySum.Location = New System.Drawing.Point(902, 557)
+        Me.lblDaySum.Location = New System.Drawing.Point(902, 582)
         Me.lblDaySum.Name = "lblDaySum"
         Me.lblDaySum.Size = New System.Drawing.Size(21, 24)
         Me.lblDaySum.TabIndex = 15
@@ -3826,7 +3817,7 @@ Partial Class Form1
         'curDatePicker
         '
         Me.curDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.curDatePicker.Location = New System.Drawing.Point(1095, 34)
+        Me.curDatePicker.Location = New System.Drawing.Point(1108, 31)
         Me.curDatePicker.Name = "curDatePicker"
         Me.curDatePicker.Size = New System.Drawing.Size(76, 20)
         Me.curDatePicker.TabIndex = 16
@@ -3834,7 +3825,7 @@ Partial Class Form1
         '
         'lblDOW
         '
-        Me.lblDOW.Location = New System.Drawing.Point(915, 33)
+        Me.lblDOW.Location = New System.Drawing.Point(928, 30)
         Me.lblDOW.Name = "lblDOW"
         Me.lblDOW.Size = New System.Drawing.Size(174, 20)
         Me.lblDOW.TabIndex = 18
@@ -3843,7 +3834,7 @@ Partial Class Form1
         'DiscountNud
         '
         Me.DiscountNud.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.DiscountNud.Location = New System.Drawing.Point(632, 2)
+        Me.DiscountNud.Location = New System.Drawing.Point(632, 27)
         Me.DiscountNud.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
         Me.DiscountNud.Name = "DiscountNud"
         Me.DiscountNud.Size = New System.Drawing.Size(71, 29)
@@ -3853,7 +3844,7 @@ Partial Class Form1
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label14.Location = New System.Drawing.Point(532, 6)
+        Me.Label14.Location = New System.Drawing.Point(532, 31)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(94, 24)
         Me.Label14.TabIndex = 20
@@ -3864,7 +3855,7 @@ Partial Class Form1
         Me.DiscountCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.DiscountCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.DiscountCombo.FormattingEnabled = True
-        Me.DiscountCombo.Location = New System.Drawing.Point(709, 3)
+        Me.DiscountCombo.Location = New System.Drawing.Point(709, 28)
         Me.DiscountCombo.Name = "DiscountCombo"
         Me.DiscountCombo.Size = New System.Drawing.Size(214, 28)
         Me.DiscountCombo.TabIndex = 21
@@ -3873,7 +3864,7 @@ Partial Class Form1
         '
         Me.lblNightWorkers.AutoSize = True
         Me.lblNightWorkers.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblNightWorkers.Location = New System.Drawing.Point(518, 557)
+        Me.lblNightWorkers.Location = New System.Drawing.Point(518, 582)
         Me.lblNightWorkers.Name = "lblNightWorkers"
         Me.lblNightWorkers.Size = New System.Drawing.Size(153, 24)
         Me.lblNightWorkers.TabIndex = 22
@@ -3885,7 +3876,7 @@ Partial Class Form1
         Me.ComboNightWorkers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboNightWorkers.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.ComboNightWorkers.FormattingEnabled = True
-        Me.ComboNightWorkers.Location = New System.Drawing.Point(676, 560)
+        Me.ComboNightWorkers.Location = New System.Drawing.Point(676, 585)
         Me.ComboNightWorkers.Name = "ComboNightWorkers"
         Me.ComboNightWorkers.Size = New System.Drawing.Size(204, 21)
         Me.ComboNightWorkers.TabIndex = 23
@@ -3899,12 +3890,122 @@ Partial Class Form1
         '
         Me.tmrSavePayments.Interval = 5000
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReportsToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1193, 24)
+        Me.MenuStrip1.TabIndex = 24
+        '
+        'ReportsToolStripMenuItem
+        '
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem, Me.МесячныйОтчётToolStripMenuItem, Me.СервисToolStripMenuItem, Me.КассаToolStripMenuItem, Me.ЗаписьToolStripMenuItem, Me.МагазинToolStripMenuItem})
+        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
+        Me.ReportsToolStripMenuItem.Text = "Отчёты"
+        '
+        'ДневнойОтчётToolStripMenuItem
+        '
+        Me.ДневнойОтчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem2, Me.МесячныйОтчётToolStripMenuItem2})
+        Me.ДневнойОтчётToolStripMenuItem.Name = "ДневнойОтчётToolStripMenuItem"
+        Me.ДневнойОтчётToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ДневнойОтчётToolStripMenuItem.Text = "Мойка"
+        '
+        'ДневнойОтчётToolStripMenuItem2
+        '
+        Me.ДневнойОтчётToolStripMenuItem2.Name = "ДневнойОтчётToolStripMenuItem2"
+        Me.ДневнойОтчётToolStripMenuItem2.Size = New System.Drawing.Size(166, 22)
+        Me.ДневнойОтчётToolStripMenuItem2.Text = "Дневной отчёт"
+        '
+        'МесячныйОтчётToolStripMenuItem2
+        '
+        Me.МесячныйОтчётToolStripMenuItem2.Name = "МесячныйОтчётToolStripMenuItem2"
+        Me.МесячныйОтчётToolStripMenuItem2.Size = New System.Drawing.Size(166, 22)
+        Me.МесячныйОтчётToolStripMenuItem2.Text = "Месячный отчёт"
+        '
+        'МесячныйОтчётToolStripMenuItem
+        '
+        Me.МесячныйОтчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem3, Me.МесячныйОтчётToolStripMenuItem3})
+        Me.МесячныйОтчётToolStripMenuItem.Name = "МесячныйОтчётToolStripMenuItem"
+        Me.МесячныйОтчётToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.МесячныйОтчётToolStripMenuItem.Text = "Шиномонтаж"
+        '
+        'ДневнойОтчётToolStripMenuItem3
+        '
+        Me.ДневнойОтчётToolStripMenuItem3.Name = "ДневнойОтчётToolStripMenuItem3"
+        Me.ДневнойОтчётToolStripMenuItem3.Size = New System.Drawing.Size(166, 22)
+        Me.ДневнойОтчётToolStripMenuItem3.Text = "Дневной отчёт"
+        '
+        'МесячныйОтчётToolStripMenuItem3
+        '
+        Me.МесячныйОтчётToolStripMenuItem3.Name = "МесячныйОтчётToolStripMenuItem3"
+        Me.МесячныйОтчётToolStripMenuItem3.Size = New System.Drawing.Size(166, 22)
+        Me.МесячныйОтчётToolStripMenuItem3.Text = "Месячный отчёт"
+        '
+        'СервисToolStripMenuItem
+        '
+        Me.СервисToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem4, Me.МесячныйОтчётToolStripMenuItem4})
+        Me.СервисToolStripMenuItem.Name = "СервисToolStripMenuItem"
+        Me.СервисToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.СервисToolStripMenuItem.Text = "Сервис"
+        '
+        'ДневнойОтчётToolStripMenuItem4
+        '
+        Me.ДневнойОтчётToolStripMenuItem4.Name = "ДневнойОтчётToolStripMenuItem4"
+        Me.ДневнойОтчётToolStripMenuItem4.Size = New System.Drawing.Size(166, 22)
+        Me.ДневнойОтчётToolStripMenuItem4.Text = "Дневной отчёт"
+        '
+        'МесячныйОтчётToolStripMenuItem4
+        '
+        Me.МесячныйОтчётToolStripMenuItem4.Name = "МесячныйОтчётToolStripMenuItem4"
+        Me.МесячныйОтчётToolStripMenuItem4.Size = New System.Drawing.Size(166, 22)
+        Me.МесячныйОтчётToolStripMenuItem4.Text = "Месячный отчёт"
+        '
+        'КассаToolStripMenuItem
+        '
+        Me.КассаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem5, Me.МесячныйОтчётToolStripMenuItem5})
+        Me.КассаToolStripMenuItem.Name = "КассаToolStripMenuItem"
+        Me.КассаToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.КассаToolStripMenuItem.Text = "Касса"
+        '
+        'ДневнойОтчётToolStripMenuItem5
+        '
+        Me.ДневнойОтчётToolStripMenuItem5.Name = "ДневнойОтчётToolStripMenuItem5"
+        Me.ДневнойОтчётToolStripMenuItem5.Size = New System.Drawing.Size(166, 22)
+        Me.ДневнойОтчётToolStripMenuItem5.Text = "Дневной отчёт"
+        '
+        'МесячныйОтчётToolStripMenuItem5
+        '
+        Me.МесячныйОтчётToolStripMenuItem5.Name = "МесячныйОтчётToolStripMenuItem5"
+        Me.МесячныйОтчётToolStripMenuItem5.Size = New System.Drawing.Size(166, 22)
+        Me.МесячныйОтчётToolStripMenuItem5.Text = "Месячный отчёт"
+        '
+        'ЗаписьToolStripMenuItem
+        '
+        Me.ЗаписьToolStripMenuItem.Name = "ЗаписьToolStripMenuItem"
+        Me.ЗаписьToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ЗаписьToolStripMenuItem.Text = "Запись"
+        '
+        'МагазинToolStripMenuItem
+        '
+        Me.МагазинToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПринятыеПлатежиToolStripMenuItem})
+        Me.МагазинToolStripMenuItem.Name = "МагазинToolStripMenuItem"
+        Me.МагазинToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.МагазинToolStripMenuItem.Text = "Магазин"
+        '
+        'ПринятыеПлатежиToolStripMenuItem
+        '
+        Me.ПринятыеПлатежиToolStripMenuItem.Name = "ПринятыеПлатежиToolStripMenuItem"
+        Me.ПринятыеПлатежиToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ПринятыеПлатежиToolStripMenuItem.Text = "Принятые платежи"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1193, 586)
+        Me.ClientSize = New System.Drawing.Size(1193, 615)
         Me.Controls.Add(Me.ComboNightWorkers)
         Me.Controls.Add(Me.lblNightWorkers)
         Me.Controls.Add(Me.DiscountCombo)
@@ -3914,14 +4015,14 @@ Partial Class Form1
         Me.Controls.Add(Me.curDatePicker)
         Me.Controls.Add(Me.lblDaySum)
         Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.txtNumber)
         Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -4016,6 +4117,8 @@ Partial Class Form1
         Me.tabPayments.PerformLayout()
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DiscountNud, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4062,7 +4165,6 @@ Partial Class Form1
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents txtNumber As System.Windows.Forms.TextBox
-    Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents midnightTimer As System.Windows.Forms.Timer
     Friend WithEvents CarpCounter As System.Windows.Forms.NumericUpDown
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
@@ -4073,7 +4175,6 @@ Partial Class Form1
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents udStain As System.Windows.Forms.NumericUpDown
     Friend WithEvents NightBox As System.Windows.Forms.CheckBox
-    Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents tabWash As System.Windows.Forms.TabPage
     Friend WithEvents tabMount As System.Windows.Forms.TabPage
@@ -4326,7 +4427,6 @@ Partial Class Form1
     Friend WithEvents cmnOpen As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents ColumnOrders As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents btnNewOrder As System.Windows.Forms.Button
-    Friend WithEvents Button21 As System.Windows.Forms.Button
     Friend WithEvents tabProviders As System.Windows.Forms.TabPage
     Friend WithEvents lblProvidersCaption As System.Windows.Forms.Label
     Friend WithEvents lwProviders As System.Windows.Forms.ListView
@@ -4366,5 +4466,22 @@ Partial Class Form1
     Friend WithEvents cmnEdit As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents cmnPrint As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents tmrSavePayments As System.Windows.Forms.Timer
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ДневнойОтчётToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ДневнойОтчётToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents МесячныйОтчётToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents МесячныйОтчётToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ДневнойОтчётToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents МесячныйОтчётToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents СервисToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ДневнойОтчётToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents МесячныйОтчётToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents КассаToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ДневнойОтчётToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents МесячныйОтчётToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents МагазинToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ПринятыеПлатежиToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ЗаписьToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

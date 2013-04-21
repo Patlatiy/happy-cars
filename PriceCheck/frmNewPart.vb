@@ -29,7 +29,7 @@
     End Sub
 
     Private Sub FillPrice()
-        '(Price * Count) + Margin
+        txtRawPrice.Text = ToMoney(nudPartPrice.Value * nudPartCount.Value)
         txtSellPrice.Text = ToMoney((nudPartPrice.Value * nudPartCount.Value) + nudMargin.Value)
     End Sub
 

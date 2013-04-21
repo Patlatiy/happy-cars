@@ -36,6 +36,10 @@ Partial Class frmAddCash
         Me.btnOK = New System.Windows.Forms.Button()
         Me.nudAdvance = New System.Windows.Forms.NumericUpDown()
         Me.nudPayment = New System.Windows.Forms.NumericUpDown()
+        Me.txtPaid = New System.Windows.Forms.TextBox()
+        Me.lblPaid = New System.Windows.Forms.Label()
+        Me.txtSellPrice = New System.Windows.Forms.TextBox()
+        Me.lblSellPrice = New System.Windows.Forms.Label()
         CType(Me.nudAdvance, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPayment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -134,7 +138,7 @@ Partial Class frmAddCash
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(224, 167)
+        Me.btnOK.Location = New System.Drawing.Point(232, 224)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(49, 23)
         Me.btnOK.TabIndex = 35
@@ -161,11 +165,51 @@ Partial Class frmAddCash
         Me.nudPayment.Size = New System.Drawing.Size(96, 20)
         Me.nudPayment.TabIndex = 36
         '
+        'txtPaid
+        '
+        Me.txtPaid.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtPaid.Location = New System.Drawing.Point(157, 170)
+        Me.txtPaid.Name = "txtPaid"
+        Me.txtPaid.ReadOnly = True
+        Me.txtPaid.Size = New System.Drawing.Size(96, 20)
+        Me.txtPaid.TabIndex = 39
+        '
+        'lblPaid
+        '
+        Me.lblPaid.AutoSize = True
+        Me.lblPaid.Location = New System.Drawing.Point(30, 173)
+        Me.lblPaid.Name = "lblPaid"
+        Me.lblPaid.Size = New System.Drawing.Size(56, 13)
+        Me.lblPaid.TabIndex = 37
+        Me.lblPaid.Text = "Оплачено"
+        '
+        'txtSellPrice
+        '
+        Me.txtSellPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtSellPrice.Location = New System.Drawing.Point(157, 196)
+        Me.txtSellPrice.Name = "txtSellPrice"
+        Me.txtSellPrice.ReadOnly = True
+        Me.txtSellPrice.Size = New System.Drawing.Size(96, 20)
+        Me.txtSellPrice.TabIndex = 40
+        '
+        'lblSellPrice
+        '
+        Me.lblSellPrice.AutoSize = True
+        Me.lblSellPrice.Location = New System.Drawing.Point(30, 199)
+        Me.lblSellPrice.Name = "lblSellPrice"
+        Me.lblSellPrice.Size = New System.Drawing.Size(101, 13)
+        Me.lblSellPrice.TabIndex = 38
+        Me.lblSellPrice.Text = "Стоимость заказа"
+        '
         'frmAddCash
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(282, 199)
+        Me.ClientSize = New System.Drawing.Size(282, 249)
+        Me.Controls.Add(Me.txtPaid)
+        Me.Controls.Add(Me.lblPaid)
+        Me.Controls.Add(Me.txtSellPrice)
+        Me.Controls.Add(Me.lblSellPrice)
         Me.Controls.Add(Me.nudPayment)
         Me.Controls.Add(Me.nudAdvance)
         Me.Controls.Add(Me.btnOK)
@@ -205,4 +249,8 @@ Partial Class frmAddCash
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents nudAdvance As System.Windows.Forms.NumericUpDown
     Friend WithEvents nudPayment As System.Windows.Forms.NumericUpDown
+    Friend WithEvents txtPaid As System.Windows.Forms.TextBox
+    Friend WithEvents lblPaid As System.Windows.Forms.Label
+    Friend WithEvents txtSellPrice As System.Windows.Forms.TextBox
+    Friend WithEvents lblSellPrice As System.Windows.Forms.Label
 End Class

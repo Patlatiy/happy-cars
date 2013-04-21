@@ -79,7 +79,6 @@
         MyOwner.Enabled = True
         Form1.SaveCustomers()
         Form1.SaveProviders()
-        Form1.SaveExecutors()
     End Sub
 
     Private Sub comboCustomers_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboCustomer.SelectedValueChanged
@@ -399,6 +398,7 @@
         If MsgBox("Вы действительно хотите удалить этот заказ?", MsgBoxStyle.YesNo, "Внимание!") = MsgBoxResult.Yes Then
             For Each Part In MyOrder.PartList
                 Form1.RemovePaymentsByPID(Part.ID)
+                Part.Provider.PartList.Remove(Part)
                 Part.Order = Nothing
                 Part.Provider = Nothing
             Next

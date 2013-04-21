@@ -114,13 +114,13 @@
             Exit Sub
         End If
         Select Case Form1.WriteRight
-            Case Form1.WriteRights.Bookkeeper
-                Dim testPartList = New List(Of HCPart)
-                Dim testOrder = New HCOrder(MyCustomer, Form1.curDate, 0, Form1.curDate, 0, Form1.curDate, 0, testPartList, False)
-                dgvCustomerOrders.Rows.Add(testOrder.Number.GetFullNumber, CStr(testOrder.GetTotalPrice), testOrder.Completed, "Открыть...")
-                dgvCustomerOrders.FirstDisplayedScrollingRowIndex = dgvCustomerOrders.Rows.Count - 1
-                frmOrder.Show(testOrder, Me)
-            Case Form1.WriteRights.Master
+            'Case Form1.WriteRights.Bookkeeper
+            '    Dim testPartList = New List(Of HCPart)
+            '    Dim testOrder = New HCOrder(MyCustomer, Form1.curDate, 0, Form1.curDate, 0, Form1.curDate, 0, testPartList, False)
+            '    dgvCustomerOrders.Rows.Add(testOrder.Number.GetFullNumber, CStr(testOrder.GetTotalPrice), testOrder.Completed, "Открыть...")
+            '    dgvCustomerOrders.FirstDisplayedScrollingRowIndex = dgvCustomerOrders.Rows.Count - 1
+            '    frmOrder.Show(testOrder, Me)
+            Case Form1.WriteRights.Master, Form1.WriteRights.Bookkeeper
                 If MyCustomer.IsIncomplete Then
                     MsgBox("Пожалуйста, заполните все поля", MsgBoxStyle.Critical, "Внимание")
                 Else

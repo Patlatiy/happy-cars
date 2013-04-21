@@ -42,6 +42,8 @@ Partial Class frmNewPart
         Me.comboUnits = New System.Windows.Forms.ComboBox()
         Me.comboProvider = New System.Windows.Forms.ComboBox()
         Me.lblProvider = New System.Windows.Forms.Label()
+        Me.lblRawPrice = New System.Windows.Forms.Label()
+        Me.txtRawPrice = New System.Windows.Forms.TextBox()
         CType(Me.nudMarginPc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,7 +79,7 @@ Partial Class frmNewPart
         'txtSellPrice
         '
         Me.txtSellPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtSellPrice.Location = New System.Drawing.Point(147, 167)
+        Me.txtSellPrice.Location = New System.Drawing.Point(145, 195)
         Me.txtSellPrice.Name = "txtSellPrice"
         Me.txtSellPrice.ReadOnly = True
         Me.txtSellPrice.Size = New System.Drawing.Size(100, 20)
@@ -86,7 +88,7 @@ Partial Class frmNewPart
         'lblSellPrice
         '
         Me.lblSellPrice.AutoSize = True
-        Me.lblSellPrice.Location = New System.Drawing.Point(12, 170)
+        Me.lblSellPrice.Location = New System.Drawing.Point(10, 198)
         Me.lblSellPrice.Name = "lblSellPrice"
         Me.lblSellPrice.Size = New System.Drawing.Size(80, 13)
         Me.lblSellPrice.TabIndex = 26
@@ -182,13 +184,13 @@ Partial Class frmNewPart
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(360, 200)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(360, 228)
         Me.ShapeContainer1.TabIndex = 28
         Me.ShapeContainer1.TabStop = False
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(303, 165)
+        Me.btnOK.Location = New System.Drawing.Point(303, 193)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(46, 23)
         Me.btnOK.TabIndex = 29
@@ -221,11 +223,31 @@ Partial Class frmNewPart
         Me.lblProvider.TabIndex = 19
         Me.lblProvider.Text = "Поставщик"
         '
+        'lblRawPrice
+        '
+        Me.lblRawPrice.AutoSize = True
+        Me.lblRawPrice.Location = New System.Drawing.Point(10, 172)
+        Me.lblRawPrice.Name = "lblRawPrice"
+        Me.lblRawPrice.Size = New System.Drawing.Size(77, 13)
+        Me.lblRawPrice.TabIndex = 26
+        Me.lblRawPrice.Text = "Цена закупки"
+        '
+        'txtRawPrice
+        '
+        Me.txtRawPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtRawPrice.Location = New System.Drawing.Point(145, 169)
+        Me.txtRawPrice.Name = "txtRawPrice"
+        Me.txtRawPrice.ReadOnly = True
+        Me.txtRawPrice.Size = New System.Drawing.Size(100, 20)
+        Me.txtRawPrice.TabIndex = 27
+        '
         'frmNewPart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(360, 200)
+        Me.ClientSize = New System.Drawing.Size(360, 228)
+        Me.Controls.Add(Me.txtRawPrice)
+        Me.Controls.Add(Me.lblRawPrice)
         Me.Controls.Add(Me.lblProvider)
         Me.Controls.Add(Me.comboProvider)
         Me.Controls.Add(Me.comboUnits)
@@ -277,4 +299,6 @@ Partial Class frmNewPart
     Friend WithEvents comboUnits As System.Windows.Forms.ComboBox
     Friend WithEvents comboProvider As System.Windows.Forms.ComboBox
     Friend WithEvents lblProvider As System.Windows.Forms.Label
+    Friend WithEvents lblRawPrice As System.Windows.Forms.Label
+    Friend WithEvents txtRawPrice As System.Windows.Forms.TextBox
 End Class

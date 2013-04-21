@@ -293,7 +293,9 @@
                     EnablePage(tabStats, False)
                     EnablePage(tabProviders, False)
                     EnablePage(tabPayments, False)
+                    EnablePage(tabSchedule, False)
                     cmnPayment.Visible = False
+                    ReportsToolStripMenuItem.Enabled = False
                 Case "-thegirl"
                     WriteRight = WriteRights.The_Girl
                     EnablePage(tabAnalytics, False)
@@ -759,8 +761,8 @@
                 While Not oFile.EndOfData
                     curRow = oFile.ReadFields
                     Dim PartList = New List(Of HCPart)
-                    For i = 11 To curRow.Length - 1 Step 7
-                        Dim newPart = New HCPart(CInt(curRow(i)), curRow(i + 1), CUInt(curRow(i + 2)), curRow(i + 3), CDbl(curRow(i + 4)), CDbl(curRow(i + 5)), Nothing, HCProvider.GetByID(CInt(curRow(i + 6))))
+                    For i = 11 To curRow.Length - 1 Step 8
+                        Dim newPart = New HCPart(CInt(curRow(i)), curRow(i + 1), CUInt(curRow(i + 2)), curRow(i + 3), CDbl(curRow(i + 4)), CDbl(curRow(i + 5)), Nothing, HCProvider.GetByID(CInt(curRow(i + 6))), CBool(curRow(i + 7)))
                         PartList.Add(newPart)
                     Next
                     Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
@@ -819,7 +821,7 @@
             End Using
             RefreshProviders()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'MsgBox(ex.Message)
         End Try
     End Sub
 
@@ -830,7 +832,7 @@
             For Each item As String In comboProviderFilter.Items
                 If item = row.Cells(index).Value Then foundFlag = True
             Next
-            If Not foundFlag Then comboProviderFilter.Items.Add(row.Cells(index).Value)
+            If Not foundFlag And Not row.Cells(index).Value Is Nothing Then comboProviderFilter.Items.Add(row.Cells(index).Value)
         Next
     End Sub
 
@@ -851,7 +853,7 @@
             RefreshProviders()
             RefreshProviderFilter()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'MsgBox(ex.Message)
         End Try
     End Sub
 
@@ -1638,8 +1640,17 @@
 
     Public Sub AddPayment(strID As String, strPID As String, strOperation As String, strDate As String, strTime As String, strIncome As String, strOutcome As String, strComment As String)
         Dim rowcount As Integer
-        rowcount = dgvPayments.RowCount - 1
-        dgvPayments.Rows.Add({strID, strPID, strOperation, strDate, strTime, strIncome, strOutcome, strComment})
+        rowcount = dgvPayments.RowCount
+        dgvPayments.Rows.Add()
+        dgvPayments.Item(0, rowcount).Value = strID
+        dgvPayments.Item(1, rowcount).Value = strPID
+        dgvPayments.Item(2, rowcount).Value = strOperation
+        dgvPayments.Item(3, rowcount).Value = strDate
+        dgvPayments.Item(4, rowcount).Value = strTime
+        dgvPayments.Item(5, rowcount).Value = strIncome
+        dgvPayments.Item(6, rowcount).Value = strOutcome
+        dgvPayments.Item(7, rowcount).Value = strComment
+        'dgvPayments.Rows(rowcount).SetValues({strID, strPID, strOperation, strDate, strTime, strIncome, strOutcome, strComment})
         dgvPayments.ClearSelection()
         dgvPayments.FirstDisplayedScrollingRowIndex = dgvPayments.RowCount - 1
     End Sub
@@ -1933,7 +1944,7 @@
                 Else
                     PartProviderID = Part.Provider.ID.ToString
                 End If
-                TextToWrite &= CStr(Part.ID) & "|" & Part.Name & "|" & CStr(Part.Count) & "|" & Part.Units & "|" & CStr(Part.Price) & "|" & CStr(Part.Margin) & "|" & PartProviderID & "|"
+                TextToWrite &= CStr(Part.ID) & "|" & Part.Name & "|" & CStr(Part.Count) & "|" & Part.Units & "|" & CStr(Part.Price) & "|" & CStr(Part.Margin) & "|" & PartProviderID & "|" & CStr(Part.PaymentAdded) & "|"
             Next
             TextToWrite = TextToWrite.Remove(TextToWrite.Length - 1)
             TextToWrite &= vbNewLine
@@ -2303,25 +2314,6 @@
         AddCommentBox.Text = ""
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        Form2.Dispose()
-        Dim WTL As String = ""
-        Select Case ServiceMode
-            Case 0
-                WTL = "Wash"
-            Case 1
-                WTL = "Mount"
-            Case 2
-                WTL = "Service"
-            Case 4
-                WTL = "Cash"
-            Case Else
-                Exit Sub
-        End Select
-        Form2.LoadMonth(WTL, 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
-        Form2.Show()
-    End Sub
-
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
         If WriteRight = WriteRights.Read_Only Then GoTo 0
         Select Case ServiceMode
@@ -2426,34 +2418,6 @@
                 Return "Неизвестный день недели"
         End Select
     End Function
-
-    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
-        Form2.Dispose()
-        Select Case ServiceMode
-            Case 0
-                Form2.LoadDay("Wash")
-            Case 1
-                Form2.LoadDay("Mount")
-            Case 2
-                Form2.LoadDay("Service")
-            Case 3
-                dSchedule1.Columns.Item(3).Visible = False
-                dSchedule1.Columns.Item(4).Visible = False
-                RadioButton19.Checked = True
-                Application.DoEvents()
-                Form2.LoadSchedule(True)
-                RadioButton20.Checked = True
-                Application.DoEvents()
-                Form2.LoadSchedule(False)
-                dSchedule1.Columns.Item(3).Visible = True
-                dSchedule1.Columns.Item(4).Visible = True
-            Case 4
-                Form2.LoadCash()
-            Case Else
-                Exit Sub
-        End Select
-        Form2.Show()
-    End Sub
 
     Private Sub RadioButton13_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton13.CheckedChanged
         FillPrices()
@@ -3589,13 +3553,6 @@
         End If
     End Sub
 
-    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
-        SaveCustomers()
-        SaveExecutors()
-        SaveProviders()
-        SavePayments()
-    End Sub
-
     Private Sub TabPage10_Enter(sender As Object, e As EventArgs) Handles tabCustomersOrders.Enter
         RefreshCustomersAndOrders()
     End Sub
@@ -3641,8 +3598,9 @@
             curProv = HCProvider.GetByName(lwProviders.SelectedItems(0).Text)
             For Each Part In curProv.PartList
                 Dim newGrp As System.Windows.Forms.ListViewGroup = Nothing
-                For Each grp As Windows.Forms.ListViewGroup In lwProviders.Groups
-                    If grp.Header = Part.Order.Number.GetFullNumber Then newGrp = grp
+                Dim PartNumber As String = Part.Order.Number.GetFullNumber
+                For Each grp As Windows.Forms.ListViewGroup In lwParts.Groups
+                    If grp.Header = PartNumber Then newGrp = grp
                 Next
                 If newGrp Is Nothing Then newGrp = New System.Windows.Forms.ListViewGroup(Part.Order.Number.GetFullNumber)
                 lwParts.Groups.Add(newGrp)
@@ -3672,18 +3630,25 @@
     End Sub
 
     Private Sub btnAddPayment_Click(sender As Object, e As EventArgs) Handles btnAddPayment.Click
+        If curPart Is Nothing Then Exit Sub
+        If curPart.PaymentAdded Then
+            If MsgBox("Вы уже оплачивали эту запчасть. Вы уверены, что хотите сделать это снова?", MsgBoxStyle.YesNo, "Внимание!") <> MsgBoxResult.Yes Then
+                Exit Sub
+            End If
+        End If
         Dim Result As String = InputBox("Оплата:", "Оплата запчасти поставщику", CStr(curPart.Price * curPart.Count))
         If Result Is Nothing Then Exit Sub
-        If Result = "" Then Exit Sub
+        If Result = "" Or Result = "0" Then Exit Sub
         Dim dblResult = Math.Round(CDbl(Result), 2)
         AddPayment(curProv.ID.ToString, _
                    curPart.ID.ToString, _
                    curProv.Name, _
                    curDate.ToString("dd.MM.yyyy"), _
                    Date.Now.ToString("hh:mm"), _
-                   CStr(curPart.Price * curPart.Count), _
+                   CStr(dblResult), _
                    "0", _
                    "За з/ч " & curPart.Name & " (" & curPart.Count & " " & curPart.Units & ") Заказ № " & curPart.Order.Number.GetFullNumber)
+        curPart.PaymentAdded = True
         SavePayments()
     End Sub
 
@@ -3711,20 +3676,21 @@
 
     Private Sub tabPayments_Enter(sender As Object, e As EventArgs) Handles tabPayments.Enter
         RefreshProviderFilter()
+        UpdateDebitCredit()
     End Sub
 
     Private Sub tabProviders_Enter(sender As Object, e As EventArgs) Handles tabProviders.Enter
         RefreshProviders()
     End Sub
 
-    Private Sub dgvPayments_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPayments.CellValueChanged
+    Private Sub dgvPayments_RowsAdded(sender As Object, e As EventArgs) Handles dgvPayments.RowsAdded, dgvPayments.RowsRemoved, dgvPayments.CellValueChanged
         If LoadProcedureRunning Then Exit Sub
+        UpdateDebitCredit()
         tmrSavePayments.Stop()
         tmrSavePayments.Start()
     End Sub
 
-    Private Sub dgvPayments_RowsAdded(sender As Object, e As EventArgs) Handles dgvPayments.RowsAdded, dgvPayments.RowsRemoved
-        If LoadProcedureRunning Then Exit Sub
+    Private Sub UpdateDebitCredit()
         On Error Resume Next
         Dim DebitSum As Double = 0
         Dim CreditSum As Double = 0
@@ -3734,10 +3700,9 @@
                 CreditSum += CDbl(row.Cells(cmnCredit.Index).Value)
             End If
         Next
-        lblDebitSum.Text = "D: " & DebitSum.ToString()
-        lblCreditSum.Text = "C: " & CreditSum.ToString()
-        lblDiff.Text = "Diff: " & CStr(DebitSum - CreditSum)
-        SavePayments()
+        lblDebitSum.Text = "D: " & Math.Round(DebitSum, 2).ToString
+        lblCreditSum.Text = "C: " & Math.Round(CreditSum, 2).ToString()
+        lblDiff.Text = "Diff: " & CStr(Math.Round(DebitSum - CreditSum, 2))
     End Sub
 
     Private Sub dgvPayments_SelectionChanged(sender As Object, e As EventArgs) Handles dgvPayments.SelectionChanged
@@ -3791,5 +3756,72 @@
     Private Sub tmrSavePayments_Tick(sender As Object, e As EventArgs) Handles tmrSavePayments.Tick
         tmrSavePayments.Stop()
         SavePayments()
+    End Sub
+
+    Private Sub ДневнойОтчётToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem2.Click
+        Form2.Dispose()
+        Form2.LoadDay("Wash")
+        Form2.Show()
+    End Sub
+
+    Private Sub ДневнойОтчётToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem3.Click
+        Form2.Dispose()
+        Form2.LoadDay("Mount")
+        Form2.Show()
+    End Sub
+
+    Private Sub ДневнойОтчётToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem4.Click
+        Form2.Dispose()
+        Form2.LoadDay("Service")
+        Form2.Show()
+    End Sub
+
+    Private Sub ДневнойОтчётToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem5.Click
+        Form2.Dispose()
+        Form2.LoadCash()
+        Form2.Show()
+    End Sub
+
+    Private Sub МесячныйОтчётToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles МесячныйОтчётToolStripMenuItem2.Click
+        Form2.Dispose()
+        Form2.LoadMonth("Wash", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
+        Form2.Show()
+    End Sub
+
+    Private Sub МесячныйОтчётToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles МесячныйОтчётToolStripMenuItem3.Click
+        Form2.Dispose()
+        Form2.LoadMonth("Mount", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
+        Form2.Show()
+    End Sub
+
+    Private Sub МесячныйОтчётToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles МесячныйОтчётToolStripMenuItem4.Click
+        Form2.Dispose()
+        Form2.LoadMonth("Service", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
+        Form2.Show()
+    End Sub
+
+    Private Sub МесячныйОтчётToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles МесячныйОтчётToolStripMenuItem5.Click
+        Form2.Dispose()
+        Form2.LoadMonth("Cash", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
+        Form2.Show()
+    End Sub
+
+    Private Sub ЗаписьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ЗаписьToolStripMenuItem.Click
+        Form2.Dispose()
+        dSchedule1.Columns.Item(3).Visible = False
+        dSchedule1.Columns.Item(4).Visible = False
+        RadioButton19.Checked = True
+        Application.DoEvents()
+        Form2.LoadSchedule(True)
+        RadioButton20.Checked = True
+        Application.DoEvents()
+        Form2.LoadSchedule(False)
+        dSchedule1.Columns.Item(3).Visible = True
+        dSchedule1.Columns.Item(4).Visible = True
+        Form2.Show()
+    End Sub
+
+    Private Sub ПринятыеПлатежиToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПринятыеПлатежиToolStripMenuItem.Click
+        frmShowPayments.Show()
     End Sub
 End Class

@@ -22,6 +22,8 @@
             nudPayment.Enabled = False
             dtpPayment.Enabled = False
         End If
+        txtSellPrice.Text = ToMoney(MyOrder.GetTotalPrice)
+        txtPaid.Text = ToMoney(MyOrder.AdvanceSum + MyOrder.PaymentSum)
     End Sub
 
     Private Sub frmAddCash_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -34,5 +36,13 @@
         MyOrder.PaymentSum = CDbl(nudPayment.Value)
         MyOrder.PaymentDate = dtpPayment.Value
         Close()
+    End Sub
+
+    Private Sub nudAdvance_ValueChanged(sender As Object, e As EventArgs) Handles nudAdvance.ValueChanged
+        txtPaid.Text = ToMoney(nudAdvance.Value + nudPayment.Value)
+    End Sub
+
+    Private Sub nudPayment_ValueChanged(sender As Object, e As EventArgs) Handles nudPayment.ValueChanged
+        txtPaid.Text = ToMoney(nudAdvance.Value + nudPayment.Value)
     End Sub
 End Class

@@ -44,7 +44,6 @@
         End If
         Form1.SaveCustomers()
         Form1.SaveProviders()
-        Form1.SaveExecutors()
         Close()
     End Sub
 
@@ -54,6 +53,7 @@
         Dim newArr() As String = {CStr(lwParts.Items.Count + 1), pName, CStr(pCount) & " " & pUnits, CStr(newPart.GetSellPrice)}
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items.Add(newItem)
+        FillRaw()
         FillTotal()
     End Sub
 
@@ -66,6 +66,7 @@
         Dim newArr() As String = {CStr(CurPartPosition), pName, CStr(pCount), CStr(CurPart.GetSellPrice)}
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items(lwParts.SelectedIndices(0)) = newItem
+        FillRaw()
         FillTotal()
     End Sub
 
@@ -129,7 +130,7 @@
         End If
     End Sub
 
-    Private Function GetRawPrice() As Double
+    Private Function GetSellPrice() As Double
         Dim TotalOrderPrice As Double = 0
         For Each Part In MyPartList
             TotalOrderPrice += Part.GetSellPrice()
@@ -138,15 +139,24 @@
         Return TotalOrderPrice
     End Function
 
+    Private Function GetRawPrice() As Double
+        Dim TotalRawPrice As Double = 0
+        For Each Part In MyPartList
+            TotalRawPrice += Part.Price * Part.Count
+        Next
+        TotalRawPrice = Math.Round(TotalRawPrice, 2)
+        Return TotalRawPrice
+    End Function
+
     Dim Silently As Boolean = False
     Private Sub nudDiscountPc_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscountPc.ValueChanged
         If Silently Then Exit Sub
-        Dim dblDiscount As Double = GetRawPrice() * nudDiscountPc.Value / 100
+        Dim dblDiscount As Double = GetSellPrice() * nudDiscountPc.Value / 100
         nudDiscount.Value = dblDiscount
     End Sub
 
     Private Sub nudDiscount_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscount.ValueChanged
-        Dim newValue = Math.Round(nudDiscount.Value * 100 / GetRawPrice())
+        Dim newValue = Math.Round(nudDiscount.Value * 100 / GetSellPrice())
         If newValue >= nudDiscountPc.Minimum And newValue <= nudDiscountPc.Maximum Then
             Silently = True
             nudDiscountPc.Value = newValue
@@ -156,7 +166,11 @@
     End Sub
 
     Private Sub FillTotal()
-        txtTotal.Text = ToMoney(Math.Round(GetRawPrice() - nudDiscount.Value, 2))
+        txtTotal.Text = ToMoney(Math.Round(GetSellPrice() - nudDiscount.Value, 2))
+    End Sub
+
+    Private Sub FillRaw()
+        txtRawPrice.Text = ToMoney(Math.Round(GetRawPrice(), 2))
     End Sub
 
     Private Sub comboCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboCustomer.SelectedIndexChanged

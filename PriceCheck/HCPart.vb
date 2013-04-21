@@ -6,6 +6,7 @@
     Public Shared UnitsList As New List(Of String)
     Public Shared GlobalID As Integer
     Public ID As Integer
+    Public PaymentAdded As Boolean = False
 
     Private _Price As ULong
     Public Property Price As Double
@@ -47,11 +48,11 @@
     End Sub
 
     Sub New(nName As String, nCount As UInteger, nUnits As String, nPrice As Double, nMargin As Double, ByRef nOrder As HCOrder, ByRef nProvider As HCProvider)
-        Me.New(GlobalID, nName, nCount, nUnits, nPrice, nMargin, nOrder, nProvider)
+        Me.New(GlobalID, nName, nCount, nUnits, nPrice, nMargin, nOrder, nProvider, False)
         If GlobalID = ID Then GlobalID += 1
     End Sub
 
-    Sub New(nID As Integer, nName As String, nCount As UInteger, nUnits As String, nPrice As Double, nMargin As Double, ByRef nOrder As HCOrder, ByRef nProvider As HCProvider)
+    Sub New(nID As Integer, nName As String, nCount As UInteger, nUnits As String, nPrice As Double, nMargin As Double, ByRef nOrder As HCOrder, ByRef nProvider As HCProvider, nPA As Boolean)
         ID = nID
         Name = nName
         Count = nCount
@@ -60,6 +61,7 @@
         Margin = nMargin
         Provider = nProvider
         Order = nOrder
+        PaymentAdded = nPA
         If Not Provider Is Nothing Then Provider.PartList.Add(Me)
         If GlobalID <= ID Then GlobalID = ID + 1
     End Sub

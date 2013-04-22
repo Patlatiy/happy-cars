@@ -30,7 +30,10 @@
 
     Private Sub FillPrice()
         txtRawPrice.Text = ToMoney(nudPartPrice.Value * nudPartCount.Value)
-        txtSellPrice.Text = ToMoney((nudPartPrice.Value * nudPartCount.Value) + nudMargin.Value)
+        Silently = True
+        nudSellPrice.Value = (nudPartPrice.Value * nudPartCount.Value) + nudMargin.Value
+        Silently = False
+        txtSellPrice.Text = ToMoney(nudSellPrice.Value)
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
@@ -48,6 +51,12 @@
         FillPrice()
     End Sub
 
+    Private Sub nudSellPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudSellPrice.ValueChanged
+        If Silently Then Exit Sub
+        Dim dblMargin As Double = Math.Round(nudSellPrice.Value - nudPartPrice.Value * nudPartCount.Value, 2)
+        nudMargin.Value = dblMargin
+    End Sub
+
     Private Sub nudMarginPc_ValueChanged(sender As Object, e As EventArgs) Handles nudMarginPc.ValueChanged
         If Silently Then Exit Sub
         Dim dblMargin As Double = Math.Round(nudPartPrice.Value * nudPartCount.Value * nudMarginPc.Value / 100, 2)
@@ -59,10 +68,12 @@
         Dim dblmargin As Double = Math.Round((nudMargin.Value * 100) / (nudPartPrice.Value * nudPartCount.Value))
         Silently = True
         nudMarginPc.Value = dblmargin
+        nudSellPrice.Value = nudPartPrice.Value * nudPartCount.Value + nudMargin.Value
         Silently = False
     End Sub
 
     Private Sub frmNewPart_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         MyOwner.Enabled = True
     End Sub
+
 End Class

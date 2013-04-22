@@ -504,6 +504,7 @@ Partial Class frmOrder
         '
         'btnDeletePart
         '
+        Me.btnDeletePart.Enabled = False
         Me.btnDeletePart.Location = New System.Drawing.Point(409, 196)
         Me.btnDeletePart.Name = "btnDeletePart"
         Me.btnDeletePart.Size = New System.Drawing.Size(99, 22)

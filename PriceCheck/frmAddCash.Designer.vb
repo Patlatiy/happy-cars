@@ -38,7 +38,7 @@ Partial Class frmAddCash
         Me.nudPayment = New System.Windows.Forms.NumericUpDown()
         Me.txtPaid = New System.Windows.Forms.TextBox()
         Me.lblPaid = New System.Windows.Forms.Label()
-        Me.txtSellPrice = New System.Windows.Forms.TextBox()
+        Me.txtDebt = New System.Windows.Forms.TextBox()
         Me.lblSellPrice = New System.Windows.Forms.Label()
         CType(Me.nudAdvance, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPayment, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -183,23 +183,23 @@ Partial Class frmAddCash
         Me.lblPaid.TabIndex = 37
         Me.lblPaid.Text = "Оплачено"
         '
-        'txtSellPrice
+        'txtDebt
         '
-        Me.txtSellPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtSellPrice.Location = New System.Drawing.Point(157, 196)
-        Me.txtSellPrice.Name = "txtSellPrice"
-        Me.txtSellPrice.ReadOnly = True
-        Me.txtSellPrice.Size = New System.Drawing.Size(96, 20)
-        Me.txtSellPrice.TabIndex = 40
+        Me.txtDebt.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtDebt.Location = New System.Drawing.Point(157, 196)
+        Me.txtDebt.Name = "txtDebt"
+        Me.txtDebt.ReadOnly = True
+        Me.txtDebt.Size = New System.Drawing.Size(96, 20)
+        Me.txtDebt.TabIndex = 40
         '
         'lblSellPrice
         '
         Me.lblSellPrice.AutoSize = True
         Me.lblSellPrice.Location = New System.Drawing.Point(30, 199)
         Me.lblSellPrice.Name = "lblSellPrice"
-        Me.lblSellPrice.Size = New System.Drawing.Size(101, 13)
+        Me.lblSellPrice.Size = New System.Drawing.Size(87, 13)
         Me.lblSellPrice.TabIndex = 38
-        Me.lblSellPrice.Text = "Стоимость заказа"
+        Me.lblSellPrice.Text = "Задолженность"
         '
         'frmAddCash
         '
@@ -208,7 +208,7 @@ Partial Class frmAddCash
         Me.ClientSize = New System.Drawing.Size(282, 249)
         Me.Controls.Add(Me.txtPaid)
         Me.Controls.Add(Me.lblPaid)
-        Me.Controls.Add(Me.txtSellPrice)
+        Me.Controls.Add(Me.txtDebt)
         Me.Controls.Add(Me.lblSellPrice)
         Me.Controls.Add(Me.nudPayment)
         Me.Controls.Add(Me.nudAdvance)
@@ -251,6 +251,6 @@ Partial Class frmAddCash
     Friend WithEvents nudPayment As System.Windows.Forms.NumericUpDown
     Friend WithEvents txtPaid As System.Windows.Forms.TextBox
     Friend WithEvents lblPaid As System.Windows.Forms.Label
-    Friend WithEvents txtSellPrice As System.Windows.Forms.TextBox
+    Friend WithEvents txtDebt As System.Windows.Forms.TextBox
     Friend WithEvents lblSellPrice As System.Windows.Forms.Label
 End Class

@@ -206,7 +206,7 @@
     End Function
 
     ''' <summary>
-    ''' Returns price of whole order, without discount
+    ''' Returns price of a whole order, without discount
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -217,6 +217,21 @@
         Next
         TotalOrderPrice = Math.Round(TotalOrderPrice, 2)
         Return TotalOrderPrice
+    End Function
+
+    ''' <summary>
+    ''' Returns (Price*Count) for all parts of specific provider
+    ''' </summary>
+    ''' <param name="Provider"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function GetProviderPrice(Provider As HCProvider) As Double
+        Dim Total As Double = 0
+        For Each part In PartList
+            If part.Provider Is Provider Then Total += part.Price * part.Count
+        Next
+        Total = Math.Round(Total, 2)
+        Return Total
     End Function
 
     ''' <summary>
@@ -238,5 +253,21 @@
             If Order.Number.ID > MaxID Then MaxID = Order.Number.ID
         Next
         GlobalID = MaxID + 1
+    End Sub
+
+    ''' <summary>
+    ''' Disposes of this order
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Sub Kill()
+        Form1.RemovePaymentsByOID(Me.Number.GetFullNumber)
+        For Each Part In Me.PartList
+            Part.Provider.PartList.Remove(Part)
+            Part.Order = Nothing
+            Part.Provider = Nothing
+        Next
+        Me.PartList = Nothing
+        HCOrder.OrderList.Remove(Me)
+        Me.Customer.MyOrderList.Remove(Me)
     End Sub
 End Class

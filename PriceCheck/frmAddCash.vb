@@ -22,7 +22,7 @@
             nudPayment.Enabled = False
             dtpPayment.Enabled = False
         End If
-        txtSellPrice.Text = ToMoney(MyOrder.GetTotalPrice)
+        txtDebt.Text = ToMoney(MyOrder.GetTotalPrice - (MyOrder.AdvanceSum + MyOrder.PaymentSum))
         txtPaid.Text = ToMoney(MyOrder.AdvanceSum + MyOrder.PaymentSum)
     End Sub
 

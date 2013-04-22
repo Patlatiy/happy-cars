@@ -159,6 +159,7 @@
             curPart.Count = nudPartCount.Value
             lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count) & " " & curPart.Units
             UpdatePart()
+            Form1.UpdatePart(curPart)
         End If
     End Sub
 
@@ -167,6 +168,7 @@
         If curPart.Price <> nudPartPrice.Value Then
             curPart.Price = nudPartPrice.Value
             UpdatePart()
+            Form1.UpdatePart(curPart)
         End If
     End Sub
 
@@ -180,7 +182,7 @@
         txtSellPrice.Enabled = True
         txtRawPrice.Enabled = True
         comboUnits.Enabled = True
-        comboProvider.Enabled = True
+        'comboProvider.Enabled = True
     End Sub
 
     Sub DisablePartControls()
@@ -379,7 +381,7 @@
         dtpAdvance.Enabled = Bk
         nudPayment.Enabled = Bk
         dtpPayment.Enabled = Bk
-        btnDeletePart.Enabled = BkOrMaster
+        'btnDeletePart.Enabled = BkOrMaster
         btnNewPart.Enabled = BkOrMaster
         nudDiscount.Enabled = BkOrMaster
         nudDiscountPc.Enabled = BkOrMaster
@@ -396,16 +398,7 @@
             Exit Sub
         End If
         If MsgBox("Вы действительно хотите удалить этот заказ?", MsgBoxStyle.YesNo, "Внимание!") = MsgBoxResult.Yes Then
-            For Each Part In MyOrder.PartList
-                Form1.RemovePaymentsByPID(Part.ID)
-                Part.Provider.PartList.Remove(Part)
-                Part.Order = Nothing
-                Part.Provider = Nothing
-            Next
-            MyOrder.PartList = Nothing
-            HCOrder.OrderList.Remove(MyOrder)
-            MyOrder.Customer.MyOrderList.Remove(MyOrder)
-            Me.Close()
+            MyOrder.Kill()
         End If
     End Sub
 
@@ -427,7 +420,7 @@
             If Not curPart.Provider Is Nothing Then curPart.Provider.PartList.Remove(curPart)
             curPart.Provider = newProv
             If Not curPart.Provider Is Nothing Then curPart.Provider.PartList.Add(curPart)
-            Form1.UpdateProviderForPID(curPart.ID, curPart.Provider)
+            Form1.UpdatePart(curPart)
         End If
     End Sub
 
@@ -438,7 +431,7 @@
         If Not curPart.Provider Is Nothing Then curPart.Provider.PartList.Remove(curPart)
         curPart.Provider = newProv
         If Not curPart.Provider Is Nothing Then curPart.Provider.PartList.Add(curPart)
-        Form1.UpdateProviderForPID(curPart.ID, curPart.Provider)
+        Form1.UpdatePart(curPart)
     End Sub
 
     Private Sub comboProvider_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboProvider.SelectedIndexChanged
@@ -448,6 +441,6 @@
         If Not curPart.Provider Is Nothing Then curPart.Provider.PartList.Remove(curPart)
         curPart.Provider = newProv
         If Not curPart.Provider Is Nothing Then curPart.Provider.PartList.Add(curPart)
-        Form1.UpdateProviderForPID(curPart.ID, curPart.Provider)
+        Form1.UpdatePart(curPart)
     End Sub
 End Class

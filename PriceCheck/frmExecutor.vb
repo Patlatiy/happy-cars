@@ -18,10 +18,14 @@
         MyExecutor.LastName = txtLastName.Text
         MyExecutor.Patronage = txtPatron.Text
         MyExecutor.Phone = txtPhone.Text
+        Close()
+    End Sub
+
+    Private Sub frmExecutor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If MyExecutor.FirstName = "" And MyExecutor.LastName = "" And MyExecutor.Patronage = "" Then HCExecutor.ExecList.Remove(MyExecutor)
         MyOwner.Enabled = True
         If MyOwner Is frmNewOrder Then
             frmNewOrder.RefreshExecutors(MyExecutor)
         End If
-        Close()
     End Sub
 End Class

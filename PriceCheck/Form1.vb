@@ -244,15 +244,9 @@
                 sum -= CLng(PartsOutDiscounted.Text)
             Case 4
                 lblDaySum.Text = "В кассе: " & CStr(cSum) & "р."
-            Case 7
-                For i = 0 To dSalary.RowCount - 1
-                    sum += Math.Round(CSng(dSalary.Item(7, i).Value), 2)
-                Next
-                lblDaySum.Text = ""
             Case Else
                 lblDaySum.Text = ""
         End Select
-        If ServiceMode = 7 Then sum = Math.Round(sum)
 0:
 
         If DiscountNud.Value <> 0 And ServiceMode < 2 Then
@@ -304,63 +298,55 @@
                     EnablePage(tabPayments, False)
                     cmnEdit.Visible = False
                     cmnOpen.Visible = False
+                Case "-log"
+                    frmLog.Show()
             End Select
         Next
         If WriteRight = WriteRights.Read_Only Then
-            'ComboBox1.Hide()
-            'txtNumber.Hide()
-            'Button1.Hide()
-            'Button4.Hide()
-            'Button5.Hide()
-            'Button6.Hide()
-            'Button7.Hide()
-            'AddCashButton.Hide()
-            'OweBox.Hide()
-            'OweBox2.Hide()
-            'OweBox3.Hide()
-            'GroupBox1.Hide()
-            'GroupBox2.Hide()
-            'GroupBox5.Hide()
-            'GroupBox6.Hide()
-            'GroupBox7.Hide()
-            'dataDay.Dock = DockStyle.Fill
-            'dataDay.Columns(4).Width = 500
-            'NightBox.Left = 870
-            'NightBox.Top = 10
-            'btnDebt1.Left = 860
-            'btnDebt1.Top = 25
-            'btnDebt2.Left = 860
-            'btnDebt2.Top = 5
-            'btnDebt3.Left = 870
-            'btnDebt3.Top = 5
-            'dataDayMount.Dock = DockStyle.Fill
-            'dataDayMount.Columns(4).Width = 500
-            'dataService.Dock = DockStyle.Fill
-            'dataService.Columns(4).Width = 250
-            'dataService.Columns(6).Width = 250
-            'TabControl1.Width = 927
-            'Label14.Hide()
-            'DiscountNud.Hide()
-            'DiscountCombo.Hide()
-            'Button2.Left = 700
-            'Button3.Left = 820
-            'lblDaySum.Left = 10
-            'lblDaySum.Top = 5
-            'Label1.Hide()
-            'Label12.Hide()
-            'Chart1.Width = 890
-            'lblDOW.Left = 629
-            'curDatePicker.Left = lblDOW.Left + lblDOW.Width
-            ''dSchedule2.Hide()
-            ''Button12.Hide()
-            ''ComboTLS2.Hide()
-            ''lblTomorrow.Hide()
-            ''GroupBox8.Left = 491
-            'Me.Width = 955
-            'Me.Height = 593
-            'For i = 0 To dCash.ColumnCount - 1
-            '    dCash.Columns(i).ReadOnly = True
-            'Next
+            ComboBox1.Hide()
+            txtNumber.Hide()
+            Button1.Hide()
+            Button4.Hide()
+            Button5.Hide()
+            Button6.Hide()
+            Button7.Hide()
+            AddCashButton.Hide()
+            OweBox.Hide()
+            OweBox2.Hide()
+            OweBox3.Hide()
+            GroupBox1.Hide()
+            GroupBox2.Hide()
+            GroupBox5.Hide()
+            GroupBox6.Hide()
+            GroupBox7.Hide()
+            Label14.Hide()
+            DiscountNud.Hide()
+            DiscountCombo.Hide()
+            Label1.Hide()
+            Label12.Hide()
+            Button12.Hide()
+            ComboTLS2.Hide()
+            lblTomorrow.Hide()
+            For i = 0 To dCash.ColumnCount - 1
+                dCash.Columns(i).ReadOnly = True
+            Next
+            dataDay.Left = 10
+            NightBox.Left = dataDay.Width + 20
+            NightBox.Top = 10
+            btnDebt1.Left = NightBox.Left
+            btnDebt1.Top = 35
+            TabControl1.Top = 30
+            Me.Height = Me.Height - 30
+            lblDaySum.Top = lblDaySum.Top - 30
+            dataDayMount.Left = 10
+            btnDebt2.Left = dataDayMount.Width + 20
+            btnDebt2.Top = 10
+            dataService.Left = 10
+            btnDebt3.Left = dataService.Width + 15
+            btnDebt3.Top = 10
+            btnNewCustomer.Hide()
+            btnNewOrder.Hide()
+            btnAddPayment.Hide()
             Me.Text = Me.Text & " - ТОЛЬКО ЧТЕНИЕ"
         End If
         LoadCars()
@@ -371,6 +357,7 @@
 
     Public Sub LoadWash()
         Try
+            Log("Loading wash")
             dayCC = 1 'Устанавлиаем номер последней машины
             dataDay.Rows.Clear() 'Очищаем все строки дневного отчёта мойки
             ComboNightWorkers.Items.Clear()
@@ -413,6 +400,7 @@
 
     Public Sub LoadMount()
         Try
+            Log("Loading mount")
             DayCCMount = 1 'Устанавлиаем номер последней машины на шиномонтаже
             dataDayMount.Rows.Clear() 'Очищаем все строки дневного отчёта шиномонтажа
             Dim curRow As String()
@@ -436,6 +424,7 @@
 
     Public Sub LoadService()
         Try
+            Log("Loading service")
             DayCCService = 1 'Устанавливаем ... ну вы поняли
             dataService.Rows.Clear() 'очищаем... ну вы поняли
             Dim curRow As String()
@@ -467,6 +456,7 @@
 
     Public Sub LoadCash()
         Try
+            Log("Loading cash")
             dCash.Rows.Clear() 'Очищаем кассовуюю книгу
             Dim curRow As String()
             'Считываем базу кассовой книги:
@@ -500,6 +490,7 @@
 
     Public Sub LoadTable()
         'Try
+        '    Log("Loading table")
         '    dTable.Rows.Clear() 'Чистим табель
         '    dTable.Columns.Clear() 'Чистим табель
         '    Dim curRow As String()
@@ -569,6 +560,7 @@
 
     Public Sub LoadSchedule(Optional RefreshHash As Boolean = False)
         Try
+            Log("Loading schedule")
             sc1Path = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & CStr(CurSche) & "sc.ini"
             sc2Path = Application.StartupPath & "\data\" & CStr(nextDay.Year) & "\" & CStr(nextDay.Month) & "\" & CStr(nextDay.Day) & CStr(CurSche) & "sc.ini"
             dSchedule1.Rows.Clear() 'Очищаем сегодняшние записи
@@ -628,6 +620,7 @@
 
     Public Sub LoadAdvance()
         Try
+            Log("Loading advance")
             Dim CurRow As String()
             For Each wrkr In Worker.AllOfThem
                 wrkr.wBonus = 0
@@ -674,6 +667,7 @@
 
     Public Sub LoadDebts()
         Try
+            Log("Loading debts")
             Dim CurRow As String()
             If My.Computer.FileSystem.FileExists(dPath & "\Debts.ini") Then
                 Using dFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(dPath & "\Debts.ini")
@@ -696,6 +690,7 @@
 
     Public Sub LoadState()
         Try
+            Log("Loading state")
             Worker.Clear()
             Dim curRow As String()
             Using tFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\State.ini")
@@ -732,6 +727,7 @@
     Sub LoadCustomers()
         Dim curRow As String()
         Try
+            Log("Loading customers")
             HCOrder.KillAll()
             HCCustomer.KillAll()
             LoadExecutors()
@@ -751,6 +747,7 @@
         Catch ex As Exception
         End Try
         Try
+            Log("Loading orders")
             Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
                 oFile.TextFieldType = FileIO.FieldType.Delimited
                 oFile.SetDelimiters("|")
@@ -778,6 +775,7 @@
 
     Sub LoadExecutors()
         Try
+            Log("Loading executors")
             HCExecutor.KillAll()
             Dim curRow As String()
             Using eFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Executors.ini")
@@ -793,20 +791,25 @@
     End Sub
 
     Sub LoadUnits()
-        HCPart.UnitsList.Clear()
-        Dim curRow As String()
-        Using uFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Units.ini")
-            uFile.TextFieldType = FileIO.FieldType.Delimited
-            uFile.SetDelimiters("|")
-            While Not uFile.EndOfData
-                curRow = uFile.ReadFields
-                HCPart.UnitsList.Add(curRow(0))
-            End While
-        End Using
+        Try
+            Log("Loading units")
+            HCPart.UnitsList.Clear()
+            Dim curRow As String()
+            Using uFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Units.ini")
+                uFile.TextFieldType = FileIO.FieldType.Delimited
+                uFile.SetDelimiters("|")
+                While Not uFile.EndOfData
+                    curRow = uFile.ReadFields
+                    HCPart.UnitsList.Add(curRow(0))
+                End While
+            End Using
+        Catch ex As Exception
+        End Try
     End Sub
 
     Sub LoadProviders()
         Try
+            Log("Loading providers")
             HCProvider.ProviderList.Clear()
             Dim curRow As String()
             Using pFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Providers.ini")
@@ -838,6 +841,7 @@
 
     Public Sub LoadPayments()
         Try
+            Log("Loading payments")
             comboProviderFilter.Items.Clear()
             comboProviderFilter.Items.Add("Показать все")
             dgvPayments.Rows.Clear()
@@ -847,7 +851,7 @@
                 pFile.SetDelimiters("|")
                 While Not pFile.EndOfData
                     curRow = pFile.ReadFields
-                    AddPayment(curRow(0), curRow(1), curRow(2), curRow(3), curRow(4), curRow(5), curRow(6), curRow(7))
+                    AddPayment(curRow(0), curRow(1), curRow(2), curRow(3), curRow(4), curRow(5), curRow(6))
                 End While
             End Using
             RefreshProviders()
@@ -866,6 +870,7 @@
         'RunCount += 1
         'MsgBox(CStr(RunCount))
         LoadProcedureRunning = True
+        Log("Load procedure started")
         curDate = DateOfLoad 'Устанавливаем дату для сверки
         nextDay = curDate.AddDays(1) 'Устанавливаем следующий день
         curDatePicker.Value = curDate 'Устанавливаем дату в элемент выбора даты
@@ -1054,6 +1059,7 @@
             UpdateWatchers()
         End If
         LoadProcedureRunning = False
+        Log("Load procedure finished")
     End Sub
 
     Public Sub UpdatePaymentsHC()
@@ -1082,6 +1088,7 @@
 
     Private Sub LoadDiscounts()
         Try
+            Log("Loading discounts")
             DiscountCombo.Items.Clear()
             'Читаем скидки:
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Discounts.ini")
@@ -1184,6 +1191,7 @@
     ''' <remarks>Стоило реализовать всё в одном файле вместо нескольких, но теперь уже лень...</remarks>
     Public Sub LoadCars()
         Try
+            Log("Loading cars")
             For i = 1 To WASH_GROUP_COUNT
                 Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\CarsDBg" & CStr(i) & ".ini")
                     MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -1638,21 +1646,21 @@
         dCash.FirstDisplayedScrollingRowIndex = dCash.RowCount - 1
     End Sub
 
-    Public Sub AddPayment(strID As String, strPID As String, strOperation As String, strDate As String, strTime As String, strIncome As String, strOutcome As String, strComment As String)
+    Public Sub AddPayment(strID As String, stroID As String, strOperation As String, strDate As String, strIncome As String, strOutcome As String, strComment As String)
         Dim rowcount As Integer
         rowcount = dgvPayments.RowCount
-        dgvPayments.Rows.Add()
-        dgvPayments.Item(0, rowcount).Value = strID
-        dgvPayments.Item(1, rowcount).Value = strPID
-        dgvPayments.Item(2, rowcount).Value = strOperation
-        dgvPayments.Item(3, rowcount).Value = strDate
-        dgvPayments.Item(4, rowcount).Value = strTime
-        dgvPayments.Item(5, rowcount).Value = strIncome
-        dgvPayments.Item(6, rowcount).Value = strOutcome
-        dgvPayments.Item(7, rowcount).Value = strComment
+        dgvPayments.Rows.Add({strID, stroID, strOperation, strDate, strIncome, strOutcome, strComment})
+        'dgvPayments.Item(0, rowcount).Value = strID
+        'dgvPayments.Item(1, rowcount).Value = stroID
+        'dgvPayments.Item(2, rowcount).Value = strOperation
+        'dgvPayments.Item(3, rowcount).Value = strDate
+        'dgvPayments.Item(4, rowcount).Value = strIncome
+        'dgvPayments.Item(5, rowcount).Value = strOutcome
+        'dgvPayments.Item(6, rowcount).Value = strComment
         'dgvPayments.Rows(rowcount).SetValues({strID, strPID, strOperation, strDate, strTime, strIncome, strOutcome, strComment})
         dgvPayments.ClearSelection()
         dgvPayments.FirstDisplayedScrollingRowIndex = dgvPayments.RowCount - 1
+        SavePayments()
     End Sub
 
     ''' <summary>
@@ -1675,6 +1683,7 @@
     ''' </summary>
     Public Sub SaveAll()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving all...")
         SaveWash()
         SaveMount()
         SaveService()
@@ -1694,6 +1703,7 @@
 
     Public Sub SaveWash()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving wash...")
         RecountRows()
         Dim tmpSTR As String = ""
         If Not DayMode Then tmpSTR = CStr(CurNightWorkerID) & vbNewLine
@@ -1716,6 +1726,7 @@
 
     Public Sub SaveMount()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving mount...")
         RecountRows()
         Dim tmpSTR As String = ""
         For i = 0 To dataDayMount.RowCount - 2
@@ -1737,6 +1748,7 @@
 
     Public Sub SaveService()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving service...")
         RecountRows()
         Dim tmpSTR As String = ""
         For i = 0 To dataService.RowCount - 2
@@ -1755,6 +1767,7 @@
 
     Public Sub SaveCash()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving cash...")
         Dim tmpSTR As String = CStr(curID) & vbNewLine
         For i = 0 To dCash.RowCount - 2
             For j = 0 To dCash.ColumnCount - 1
@@ -1774,6 +1787,7 @@
 
     Public Sub SavePayments()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving payments...")
         Dim tmpSTR As String = ""
         For i = 0 To dgvPayments.RowCount - 1
             For j = 0 To dgvPayments.ColumnCount - 1
@@ -1791,6 +1805,7 @@
 
     Public Sub SaveSchedule()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving schedule...")
         Dim tmpSTR As String = ""
         For i = 0 To dSchedule1.RowCount - 1
             For j = 0 To dSchedule1.ColumnCount - 1
@@ -1816,6 +1831,7 @@
 
     Public Sub SaveTable()
         'If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        'Log("Saving table...")
         'Dim tmpSTR As String = ""
         'For i = 0 To dTable.RowCount - 1
         '    tmpSTR = tmpSTR & dTable.Item("dTable_ID", i).Value & "|"
@@ -1834,6 +1850,7 @@
 
     Public Sub SaveAdvance()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving advance...")
         Dim tmpSTR As String = "[Advance]" & vbNewLine
         For Each w In Worker.AllOfThem
             If w.wAdvance <> 0 Then
@@ -1867,6 +1884,7 @@
 
     Public Sub SaveDebts()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving debts")
         Dim ReduceFor As Integer = 0
         Dim tmpSTR As String = CStr(NextDebtID) & vbNewLine
         For i = 0 To NextDebtID - 1
@@ -1890,6 +1908,7 @@
 
     Public Sub SaveState()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving state...")
         Dim tmpSTR As String = CStr(Worker.nextID) & vbNewLine
         For i = 0 To 2
             Select Case i
@@ -1914,8 +1933,9 @@
     End Sub
 
     Sub SaveCustomers()
-        SaveExecutors()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        SaveExecutors()
+        Log("Saving customers...")
         Dim TextToWrite As String = CStr(HCCustomer.GlobalID) & vbNewLine
         For Each Customer In CustomerList
             TextToWrite &= Customer.ID.ToString & "|"
@@ -1923,6 +1943,7 @@
             TextToWrite &= Customer.Phone & "|" & Customer.Address & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\Customers.ini", TextToWrite, False)
+        Log("Saving orders...")
         TextToWrite = CStr(HCOrder.GlobalID) & vbNewLine
         TextToWrite &= CStr(HCPart.GlobalID) & vbNewLine
         For Each Order In OrderList
@@ -1961,6 +1982,7 @@
 
     Sub SaveExecutors()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving executors...")
         Dim ttw As String = ""
         For Each exec As HCExecutor In HCExecutor.ExecList
             ttw &= exec.ID.ToString & "|"
@@ -1977,6 +1999,7 @@
 
     Sub SaveProviders()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        Log("Saving providers...")
         Dim ttw As String = HCProvider.GlobalID.ToString & vbNewLine
         For Each prov In HCProvider.ProviderList
             ttw &= prov.ID.ToString & "|"
@@ -2324,9 +2347,23 @@
                     lblNightWorkers.Show()
                     ComboNightWorkers.Show()
                 End If
+                lblDaySum.Show()
+            Case 7, 8
+                Label12.Hide()
+                Label1.Hide()
+                lblNightWorkers.Hide()
+                ComboNightWorkers.Hide()
+                lblDaySum.Hide()
+            Case 6, 9
+                Label12.Show()
+                Label1.Show()
+                lblNightWorkers.Hide()
+                ComboNightWorkers.Hide()
+                lblDaySum.Hide()
             Case Else
                 lblNightWorkers.Hide()
                 ComboNightWorkers.Hide()
+                lblDaySum.Show()
         End Select
 0:
         FillPrices()
@@ -2616,6 +2653,7 @@
     End Sub
 
     Private Sub ClearAllSelection(sender As System.Object, e As System.EventArgs) Handles tabWash.Click, tabMount.Click, tabCash.Click, tabService.Click, Me.Click
+        ServiceMode = 4
         dataDay.ClearSelection()
         dataDayMount.ClearSelection()
         dataService.ClearSelection()
@@ -3232,12 +3270,6 @@
     Dim YearDirWatcher As System.IO.FileSystemWatcher
 
     Sub CreateWatchers()
-        'On Error Resume Next
-        'RemoveHandler CurDirWatcher.Created, AddressOf SomethingChanged
-        'RemoveHandler CurDirWatcher.Changed, AddressOf SomethingChanged
-        'RemoveHandler CurDirWatcher.Deleted, AddressOf SomethingChanged
-        'RemoveHandler CurDirWatcher.Renamed, AddressOf SomethingChanged
-
         CurDirWatcher = New System.IO.FileSystemWatcher()
         CurDirWatcher.Path = dPath
         CurDirWatcher.NotifyFilter = (System.IO.NotifyFilters.LastWrite Or System.IO.NotifyFilters.FileName Or System.IO.NotifyFilters.DirectoryName)
@@ -3247,11 +3279,6 @@
         AddHandler CurDirWatcher.Changed, AddressOf SomethingChanged
         AddHandler CurDirWatcher.Deleted, AddressOf SomethingChanged
         AddHandler CurDirWatcher.Renamed, AddressOf SomethingChanged
-
-        'RemoveHandler AppDirWatcher.Created, AddressOf SomethingChanged
-        'RemoveHandler AppDirWatcher.Changed, AddressOf SomethingChanged
-        'RemoveHandler AppDirWatcher.Deleted, AddressOf SomethingChanged
-        'RemoveHandler AppDirWatcher.Renamed, AddressOf SomethingChanged
 
         AppDirWatcher = New System.IO.FileSystemWatcher()
         AppDirWatcher.Path = Application.StartupPath & "\data"
@@ -3292,6 +3319,8 @@
     Sub SomethingChanged(source As Object, e As System.IO.FileSystemEventArgs)
         If ClosingNow Then Exit Sub
         On Error Resume Next
+
+        Log(e.Name & " has been changed!")
         Dim Appendix As String
         Dim CDD As String = CStr(curDate.Day)
         Dim NDD As String = CStr(curDate.AddDays(1).Day)
@@ -3410,24 +3439,24 @@
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, PaymentsHashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadPayments())
                 PaymentsHashCode = HashCode
+                Me.Invoke(Sub() LoadPayments())
             Case "Providers"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Providers.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, ProvHashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadProviders())
                 ProvHashCode = HashCode
+                Me.Invoke(Sub() LoadProviders())
             Case "Executors"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Executors.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, ExecutorsHashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadExecutors())
                 ExecutorsHashCode = HashCode
+                Me.Invoke(Sub() LoadExecutors())
         End Select
     End Sub
 
@@ -3554,6 +3583,7 @@
     End Sub
 
     Private Sub TabPage10_Enter(sender As Object, e As EventArgs) Handles tabCustomersOrders.Enter
+        ServiceMode = 7
         RefreshCustomersAndOrders()
     End Sub
 
@@ -3626,30 +3656,34 @@
             txtPartName.Text = curPart.Name
             txtPartCount.Text = curPart.Count & " " & curPart.Units
             txtPartPrice.Text = ToMoney(curPart.Price * curPart.Count)
+            dtpPayment.Value = curDate
         End If
     End Sub
 
     Private Sub btnAddPayment_Click(sender As Object, e As EventArgs) Handles btnAddPayment.Click
         If curPart Is Nothing Then Exit Sub
         If curPart.PaymentAdded Then
-            If MsgBox("Вы уже оплачивали эту запчасть. Вы уверены, что хотите сделать это снова?", MsgBoxStyle.YesNo, "Внимание!") <> MsgBoxResult.Yes Then
+            If MsgBox("Вы уже оплачивали эти запчасти. Вы уверены, что хотите сделать это снова?", MsgBoxStyle.YesNo, "Внимание!") <> MsgBoxResult.Yes Then
                 Exit Sub
             End If
         End If
-        Dim Result As String = InputBox("Оплата:", "Оплата запчасти поставщику", CStr(curPart.Price * curPart.Count))
+        Dim Result As String = InputBox("Оплата:", "Оплата запчастей поставщику", curPart.Order.GetProviderPrice(curPart.Provider))
         If Result Is Nothing Then Exit Sub
         If Result = "" Or Result = "0" Then Exit Sub
         Dim dblResult = Math.Round(CDbl(Result), 2)
         AddPayment(curProv.ID.ToString, _
-                   curPart.ID.ToString, _
+                   curPart.Order.Number.GetFullNumber, _
                    curProv.Name, _
-                   curDate.ToString("dd.MM.yyyy"), _
-                   Date.Now.ToString("hh:mm"), _
+                   dtpPayment.Value.ToString("dd.MM.yyyy"), _
                    CStr(dblResult), _
                    "0", _
-                   "За з/ч " & curPart.Name & " (" & curPart.Count & " " & curPart.Units & ") Заказ № " & curPart.Order.Number.GetFullNumber)
-        curPart.PaymentAdded = True
-        SavePayments()
+                   "За заказ № " & curPart.Order.Number.GetFullNumber)
+        For Each part In curPart.Order.PartList
+            If part.Provider.ID = curPart.Provider.ID Then
+                part.PaymentAdded = True
+            End If
+        Next
+
     End Sub
 
     Private Sub comboProviderFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboProviderFilter.SelectedIndexChanged
@@ -3675,19 +3709,19 @@
     End Sub
 
     Private Sub tabPayments_Enter(sender As Object, e As EventArgs) Handles tabPayments.Enter
+        ServiceMode = 9
         RefreshProviderFilter()
         UpdateDebitCredit()
     End Sub
 
     Private Sub tabProviders_Enter(sender As Object, e As EventArgs) Handles tabProviders.Enter
+        ServiceMode = 8
         RefreshProviders()
     End Sub
 
     Private Sub dgvPayments_RowsAdded(sender As Object, e As EventArgs) Handles dgvPayments.RowsAdded, dgvPayments.RowsRemoved, dgvPayments.CellValueChanged
         If LoadProcedureRunning Then Exit Sub
         UpdateDebitCredit()
-        tmrSavePayments.Stop()
-        tmrSavePayments.Start()
     End Sub
 
     Private Sub UpdateDebitCredit()
@@ -3714,26 +3748,10 @@
         Label1.Text = CStr(sum)
     End Sub
 
-    Public Sub UpdateProviderForPID(pID As Integer, newProvider As HCProvider)
-        Dim npID As String = ""
-        Dim npName As String = ""
-        If Not newProvider Is Nothing Then
-            npID = newProvider.ID.ToString
-            npName = newProvider.Name
-        End If
-        Dim strPID As String = CStr(pID)
-        For Each row As DataGridViewRow In dgvPayments.Rows
-            If row.Cells(cmnPID.Index).Value = strPID Then
-                row.Cells(cmnProvID.Index).Value = npID
-                row.Cells(cmnProvider.Index).Value = npName
-            End If
-        Next
-    End Sub
-
-    Public Function RemovePaymentsByPID(strPID As String) As Integer
+    Public Function RemovePaymentsByID(strID As String) As Integer
         Dim counter As Integer = 0
         For Each row As DataGridViewRow In dgvPayments.Rows
-            If row.Cells(cmnPID.Index).Value = strPID Then
+            If row.Cells(cmnProvID.Index).Value = strID Then
                 dgvPayments.Rows.Remove(row)
                 counter += 1
             End If
@@ -3741,21 +3759,73 @@
         Return counter
     End Function
 
-    Public Function RemovePaymentsByPID(pID As Integer) As Integer
-        Dim strPID As String = CStr(pID)
-        Return RemovePaymentsByPID(strPID)
+    Public Function RemovePaymentsByID(ID As Integer) As Integer
+        Dim strPID As String = CStr(ID)
+        Return RemovePaymentsByID(strPID)
+    End Function
+
+    Public Function RemovePaymentsByOID(strID As String) As Integer
+        Dim counter As Integer = 0
+        For Each row As DataGridViewRow In dgvPayments.Rows
+            If row.Cells(cmnOrderID.Index).Value = strID Then
+                dgvPayments.Rows.Remove(row)
+                counter += 1
+            End If
+        Next
+        Return counter
     End Function
 
     Public Sub RegisterPartList(ByRef PartList As List(Of HCPart))
+        Dim sums As New List(Of Integer)
+        Dim names As New List(Of String)
+        Dim IDs As New List(Of Integer)
         For Each Part In PartList
-            AddPayment(Part.Provider.ID.ToString(), Part.ID.ToString(), Part.Provider.Name, Date.Now.ToString("dd.MM.yyyy"), Date.Now.ToString("hh:mm"), "0", CStr(Part.Price * Part.Count), _
-                       "За з/ч " & Part.Name & " (" & Part.Count & " " & Part.Units & ") Заказ № " & Part.Order.Number.GetFullNumber)
+            Dim bFound As Boolean = False
+            For i = 0 To names.Count - 1
+                If IDs(i) = Part.Provider.ID Then
+                    sums(i) += Part.Price
+                    bFound = True
+                End If
+            Next
+            If Not bFound Then
+                sums.Add(Part.Price)
+                names.Add(Part.Provider.Name)
+                IDs.Add(Part.Provider.ID)
+            End If
+        Next
+        For i = 0 To sums.Count - 1
+            AddPayment(IDs(i).ToString(), PartList(0).Order.Number.GetFullNumber, names(i).ToString, Date.Now.ToString("dd.MM.yyyy"), "0", CStr(Math.Round(sums(i), 2)), _
+                       "За заказ № " & PartList(0).Order.Number.GetFullNumber)
         Next
     End Sub
 
-    Private Sub tmrSavePayments_Tick(sender As Object, e As EventArgs) Handles tmrSavePayments.Tick
-        tmrSavePayments.Stop()
+    Public Sub UpdatePart(ByRef Part As HCPart)
+        For Each row As DataGridViewRow In dgvPayments.Rows
+            If row.Cells(cmnOrderID.Index).Value = Part.Order.Number.GetFullNumber And CInt(row.Cells(cmnProvID.Index).Value) = Part.Provider.ID Then
+                row.Cells(cmnCredit.Index).Value = Part.Order.GetProviderPrice(Part.Provider).ToString
+            End If
+        Next
         SavePayments()
+    End Sub
+
+    Public Sub UpdateProviderForID(ID As Integer, newProvider As HCProvider)
+        Dim npID As String = ""
+        Dim npName As String = ""
+        If Not newProvider Is Nothing Then
+            npID = newProvider.ID.ToString
+            npName = newProvider.Name
+        End If
+        Dim strID As String = CStr(ID)
+        For Each row As DataGridViewRow In dgvPayments.Rows
+            If row.Cells(cmnProvID.Index).Value = strID Then
+                If row.Cells(cmnProvider.Index).Value = newProvider.Name Then Exit Sub
+                NumberToFind = row.Cells(cmnOrderID.Index).Value
+                Dim MyOrder As HCOrder = OrderList.Find(AddressOf FindOrderByNumber)
+                'row.Cells(cmnProvID.Index).Value = npID
+                'row.Cells(cmnProvider.Index).Value = npName
+            End If
+        Next
+
     End Sub
 
     Private Sub ДневнойОтчётToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem2.Click
@@ -3823,5 +3893,13 @@
 
     Private Sub ПринятыеПлатежиToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПринятыеПлатежиToolStripMenuItem.Click
         frmShowPayments.Show()
+    End Sub
+
+    Private Sub tabAnalytics_Enter(sender As Object, e As EventArgs) Handles tabAnalytics.Enter
+        ServiceMode = 6
+    End Sub
+
+    Private Sub Log(Message)
+        frmLog.Add(Message)
     End Sub
 End Class

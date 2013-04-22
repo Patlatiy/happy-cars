@@ -7,14 +7,19 @@
         If Me.Visible = False Then Me.Show() Else Me.BringToFront()
         dtpFrom.Value = dFrom
         dtpTo.Value = dTo
+        Dim sum As Double
         For Each Order In HCOrder.OrderList
             If Order.AdvanceSum <> 0 And Order.AdvanceDate >= dFrom And Order.AdvanceDate <= dTo Then
                 AddPayment(Order.Number.GetFullNumber, Order.AdvanceDate, "Аванс", Order.AdvanceSum)
+                sum += Order.AdvanceSum
             End If
             If Order.PaymentSum <> 0 And Order.PaymentDate >= dFrom And Order.PaymentDate <= dTo Then
                 AddPayment(Order.Number.GetFullNumber, Order.PaymentDate, "Оплата", Order.PaymentSum)
+                sum += Order.PaymentSum
             End If
         Next
+        dgvPayments.Rows.Add({"", "", "Сумма:", Math.Round(sum, 2).ToString})
+        dgvPayments.ClearSelection()
     End Sub
 
     Private Sub btnShow_Click(sender As Object, e As EventArgs) Handles btnShow.Click

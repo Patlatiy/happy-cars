@@ -132,8 +132,15 @@ HappyCars
 	<remarks></remarks>
 </member><member name="M:HappyCars.HCOrder.GetRawPrice">
 	<summary>
- Returns price of whole order, without discount
+ Returns price of a whole order, without discount
  </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCOrder.GetProviderPrice(HappyCars.HCProvider)">
+	<summary>
+ Returns (Price*Count) for all parts of specific provider
+ </summary>
+	<param name="Provider"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:HappyCars.HCOrder.KillAll">
@@ -144,6 +151,11 @@ HappyCars
 </member><member name="M:HappyCars.HCOrder.SettleGlobalID">
 	<summary>
  Sets GlobalID to the maximum ID + 1 value
+ </summary>
+	<remarks></remarks>
+</member><member name="M:HappyCars.HCOrder.Kill">
+	<summary>
+ Disposes of this order
  </summary>
 	<remarks></remarks>
 </member>

@@ -44,10 +44,13 @@ Partial Class frmNewPart
         Me.lblProvider = New System.Windows.Forms.Label()
         Me.lblRawPrice = New System.Windows.Forms.Label()
         Me.txtRawPrice = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.nudSellPrice = New System.Windows.Forms.NumericUpDown()
         CType(Me.nudMarginPc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSellPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -70,7 +73,7 @@ Partial Class frmNewPart
         '
         Me.lblMarginRbl.AutoSize = True
         Me.lblMarginRbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblMarginRbl.Location = New System.Drawing.Point(332, 114)
+        Me.lblMarginRbl.Location = New System.Drawing.Point(332, 139)
         Me.lblMarginRbl.Name = "lblMarginRbl"
         Me.lblMarginRbl.Size = New System.Drawing.Size(16, 13)
         Me.lblMarginRbl.TabIndex = 24
@@ -79,7 +82,7 @@ Partial Class frmNewPart
         'txtSellPrice
         '
         Me.txtSellPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtSellPrice.Location = New System.Drawing.Point(145, 195)
+        Me.txtSellPrice.Location = New System.Drawing.Point(145, 216)
         Me.txtSellPrice.Name = "txtSellPrice"
         Me.txtSellPrice.ReadOnly = True
         Me.txtSellPrice.Size = New System.Drawing.Size(100, 20)
@@ -88,7 +91,7 @@ Partial Class frmNewPart
         'lblSellPrice
         '
         Me.lblSellPrice.AutoSize = True
-        Me.lblSellPrice.Location = New System.Drawing.Point(10, 198)
+        Me.lblSellPrice.Location = New System.Drawing.Point(10, 219)
         Me.lblSellPrice.Name = "lblSellPrice"
         Me.lblSellPrice.Size = New System.Drawing.Size(80, 13)
         Me.lblSellPrice.TabIndex = 26
@@ -98,7 +101,7 @@ Partial Class frmNewPart
         '
         Me.lblMarginPc.AutoSize = True
         Me.lblMarginPc.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblMarginPc.Location = New System.Drawing.Point(221, 115)
+        Me.lblMarginPc.Location = New System.Drawing.Point(221, 140)
         Me.lblMarginPc.Name = "lblMarginPc"
         Me.lblMarginPc.Size = New System.Drawing.Size(15, 13)
         Me.lblMarginPc.TabIndex = 25
@@ -106,7 +109,7 @@ Partial Class frmNewPart
         '
         'nudMarginPc
         '
-        Me.nudMarginPc.Location = New System.Drawing.Point(155, 111)
+        Me.nudMarginPc.Location = New System.Drawing.Point(155, 136)
         Me.nudMarginPc.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudMarginPc.Name = "nudMarginPc"
         Me.nudMarginPc.Size = New System.Drawing.Size(65, 20)
@@ -116,7 +119,7 @@ Partial Class frmNewPart
         '
         Me.nudMargin.DecimalPlaces = 2
         Me.nudMargin.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudMargin.Location = New System.Drawing.Point(266, 111)
+        Me.nudMargin.Location = New System.Drawing.Point(266, 136)
         Me.nudMargin.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudMargin.Name = "nudMargin"
         Me.nudMargin.Size = New System.Drawing.Size(65, 20)
@@ -125,7 +128,7 @@ Partial Class frmNewPart
         'lblMargin
         '
         Me.lblMargin.AutoSize = True
-        Me.lblMargin.Location = New System.Drawing.Point(9, 113)
+        Me.lblMargin.Location = New System.Drawing.Point(9, 138)
         Me.lblMargin.Name = "lblMargin"
         Me.lblMargin.Size = New System.Drawing.Size(42, 13)
         Me.lblMargin.TabIndex = 17
@@ -156,9 +159,9 @@ Partial Class frmNewPart
         Me.lblPartPrice.AutoSize = True
         Me.lblPartPrice.Location = New System.Drawing.Point(9, 87)
         Me.lblPartPrice.Name = "lblPartPrice"
-        Me.lblPartPrice.Size = New System.Drawing.Size(77, 13)
+        Me.lblPartPrice.Size = New System.Drawing.Size(142, 13)
         Me.lblPartPrice.TabIndex = 18
-        Me.lblPartPrice.Text = "Цена закупки"
+        Me.lblPartPrice.Text = "Цена закупки (за единицу)"
         '
         'lblPartCount
         '
@@ -173,10 +176,10 @@ Partial Class frmNewPart
         '
         Me.LineShape2.Enabled = False
         Me.LineShape2.Name = "LineShape2"
-        Me.LineShape2.X1 = 16
-        Me.LineShape2.X2 = 347
-        Me.LineShape2.Y1 = 155
-        Me.LineShape2.Y2 = 155
+        Me.LineShape2.X1 = 17
+        Me.LineShape2.X2 = 348
+        Me.LineShape2.Y1 = 173
+        Me.LineShape2.Y2 = 173
         '
         'ShapeContainer1
         '
@@ -184,13 +187,13 @@ Partial Class frmNewPart
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(360, 228)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(360, 246)
         Me.ShapeContainer1.TabIndex = 28
         Me.ShapeContainer1.TabStop = False
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(303, 193)
+        Me.btnOK.Location = New System.Drawing.Point(303, 214)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(46, 23)
         Me.btnOK.TabIndex = 29
@@ -226,7 +229,7 @@ Partial Class frmNewPart
         'lblRawPrice
         '
         Me.lblRawPrice.AutoSize = True
-        Me.lblRawPrice.Location = New System.Drawing.Point(10, 172)
+        Me.lblRawPrice.Location = New System.Drawing.Point(10, 193)
         Me.lblRawPrice.Name = "lblRawPrice"
         Me.lblRawPrice.Size = New System.Drawing.Size(77, 13)
         Me.lblRawPrice.TabIndex = 26
@@ -235,17 +238,38 @@ Partial Class frmNewPart
         'txtRawPrice
         '
         Me.txtRawPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtRawPrice.Location = New System.Drawing.Point(145, 169)
+        Me.txtRawPrice.Location = New System.Drawing.Point(145, 190)
         Me.txtRawPrice.Name = "txtRawPrice"
         Me.txtRawPrice.ReadOnly = True
         Me.txtRawPrice.Size = New System.Drawing.Size(100, 20)
         Me.txtRawPrice.TabIndex = 27
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(9, 112)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(145, 13)
+        Me.Label2.TabIndex = 18
+        Me.Label2.Text = "Цена продажи (за единицу)"
+        '
+        'nudSellPrice
+        '
+        Me.nudSellPrice.DecimalPlaces = 2
+        Me.nudSellPrice.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudSellPrice.Location = New System.Drawing.Point(266, 110)
+        Me.nudSellPrice.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudSellPrice.Name = "nudSellPrice"
+        Me.nudSellPrice.Size = New System.Drawing.Size(82, 20)
+        Me.nudSellPrice.TabIndex = 23
+        '
         'frmNewPart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(360, 228)
+        Me.ClientSize = New System.Drawing.Size(360, 246)
+        Me.Controls.Add(Me.nudSellPrice)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtRawPrice)
         Me.Controls.Add(Me.lblRawPrice)
         Me.Controls.Add(Me.lblProvider)
@@ -276,6 +300,7 @@ Partial Class frmNewPart
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSellPrice, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -301,4 +326,6 @@ Partial Class frmNewPart
     Friend WithEvents lblProvider As System.Windows.Forms.Label
     Friend WithEvents lblRawPrice As System.Windows.Forms.Label
     Friend WithEvents txtRawPrice As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents nudSellPrice As System.Windows.Forms.NumericUpDown
 End Class

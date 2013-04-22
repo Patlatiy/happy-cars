@@ -122,3 +122,4 @@ D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmExecutor.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmAddCash.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmCustomer.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmShowPayments.resources
+D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmLog.resources

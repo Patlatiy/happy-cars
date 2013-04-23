@@ -42,5 +42,6 @@
         If Order.Number.Day < 10 Then strDay = "0" & strDay
         lblPrintDate.Text = strDay & "." & strMonth & "." & Order.Number.Year.ToString
         lblGlobalDate.Text = strDay & "." & strMonth & "." & Order.Number.Year.ToString
+        lblCashString.Text = RSDN.RusCurrency.Str(Order.AdvanceSum)
     End Sub
 End Class

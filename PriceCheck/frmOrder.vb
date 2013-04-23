@@ -144,15 +144,6 @@
         lwParts.Focus()
     End Sub
 
-    Private Sub txtPartName_TextChanged(sender As Object, e As EventArgs) Handles txtPartName.TextChanged
-        If curPart Is Nothing Then Exit Sub
-        If txtPartName.Text = "" Then Exit Sub
-        If curPart.Name <> txtPartName.Text Then
-            curPart.Name = txtPartName.Text
-            lwParts.Items(curPartPosition).SubItems(1).Text = curPart.Name
-        End If
-    End Sub
-
     Private Sub nudPartCount_ValueChanged(sender As Object, e As EventArgs) Handles nudPartCount.ValueChanged
         If curPart Is Nothing Then Exit Sub
         If curPart.Count <> nudPartCount.Value Then
@@ -174,7 +165,7 @@
 
     Sub EnablePartControls()
         If (Form1.WriteRight = Form1.WriteRights.The_Girl) Or (Form1.WriteRight = Form1.WriteRights.Read_Only) Or MyOrder.Completed Then Exit Sub
-        txtPartName.Enabled = True
+        comboPartName.Enabled = True
         nudPartCount.Enabled = True
         nudPartPrice.Enabled = True
         nudMargin.Enabled = True
@@ -186,8 +177,8 @@
     End Sub
 
     Sub DisablePartControls()
-        txtPartName.Enabled = False
-        txtPartName.Text = ""
+        comboPartName.Enabled = False
+        comboPartName.Text = ""
         nudPartCount.Enabled = False
         nudPartCount.Value = 1
         nudPartPrice.Enabled = False
@@ -208,7 +199,7 @@
 
     Sub UpdatePart()
         If curPart Is Nothing Then Exit Sub
-        txtPartName.Text = curPart.Name
+        comboPartName.Text = curPart.Name
         nudPartCount.Value = curPart.Count
         nudPartPrice.Value = curPart.Price
         comboUnits.Text = curPart.Units
@@ -443,4 +434,20 @@
         If Not curPart.Provider Is Nothing Then curPart.Provider.PartList.Add(curPart)
         Form1.UpdatePart(curPart)
     End Sub
+
+    Private Sub comboPartName_KeyDown(sender As Object, e As KeyEventArgs) Handles comboPartName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            comboPartName_SelectedIndexChanged(Me, e)
+        End If
+    End Sub
+
+    Private Sub comboPartName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboPartName.SelectedIndexChanged, comboPartName.Leave
+        If curPart Is Nothing Then Exit Sub
+        If comboPartName.Text = "" Then Exit Sub
+        If curPart.Name <> comboPartName.Text Then
+            curPart.Name = comboPartName.Text
+            lwParts.Items(curPartPosition).SubItems(1).Text = curPart.Name
+        End If
+    End Sub
+
 End Class

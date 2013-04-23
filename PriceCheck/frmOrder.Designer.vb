@@ -41,7 +41,6 @@ Partial Class frmOrder
         Me.lblOrderNumber = New System.Windows.Forms.Label()
         Me.txtOrderNumber = New System.Windows.Forms.TextBox()
         Me.btnNewPart = New System.Windows.Forms.Button()
-        Me.txtPartName = New System.Windows.Forms.TextBox()
         Me.lblPartName = New System.Windows.Forms.Label()
         Me.lblPartCount = New System.Windows.Forms.Label()
         Me.nudPartCount = New System.Windows.Forms.NumericUpDown()
@@ -87,6 +86,7 @@ Partial Class frmOrder
         Me.lblProvider = New System.Windows.Forms.Label()
         Me.lblRawPrice = New System.Windows.Forms.Label()
         Me.txtRawPrice = New System.Windows.Forms.TextBox()
+        Me.comboPartName = New System.Windows.Forms.ComboBox()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -249,14 +249,6 @@ Partial Class frmOrder
         Me.btnNewPart.TabIndex = 7
         Me.btnNewPart.Text = "Новая запчасть"
         Me.btnNewPart.UseVisualStyleBackColor = True
-        '
-        'txtPartName
-        '
-        Me.txtPartName.Enabled = False
-        Me.txtPartName.Location = New System.Drawing.Point(667, 36)
-        Me.txtPartName.Name = "txtPartName"
-        Me.txtPartName.Size = New System.Drawing.Size(152, 20)
-        Me.txtPartName.TabIndex = 9
         '
         'lblPartName
         '
@@ -673,11 +665,21 @@ Partial Class frmOrder
         Me.txtRawPrice.Size = New System.Drawing.Size(100, 20)
         Me.txtRawPrice.TabIndex = 16
         '
+        'comboPartName
+        '
+        Me.comboPartName.FormattingEnabled = True
+        Me.comboPartName.Location = New System.Drawing.Point(667, 36)
+        Me.comboPartName.Name = "comboPartName"
+        Me.comboPartName.Size = New System.Drawing.Size(152, 21)
+        Me.comboPartName.Sorted = True
+        Me.comboPartName.TabIndex = 34
+        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(841, 301)
+        Me.Controls.Add(Me.comboPartName)
         Me.Controls.Add(Me.txtRawPrice)
         Me.Controls.Add(Me.lblRawPrice)
         Me.Controls.Add(Me.lblProvider)
@@ -714,7 +716,6 @@ Partial Class frmOrder
         Me.Controls.Add(Me.lblPartPrice)
         Me.Controls.Add(Me.lblPartCount)
         Me.Controls.Add(Me.lblPartName)
-        Me.Controls.Add(Me.txtPartName)
         Me.Controls.Add(Me.btnNewPart)
         Me.Controls.Add(Me.txtOrderNumber)
         Me.Controls.Add(Me.dtpPayment)
@@ -769,7 +770,6 @@ Partial Class frmOrder
     Friend WithEvents lblOrderNumber As System.Windows.Forms.Label
     Friend WithEvents txtOrderNumber As System.Windows.Forms.TextBox
     Friend WithEvents btnNewPart As System.Windows.Forms.Button
-    Friend WithEvents txtPartName As System.Windows.Forms.TextBox
     Friend WithEvents lblPartName As System.Windows.Forms.Label
     Friend WithEvents lblPartCount As System.Windows.Forms.Label
     Friend WithEvents nudPartCount As System.Windows.Forms.NumericUpDown
@@ -817,4 +817,5 @@ Partial Class frmOrder
     Friend WithEvents lblProvider As System.Windows.Forms.Label
     Friend WithEvents lblRawPrice As System.Windows.Forms.Label
     Friend WithEvents txtRawPrice As System.Windows.Forms.TextBox
+    Friend WithEvents comboPartName As System.Windows.Forms.ComboBox
 End Class

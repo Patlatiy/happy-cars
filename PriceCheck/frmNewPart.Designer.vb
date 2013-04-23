@@ -24,7 +24,6 @@ Partial Class frmNewPart
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNewPart))
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtPartName = New System.Windows.Forms.TextBox()
         Me.lblMarginRbl = New System.Windows.Forms.Label()
         Me.txtSellPrice = New System.Windows.Forms.TextBox()
         Me.lblSellPrice = New System.Windows.Forms.Label()
@@ -46,6 +45,7 @@ Partial Class frmNewPart
         Me.txtRawPrice = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.nudSellPrice = New System.Windows.Forms.NumericUpDown()
+        Me.comboName = New System.Windows.Forms.ComboBox()
         CType(Me.nudMarginPc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,13 +61,6 @@ Partial Class frmNewPart
         Me.Label1.Size = New System.Drawing.Size(83, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Наименование"
-        '
-        'txtPartName
-        '
-        Me.txtPartName.Location = New System.Drawing.Point(99, 6)
-        Me.txtPartName.Name = "txtPartName"
-        Me.txtPartName.Size = New System.Drawing.Size(250, 20)
-        Me.txtPartName.TabIndex = 1
         '
         'lblMarginRbl
         '
@@ -203,7 +196,7 @@ Partial Class frmNewPart
         'comboUnits
         '
         Me.comboUnits.FormattingEnabled = True
-        Me.comboUnits.Location = New System.Drawing.Point(277, 32)
+        Me.comboUnits.Location = New System.Drawing.Point(276, 32)
         Me.comboUnits.Name = "comboUnits"
         Me.comboUnits.Size = New System.Drawing.Size(72, 21)
         Me.comboUnits.TabIndex = 30
@@ -263,11 +256,21 @@ Partial Class frmNewPart
         Me.nudSellPrice.Size = New System.Drawing.Size(82, 20)
         Me.nudSellPrice.TabIndex = 23
         '
+        'comboName
+        '
+        Me.comboName.FormattingEnabled = True
+        Me.comboName.Location = New System.Drawing.Point(145, 6)
+        Me.comboName.Name = "comboName"
+        Me.comboName.Size = New System.Drawing.Size(203, 21)
+        Me.comboName.Sorted = True
+        Me.comboName.TabIndex = 32
+        '
         'frmNewPart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(360, 246)
+        Me.Controls.Add(Me.comboName)
         Me.Controls.Add(Me.nudSellPrice)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtRawPrice)
@@ -287,7 +290,6 @@ Partial Class frmNewPart
         Me.Controls.Add(Me.nudPartCount)
         Me.Controls.Add(Me.lblPartPrice)
         Me.Controls.Add(Me.lblPartCount)
-        Me.Controls.Add(Me.txtPartName)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -306,7 +308,6 @@ Partial Class frmNewPart
 
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtPartName As System.Windows.Forms.TextBox
     Friend WithEvents lblMarginRbl As System.Windows.Forms.Label
     Friend WithEvents txtSellPrice As System.Windows.Forms.TextBox
     Friend WithEvents lblSellPrice As System.Windows.Forms.Label
@@ -328,4 +329,5 @@ Partial Class frmNewPart
     Friend WithEvents txtRawPrice As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents nudSellPrice As System.Windows.Forms.NumericUpDown
+    Friend WithEvents comboName As System.Windows.Forms.ComboBox
 End Class

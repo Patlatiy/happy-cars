@@ -17,4 +17,22 @@
         Dim tens As String() = {"", "", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"}
         Return Nothing
     End Function
+
+    Public Function LoadPartList() As List(Of String)
+        Dim partList As New List(Of String)
+        frmLog.Add("Loading parts")
+        Try
+            Dim curRow As String
+            Using pFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Parts.ini")
+                pFile.TextFieldType = FileIO.FieldType.Delimited
+                pFile.SetDelimiters("|")
+                While Not pFile.EndOfData
+                    curRow = pFile.ReadLine
+                    partList.Add(curRow)
+                End While
+            End Using
+        Catch ex As Exception
+        End Try
+        Return partList
+    End Function
 End Module

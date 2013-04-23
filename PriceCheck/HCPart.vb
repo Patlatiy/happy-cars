@@ -1,9 +1,19 @@
 ﻿Public Class HCPart
-    Public Name As String
+    Public _Name As String
+    Public Property Name As String
+        Get
+            Return _Name
+        End Get
+        Set(value As String)
+            _Name = value
+            If Not PartList.Contains("value") Then PartList.Add(value)
+        End Set
+    End Property
     Public Count As UInteger
     Public Provider As HCProvider
     Public Order As HCOrder
     Public Shared UnitsList As New List(Of String)
+    Public Shared PartList As New List(Of String)
     Public Shared GlobalID As Integer
     Public ID As Integer
     Public PaymentAdded As Boolean = False

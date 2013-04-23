@@ -726,50 +726,43 @@
 
     Sub LoadCustomers()
         Dim curRow As String()
-        Try
-            Log("Loading customers")
-            HCOrder.KillAll()
-            HCCustomer.KillAll()
-            LoadExecutors()
-            LoadProviders()
-            Using cFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Customers.ini")
-                cFile.TextFieldType = FileIO.FieldType.Delimited
-                cFile.SetDelimiters("|")
-                While Not cFile.EndOfData
-                    curRow = cFile.ReadFields
-                    If curRow.Count = 1 Then
-                        HCCustomer.GlobalID = CUInt(curRow(0))
-                    Else
-                        Dim newCustomer = New HCCustomer(CUInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4), curRow(5))
-                    End If
-                End While
-            End Using
-        Catch ex As Exception
-        End Try
-        Try
-            Log("Loading orders")
-            Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
-                oFile.TextFieldType = FileIO.FieldType.Delimited
-                oFile.SetDelimiters("|")
+        Log("Loading customers")
+        HCOrder.KillAll()
+        HCCustomer.KillAll()
+        LoadExecutors()
+        LoadProviders()
+        Using cFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Customers.ini")
+            cFile.TextFieldType = FileIO.FieldType.Delimited
+            cFile.SetDelimiters("|")
+            While Not cFile.EndOfData
+                curRow = cFile.ReadFields
+                If curRow.Count = 1 Then
+                    HCCustomer.GlobalID = CUInt(curRow(0))
+                Else
+                    Dim newCustomer = New HCCustomer(CUInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4), curRow(5))
+                End If
+            End While
+        End Using
+        Log("Loading orders")
+        Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
+            oFile.TextFieldType = FileIO.FieldType.Delimited
+            oFile.SetDelimiters("|")
+            curRow = oFile.ReadFields
+            HCOrder.GlobalID = CUInt(curRow(0))
+            curRow = oFile.ReadFields
+            HCPart.GlobalID = CUInt(curRow(0))
+            While Not oFile.EndOfData
                 curRow = oFile.ReadFields
-                HCOrder.GlobalID = CUInt(curRow(0))
-                curRow = oFile.ReadFields
-                HCPart.GlobalID = CUInt(curRow(0))
-                While Not oFile.EndOfData
-                    curRow = oFile.ReadFields
-                    Dim PartList = New List(Of HCPart)
-                    For i = 11 To curRow.Length - 1 Step 8
-                        Dim newPart = New HCPart(CInt(curRow(i)), curRow(i + 1), CUInt(curRow(i + 2)), curRow(i + 3), CDbl(curRow(i + 4)), CDbl(curRow(i + 5)), Nothing, HCProvider.GetByID(CInt(curRow(i + 6))), CBool(curRow(i + 7)))
-                        PartList.Add(newPart)
-                    Next
-                    Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
-                    newOrder.Discount = CDbl(curRow(9))
-                    newOrder.Comment = curRow(10)
-                End While
-            End Using
-        Catch ex As Exception
-            'MsgBox(ex.Message)
-        End Try
+                Dim PartList = New List(Of HCPart)
+                For i = 11 To curRow.Length - 1 Step 8
+                    Dim newPart = New HCPart(CInt(curRow(i)), curRow(i + 1), CUInt(curRow(i + 2)), curRow(i + 3), CDbl(curRow(i + 4)), CDbl(curRow(i + 5)), Nothing, HCProvider.GetByID(CInt(curRow(i + 6))), CBool(curRow(i + 7)))
+                    PartList.Add(newPart)
+                Next
+                Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
+                newOrder.Discount = CDbl(curRow(9))
+                newOrder.Comment = curRow(10)
+            End While
+        End Using
         If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
     End Sub
 
@@ -3333,36 +3326,36 @@
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, WashHashCode) Then Exit Sub
                 End Using
+                WashHashCode = HashCode
                 Me.Invoke(Sub() LoadWash())
                 Me.Invoke(Sub() Commit())
-                WashHashCode = HashCode
             Case CDD & "m"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(fmPath)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, MountHashCode) Then Exit Sub
                 End Using
+                MountHashCode = HashCode
                 Me.Invoke(Sub() LoadMount())
                 Me.Invoke(Sub() Commit())
-                MountHashCode = HashCode
             Case CDD & "s"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(sPath)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, ServiceHashCode) Then Exit Sub
                 End Using
+                ServiceHashCode = HashCode
                 Me.Invoke(Sub() LoadService())
                 Me.Invoke(Sub() Commit())
-                ServiceHashCode = HashCode
             Case CDD & "c"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(cPath)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, CashHashCode) Then Exit Sub
                 End Using
+                CashHashCode = HashCode
                 Me.Invoke(Sub() LoadCash())
                 Me.Invoke(Sub() Commit())
-                CashHashCode = HashCode
             Case CDD & CStr(CurSche) & "sc"
                 If ScheduleSaving Then Exit Select
                 Dim HashCode As Byte()
@@ -3370,8 +3363,8 @@
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, sc1HashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadSchedule())
                 sc1HashCode = HashCode
+                Me.Invoke(Sub() LoadSchedule())
             Case NDD & CStr(CurSche) & "sc"
                 If ScheduleSaving Then Exit Select
                 Dim HashCode As Byte()
@@ -3379,40 +3372,40 @@
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, sc2HashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadSchedule())
                 sc2HashCode = HashCode
+                Me.Invoke(Sub() LoadSchedule())
             Case "Table"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Table.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, TableHashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadTable())
                 TableHashCode = HashCode
+                Me.Invoke(Sub() LoadTable())
             Case "Advance"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Advance.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, AdvanceHashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadAdvance())
                 AdvanceHashCode = HashCode
+                Me.Invoke(Sub() LoadAdvance())
             Case "Debts"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Debts.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, DebtsHashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadDebts())
                 DebtsHashCode = HashCode
+                Me.Invoke(Sub() LoadDebts())
             Case "State"
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\State.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
                     If HashCodeEquals(HashCode, StateHashCode) Then Exit Sub
                 End Using
-                Me.Invoke(Sub() LoadState())
                 StateHashCode = HashCode
+                Me.Invoke(Sub() LoadState())
             Case "Customers", "Orders"
                 Dim cHashCode As Byte()
                 Dim fQuit As Boolean = True 'quit flag

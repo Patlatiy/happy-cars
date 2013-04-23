@@ -4,10 +4,28 @@
     Public FirstName As String = ""
     Public LastName As String = ""
     Public Patron As String = ""
-    Public Phone As String = ""
+    Public _Phone As String = ""
+    Public _Code As String = ""
+    Public Property Phone As String
+        Get
+            Return "+7 (" & _Code & ") " & _Phone
+        End Get
+        Set(value As String)
+            If value = "" Then
+                _Code = ""
+                _Phone = ""
+                Exit Property
+            End If
+            Dim j As Integer = value.IndexOf(CChar("(")) + 1 'Index where code starts
+            Dim i As Integer = value.IndexOf(CChar(")")) + 1 ' Index where code ends
+            _Code = value.Substring(j, i - j - 1).Trim
+            _Phone = value.Substring(i, value.Length - i).Trim
+        End Set
+    End Property
     Public Address As String = ""
     Public MyOrderList As New List(Of HCOrder)
     Public Shared CustomerList As New List(Of HCCustomer)
+
     Public ReadOnly Property FullName
         Get
             Return (Me.LastName & " " & Me.FirstName & " " & Me.Patron).Trim()

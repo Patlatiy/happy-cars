@@ -32,13 +32,14 @@ Partial Class frmExecutor
         Me.lblLastName = New System.Windows.Forms.Label()
         Me.lbl1stName = New System.Windows.Forms.Label()
         Me.btnOK = New System.Windows.Forms.Button()
+        Me.txtPhoneCode = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtPhone
         '
-        Me.txtPhone.Location = New System.Drawing.Point(91, 87)
+        Me.txtPhone.Location = New System.Drawing.Point(139, 87)
         Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.Size = New System.Drawing.Size(137, 20)
+        Me.txtPhone.Size = New System.Drawing.Size(89, 20)
         Me.txtPhone.TabIndex = 11
         '
         'txtPatron
@@ -60,9 +61,9 @@ Partial Class frmExecutor
         Me.lblPhone.AutoSize = True
         Me.lblPhone.Location = New System.Drawing.Point(13, 90)
         Me.lblPhone.Name = "lblPhone"
-        Me.lblPhone.Size = New System.Drawing.Size(52, 13)
+        Me.lblPhone.Size = New System.Drawing.Size(76, 13)
         Me.lblPhone.TabIndex = 5
-        Me.lblPhone.Text = "Телефон"
+        Me.lblPhone.Text = "Телефон    +7"
         '
         'lblPatron
         '
@@ -107,11 +108,19 @@ Partial Class frmExecutor
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
+        'txtPhoneCode
+        '
+        Me.txtPhoneCode.Location = New System.Drawing.Point(91, 87)
+        Me.txtPhoneCode.Name = "txtPhoneCode"
+        Me.txtPhoneCode.Size = New System.Drawing.Size(42, 20)
+        Me.txtPhoneCode.TabIndex = 13
+        '
         'frmExecutor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(240, 148)
+        Me.Controls.Add(Me.txtPhoneCode)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.txtPhone)
         Me.Controls.Add(Me.txtPatron)
@@ -140,4 +149,5 @@ Partial Class frmExecutor
     Friend WithEvents lblLastName As System.Windows.Forms.Label
     Friend WithEvents lbl1stName As System.Windows.Forms.Label
     Friend WithEvents btnOK As System.Windows.Forms.Button
+    Friend WithEvents txtPhoneCode As System.Windows.Forms.TextBox
 End Class

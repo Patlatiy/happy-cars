@@ -7,7 +7,8 @@
         txt1stName.Text = Executor.FirstName
         txtLastName.Text = Executor.LastName
         txtPatron.Text = Executor.Patronage
-        txtPhone.Text = Executor.Phone
+        txtPhoneCode.Text = Executor._Code
+        txtPhone.Text = Executor._Phone
         MyExecutor = Executor
         MyOwner = Owner
         MyOwner.Enabled = False
@@ -17,7 +18,7 @@
         MyExecutor.FirstName = txt1stName.Text
         MyExecutor.LastName = txtLastName.Text
         MyExecutor.Patronage = txtPatron.Text
-        MyExecutor.Phone = txtPhone.Text
+        MyExecutor.Phone = "+7 (" & txtPhoneCode.Text.Trim & ") " & txtPhone.Text.Trim
         Close()
     End Sub
 
@@ -26,6 +27,16 @@
         MyOwner.Enabled = True
         If MyOwner Is frmNewOrder Then
             frmNewOrder.RefreshExecutors(MyExecutor)
+        End If
+    End Sub
+
+    Private Sub txtPhoneCode_TextChanged(sender As Object, e As EventArgs) Handles txtPhoneCode.TextChanged
+        If txtPhoneCode.Text(0) = "9" And txtPhoneCode.Text.Length = 3 Then
+            txtPhone.Focus()
+        ElseIf txtPhoneCode.Text = "4852" Then
+            txtPhone.Focus()
+        ElseIf txtPhoneCode.Text.Length = 4 Then
+            txtPhone.Focus()
         End If
     End Sub
 End Class

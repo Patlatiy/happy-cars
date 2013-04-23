@@ -30,16 +30,17 @@ Partial Class frmCustomer
         Me.lblPatron = New System.Windows.Forms.Label()
         Me.txtPatron = New System.Windows.Forms.TextBox()
         Me.dgvCustomerOrders = New System.Windows.Forms.DataGridView()
+        Me.cmnCustomerOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnCustomerOrderSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnCustomerDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.cmnCustomerEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.lblPhone = New System.Windows.Forms.Label()
         Me.btnNewOrder = New System.Windows.Forms.Button()
         Me.btnDeleteCustomer = New System.Windows.Forms.Button()
         Me.lblAddress = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
-        Me.cmnCustomerOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnCustomerOrderSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnCustomerDone = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.cmnCustomerEdit = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.txtPhoneCode = New System.Windows.Forms.TextBox()
         CType(Me.dgvCustomerOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -107,28 +108,55 @@ Partial Class frmCustomer
         Me.dgvCustomerOrders.Size = New System.Drawing.Size(375, 287)
         Me.dgvCustomerOrders.TabIndex = 8
         '
+        'cmnCustomerOrderNumber
+        '
+        Me.cmnCustomerOrderNumber.HeaderText = "Номер"
+        Me.cmnCustomerOrderNumber.Name = "cmnCustomerOrderNumber"
+        Me.cmnCustomerOrderNumber.ReadOnly = True
+        Me.cmnCustomerOrderNumber.Width = 105
+        '
+        'cmnCustomerOrderSum
+        '
+        Me.cmnCustomerOrderSum.HeaderText = "Сумма"
+        Me.cmnCustomerOrderSum.Name = "cmnCustomerOrderSum"
+        Me.cmnCustomerOrderSum.ReadOnly = True
+        '
+        'cmnCustomerDone
+        '
+        Me.cmnCustomerDone.HeaderText = "Выполнен"
+        Me.cmnCustomerDone.Name = "cmnCustomerDone"
+        Me.cmnCustomerDone.ReadOnly = True
+        Me.cmnCustomerDone.Width = 70
+        '
+        'cmnCustomerEdit
+        '
+        Me.cmnCustomerEdit.HeaderText = "Подробно"
+        Me.cmnCustomerEdit.Name = "cmnCustomerEdit"
+        Me.cmnCustomerEdit.ReadOnly = True
+        Me.cmnCustomerEdit.Width = 75
+        '
         'txtPhone
         '
-        Me.txtPhone.Location = New System.Drawing.Point(90, 92)
+        Me.txtPhone.Location = New System.Drawing.Point(137, 92)
         Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.Size = New System.Drawing.Size(137, 20)
-        Me.txtPhone.TabIndex = 3
+        Me.txtPhone.Size = New System.Drawing.Size(90, 20)
+        Me.txtPhone.TabIndex = 4
         '
         'lblPhone
         '
         Me.lblPhone.AutoSize = True
         Me.lblPhone.Location = New System.Drawing.Point(12, 95)
         Me.lblPhone.Name = "lblPhone"
-        Me.lblPhone.Size = New System.Drawing.Size(52, 13)
+        Me.lblPhone.Size = New System.Drawing.Size(79, 13)
         Me.lblPhone.TabIndex = 0
-        Me.lblPhone.Text = "Телефон"
+        Me.lblPhone.Text = "Телефон     +7"
         '
         'btnNewOrder
         '
         Me.btnNewOrder.Location = New System.Drawing.Point(399, 305)
         Me.btnNewOrder.Name = "btnNewOrder"
         Me.btnNewOrder.Size = New System.Drawing.Size(97, 23)
-        Me.btnNewOrder.TabIndex = 9
+        Me.btnNewOrder.TabIndex = 6
         Me.btnNewOrder.Text = "Новый заказ"
         Me.btnNewOrder.UseVisualStyleBackColor = True
         '
@@ -157,40 +185,21 @@ Partial Class frmCustomer
         Me.txtAddress.Location = New System.Drawing.Point(90, 118)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.Size = New System.Drawing.Size(137, 20)
-        Me.txtAddress.TabIndex = 3
+        Me.txtAddress.TabIndex = 5
         '
-        'cmnCustomerOrderNumber
+        'txtPhoneCode
         '
-        Me.cmnCustomerOrderNumber.HeaderText = "Номер"
-        Me.cmnCustomerOrderNumber.Name = "cmnCustomerOrderNumber"
-        Me.cmnCustomerOrderNumber.ReadOnly = True
-        Me.cmnCustomerOrderNumber.Width = 105
-        '
-        'cmnCustomerOrderSum
-        '
-        Me.cmnCustomerOrderSum.HeaderText = "Сумма"
-        Me.cmnCustomerOrderSum.Name = "cmnCustomerOrderSum"
-        Me.cmnCustomerOrderSum.ReadOnly = True
-        '
-        'cmnCustomerDone
-        '
-        Me.cmnCustomerDone.HeaderText = "Выполнен"
-        Me.cmnCustomerDone.Name = "cmnCustomerDone"
-        Me.cmnCustomerDone.ReadOnly = True
-        Me.cmnCustomerDone.Width = 70
-        '
-        'cmnCustomerEdit
-        '
-        Me.cmnCustomerEdit.HeaderText = "Подробно"
-        Me.cmnCustomerEdit.Name = "cmnCustomerEdit"
-        Me.cmnCustomerEdit.ReadOnly = True
-        Me.cmnCustomerEdit.Width = 75
+        Me.txtPhoneCode.Location = New System.Drawing.Point(91, 92)
+        Me.txtPhoneCode.Name = "txtPhoneCode"
+        Me.txtPhoneCode.Size = New System.Drawing.Size(40, 20)
+        Me.txtPhoneCode.TabIndex = 3
         '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(647, 336)
+        Me.Controls.Add(Me.txtPhoneCode)
         Me.Controls.Add(Me.btnDeleteCustomer)
         Me.Controls.Add(Me.btnNewOrder)
         Me.Controls.Add(Me.txtAddress)
@@ -233,4 +242,5 @@ Partial Class frmCustomer
     Friend WithEvents cmnCustomerOrderSum As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cmnCustomerDone As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents cmnCustomerEdit As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents txtPhoneCode As System.Windows.Forms.TextBox
 End Class

@@ -12,12 +12,15 @@
 
     Sub FillForm()
         If MyCustomer Is Nothing Then Exit Sub
+        Silently = True
         txt1stName.Text = MyCustomer.FirstName
         txtLastName.Text = MyCustomer.LastName
         txtPatron.Text = MyCustomer.Patron
-        txtPhone.Text = MyCustomer.Phone
+        txtPhoneCode.Text = MyCustomer._Code
+        txtPhone.Text = MyCustomer._Phone
         Me.Text = MyCustomer.FullName
         RefreshOrders()
+        Silently = False
     End Sub
 
     Sub AddOrder(Order As HCOrder)
@@ -78,7 +81,7 @@
     Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
         If Silently Then Exit Sub
         If MyCustomer Is Nothing Then CreateCustomer()
-        MyCustomer.Phone = txtPhone.Text.Trim
+        MyCustomer.Phone = "+7 (" & txtPhoneCode.Text.Trim & ") " & txtPhone.Text.Trim
     End Sub
 
     Private Sub txtAddress_TextChanged(sender As Object, e As EventArgs) Handles txtAddress.TextChanged
@@ -143,5 +146,18 @@ Deletion:
                 btnDeleteCustomer.Hide()
                 btnNewOrder.Hide()
         End Select
+    End Sub
+
+    Private Sub txtPhoneCode_TextChanged(sender As Object, e As EventArgs) Handles txtPhoneCode.TextChanged
+        If Silently Or txtPhoneCode.Text = "" Then Exit Sub
+        If txtPhoneCode.Text(0) = "9" And txtPhoneCode.Text.Length = 3 Then
+            txtPhone.Focus()
+        ElseIf txtPhoneCode.Text = "4852" Then
+            txtPhone.Focus()
+        ElseIf txtPhoneCode.Text.Length = 4 Then
+            txtPhone.Focus()
+        End If
+        If MyCustomer Is Nothing Then CreateCustomer()
+        MyCustomer.Phone = "+7 (" & txtPhoneCode.Text.Trim & ") " & txtPhone.Text.Trim
     End Sub
 End Class

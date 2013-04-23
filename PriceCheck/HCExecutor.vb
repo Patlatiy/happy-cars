@@ -5,7 +5,24 @@
     Public LastName As String
     Public FirstName As String
     Public Patronage As String
-    Public Phone As String
+    Public _Phone As String = ""
+    Public _Code As String = ""
+    Public Property Phone As String
+        Get
+            Return "+7 (" & _Code & ") " & _Phone
+        End Get
+        Set(value As String)
+            If value = "" Then
+                _Code = ""
+                _Phone = ""
+                Exit Property
+            End If
+            Dim j As Integer = value.IndexOf(CChar("(")) + 1 'Index where code starts
+            Dim i As Integer = value.IndexOf(CChar(")")) + 1 ' Index where code ends
+            _Code = value.Substring(j, i - j - 1).Trim
+            _Phone = value.Substring(i, value.Length - i).Trim
+        End Set
+    End Property
     Public ReadOnly Property FullName As String
         Get
             Return (Me.LastName & " " & Me.FirstName & " " & Me.Patronage).Trim()

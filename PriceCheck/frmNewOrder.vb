@@ -26,11 +26,9 @@
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         If MyCustomer Is Nothing Then
-            MsgBox("Пожалуйста, выберите заказчика.", MsgBoxStyle.Critical, "Внимание!")
-            Exit Sub
+            MyCustomer = HCCustomer.NullCustomer
         ElseIf MyExecutor Is Nothing Then
-            MsgBox("Пожалуйста, выберите исполнителя.", MsgBoxStyle.Critical, "Внимание!")
-            Exit Sub
+            MyExecutor = HCExecutor.NullExecutor
         ElseIf MyPartList.Count = 0 Then
             MsgBox("Пожалуйста, добавьте к заказу хотя бы одну запчасть.", MsgBoxStyle.Critical, "Внимание!")
             Exit Sub
@@ -55,19 +53,21 @@
         lwParts.Items.Add(newItem)
         FillRaw()
         FillTotal()
+        FillTotalMargin()
     End Sub
 
-    Public Sub UpdatePart(pName As String, pCount As UInteger, pPrice As Double, pMargin As Double, ByRef pProvider As HCProvider)
+    Public Sub UpdatePart(pName As String, pCount As UInteger, pUnits As String, pPrice As Double, pMargin As Double, ByRef pProvider As HCProvider)
         CurPart.Name = pName
         CurPart.Count = pCount
         CurPart.Price = pPrice
         CurPart.Margin = pMargin
         CurPart.Provider = pProvider
-        Dim newArr() As String = {CStr(CurPartPosition), pName, CStr(pCount), CStr(CurPart.GetSellPrice)}
+        Dim newArr() As String = {CStr(CurPartPosition), pName, CStr(pCount) & " " & pUnits, CStr(CurPart.GetSellPrice)}
         Dim newItem As New ListViewItem(newArr)
         lwParts.Items(lwParts.SelectedIndices(0)) = newItem
         FillRaw()
         FillTotal()
+        FillTotalMargin()
     End Sub
 
     Private Sub lwParts_ItemActivate(sender As Object, e As EventArgs) Handles lwParts.ItemActivate
@@ -148,6 +148,15 @@
         Return TotalRawPrice
     End Function
 
+    Private Function GetMargin() As Double
+        Dim TotalMargin As Double = 0
+        For Each Part In MyPartList
+            TotalMargin += Part.Margin
+        Next
+        TotalMargin = Math.Round(TotalMargin, 2)
+        Return TotalMargin
+    End Function
+
     Dim Silently As Boolean = False
     Private Sub nudDiscountPc_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscountPc.ValueChanged
         If Silently Then Exit Sub
@@ -163,6 +172,7 @@
             Silently = False
         End If
         FillTotal()
+        FillTotalMargin()
     End Sub
 
     Private Sub FillTotal()
@@ -171,6 +181,10 @@
 
     Private Sub FillRaw()
         txtRawPrice.Text = ToMoney(Math.Round(GetRawPrice(), 2))
+    End Sub
+
+    Private Sub FillTotalMargin()
+        txtTotalMargin.Text = ToMoney(Math.Round(GetMargin(), 2))
     End Sub
 
     Private Sub comboCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboCustomer.SelectedIndexChanged

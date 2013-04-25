@@ -12,7 +12,7 @@ HappyCars
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:HappyCars.HCCustomer.FindByID(System.UInt32)">
+</member><member name="M:HappyCars.HCCustomer.FindByID(System.Int32)">
 	<summary>
  Returns an instance with given ID
  </summary>

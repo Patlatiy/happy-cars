@@ -37,15 +37,22 @@
         Silently = True
         nudSellPrice.Value = (nudPartPrice.Value * nudPartCount.Value) + nudMargin.Value
         Silently = False
-        txtSellPrice.Text = ToMoney(nudSellPrice.Value)
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+        If comboName.Text = "" Then
+            MsgBox("Создание запчастей без имени пока не поддерживается. Пожалуйста, выберите или введите имя для запчасти.", MsgBoxStyle.Critical, "Извините")
+            Exit Sub
+        End If
+        If comboProvider.Text = "" Then
+            MsgBox("Создание запчастей без поставщика пока не поддерживается. Пожалуйста, выберите или введите поставщика для запчасти.", MsgBoxStyle.Critical, "Извините")
+            Exit Sub
+        End If
         If MyOwner Is frmNewOrder Then
             If CreateNew Then
                 frmNewOrder.AddPart(comboName.Text, CInt(nudPartCount.Value), comboUnits.Text, nudPartPrice.Value, nudMargin.Value, HCProvider.GetByName(comboProvider.Text))
             Else
-                frmNewOrder.UpdatePart(comboName.Text, CInt(nudPartCount.Value), nudPartPrice.Value, nudMargin.Value, HCProvider.GetByName(comboProvider.Text))
+                frmNewOrder.UpdatePart(comboName.Text, CInt(nudPartCount.Value), comboUnits.Text, nudPartPrice.Value, nudMargin.Value, HCProvider.GetByName(comboProvider.Text))
             End If
         End If
         Close()

@@ -254,6 +254,7 @@
         End If
 
         Label1.Text = CStr(sum) & " р."
+        Log(CStr(ServiceMode))
     End Sub
 
     Private Sub CheckForComplex()
@@ -726,44 +727,50 @@
 
     Sub LoadCustomers()
         Dim curRow As String()
-        Log("Loading customers")
-        HCOrder.KillAll()
-        HCCustomer.KillAll()
-        LoadExecutors()
-        LoadProviders()
-        Using cFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Customers.ini")
-            cFile.TextFieldType = FileIO.FieldType.Delimited
-            cFile.SetDelimiters("|")
-            While Not cFile.EndOfData
-                curRow = cFile.ReadFields
-                If curRow.Count = 1 Then
-                    HCCustomer.GlobalID = CUInt(curRow(0))
-                Else
-                    Dim newCustomer = New HCCustomer(CUInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4), curRow(5))
-                End If
-            End While
-        End Using
-        Log("Loading orders")
-        Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
-            oFile.TextFieldType = FileIO.FieldType.Delimited
-            oFile.SetDelimiters("|")
-            curRow = oFile.ReadFields
-            HCOrder.GlobalID = CUInt(curRow(0))
-            curRow = oFile.ReadFields
-            HCPart.GlobalID = CUInt(curRow(0))
-            While Not oFile.EndOfData
+        Try
+            Log("Loading customers")
+            HCOrder.KillAll()
+            HCCustomer.KillAll()
+            LoadExecutors()
+            LoadProviders()
+            Using cFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\Customers.ini")
+                cFile.TextFieldType = FileIO.FieldType.Delimited
+                cFile.SetDelimiters("|")
+                While Not cFile.EndOfData
+                    curRow = cFile.ReadFields
+                    If curRow.Count = 1 Then
+                        HCCustomer.GlobalID = CUInt(curRow(0))
+                    Else
+                        Dim newCustomer = New HCCustomer(CInt(curRow(0)), curRow(2), curRow(1), curRow(3), curRow(4), curRow(5))
+                    End If
+                End While
+            End Using
+        Catch ex As Exception
+        End Try
+        Try
+            Log("Loading orders")
+            Using oFile As New Microsoft.VisualBasic.FileIO.TextFieldParser(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
+                oFile.TextFieldType = FileIO.FieldType.Delimited
+                oFile.SetDelimiters("|")
                 curRow = oFile.ReadFields
-                Dim PartList = New List(Of HCPart)
-                For i = 11 To curRow.Length - 1 Step 8
-                    Dim newPart = New HCPart(CInt(curRow(i)), curRow(i + 1), CUInt(curRow(i + 2)), curRow(i + 3), CDbl(curRow(i + 4)), CDbl(curRow(i + 5)), Nothing, HCProvider.GetByID(CInt(curRow(i + 6))), CBool(curRow(i + 7)))
-                    PartList.Add(newPart)
-                Next
-                Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CUInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
-                newOrder.Discount = CDbl(curRow(9))
-                newOrder.Comment = curRow(10)
-            End While
-        End Using
-        If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
+                HCOrder.GlobalID = CUInt(curRow(0))
+                curRow = oFile.ReadFields
+                HCPart.GlobalID = CUInt(curRow(0))
+                While Not oFile.EndOfData
+                    curRow = oFile.ReadFields
+                    Dim PartList = New List(Of HCPart)
+                    For i = 11 To curRow.Length - 1 Step 8
+                        Dim newPart = New HCPart(CInt(curRow(i)), curRow(i + 1), CUInt(curRow(i + 2)), curRow(i + 3), CDbl(curRow(i + 4)), CDbl(curRow(i + 5)), Nothing, HCProvider.GetByID(CInt(curRow(i + 6))), CBool(curRow(i + 7)))
+                        PartList.Add(newPart)
+                    Next
+                    Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
+                    newOrder.Discount = CDbl(curRow(9))
+                    newOrder.Comment = curRow(10)
+                End While
+            End Using
+            If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Sub LoadExecutors()
@@ -776,7 +783,7 @@
                 eFile.SetDelimiters("|")
                 While Not eFile.EndOfData
                     curRow = eFile.ReadFields
-                    Dim newExec = New HCExecutor(CUInt(curRow(0)), curRow(1), curRow(2), curRow(3), curRow(4))
+                    Dim newExec = New HCExecutor(CInt(curRow(0)), curRow(1), curRow(2), curRow(3), curRow(4))
                 End While
             End Using
         Catch ex As Exception
@@ -2645,8 +2652,7 @@
         SaveCash()
     End Sub
 
-    Private Sub ClearAllSelection(sender As System.Object, e As System.EventArgs) Handles tabWash.Click, tabMount.Click, tabCash.Click, tabService.Click, Me.Click
-        ServiceMode = 4
+    Private Sub ClearAllSelection(sender As System.Object, e As System.EventArgs) Handles tabWash.Click, tabMount.Click, tabService.Click, Me.Click, tabCash.Click
         dataDay.ClearSelection()
         dataDayMount.ClearSelection()
         dataService.ClearSelection()
@@ -3694,6 +3700,7 @@
                 End If
             End If
         Next
+        UpdateDebitCredit()
         'If dgvPayments.Item(0, i).Value = "autosum" Then
         ' dgvPayments.Rows(i).Visible = True
         ' dgvPayments.Item(4, i).Value = ComeGetSum(dgvPayments, 4, 0, dgvPayments.RowCount - 2, True)
@@ -3727,9 +3734,16 @@
                 CreditSum += CDbl(row.Cells(cmnCredit.Index).Value)
             End If
         Next
-        lblDebitSum.Text = "D: " & Math.Round(DebitSum, 2).ToString
-        lblCreditSum.Text = "C: " & Math.Round(CreditSum, 2).ToString()
-        lblDiff.Text = "Diff: " & CStr(Math.Round(DebitSum - CreditSum, 2))
+        txtDebitSum.Text = Math.Round(DebitSum, 2).ToString
+        txtCreditSum.Text = Math.Round(CreditSum, 2).ToString()
+        txtDebitDiff.Text = ""
+        txtCreditDiff.Text = ""
+        Dim Diff As Double = Math.Round(DebitSum - CreditSum, 2)
+        If Diff < 0 Then
+            txtCreditDiff.Text = (-Diff).ToString
+        ElseIf Diff > 0 Then
+            txtDebitDiff.Text = Diff.ToString
+        End If
     End Sub
 
     Private Sub dgvPayments_SelectionChanged(sender As Object, e As EventArgs) Handles dgvPayments.SelectionChanged
@@ -3776,12 +3790,12 @@
             Dim bFound As Boolean = False
             For i = 0 To names.Count - 1
                 If IDs(i) = Part.Provider.ID Then
-                    sums(i) += Part.Price
+                    sums(i) += Part.Price * Part.Count
                     bFound = True
                 End If
             Next
             If Not bFound Then
-                sums.Add(Part.Price)
+                sums.Add(Part.Price * Part.Count)
                 names.Add(Part.Provider.Name)
                 IDs.Add(Part.Provider.ID)
             End If
@@ -3894,5 +3908,13 @@
 
     Private Sub Log(Message)
         frmLog.Add(Message)
+    End Sub
+
+    Private Sub tabCash_Enter(sender As Object, e As EventArgs) Handles tabCash.Enter
+        ServiceMode = 4
+    End Sub
+
+    Private Sub tabSchedule_Enter(sender As Object, e As EventArgs) Handles tabSchedule.Enter
+        ServiceMode = 3
     End Sub
 End Class

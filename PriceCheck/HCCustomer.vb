@@ -1,5 +1,6 @@
 ﻿Public Class HCCustomer
-    Public ID As UInteger
+    Public Shared NullCustomer As New HCCustomer("Null")
+    Public ID As Integer
     Public Shared GlobalID As UInteger = 1
     Public FirstName As String = ""
     Public LastName As String = ""
@@ -8,6 +9,7 @@
     Public _Code As String = ""
     Public Property Phone As String
         Get
+            If _Code = "" And _Phone = "" Then Return ""
             Return "+7 (" & _Code & ") " & _Phone
         End Get
         Set(value As String)
@@ -17,7 +19,7 @@
                 Exit Property
             End If
             Dim j As Integer = value.IndexOf(CChar("(")) + 1 'Index where code starts
-            Dim i As Integer = value.IndexOf(CChar(")")) + 1 ' Index where code ends
+            Dim i As Integer = value.IndexOf(CChar(")")) + 1 'Index where code ends
             _Code = value.Substring(j, i - j - 1).Trim
             _Phone = value.Substring(i, value.Length - i).Trim
         End Set
@@ -28,15 +30,25 @@
 
     Public ReadOnly Property FullName
         Get
+            If Me Is NullCustomer Then Return ""
             Return (Me.LastName & " " & Me.FirstName & " " & Me.Patron).Trim()
         End Get
     End Property
+
+    Sub New(NullStr As String)
+        FirstName = ""
+        LastName = ""
+        Patron = ""
+        Phone = ""
+        Address = ""
+        ID = -1
+    End Sub
 
     Sub New()
         Me.New("", "", "", "", "")
     End Sub
 
-    Sub New(nID As UInteger, nFirstName As String, nLastName As String, nPatron As String, nPhone As String, nAddress As String)
+    Sub New(nID As Integer, nFirstName As String, nLastName As String, nPatron As String, nPhone As String, nAddress As String)
         FirstName = nFirstName.Trim
         LastName = nLastName.Trim
         Patron = nPatron.Trim
@@ -64,6 +76,7 @@
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function GetShortName() As String
+        If Me Is NullCustomer Then Return ""
         If LastName = "" Then Return FullName
         If FirstName = "" And Patron = "" Then Return LastName
         If FirstName = "" Then Return LastName
@@ -77,11 +90,12 @@
     ''' <param name="sID"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Shared Function FindByID(sID As UInteger) As HCCustomer
+    Public Shared Function FindByID(sID As Integer) As HCCustomer
+        If sID < 0 Then Return NullCustomer
         For Each Customer As HCCustomer In CustomerList
             If Customer.ID = sID Then Return Customer
         Next
-        Return Nothing
+        Return NullCustomer
     End Function
 
     ''' <summary>

@@ -43,5 +43,6 @@
         lblPrintDate.Text = strDay & "." & strMonth & "." & Order.Number.Year.ToString
         lblGlobalDate.Text = strDay & "." & strMonth & "." & Order.Number.Year.ToString
         lblCashString.Text = RSDN.RusCurrency.Str(Order.AdvanceSum)
+        lblCashName.Text = Order.Customer.FullName
     End Sub
 End Class

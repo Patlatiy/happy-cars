@@ -181,7 +181,7 @@ namespace RSDN
             r.Insert(0, RusNumber.Str(n, true, "триллиард", "триллиарда", "триллиардов"));
             if (minus) r.Insert(0, "минус ");
 
-            r.Append(remainder.ToString("00 "));
+            r.Append(remainder.ToString(" 00 "));
             r.Append(RusNumber.Case(remainder, juniorOne, juniorTwo, juniorFive));
 
             //Делаем первую букву заглавной

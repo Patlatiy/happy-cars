@@ -331,6 +331,7 @@ Partial Class Form1
         Me.Label25 = New System.Windows.Forms.Label()
         Me.tabProviders = New System.Windows.Forms.TabPage()
         Me.gbPart = New System.Windows.Forms.GroupBox()
+        Me.dtpPayment = New System.Windows.Forms.DateTimePicker()
         Me.btnAddPayment = New System.Windows.Forms.Button()
         Me.txtPartCount = New System.Windows.Forms.TextBox()
         Me.lblPartCount = New System.Windows.Forms.Label()
@@ -347,12 +348,16 @@ Partial Class Form1
         Me.lblPartsCaption = New System.Windows.Forms.Label()
         Me.lblProvidersCaption = New System.Windows.Forms.Label()
         Me.tabPayments = New System.Windows.Forms.TabPage()
-        Me.lblDiff = New System.Windows.Forms.Label()
-        Me.lblCreditSum = New System.Windows.Forms.Label()
-        Me.lblDebitSum = New System.Windows.Forms.Label()
         Me.lblProviderFilet = New System.Windows.Forms.Label()
         Me.comboProviderFilter = New System.Windows.Forms.ComboBox()
         Me.dgvPayments = New System.Windows.Forms.DataGridView()
+        Me.cmnProvID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnOrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnProvider = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn20 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnDebit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmnCredit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn24 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblDaySum = New System.Windows.Forms.Label()
         Me.curDatePicker = New System.Windows.Forms.DateTimePicker()
         Me.lblDOW = New System.Windows.Forms.Label()
@@ -380,14 +385,12 @@ Partial Class Form1
         Me.ЗаписьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.МагазинToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПринятыеПлатежиToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.dtpPayment = New System.Windows.Forms.DateTimePicker()
-        Me.cmnProvID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnOrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnProvider = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn20 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnDebit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmnCredit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn24 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtDebitSum = New System.Windows.Forms.TextBox()
+        Me.txtCreditSum = New System.Windows.Forms.TextBox()
+        Me.txtCreditDiff = New System.Windows.Forms.TextBox()
+        Me.txtDebitDiff = New System.Windows.Forms.TextBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -3527,6 +3530,15 @@ Partial Class Form1
         Me.gbPart.Text = "Запчасть"
         Me.gbPart.Visible = False
         '
+        'dtpPayment
+        '
+        Me.dtpPayment.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpPayment.Location = New System.Drawing.Point(158, 115)
+        Me.dtpPayment.Name = "dtpPayment"
+        Me.dtpPayment.Size = New System.Drawing.Size(76, 20)
+        Me.dtpPayment.TabIndex = 20
+        Me.dtpPayment.Value = New Date(2012, 9, 3, 14, 6, 0, 0)
+        '
         'btnAddPayment
         '
         Me.btnAddPayment.Location = New System.Drawing.Point(18, 112)
@@ -3659,9 +3671,12 @@ Partial Class Form1
         '
         'tabPayments
         '
-        Me.tabPayments.Controls.Add(Me.lblDiff)
-        Me.tabPayments.Controls.Add(Me.lblCreditSum)
-        Me.tabPayments.Controls.Add(Me.lblDebitSum)
+        Me.tabPayments.Controls.Add(Me.Label28)
+        Me.tabPayments.Controls.Add(Me.Label27)
+        Me.tabPayments.Controls.Add(Me.txtDebitDiff)
+        Me.tabPayments.Controls.Add(Me.txtCreditDiff)
+        Me.tabPayments.Controls.Add(Me.txtCreditSum)
+        Me.tabPayments.Controls.Add(Me.txtDebitSum)
         Me.tabPayments.Controls.Add(Me.lblProviderFilet)
         Me.tabPayments.Controls.Add(Me.comboProviderFilter)
         Me.tabPayments.Controls.Add(Me.dgvPayments)
@@ -3671,33 +3686,6 @@ Partial Class Form1
         Me.tabPayments.TabIndex = 11
         Me.tabPayments.Text = "Расчёты с поставщиками"
         Me.tabPayments.UseVisualStyleBackColor = True
-        '
-        'lblDiff
-        '
-        Me.lblDiff.Location = New System.Drawing.Point(614, 468)
-        Me.lblDiff.Name = "lblDiff"
-        Me.lblDiff.Size = New System.Drawing.Size(82, 13)
-        Me.lblDiff.TabIndex = 109
-        Me.lblDiff.Text = "lblDiff"
-        Me.lblDiff.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblCreditSum
-        '
-        Me.lblCreditSum.Location = New System.Drawing.Point(514, 468)
-        Me.lblCreditSum.Name = "lblCreditSum"
-        Me.lblCreditSum.Size = New System.Drawing.Size(82, 13)
-        Me.lblCreditSum.TabIndex = 109
-        Me.lblCreditSum.Text = "lblCreditSum"
-        Me.lblCreditSum.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblDebitSum
-        '
-        Me.lblDebitSum.Location = New System.Drawing.Point(432, 468)
-        Me.lblDebitSum.Name = "lblDebitSum"
-        Me.lblDebitSum.Size = New System.Drawing.Size(77, 13)
-        Me.lblDebitSum.TabIndex = 109
-        Me.lblDebitSum.Text = "lblDebitSum"
-        Me.lblDebitSum.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblProviderFilet
         '
@@ -3736,9 +3724,65 @@ Partial Class Form1
         Me.dgvPayments.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dgvPayments.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
         Me.dgvPayments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgvPayments.Size = New System.Drawing.Size(943, 462)
+        Me.dgvPayments.Size = New System.Drawing.Size(943, 431)
         Me.dgvPayments.TabIndex = 101
         Me.dgvPayments.TabStop = False
+        '
+        'cmnProvID
+        '
+        Me.cmnProvID.HeaderText = "ID"
+        Me.cmnProvID.Name = "cmnProvID"
+        Me.cmnProvID.ReadOnly = True
+        Me.cmnProvID.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.cmnProvID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cmnProvID.Width = 50
+        '
+        'cmnOrderID
+        '
+        Me.cmnOrderID.HeaderText = "Номер заказа"
+        Me.cmnOrderID.Name = "cmnOrderID"
+        Me.cmnOrderID.ReadOnly = True
+        Me.cmnOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cmnOrderID.Width = 120
+        '
+        'cmnProvider
+        '
+        Me.cmnProvider.HeaderText = "Поставщик"
+        Me.cmnProvider.Name = "cmnProvider"
+        Me.cmnProvider.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.cmnProvider.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cmnProvider.Width = 150
+        '
+        'DataGridViewTextBoxColumn20
+        '
+        Me.DataGridViewTextBoxColumn20.HeaderText = "Дата"
+        Me.DataGridViewTextBoxColumn20.Name = "DataGridViewTextBoxColumn20"
+        Me.DataGridViewTextBoxColumn20.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'cmnDebit
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.cmnDebit.DefaultCellStyle = DataGridViewCellStyle2
+        Me.cmnDebit.HeaderText = "Дебет"
+        Me.cmnDebit.Name = "cmnDebit"
+        Me.cmnDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cmnDebit.Width = 85
+        '
+        'cmnCredit
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.cmnCredit.DefaultCellStyle = DataGridViewCellStyle3
+        Me.cmnCredit.HeaderText = "Кредит"
+        Me.cmnCredit.Name = "cmnCredit"
+        Me.cmnCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cmnCredit.Width = 85
+        '
+        'DataGridViewTextBoxColumn24
+        '
+        Me.DataGridViewTextBoxColumn24.HeaderText = "Комментарий"
+        Me.DataGridViewTextBoxColumn24.Name = "DataGridViewTextBoxColumn24"
+        Me.DataGridViewTextBoxColumn24.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DataGridViewTextBoxColumn24.Width = 325
         '
         'lblDaySum
         '
@@ -3933,70 +3977,63 @@ Partial Class Form1
         Me.ПринятыеПлатежиToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ПринятыеПлатежиToolStripMenuItem.Text = "Принятые платежи"
         '
-        'dtpPayment
+        'txtDebitSum
         '
-        Me.dtpPayment.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpPayment.Location = New System.Drawing.Point(158, 115)
-        Me.dtpPayment.Name = "dtpPayment"
-        Me.dtpPayment.Size = New System.Drawing.Size(76, 20)
-        Me.dtpPayment.TabIndex = 20
-        Me.dtpPayment.Value = New Date(2012, 9, 3, 14, 6, 0, 0)
+        Me.txtDebitSum.BackColor = System.Drawing.SystemColors.Control
+        Me.txtDebitSum.Location = New System.Drawing.Point(421, 436)
+        Me.txtDebitSum.Name = "txtDebitSum"
+        Me.txtDebitSum.ReadOnly = True
+        Me.txtDebitSum.Size = New System.Drawing.Size(88, 20)
+        Me.txtDebitSum.TabIndex = 110
+        Me.txtDebitSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'cmnProvID
+        'txtCreditSum
         '
-        Me.cmnProvID.HeaderText = "ID"
-        Me.cmnProvID.Name = "cmnProvID"
-        Me.cmnProvID.ReadOnly = True
-        Me.cmnProvID.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.cmnProvID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cmnProvID.Width = 50
+        Me.txtCreditSum.BackColor = System.Drawing.SystemColors.Control
+        Me.txtCreditSum.Location = New System.Drawing.Point(511, 436)
+        Me.txtCreditSum.Name = "txtCreditSum"
+        Me.txtCreditSum.ReadOnly = True
+        Me.txtCreditSum.Size = New System.Drawing.Size(88, 20)
+        Me.txtCreditSum.TabIndex = 110
+        Me.txtCreditSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'cmnOrderID
+        'txtCreditDiff
         '
-        Me.cmnOrderID.HeaderText = "Номер заказа"
-        Me.cmnOrderID.Name = "cmnOrderID"
-        Me.cmnOrderID.ReadOnly = True
-        Me.cmnOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cmnOrderID.Width = 120
+        Me.txtCreditDiff.BackColor = System.Drawing.SystemColors.Control
+        Me.txtCreditDiff.Location = New System.Drawing.Point(511, 458)
+        Me.txtCreditDiff.Name = "txtCreditDiff"
+        Me.txtCreditDiff.ReadOnly = True
+        Me.txtCreditDiff.Size = New System.Drawing.Size(88, 20)
+        Me.txtCreditDiff.TabIndex = 110
+        Me.txtCreditDiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'cmnProvider
+        'txtDebitDiff
         '
-        Me.cmnProvider.HeaderText = "Поставщик"
-        Me.cmnProvider.Name = "cmnProvider"
-        Me.cmnProvider.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.cmnProvider.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cmnProvider.Width = 150
+        Me.txtDebitDiff.BackColor = System.Drawing.SystemColors.Control
+        Me.txtDebitDiff.Location = New System.Drawing.Point(421, 458)
+        Me.txtDebitDiff.Name = "txtDebitDiff"
+        Me.txtDebitDiff.ReadOnly = True
+        Me.txtDebitDiff.Size = New System.Drawing.Size(88, 20)
+        Me.txtDebitDiff.TabIndex = 110
+        Me.txtDebitDiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'DataGridViewTextBoxColumn20
+        'Label27
         '
-        Me.DataGridViewTextBoxColumn20.HeaderText = "Дата"
-        Me.DataGridViewTextBoxColumn20.Name = "DataGridViewTextBoxColumn20"
-        Me.DataGridViewTextBoxColumn20.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(370, 439)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(41, 13)
+        Me.Label27.TabIndex = 111
+        Me.Label27.Text = "Сумма"
         '
-        'cmnDebit
+        'Label28
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.cmnDebit.DefaultCellStyle = DataGridViewCellStyle2
-        Me.cmnDebit.HeaderText = "Дебет"
-        Me.cmnDebit.Name = "cmnDebit"
-        Me.cmnDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cmnDebit.Width = 85
-        '
-        'cmnCredit
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.cmnCredit.DefaultCellStyle = DataGridViewCellStyle3
-        Me.cmnCredit.HeaderText = "Кредит"
-        Me.cmnCredit.Name = "cmnCredit"
-        Me.cmnCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cmnCredit.Width = 85
-        '
-        'DataGridViewTextBoxColumn24
-        '
-        Me.DataGridViewTextBoxColumn24.HeaderText = "Комментарий"
-        Me.DataGridViewTextBoxColumn24.Name = "DataGridViewTextBoxColumn24"
-        Me.DataGridViewTextBoxColumn24.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.DataGridViewTextBoxColumn24.Width = 325
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(370, 461)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(44, 13)
+        Me.Label28.TabIndex = 111
+        Me.Label28.Text = "Сальдо"
         '
         'Form1
         '
@@ -4446,9 +4483,6 @@ Partial Class Form1
     Friend WithEvents dgvPayments As System.Windows.Forms.DataGridView
     Friend WithEvents lblProviderFilet As System.Windows.Forms.Label
     Friend WithEvents comboProviderFilter As System.Windows.Forms.ComboBox
-    Friend WithEvents lblCreditSum As System.Windows.Forms.Label
-    Friend WithEvents lblDebitSum As System.Windows.Forms.Label
-    Friend WithEvents lblDiff As System.Windows.Forms.Label
     Friend WithEvents cmnOrderNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cmnCustomer As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cmnDone As System.Windows.Forms.DataGridViewCheckBoxColumn
@@ -4480,5 +4514,11 @@ Partial Class Form1
     Friend WithEvents cmnDebit As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cmnCredit As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn24 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtDebitDiff As System.Windows.Forms.TextBox
+    Friend WithEvents txtCreditDiff As System.Windows.Forms.TextBox
+    Friend WithEvents txtCreditSum As System.Windows.Forms.TextBox
+    Friend WithEvents txtDebitSum As System.Windows.Forms.TextBox
+    Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents Label27 As System.Windows.Forms.Label
 
 End Class

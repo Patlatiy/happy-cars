@@ -48,13 +48,15 @@ Partial Class frmNewOrder
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.lblRawPrice = New System.Windows.Forms.Label()
         Me.txtRawPrice = New System.Windows.Forms.TextBox()
+        Me.lblTotalMargin = New System.Windows.Forms.Label()
+        Me.txtTotalMargin = New System.Windows.Forms.TextBox()
         CType(Me.nudDiscountPc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDiscount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(292, 398)
+        Me.btnOK.Location = New System.Drawing.Point(290, 419)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
         Me.btnOK.TabIndex = 0
@@ -165,7 +167,7 @@ Partial Class frmNewOrder
         '
         Me.lblDiscountRbl.AutoSize = True
         Me.lblDiscountRbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblDiscountRbl.Location = New System.Drawing.Point(349, 343)
+        Me.lblDiscountRbl.Location = New System.Drawing.Point(350, 317)
         Me.lblDiscountRbl.Name = "lblDiscountRbl"
         Me.lblDiscountRbl.Size = New System.Drawing.Size(16, 13)
         Me.lblDiscountRbl.TabIndex = 18
@@ -175,7 +177,7 @@ Partial Class frmNewOrder
         '
         Me.lblDiscountPc.AutoSize = True
         Me.lblDiscountPc.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblDiscountPc.Location = New System.Drawing.Point(234, 345)
+        Me.lblDiscountPc.Location = New System.Drawing.Point(235, 319)
         Me.lblDiscountPc.Name = "lblDiscountPc"
         Me.lblDiscountPc.Size = New System.Drawing.Size(15, 13)
         Me.lblDiscountPc.TabIndex = 19
@@ -184,7 +186,7 @@ Partial Class frmNewOrder
         'lblDiscount
         '
         Me.lblDiscount.AutoSize = True
-        Me.lblDiscount.Location = New System.Drawing.Point(24, 343)
+        Me.lblDiscount.Location = New System.Drawing.Point(24, 317)
         Me.lblDiscount.Name = "lblDiscount"
         Me.lblDiscount.Size = New System.Drawing.Size(44, 13)
         Me.lblDiscount.TabIndex = 15
@@ -192,7 +194,7 @@ Partial Class frmNewOrder
         '
         'nudDiscountPc
         '
-        Me.nudDiscountPc.Location = New System.Drawing.Point(190, 341)
+        Me.nudDiscountPc.Location = New System.Drawing.Point(191, 315)
         Me.nudDiscountPc.Name = "nudDiscountPc"
         Me.nudDiscountPc.Size = New System.Drawing.Size(45, 20)
         Me.nudDiscountPc.TabIndex = 16
@@ -201,7 +203,7 @@ Partial Class frmNewOrder
         '
         Me.nudDiscount.DecimalPlaces = 2
         Me.nudDiscount.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudDiscount.Location = New System.Drawing.Point(262, 341)
+        Me.nudDiscount.Location = New System.Drawing.Point(263, 315)
         Me.nudDiscount.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudDiscount.Name = "nudDiscount"
         Me.nudDiscount.Size = New System.Drawing.Size(86, 20)
@@ -222,9 +224,9 @@ Partial Class frmNewOrder
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.lblTotal.Location = New System.Drawing.Point(23, 370)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(114, 13)
+        Me.lblTotal.Size = New System.Drawing.Size(112, 13)
         Me.lblTotal.TabIndex = 20
-        Me.lblTotal.Text = "Общая стоимость"
+        Me.lblTotal.Text = "ИТОГО (продажа)"
         '
         'dtpDelivery
         '
@@ -255,31 +257,52 @@ Partial Class frmNewOrder
         '
         Me.lblRawPrice.AutoSize = True
         Me.lblRawPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblRawPrice.Location = New System.Drawing.Point(23, 318)
+        Me.lblRawPrice.Location = New System.Drawing.Point(22, 344)
         Me.lblRawPrice.Name = "lblRawPrice"
-        Me.lblRawPrice.Size = New System.Drawing.Size(123, 13)
+        Me.lblRawPrice.Size = New System.Drawing.Size(109, 13)
         Me.lblRawPrice.TabIndex = 20
-        Me.lblRawPrice.Text = "Стоимость закупки"
+        Me.lblRawPrice.Text = "ИТОГО (закупка)"
         '
         'txtRawPrice
         '
         Me.txtRawPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtRawPrice.Location = New System.Drawing.Point(261, 315)
+        Me.txtRawPrice.Location = New System.Drawing.Point(261, 341)
         Me.txtRawPrice.Name = "txtRawPrice"
         Me.txtRawPrice.ReadOnly = True
         Me.txtRawPrice.Size = New System.Drawing.Size(88, 20)
         Me.txtRawPrice.TabIndex = 21
         '
+        'lblTotalMargin
+        '
+        Me.lblTotalMargin.AutoSize = True
+        Me.lblTotalMargin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblTotalMargin.Location = New System.Drawing.Point(23, 396)
+        Me.lblTotalMargin.Name = "lblTotalMargin"
+        Me.lblTotalMargin.Size = New System.Drawing.Size(100, 13)
+        Me.lblTotalMargin.TabIndex = 20
+        Me.lblTotalMargin.Text = "ИТОГО (маржа)"
+        '
+        'txtTotalMargin
+        '
+        Me.txtTotalMargin.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtTotalMargin.Location = New System.Drawing.Point(261, 393)
+        Me.txtTotalMargin.Name = "txtTotalMargin"
+        Me.txtTotalMargin.ReadOnly = True
+        Me.txtTotalMargin.Size = New System.Drawing.Size(88, 20)
+        Me.txtTotalMargin.TabIndex = 21
+        '
         'frmNewOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(377, 430)
+        Me.ClientSize = New System.Drawing.Size(377, 449)
         Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.dtpDelivery)
         Me.Controls.Add(Me.lblDelivery)
         Me.Controls.Add(Me.txtRawPrice)
         Me.Controls.Add(Me.lblRawPrice)
+        Me.Controls.Add(Me.txtTotalMargin)
+        Me.Controls.Add(Me.lblTotalMargin)
         Me.Controls.Add(Me.txtTotal)
         Me.Controls.Add(Me.lblTotal)
         Me.Controls.Add(Me.lblDiscountRbl)
@@ -333,4 +356,6 @@ Partial Class frmNewOrder
     Friend WithEvents txtComment As System.Windows.Forms.TextBox
     Friend WithEvents lblRawPrice As System.Windows.Forms.Label
     Friend WithEvents txtRawPrice As System.Windows.Forms.TextBox
+    Friend WithEvents lblTotalMargin As System.Windows.Forms.Label
+    Friend WithEvents txtTotalMargin As System.Windows.Forms.TextBox
 End Class

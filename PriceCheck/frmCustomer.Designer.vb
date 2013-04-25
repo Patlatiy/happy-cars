@@ -41,6 +41,7 @@ Partial Class frmCustomer
         Me.lblAddress = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.txtPhoneCode = New System.Windows.Forms.TextBox()
+        Me.btnClose = New System.Windows.Forms.Button()
         CType(Me.dgvCustomerOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -153,7 +154,7 @@ Partial Class frmCustomer
         '
         'btnNewOrder
         '
-        Me.btnNewOrder.Location = New System.Drawing.Point(399, 305)
+        Me.btnNewOrder.Location = New System.Drawing.Point(260, 306)
         Me.btnNewOrder.Name = "btnNewOrder"
         Me.btnNewOrder.Size = New System.Drawing.Size(97, 23)
         Me.btnNewOrder.TabIndex = 6
@@ -194,11 +195,21 @@ Partial Class frmCustomer
         Me.txtPhoneCode.Size = New System.Drawing.Size(40, 20)
         Me.txtPhoneCode.TabIndex = 3
         '
+        'btnClose
+        '
+        Me.btnClose.Location = New System.Drawing.Point(560, 305)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 11
+        Me.btnClose.Text = "OK"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(647, 336)
+        Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.txtPhoneCode)
         Me.Controls.Add(Me.btnDeleteCustomer)
         Me.Controls.Add(Me.btnNewOrder)
@@ -243,4 +254,5 @@ Partial Class frmCustomer
     Friend WithEvents cmnCustomerDone As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents cmnCustomerEdit As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents txtPhoneCode As System.Windows.Forms.TextBox
+    Friend WithEvents btnClose As System.Windows.Forms.Button
 End Class

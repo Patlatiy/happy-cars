@@ -6,7 +6,11 @@
         End Get
         Set(value As String)
             _Name = value
-            If Not PartList.Contains("value") Then PartList.Add(value)
+            Dim fFound As Boolean
+            For Each pName In PartList
+                If pName = value Then fFound = True
+            Next
+            If Not fFound Then PartList.Add(value)
         End Set
     End Property
     Public Count As UInteger

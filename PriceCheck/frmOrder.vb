@@ -449,5 +449,4 @@
             lwParts.Items(curPartPosition).SubItems(1).Text = curPart.Name
         End If
     End Sub
-
 End Class

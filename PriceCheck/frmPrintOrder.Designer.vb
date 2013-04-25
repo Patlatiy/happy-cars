@@ -93,6 +93,7 @@ Partial Class frmPrintOrder
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblGlobalDate = New System.Windows.Forms.Label()
         Me.lblCashString = New System.Windows.Forms.Label()
+        Me.lblCashName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Button1
@@ -774,12 +775,24 @@ Partial Class frmPrintOrder
         Me.lblCashString.Text = "(Сумма прописью)"
         Me.lblCashString.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblCashName
+        '
+        Me.lblCashName.AutoSize = True
+        Me.lblCashName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblCashName.Location = New System.Drawing.Point(108, 765)
+        Me.lblCashName.Name = "lblCashName"
+        Me.lblCashName.Size = New System.Drawing.Size(47, 16)
+        Me.lblCashName.TabIndex = 12
+        Me.lblCashName.Text = "(ФИО)"
+        Me.lblCashName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmPrintOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(593, 940)
+        Me.Controls.Add(Me.lblCashName)
         Me.Controls.Add(Me.lblCashString)
         Me.Controls.Add(Me.lblGlobalDate)
         Me.Controls.Add(Me.Label3)
@@ -905,4 +918,5 @@ Partial Class frmPrintOrder
     Friend WithEvents RectangleShape19 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents lblGlobalDate As System.Windows.Forms.Label
     Friend WithEvents lblCashString As System.Windows.Forms.Label
+    Friend WithEvents lblCashName As System.Windows.Forms.Label
 End Class

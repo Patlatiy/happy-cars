@@ -122,7 +122,7 @@
             ByVal nAdvanceSum As Double, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
         Customer = nCustomer
         Executor = nExecutor
-        Customer.MyOrderList.Add(Me)
+        If Not Customer Is Nothing Then Customer.MyOrderList.Add(Me)
         DeliveryDate = nDeliveryDate
         PaymentSum = nPaymentSum
         PaymentDate = nPaymentDate
@@ -143,7 +143,7 @@
             ByVal nAdvanceSum As Double, ByVal nAdvanceDate As Date, ByVal nDiscount As Double, ByVal nParts As List(Of HCPart), ByVal nCompleted As Boolean)
         Customer = nCustomer
         Executor = nExecutor
-        Customer.MyOrderList.Add(Me)
+        If Not Customer Is Nothing Then Customer.MyOrderList.Add(Me)
         DeliveryDate = nDeliveryDate
         PaymentSum = nPaymentSum
         PaymentDate = nPaymentDate

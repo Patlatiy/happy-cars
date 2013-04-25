@@ -35,6 +35,7 @@
     End Sub
 
     Private Sub FormCustomer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If MyCustomer Is Nothing Then Exit Sub
         If MyCustomer.IsEmpty Then
             HCCustomer.CustomerList.Remove(MyCustomer)
         End If
@@ -102,19 +103,8 @@
             Exit Sub
         End If
         Select Case Form1.WriteRight
-            'Case Form1.WriteRights.Bookkeeper
-            '    Dim testPartList = New List(Of HCPart)
-            '    Dim testOrder = New HCOrder(MyCustomer, Form1.curDate, 0, Form1.curDate, 0, Form1.curDate, 0, testPartList, False)
-            '    dgvCustomerOrders.Rows.Add(testOrder.Number.GetFullNumber, CStr(testOrder.GetTotalPrice), testOrder.Completed, "Открыть...")
-            '    dgvCustomerOrders.FirstDisplayedScrollingRowIndex = dgvCustomerOrders.Rows.Count - 1
-            '    frmOrder.Show(testOrder, Me)
             Case Form1.WriteRights.Master, Form1.WriteRights.Bookkeeper
-                If MyCustomer.IsIncomplete Then
-                    MsgBox("Пожалуйста, заполните все поля", MsgBoxStyle.Critical, "Внимание")
-                Else
-                    frmNewOrder.Show(MyCustomer, Me)
-                End If
-
+                frmNewOrder.Show(MyCustomer, Me)
         End Select
     End Sub
 
@@ -159,5 +149,9 @@ Deletion:
         End If
         If MyCustomer Is Nothing Then CreateCustomer()
         MyCustomer.Phone = "+7 (" & txtPhoneCode.Text.Trim & ") " & txtPhone.Text.Trim
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Close()
     End Sub
 End Class

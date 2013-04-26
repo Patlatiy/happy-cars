@@ -54,6 +54,12 @@
             Else
                 frmNewOrder.UpdatePart(comboName.Text, CInt(nudPartCount.Value), comboUnits.Text, nudPartPrice.Value, nudMargin.Value, HCProvider.GetByName(comboProvider.Text))
             End If
+        ElseIf MyOwner Is frmOrder Then
+            If CreateNew Then
+                frmOrder.AddPart(comboName.Text, CInt(nudPartCount.Value), comboUnits.Text, nudPartPrice.Value, nudMargin.Value, HCProvider.GetByName(comboProvider.Text))
+            Else
+                frmOrder.UpdatePart(comboName.Text, CInt(nudPartCount.Value), comboUnits.Text, nudPartPrice.Value, nudMargin.Value, HCProvider.GetByName(comboProvider.Text))
+            End If
         End If
         Close()
     End Sub

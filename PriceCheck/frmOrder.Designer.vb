@@ -87,6 +87,7 @@ Partial Class frmOrder
         Me.lblRawPrice = New System.Windows.Forms.Label()
         Me.txtRawPrice = New System.Windows.Forms.TextBox()
         Me.comboPartName = New System.Windows.Forms.ComboBox()
+        Me.btnShowExecutor = New System.Windows.Forms.Button()
         CType(Me.nudPartCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPartPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMargin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,7 +140,7 @@ Partial Class frmOrder
         Me.comboCustomer.FormattingEnabled = True
         Me.comboCustomer.Location = New System.Drawing.Point(64, 52)
         Me.comboCustomer.Name = "comboCustomer"
-        Me.comboCustomer.Size = New System.Drawing.Size(171, 21)
+        Me.comboCustomer.Size = New System.Drawing.Size(180, 21)
         Me.comboCustomer.Sorted = True
         Me.comboCustomer.TabIndex = 1
         '
@@ -164,7 +165,7 @@ Partial Class frmOrder
         'dtpDelivery
         '
         Me.dtpDelivery.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDelivery.Location = New System.Drawing.Point(147, 112)
+        Me.dtpDelivery.Location = New System.Drawing.Point(156, 114)
         Me.dtpDelivery.Name = "dtpDelivery"
         Me.dtpDelivery.Size = New System.Drawing.Size(88, 20)
         Me.dtpDelivery.TabIndex = 4
@@ -181,7 +182,7 @@ Partial Class frmOrder
         'dtpAdvance
         '
         Me.dtpAdvance.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpAdvance.Location = New System.Drawing.Point(147, 174)
+        Me.dtpAdvance.Location = New System.Drawing.Point(156, 170)
         Me.dtpAdvance.Name = "dtpAdvance"
         Me.dtpAdvance.Size = New System.Drawing.Size(88, 20)
         Me.dtpAdvance.TabIndex = 4
@@ -216,7 +217,7 @@ Partial Class frmOrder
         'dtpPayment
         '
         Me.dtpPayment.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpPayment.Location = New System.Drawing.Point(147, 234)
+        Me.dtpPayment.Location = New System.Drawing.Point(157, 234)
         Me.dtpPayment.Name = "dtpPayment"
         Me.dtpPayment.Size = New System.Drawing.Size(88, 20)
         Me.dtpPayment.TabIndex = 4
@@ -233,7 +234,7 @@ Partial Class frmOrder
         'txtOrderNumber
         '
         Me.txtOrderNumber.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtOrderNumber.Location = New System.Drawing.Point(202, 25)
+        Me.txtOrderNumber.Location = New System.Drawing.Point(211, 25)
         Me.txtOrderNumber.Name = "txtOrderNumber"
         Me.txtOrderNumber.ReadOnly = True
         Me.txtOrderNumber.Size = New System.Drawing.Size(33, 20)
@@ -357,6 +358,7 @@ Partial Class frmOrder
         Me.nudMargin.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudMargin.Location = New System.Drawing.Point(736, 150)
         Me.nudMargin.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudMargin.Minimum = New Decimal(New Integer() {1000000, 0, 0, -2147483648})
         Me.nudMargin.Name = "nudMargin"
         Me.nudMargin.Size = New System.Drawing.Size(65, 20)
         Me.nudMargin.TabIndex = 12
@@ -366,6 +368,7 @@ Partial Class frmOrder
         Me.nudMarginPc.Enabled = False
         Me.nudMarginPc.Location = New System.Drawing.Point(625, 150)
         Me.nudMarginPc.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudMarginPc.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
         Me.nudMarginPc.Name = "nudMarginPc"
         Me.nudMarginPc.Size = New System.Drawing.Size(65, 20)
         Me.nudMarginPc.TabIndex = 12
@@ -525,7 +528,7 @@ Partial Class frmOrder
         'txtOrderDate
         '
         Me.txtOrderDate.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtOrderDate.Location = New System.Drawing.Point(117, 25)
+        Me.txtOrderDate.Location = New System.Drawing.Point(126, 25)
         Me.txtOrderDate.Name = "txtOrderDate"
         Me.txtOrderDate.ReadOnly = True
         Me.txtOrderDate.Size = New System.Drawing.Size(72, 20)
@@ -536,7 +539,7 @@ Partial Class frmOrder
         'lblDash
         '
         Me.lblDash.AutoSize = True
-        Me.lblDash.Location = New System.Drawing.Point(191, 27)
+        Me.lblDash.Location = New System.Drawing.Point(200, 27)
         Me.lblDash.Name = "lblDash"
         Me.lblDash.Size = New System.Drawing.Size(10, 13)
         Me.lblDash.TabIndex = 22
@@ -546,9 +549,9 @@ Partial Class frmOrder
         '
         Me.comboExecutor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.comboExecutor.FormattingEnabled = True
-        Me.comboExecutor.Location = New System.Drawing.Point(95, 79)
+        Me.comboExecutor.Location = New System.Drawing.Point(88, 79)
         Me.comboExecutor.Name = "comboExecutor"
-        Me.comboExecutor.Size = New System.Drawing.Size(140, 21)
+        Me.comboExecutor.Size = New System.Drawing.Size(129, 21)
         Me.comboExecutor.Sorted = True
         Me.comboExecutor.TabIndex = 1
         '
@@ -580,13 +583,13 @@ Partial Class frmOrder
         'ПечатьToolStripMenuItem
         '
         Me.ПечатьToolStripMenuItem.Name = "ПечатьToolStripMenuItem"
-        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ПечатьToolStripMenuItem.Text = "Печать..."
         '
         'УдалитьЗаказToolStripMenuItem
         '
         Me.УдалитьЗаказToolStripMenuItem.Name = "УдалитьЗаказToolStripMenuItem"
-        Me.УдалитьЗаказToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.УдалитьЗаказToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.УдалитьЗаказToolStripMenuItem.Text = "Удалить заказ"
         '
         'lblCompleted
@@ -603,7 +606,7 @@ Partial Class frmOrder
         '
         Me.nudPayment.DecimalPlaces = 2
         Me.nudPayment.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudPayment.Location = New System.Drawing.Point(146, 211)
+        Me.nudPayment.Location = New System.Drawing.Point(156, 211)
         Me.nudPayment.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudPayment.Name = "nudPayment"
         Me.nudPayment.Size = New System.Drawing.Size(88, 20)
@@ -613,7 +616,7 @@ Partial Class frmOrder
         '
         Me.nudAdvance.DecimalPlaces = 2
         Me.nudAdvance.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudAdvance.Location = New System.Drawing.Point(147, 151)
+        Me.nudAdvance.Location = New System.Drawing.Point(156, 146)
         Me.nudAdvance.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.nudAdvance.Name = "nudAdvance"
         Me.nudAdvance.Size = New System.Drawing.Size(88, 20)
@@ -667,6 +670,7 @@ Partial Class frmOrder
         '
         'comboPartName
         '
+        Me.comboPartName.Enabled = False
         Me.comboPartName.FormattingEnabled = True
         Me.comboPartName.Location = New System.Drawing.Point(667, 36)
         Me.comboPartName.Name = "comboPartName"
@@ -674,11 +678,21 @@ Partial Class frmOrder
         Me.comboPartName.Sorted = True
         Me.comboPartName.TabIndex = 34
         '
+        'btnShowExecutor
+        '
+        Me.btnShowExecutor.Location = New System.Drawing.Point(217, 78)
+        Me.btnShowExecutor.Name = "btnShowExecutor"
+        Me.btnShowExecutor.Size = New System.Drawing.Size(27, 23)
+        Me.btnShowExecutor.TabIndex = 35
+        Me.btnShowExecutor.Text = "..."
+        Me.btnShowExecutor.UseVisualStyleBackColor = True
+        '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(841, 301)
+        Me.Controls.Add(Me.btnShowExecutor)
         Me.Controls.Add(Me.comboPartName)
         Me.Controls.Add(Me.txtRawPrice)
         Me.Controls.Add(Me.lblRawPrice)
@@ -818,4 +832,5 @@ Partial Class frmOrder
     Friend WithEvents lblRawPrice As System.Windows.Forms.Label
     Friend WithEvents txtRawPrice As System.Windows.Forms.TextBox
     Friend WithEvents comboPartName As System.Windows.Forms.ComboBox
+    Friend WithEvents btnShowExecutor As System.Windows.Forms.Button
 End Class

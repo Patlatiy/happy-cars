@@ -27,6 +27,8 @@
         MyOwner.Enabled = True
         If MyOwner Is frmNewOrder Then
             frmNewOrder.RefreshExecutors(MyExecutor)
+        ElseIf MyOwner Is frmOrder Then
+            frmOrder.RefreshExecutors(MyExecutor)
         End If
     End Sub
 

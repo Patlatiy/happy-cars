@@ -32,15 +32,7 @@
             If Customer.ID = MyOrder.Customer.ID Then comboCustomer.SelectedItem = newItem
         Next
 
-        comboExecutor.Items.Clear()
-        For Each Executor In HCExecutor.ExecList
-            Dim newItem = New HCListItem(Executor.ShortName, Executor.ID)
-            comboExecutor.Items.Add(newItem)
-            If Not MyOrder.Executor Is Nothing Then
-                If Executor.ID = MyOrder.Executor.ID Then comboExecutor.SelectedItem = newItem
-            End If
-        Next
-
+        RefreshExecutors(MyOrder.Executor)
         RefreshUnits()
         RefreshProviders()
 
@@ -58,9 +50,12 @@
     End Sub
 
     Sub AddPartToList(NewPartName As String, NewPartCount As UInteger, NewPartUnits As String, NewPartPrice As Double)
-        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), NewPartName, CStr(NewPartCount) & " " & NewPartUnits, CStr(Math.Round(NewPartPrice, 2))}
+        Dim newArr() As String = {CStr(lwParts.Items.Count + 1), NewPartName, CStr(NewPartCount) & " " & NewPartUnits, ToMoney(Math.Round(NewPartPrice, 2))}
         Dim newItem As New ListViewItem(newArr)
+        lwParts.SelectedItems.Clear()
         lwParts.Items.Add(newItem)
+        lwParts.EnsureVisible(newItem.Index)
+        newItem.Selected = True
     End Sub
 
     Sub RecountParts()
@@ -96,8 +91,9 @@
 
     Private Sub comboExecutor_SelectedValueChanged(sender As Object, e As EventArgs) Handles comboExecutor.SelectedValueChanged
         Dim newExecutor = HCExecutor.GetById(comboExecutor.Items(comboExecutor.SelectedIndex).Value)
-        If newExecutor Is Nothing Then
-            MsgBox("Что-то пошло не так...", MsgBoxStyle.Critical, "Ошибка!")
+        If newExecutor Is HCExecutor.NullExecutor Then
+            Dim newExec As New HCExecutor()
+            frmExecutor.Show(newExec, Me)
         Else
             If Not MyOrder.Executor Is Nothing Then
                 If newExecutor.ID = MyOrder.Executor.ID Then Exit Sub
@@ -123,6 +119,10 @@
         MyOrder.Comment = txtComment.Text
     End Sub
 
+    Private Sub lwParts_ItemActivate(sender As Object, e As EventArgs) Handles lwParts.ItemActivate
+        frmNewPart.Show(Me, curPart)
+    End Sub
+
     Private Sub lwParts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lwParts.SelectedIndexChanged
         curPart = Nothing
         If lwParts.SelectedItems.Count = 0 Then
@@ -136,16 +136,60 @@
     End Sub
 
     Private Sub btnNewPart_Click(sender As Object, e As EventArgs) Handles btnNewPart.Click
-        Dim newPart As New HCPart("Новая запчасть", 1, "шт.", 0, MyOrder, Nothing)
+        'Dim newPart As New HCPart("Новая запчасть", 1, "шт.", 0, MyOrder, Nothing)
+        'MyOrder.PartList.Add(newPart)
+        'AddPartToList(newPart.Name, newPart.Count, newPart.Units, 0)
+        'lwParts.SelectedIndices.Clear()
+        'lwParts.SelectedIndices.Add(lwParts.Items.Count - 1)
+        'lwParts.Focus()
+        frmNewPart.Show(Me)
+    End Sub
+
+    Public Sub AddPart(pName As String, pCount As UInteger, pUnits As String, pPrice As Double, pMargin As Double, ByRef pProvider As HCProvider)
+        'newPart section {
+        Dim newPart As HCPart = New HCPart(pName, pCount, pUnits, pPrice, pMargin, MyOrder, pProvider)
         MyOrder.PartList.Add(newPart)
-        AddPartToList(newPart.Name, newPart.Count, newPart.Units, 0)
-        lwParts.SelectedIndices.Clear()
-        lwParts.SelectedIndices.Add(lwParts.Items.Count - 1)
-        lwParts.Focus()
+        Form1.UpdatePart(newPart) '}
+
+        'frmOrder section: {
+        AddPartToList(pName, pCount, pUnits, newPart.GetSellPrice)
+        RefreshUnits()
+        RefreshProviders()
+        FillDiscount()
+        FillSellPrice()
+        FillTotal() '}
+    End Sub
+
+    Public Sub UpdatePart(pName As String, pCount As UInteger, pUnits As String, pPrice As Double, pMargin As Double, ByRef pProvider As HCProvider)
+        'curPart section {
+        curPart.Name = pName
+        curPart.Count = pCount
+        curPart.Price = pPrice
+        curPart.Margin = pMargin
+        If Not curPart.Provider Is pProvider Then
+            Form1.RemovePart(curPart)
+            curPart.Provider.PartList.Remove(curPart)
+            curPart.Provider = pProvider
+            curPart.Provider.PartList.Add(curPart)
+            Form1.UpdatePart(curPart)
+        End If '}
+
+        'frmOrder section {
+        Dim newArr() As String = {CStr(curPartPosition), pName, CStr(pCount) & " " & pUnits, CStr(curPart.GetSellPrice)}
+        Dim newItem As New ListViewItem(newArr)
+        lwParts.Items(lwParts.SelectedIndices(0)) = newItem
+        lwParts.EnsureVisible(newItem.Index)
+        newItem.Selected = True
+        RefreshUnits()
+        RefreshProviders()
+        FillDiscount()
+        FillSellPrice()
+        FillTotal() '}
     End Sub
 
     Private Sub nudPartCount_ValueChanged(sender As Object, e As EventArgs) Handles nudPartCount.ValueChanged
         If curPart Is Nothing Then Exit Sub
+        If sender.Enabled = False Then Exit Sub
         If curPart.Count <> nudPartCount.Value Then
             curPart.Count = nudPartCount.Value
             lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count) & " " & curPart.Units
@@ -156,6 +200,7 @@
 
     Private Sub nudPartPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudPartPrice.ValueChanged
         If curPart Is Nothing Then Exit Sub
+        If sender.Enabled = False Then Exit Sub
         If curPart.Price <> nudPartPrice.Value Then
             curPart.Price = nudPartPrice.Value
             UpdatePart()
@@ -165,15 +210,16 @@
 
     Sub EnablePartControls()
         If (Form1.WriteRight = Form1.WriteRights.The_Girl) Or (Form1.WriteRight = Form1.WriteRights.Read_Only) Or MyOrder.Completed Then Exit Sub
-        comboPartName.Enabled = True
-        nudPartCount.Enabled = True
-        nudPartPrice.Enabled = True
-        nudMargin.Enabled = True
-        nudMarginPc.Enabled = True
-        txtSellPrice.Enabled = True
-        txtRawPrice.Enabled = True
-        comboUnits.Enabled = True
+        'comboPartName.Enabled = True
+        'nudPartCount.Enabled = True
+        'nudPartPrice.Enabled = True
+        'nudMargin.Enabled = True
+        'nudMarginPc.Enabled = True
+        'txtSellPrice.Enabled = True
+        'txtRawPrice.Enabled = True
+        'comboUnits.Enabled = True
         'comboProvider.Enabled = True
+        btnDeletePart.Enabled = True
     End Sub
 
     Sub DisablePartControls()
@@ -195,6 +241,7 @@
         comboUnits.Text = "шт."
         comboProvider.Enabled = False
         comboProvider.Text = ""
+        btnDeletePart.Enabled = False
     End Sub
 
     Sub UpdatePart()
@@ -217,7 +264,6 @@
         FillDiscount()
         FillSellPrice()
         FillTotal()
-        FillTotalReceived()
     End Sub
 
     Sub FillSellPrice()
@@ -259,6 +305,7 @@
         Silently = True
         nudMarginPc.Value = dblmargin
         Silently = False
+        If sender.Enabled = False Then Exit Sub
         curPart.Margin = nudMargin.Value
         FillSellPrice()
         FillTotal()
@@ -295,6 +342,7 @@
 
     Private Sub comboUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboUnits.SelectedIndexChanged
         If curPart Is Nothing Then Exit Sub
+        If sender.Enabled = False Then Exit Sub
         comboUnits.Text = comboUnits.SelectedItem
         curPart.Units = comboUnits.Text
         lwParts.Items(curPartPosition).SubItems(2).Text = CStr(curPart.Count) & " " & curPart.Units
@@ -308,19 +356,23 @@
     End Sub
 
     Private Sub nudDiscount_ValueChanged(sender As Object, e As EventArgs) Handles nudDiscount.ValueChanged
-        MyOrder.Discount = nudDiscount.Value
         Dim newValue = Math.Round(nudDiscount.Value * 100 / MyOrder.GetRawPrice)
         If newValue >= nudDiscountPc.Minimum And newValue <= nudDiscountPc.Maximum Then
             Silently = True
             nudDiscountPc.Value = newValue
             Silently = False
         End If
+        If sender.Enabled = False Then Exit Sub
+        MyOrder.Discount = nudDiscount.Value
         FillTotal()
     End Sub
 
     Private Sub btnDeletePart_Click(sender As Object, e As EventArgs) Handles btnDeletePart.Click
         If curPart Is Nothing Then Exit Sub
+        If MsgBox("Вы действительно хотите удалить " & curPart.Name & "?", MsgBoxStyle.YesNo, "Внимание!") <> MsgBoxResult.Yes Then Exit Sub
+        Form1.RemovePart(curPart)
         MyOrder.PartList.Remove(MyOrder.PartList.Item(lwParts.SelectedItems.Item(0).Index))
+        curPart.Provider.PartList.Remove(curPart)
         lwParts.Items.RemoveAt(lwParts.SelectedIndices(0))
         curPart = Nothing
         CheckParts()
@@ -390,6 +442,8 @@
         End If
         If MsgBox("Вы действительно хотите удалить этот заказ?", MsgBoxStyle.YesNo, "Внимание!") = MsgBoxResult.Yes Then
             MyOrder.Kill()
+            MyOrder = Nothing
+            Close()
         End If
     End Sub
 
@@ -427,6 +481,7 @@
 
     Private Sub comboProvider_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboProvider.SelectedIndexChanged
         If curPart Is Nothing Then Exit Sub
+        If sender.Enabled = False Then Exit Sub
         Dim newProv As HCProvider = HCProvider.GetByID(comboProvider.SelectedItem.Value)
         If newProv Is curPart.Provider Then Exit Sub
         If Not curPart.Provider Is Nothing Then curPart.Provider.PartList.Remove(curPart)
@@ -443,10 +498,41 @@
 
     Private Sub comboPartName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboPartName.SelectedIndexChanged, comboPartName.Leave
         If curPart Is Nothing Then Exit Sub
+        If sender.Enabled = False Then Exit Sub
         If comboPartName.Text = "" Then Exit Sub
         If curPart.Name <> comboPartName.Text Then
             curPart.Name = comboPartName.Text
             lwParts.Items(curPartPosition).SubItems(1).Text = curPart.Name
         End If
+    End Sub
+
+    Private Sub btnShowExecutor_Click(sender As Object, e As EventArgs) Handles btnShowExecutor.Click
+        If comboExecutor.SelectedIndex = -1 Then
+            Dim newExecutor As New HCExecutor()
+            Dim newItem As New HCListItem(newExecutor.FullName, newExecutor.ID)
+            comboExecutor.Items.Add(newItem)
+            frmExecutor.Show(newExecutor, Me)
+        Else
+            frmExecutor.Show(HCExecutor.GetById(comboExecutor.SelectedItem.Value), Me)
+        End If
+    End Sub
+
+    Public Sub RefreshExecutors(Optional Selected As HCExecutor = Nothing)
+        comboExecutor.Items.Clear()
+        For Each Exec As HCExecutor In HCExecutor.ExecList
+            Dim newItem = New HCListItem(Exec.ShortName, Exec.ID)
+            comboExecutor.Items.Add(newItem)
+            If Not Selected Is Nothing Then
+                If Selected.ID = newItem.Value Then
+                    comboExecutor.SelectedItem = newItem
+                End If
+            End If
+        Next
+        Dim newExecItem = New HCListItem("(Новый исполнитель)", (-1))
+        comboExecutor.Items.Add(newExecItem)
+    End Sub
+
+    Private Sub comboExecutor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboExecutor.SelectedIndexChanged
+
     End Sub
 End Class

@@ -18,6 +18,7 @@
         txtPatron.Text = MyCustomer.Patron
         txtPhoneCode.Text = MyCustomer._Code
         txtPhone.Text = MyCustomer._Phone
+        txtAddress.Text = MyCustomer.Address
         Me.Text = MyCustomer.FullName
         RefreshOrders()
         Silently = False

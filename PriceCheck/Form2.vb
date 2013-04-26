@@ -6,8 +6,8 @@
     Dim currentType As String
 
     Public Sub LoadMonth(WhatToLoad As String, ByVal StartingDay As Integer, ByVal EndingDay As Integer, intMonth As Integer, intYear As Integer)
-        Dim sum As ULong = 0
-        Dim diff As ULong = 0
+        Dim sum As Long = 0
+        Dim diff As Long = 0
         Dim cnt As UInteger = 0
         fpath = Application.StartupPath & "\data\" & CStr(intYear) & "\" & CStr(intMonth) & "\"
         Dim CurRow As String()
@@ -31,7 +31,7 @@
                                 baseFile.SetDelimiters("|")
                                 While Not baseFile.EndOfData
                                     CurRow = baseFile.ReadFields
-                                    If CurRow.Length > 1 Then sum = sum + CULng(CurRow(6))
+                                    If CurRow.Length > 1 Then sum = sum + CLng(CurRow(6))
                                     cnt = cnt + 1
                                 End While
                             End Using
@@ -53,7 +53,7 @@
                                 baseFile.SetDelimiters("|")
                                 While Not baseFile.EndOfData
                                     CurRow = baseFile.ReadFields
-                                    sum = sum + CULng(CurRow(6))
+                                    sum = sum + CLng(CurRow(6))
                                     cnt = cnt + 1
                                 End While
                             End Using
@@ -115,7 +115,7 @@
                                 baseFile.SetDelimiters("|")
                                 While Not baseFile.EndOfData
                                     CurRow = baseFile.ReadFields
-                                    sum += CULng(CurRow(6))
+                                    sum += CLng(CurRow(6))
                                     cnt += 1
                                 End While
                                 dataDay.Rows.Add()
@@ -164,7 +164,7 @@
                                 baseFile.SetDelimiters("|")
                                 While Not baseFile.EndOfData
                                     CurRow = baseFile.ReadFields
-                                    sum += CULng(CurRow(7)) + CULng(CurRow(9)) - CULng(CurRow(10))
+                                    sum += CLng(CurRow(7)) + CLng(CurRow(9)) - CLng(CurRow(10))
                                     cnt += 1
                                 End While
                                 dataDay.Rows.Add()
@@ -194,8 +194,8 @@
                 dataDay.ClearSelection()
                 Label1.Text = "Месячный отчёт по сервису с " & CStr(StartingDay) & " по " & CStr(EndingDay) & ", " & NumberToMonth(intMonth) & " " & CStr(intYear)
             Case "Cash"
-                Dim sum2 As ULong = 0
-                Dim diff2 As ULong = 0
+                Dim sum2 As Long = 0
+                Dim diff2 As Long = 0
                 dataCash.Rows.Clear()
                 dataDay.Hide()
                 dataNight.Hide()
@@ -220,11 +220,11 @@
                                         dataCash.Rows.Add()
                                         dataCash.Item(0, dataCash.RowCount - 2).Value = "Остаток"
                                         dataCash.Item(1, dataCash.RowCount - 2).Value = CurRow(4)
-                                        sum2 = CULng(CurRow(4))
+                                        sum2 = CLng(CurRow(4))
                                     End If
                                     If CurRow.Length > 1 And CurRow(0) <> "x" And CurRow(0) <> "xxx" Then
-                                        sum += CULng(CurRow(4))
-                                        diff += CULng(CurRow(5))
+                                        sum += CLng(CurRow(4))
+                                        diff += CLng(CurRow(5))
                                         cnt += 1
                                     End If
                                 End While

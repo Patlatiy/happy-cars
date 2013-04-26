@@ -22,7 +22,7 @@
     Public ID As Integer
     Public PaymentAdded As Boolean = False
 
-    Private _Price As ULong
+    Private _Price As Long
     Public Property Price As Double
         Get
             Return Math.Round(CDbl(_Price / 100), 2)
@@ -32,13 +32,13 @@
         End Set
     End Property
 
-    Private _Margin As ULong = 0
+    Private _Margin As Long = 0
     Public Property Margin As Double
         Get
             Return Math.Round(_Margin / 100, 2)
         End Get
         Set(value As Double)
-            _Margin = CULng(value * 100)
+            _Margin = CLng(value * 100)
         End Set
     End Property
 

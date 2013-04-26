@@ -67,6 +67,7 @@
         Phone = ePhone
         ID = eID
         ExecList.Add(Me)
+        If GlobalID <= eID Then GlobalID = eID + 1
     End Sub
 
     Public Shared Function GetById(sID As Integer) As HCExecutor

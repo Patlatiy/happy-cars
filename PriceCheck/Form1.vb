@@ -4,6 +4,8 @@
     Const SVC_DIVIDER As String = ", " 'Разделитель между услугами в поле "Услуги"
     Const GLOBAL_PASSWORD As String = "***" 'Пароль для смены глобального режима
     Const START_HOUR As UShort = 9, END_HOUR As UShort = 21 'Рабочий день
+    Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.CreateSpecificCulture("eu-ES")
+    Const specifier As String = "f2"
 
     Public WriteRight As WriteRights = WriteRights.Read_Only
     Dim Random As New Random
@@ -75,7 +77,7 @@
     Dim tPath As String 'Table path
     Public curDate As Date 'Дата последнего запуска процедуры загрузки LoadProcedure
     Dim nextDay As Date 'Следующий день
-    Dim curID As ULong = 0 'Текущий ID для кассовой книги
+    Dim curID As Long = 0 'Текущий ID для кассовой книги
     Dim GlobalMode As Integer = 0 '0 - рабочий режим, 1 - режим администратора. Чтобы сменить режим нужно ввести GLOBAL_PASSWORD вместо марки машины
     Public Shadows DefaultBackColor As Color = Color.White 'Дефолтный цвет ячейки
     Public Shadows DefaultForeColor As Color = Color.Black 'Дефолтный цвет шрифта в ячейке
@@ -388,9 +390,9 @@
                             Continue While
                         End If
                         Try
-                            AddRecord(CULng(curRow(7)), CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 0)
+                            AddRecord(CLng(curRow(7)), CLng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CLng(curRow(6)), CLng(curRow(2)), 0)
                         Catch ex As Exception
-                            AddRecord(9999, CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 0)
+                            AddRecord(9999, CLng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CLng(curRow(6)), CLng(curRow(2)), 0)
                         End Try
                     End While
                 End Using
@@ -412,9 +414,9 @@
                     While Not mbaseFile.EndOfData
                         curRow = mbaseFile.ReadFields
                         Try
-                            AddRecord(CULng(curRow(7)), CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 1)
+                            AddRecord(CLng(curRow(7)), CLng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CLng(curRow(6)), CLng(curRow(2)), 1)
                         Catch ex As Exception
-                            AddRecord(9999, CULng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CULng(curRow(6)), CULng(curRow(2)), 1)
+                            AddRecord(9999, CLng(curRow(0)), curRow(1), curRow(3), curRow(4), curRow(5), CLng(curRow(6)), CLng(curRow(2)), 1)
                         End Try
                     End While
                 End Using
@@ -437,15 +439,15 @@
                         curRow = sbaseFile.ReadFields
                         Try
                             If curRow.Length = 10 Then 'Обеспечиваем совместимость со старым форматом
-                                AddRecord(CULng(curRow(9)), CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(5)), curRow(6), CULng(curRow(7)), "~", "~", CULng(curRow(8)))
+                                AddRecord(CLng(curRow(9)), CLng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CLng(curRow(5)), curRow(6), CLng(curRow(7)), "~", "~", CLng(curRow(8)))
                             Else
-                                AddRecord(CULng(curRow(11)), CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(7)), curRow(8), CULng(curRow(9)), curRow(5), curRow(6), CULng(curRow(10)))
+                                AddRecord(CLng(curRow(11)), CLng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CLng(curRow(7)), curRow(8), CLng(curRow(9)), curRow(5), curRow(6), CLng(curRow(10)))
                             End If
                         Catch ex As Exception
                             If curRow.Length = 9 Then
-                                AddRecord(9999, CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(5)), curRow(6), CULng(curRow(7)), "~", "~", CULng(curRow(8)))
+                                AddRecord(9999, CLng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CLng(curRow(5)), curRow(6), CLng(curRow(7)), "~", "~", CLng(curRow(8)))
                             Else
-                                AddRecord(9999, CULng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CULng(curRow(7)), curRow(8), CULng(curRow(9)), curRow(5), curRow(6), CULng(curRow(10)))
+                                AddRecord(9999, CLng(curRow(0)), curRow(2), curRow(3), curRow(1), curRow(4), CLng(curRow(7)), curRow(8), CLng(curRow(9)), curRow(5), curRow(6), CLng(curRow(10)))
                             End If
                         End Try
                     End While
@@ -477,7 +479,7 @@
                     cbaseFile.TextFieldType = FileIO.FieldType.Delimited
                     cbaseFile.SetDelimiters("|")
                     curRow = cbaseFile.ReadFields
-                    curID = CULng(curRow(0))
+                    curID = CLng(curRow(0))
                     While Not cbaseFile.EndOfData
                         curRow = cbaseFile.ReadFields
                         If EXISTS And curRow(1) = "Остаток в кассе" Then Continue While
@@ -760,10 +762,10 @@
                     curRow = oFile.ReadFields
                     Dim PartList = New List(Of HCPart)
                     For i = 11 To curRow.Length - 1 Step 8
-                        Dim newPart = New HCPart(CInt(curRow(i)), curRow(i + 1), CUInt(curRow(i + 2)), curRow(i + 3), CDbl(curRow(i + 4)), CDbl(curRow(i + 5)), Nothing, HCProvider.GetByID(CInt(curRow(i + 6))), CBool(curRow(i + 7)))
+                        Dim newPart = New HCPart(CInt(curRow(i)), curRow(i + 1), CUInt(curRow(i + 2)), curRow(i + 3), Double.Parse(curRow(i + 4), culture), Double.Parse(curRow(i + 5), culture), Nothing, HCProvider.GetByID(CInt(curRow(i + 6))), CBool(curRow(i + 7)))
                         PartList.Add(newPart)
                     Next
-                    Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), CDbl(curRow(6)), Date.Parse(curRow(5)), CDbl(curRow(4)), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
+                    Dim newOrder = New HCOrder(curRow(0), HCCustomer.FindByID(CInt(curRow(1))), HCExecutor.GetById(CInt(curRow(2))), Date.Parse(curRow(7)), Double.Parse(curRow(6), culture), Date.Parse(curRow(5)), Double.Parse(curRow(4), culture), Date.Parse(curRow(3)), 0, PartList, CBool(curRow(8)))
                     newOrder.Discount = CDbl(curRow(9))
                     newOrder.Comment = curRow(10)
                 End While
@@ -840,6 +842,10 @@
     End Sub
 
     Public Sub LoadPayments()
+        If SavingPayments Then
+            Log("Saving payments now! Could not load payments")
+            Exit Sub
+        End If
         Try
             Log("Loading payments")
             comboProviderFilter.Items.Clear()
@@ -973,7 +979,7 @@
             End Using
         Catch ex As Exception
         End Try
-        
+
         'Сразу присвоим кастомные цены на лисапед и мотоциклы:
         bicycle1Price = WashPrices(1, 30)
         bike1Price = WashPrices(2, 30)
@@ -1428,22 +1434,22 @@
                 End If
                 If DayMode Then
                     If OweBox.CheckState = CheckState.Unchecked Then
-                        AddRecord(curID, CULng(dayCC), ComboBox1.Text, txtNumber.Text, service, FormattedTime(), CULng(sum), curGr)
+                        AddRecord(curID, CLng(dayCC), ComboBox1.Text, txtNumber.Text, service, FormattedTime(), CLng(sum), curGr)
                         AddCash("Автомойка", curDate.ToString("dd.MM.yyyy"), FormattedTime(), sum, 0, ComboBox1.Text & " " & txtNumber.Text & "; " & service)
                         SaveCash()
                     Else
-                        AddRecord(curID, CULng(dayCC), ComboBox1.Text, txtNumber.Text, service, FormattedTime(), CULng(sum), curGr)
+                        AddRecord(curID, CLng(dayCC), ComboBox1.Text, txtNumber.Text, service, FormattedTime(), CLng(sum), curGr)
                         AddDebt(curID)
                         curID += 1
                         SaveDebts()
                     End If
                 Else
                     If OweBox.CheckState = CheckState.Unchecked Then
-                        AddRecord(curID, CULng(dayCC), ComboBox1.Text, txtNumber.Text, service, "Ночь", CULng(sum), curGr)
+                        AddRecord(curID, CLng(dayCC), ComboBox1.Text, txtNumber.Text, service, "Ночь", CLng(sum), curGr)
                         AddCash("Автомойка", curDate.ToString("dd.MM.yyyy"), "Ночь", sum, 0, ComboBox1.Text & " " & txtNumber.Text & "; " & service)
                         SaveCash()
                     Else
-                        AddRecord(curID, CULng(dayCC), ComboBox1.Text, txtNumber.Text, service, "Ночь", CULng(sum), curGr)
+                        AddRecord(curID, CLng(dayCC), ComboBox1.Text, txtNumber.Text, service, "Ночь", CLng(sum), curGr)
                         AddDebt(curID)
                         curID += 1
                         SaveDebts()
@@ -1476,7 +1482,7 @@
                 End If
                 service = service.Remove(service.Length - 2, 2)
                 If OweBox2.CheckState = CheckState.Unchecked Then
-                    AddRecord(CULng(curID), DayCCMount, ComboBox1.Text, txtNumber.Text, service, FormattedTime(), sum, curGr)
+                    AddRecord(CLng(curID), DayCCMount, ComboBox1.Text, txtNumber.Text, service, FormattedTime(), sum, curGr)
                     AddCash("Шиномонтаж", curDate.ToString("dd.MM.yyyy"), FormattedTime(), sum, 0, ComboBox1.Text & " " & txtNumber.Text & "; " & service)
                 Else
                     AddRecord(curID, DayCCMount, ComboBox1.Text, txtNumber.Text, service, FormattedTime(), sum, curGr)
@@ -1496,16 +1502,16 @@
                     Next
                     Executor = Executor.Remove(Executor.Length - 2, 2)
                 End If
-                AddRecord(CULng(curID), DayCCService, ComboBox1.Text, txtNumber.Text, FormattedTime, workBox.Text, CULng(WorkDiscounted.Text), partsBox.Text, CULng(PartsSumDiscounted.Text), comboMaster.Text, Executor, CULng(PartsOutDiscounted.Text))
+                AddRecord(CLng(curID), DayCCService, ComboBox1.Text, txtNumber.Text, FormattedTime, workBox.Text, CLng(WorkDiscounted.Text), partsBox.Text, CLng(PartsSumDiscounted.Text), comboMaster.Text, Executor, CLng(PartsOutDiscounted.Text))
                 If OweBox3.CheckState = CheckState.Checked Then
                     AddDebt(curID)
                     curID += 1
                     SaveDebts()
                 Else
                     If partsBox.Text <> "" Or (partsSumBox.Text <> "0" And partsSumBox.Text <> "") Or (partsOutBox.Text <> "0" And partsOutBox.Text <> "") Then
-                        AddCash("Автосервис", CULng(WorkDiscounted.Text) + CULng(PartsSumDiscounted.Text), CULng(PartsOutDiscounted.Text), ComboBox1.Text & " " & txtNumber.Text & "; Работы: " & workBox.Text & ". Расходные материалы: " & partsBox.Text & " на сумму " & partsSumBox.Text & "; Мастер: " & comboMaster.Text & ", исполнители: " & Executor)
+                        AddCash("Автосервис", CLng(WorkDiscounted.Text) + CLng(PartsSumDiscounted.Text), CLng(PartsOutDiscounted.Text), ComboBox1.Text & " " & txtNumber.Text & "; Работы: " & workBox.Text & ". Расходные материалы: " & partsBox.Text & " на сумму " & partsSumBox.Text & "; Мастер: " & comboMaster.Text & ", исполнители: " & Executor)
                     Else
-                        AddCash("Автосервис", CULng(WorkDiscounted.Text), 0, ComboBox1.Text & " " & txtNumber.Text & "; Работы: " & workBox.Text & "; Мастер: " & comboMaster.Text & ", исполнители: " & Executor)
+                        AddCash("Автосервис", CLng(WorkDiscounted.Text), 0, ComboBox1.Text & " " & txtNumber.Text & "; Работы: " & workBox.Text & "; Мастер: " & comboMaster.Text & ", исполнители: " & Executor)
                     End If
                     SaveCash()
                 End If
@@ -1539,7 +1545,7 @@
     ''' <param name="uintSum">Сумма</param>
     ''' <param name="uintGroup">Группа</param>
     ''' <param name="SMode">Режим (0 - автомойка, 1 - шиномонтаж)</param>
-    Public Sub AddRecord(ulngID As ULong, uintCount As ULong, strMark As String, strNumber As String, strService As String, strTime As String, uintSum As ULong, Optional uintGroup As ULong = 0, Optional SMode As Integer = -9)
+    Public Sub AddRecord(ulngID As Long, uintCount As Long, strMark As String, strNumber As String, strService As String, strTime As String, uintSum As Long, Optional uintGroup As Long = 0, Optional SMode As Integer = -9)
         Dim rowcount As Integer
         Select Case SMode
             Case -9
@@ -1590,7 +1596,7 @@
     ''' Добавляет запись во вкладке автосервиса
     ''' </summary>
     ''' <remarks></remarks>
-    Public Sub AddRecord(ulngID As ULong, ulngCount As ULong, strMark As String, strNumber As String, strTime As String, strService As String, ulngServiceSum As ULong, strParts As String, ulngPartsSum As ULong, strMaster As String, strExecutor As String, Optional ulngPartsOut As ULong = 0)
+    Public Sub AddRecord(ulngID As Long, ulngCount As Long, strMark As String, strNumber As String, strTime As String, strService As String, ulngServiceSum As Long, strParts As String, ulngPartsSum As Long, strMaster As String, strExecutor As String, Optional ulngPartsOut As Long = 0)
         Dim rowcount As Integer
         rowcount = dataService.RowCount - 1
         dataService.Rows.Add()
@@ -1611,11 +1617,11 @@
         dataService.FirstDisplayedScrollingRowIndex = dataService.RowCount - 1
     End Sub
 
-    Public Sub AddCash(strOperation As String, ulngIncome As ULong, ulngOutcome As ULong, strComment As String)
+    Public Sub AddCash(strOperation As String, ulngIncome As Long, ulngOutcome As Long, strComment As String)
         AddCash(strOperation, curDate.ToString("dd.MM.yyyy"), FormattedTime, ulngIncome, ulngOutcome, strComment)
     End Sub
 
-    Public Sub AddCash(strOperation As String, strDate As String, strTime As String, uintIncome As ULong, uintOutcome As ULong, strComment As String)
+    Public Sub AddCash(strOperation As String, strDate As String, strTime As String, uintIncome As Long, uintOutcome As Long, strComment As String)
         Dim rowcount As Integer
         rowcount = dCash.RowCount - 1
         dCash.Rows.Add()
@@ -1785,7 +1791,9 @@
         End Using
     End Sub
 
+    Dim SavingPayments As Boolean = False
     Public Sub SavePayments()
+        SavingPayments = True
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Log("Saving payments...")
         Dim tmpSTR As String = ""
@@ -1799,10 +1807,10 @@
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\data\" & curDate.Year.ToString & "\Payments.ini", tmpSTR, False)
         Application.DoEvents()
         UpdatePaymentsHC()
+        SavingPayments = False
     End Sub
 
     Dim ScheduleSaving As Boolean = False
-
     Public Sub SaveSchedule()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
         Log("Saving schedule...")
@@ -1954,18 +1962,18 @@
             Else
                 TextToWrite &= CStr(Order.Executor.ID) & "|"
             End If
-            TextToWrite &= Order.AdvanceDate.ToString & "|" & CStr(Order.AdvanceSum) & "|"
-            TextToWrite &= Order.PaymentDate.ToString & "|" & CStr(Order.PaymentSum) & "|"
-            TextToWrite &= Order.DeliveryDate.ToString & "|" & CStr(Order.Completed) & "|"
-            TextToWrite &= CStr(Order.Discount) & "|" & Order.Comment & "|"
+            TextToWrite &= Order.AdvanceDate.ToString & "|" & Order.AdvanceSum.ToString(specifier, culture) & "|"
+            TextToWrite &= Order.PaymentDate.ToString & "|" & Order.PaymentSum.ToString(specifier, culture) & "|"
+            TextToWrite &= Order.DeliveryDate.ToString & "|" & Order.Completed.ToString() & "|"
+            TextToWrite &= Order.Discount.ToString(specifier, culture) & "|" & Order.Comment & "|"
             For Each Part In Order.PartList
                 Dim PartProviderID As String
                 If Part.Provider Is Nothing Then
-                    PartProviderID = -1.ToString
+                    PartProviderID = "-1"
                 Else
                     PartProviderID = Part.Provider.ID.ToString
                 End If
-                TextToWrite &= CStr(Part.ID) & "|" & Part.Name & "|" & CStr(Part.Count) & "|" & Part.Units & "|" & CStr(Part.Price) & "|" & CStr(Part.Margin) & "|" & PartProviderID & "|" & CStr(Part.PaymentAdded) & "|"
+                TextToWrite &= Part.ID.ToString() & "|" & Part.Name & "|" & Part.Count.ToString & "|" & Part.Units & "|" & Part.Price.ToString(specifier, culture) & "|" & Part.Margin.ToString(specifier, culture) & "|" & PartProviderID & "|" & Part.PaymentAdded.ToString & "|"
             Next
             TextToWrite = TextToWrite.Remove(TextToWrite.Length - 1)
             TextToWrite &= vbNewLine
@@ -2156,12 +2164,12 @@
     Private Sub dataDay_CellDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataDay.CellDoubleClick
         If GlobalMode = 1 Then
             If MsgBox("Удалить запись?!", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                Dim DelID As ULong = 9999
-                DelID = CULng(dataDay.Item(7, e.RowIndex).Value)
+                Dim DelID As Long = 9999
+                DelID = CLng(dataDay.Item(7, e.RowIndex).Value)
                 dataDay.Rows.RemoveAt(e.RowIndex)
                 For i = 0 To dCash.RowCount - 1
                     Try
-                        If CULng(dCash.Item(0, i).Value) = DelID Then
+                        If CLng(dCash.Item(0, i).Value) = DelID Then
                             dCash.Rows.RemoveAt(i)
                             SaveCash()
                             Exit For
@@ -2384,11 +2392,11 @@
 
     Private Sub dataDay_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataDay.CellEndEdit
         If e.ColumnIndex = 6 Then
-            Dim DelID As ULong = 9999
-            DelID = CULng(dataDay.Item(7, e.RowIndex).Value)
+            Dim DelID As Long = 9999
+            DelID = CLng(dataDay.Item(7, e.RowIndex).Value)
             For i = 0 To dCash.RowCount - 1
                 Try
-                    If CULng(dCash.Item(0, i).Value) = DelID Then
+                    If CLng(dCash.Item(0, i).Value) = DelID Then
                         dCash.Item(4, i).Value = dataDay.Item(6, e.RowIndex).Value
                         SaveCash()
                         Exit For
@@ -2512,12 +2520,12 @@
     Private Sub dataDayMount_CellDoubleClick1(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataDayMount.CellDoubleClick
         If GlobalMode = 1 Then
             If MsgBox("Удалить запись?!", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                Dim DelID As ULong = 9999
-                DelID = CULng(dataDayMount.Item(7, e.RowIndex).Value)
+                Dim DelID As Long = 9999
+                DelID = CLng(dataDayMount.Item(7, e.RowIndex).Value)
                 dataDayMount.Rows.RemoveAt(e.RowIndex)
                 For i = 0 To dCash.RowCount - 1
                     Try
-                        If CULng(dCash.Item(0, i).Value) = DelID Then
+                        If CLng(dCash.Item(0, i).Value) = DelID Then
                             dCash.Rows.RemoveAt(i)
                             SaveCash()
                             Exit For
@@ -2534,11 +2542,11 @@
 
     Private Sub dataDayMount_CellEndEdit1(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataDayMount.CellEndEdit
         If e.ColumnIndex = 6 Then
-            Dim DelID As ULong = 9999
-            DelID = CULng(dataDayMount.Item(7, e.RowIndex).Value)
+            Dim DelID As Long = 9999
+            DelID = CLng(dataDayMount.Item(7, e.RowIndex).Value)
             For i = 0 To dCash.RowCount - 1
                 Try
-                    If CULng(dCash.Item(0, i).Value) = DelID Then
+                    If CLng(dCash.Item(0, i).Value) = DelID Then
                         dCash.Item(4, i).Value = dataDayMount.Item(6, e.RowIndex).Value
                         SaveCash()
                         Exit For
@@ -2555,8 +2563,8 @@
         On Error Resume Next
         Commit()
         If dCash.AllowUserToAddRows = True Then
-            Dim Income As ULong = 0
-            Dim Outcome As ULong = 0
+            Dim Income As Long = 0
+            Dim Outcome As Long = 0
             Dim i As Integer = 0
             Do Until i > dCash.RowCount - 2
                 If CStr(dCash.Item(0, i).Value).ToLower = "xxx" Then
@@ -2565,8 +2573,8 @@
                 End If
                 If dCash.Item(4, i).Value = "" Then dCash.Item(4, i).Value = "0"
                 If dCash.Item(5, i).Value = "" Then dCash.Item(5, i).Value = "0"
-                Income += CULng(dCash.Item(4, i).Value)
-                Outcome += CULng(dCash.Item(5, i).Value)
+                Income += CLng(dCash.Item(4, i).Value)
+                Outcome += CLng(dCash.Item(5, i).Value)
                 i += 1
             Loop
             AddCash("xxx", "День закрыт", curDate.ToString("dd.MM.yyyy"), FormattedTime, CStr(Income) & " р.", CStr(Outcome) & " р.", "В кассе: " & CStr(cSum))
@@ -2623,7 +2631,7 @@
     End Sub
 
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles AddCashButton.Click
-        AddCash(AddComboBox.Text, CULng(AddIncomeBox.Text), CULng(AddOutcomeBox.Text), AddCommentBox.Text)
+        AddCash(AddComboBox.Text, CLng(AddIncomeBox.Text), CLng(AddOutcomeBox.Text), AddCommentBox.Text)
         Me.Clear()
         Commit()
         SaveCash()
@@ -2632,12 +2640,12 @@
     Private Sub dataService_CellDoubleClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataService.CellDoubleClick
         If GlobalMode = 1 Then
             If MsgBox("Удалить запись?!", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                Dim DelID As ULong = 9999
-                DelID = CULng(dataService.Item("Column10", e.RowIndex).Value)
+                Dim DelID As Long = 9999
+                DelID = CLng(dataService.Item("Column10", e.RowIndex).Value)
                 dataService.Rows.RemoveAt(e.RowIndex)
                 For i = 0 To dCash.RowCount - 1
                     Try
-                        If CULng(dCash.Item(0, i).Value) = DelID Then
+                        If CLng(dCash.Item(0, i).Value) = DelID Then
                             dCash.Rows.RemoveAt(i)
                             Exit For
                         End If
@@ -2664,7 +2672,7 @@
         Select Case ComboBox2.SelectedIndex
             Case 0
                 Dim SName As String = "Мойка " & comboMonth.Text & " " & comboYear.Text
-                Dim YVals(31) As ULong
+                Dim YVals(31) As Long
                 AddGraph(dpath, "N.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, ".ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, False, YVals)
             Case 1
@@ -2703,20 +2711,20 @@
                 Chart1.Series(GraphName).Points.AddXY(CInt(comboDayTo.Text), sum)
             Case 6
                 Dim SName As String = "Выручка " & comboMonth.Text & " " & CStr(curDate.Year)
-                Dim YVals(31) As ULong
+                Dim YVals(31) As Long
                 AddGraph(dpath, "N.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, ".ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, "m.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, "s.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 7, SName, False, YVals)
             Case 7
                 Dim SName As String = "Ср. выручка " & comboMonth.Text & " " & CStr(curDate.Year)
-                Dim YVals(31) As ULong
+                Dim YVals(31) As Long
                 Dim sum As Long = 0
                 AddGraph(dpath, "N.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, ".ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, "m.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 6, SName, True, YVals)
                 AddGraph(dpath, "s.ini", CInt(comboDayFrom.Text), CInt(comboDayTo.Text), 7, SName, True, YVals)
-                For Each i As ULong In YVals
+                For Each i As Long In YVals
                     sum += i
                 Next
                 sum = sum / (CInt(comboDayTo.Text) - CInt(comboDayFrom.Text))
@@ -2729,8 +2737,8 @@
         End Select
     End Sub
 
-    Private Sub AddGraph(DirPath As String, FilePostfix As String, fromNum As Integer, toNum As Integer, SumPos As UInteger, GraphName As String, Optional Fake As Boolean = False, Optional ByRef PYValues() As ULong = Nothing)
-        Dim summ As ULong = 0
+    Private Sub AddGraph(DirPath As String, FilePostfix As String, fromNum As Integer, toNum As Integer, SumPos As UInteger, GraphName As String, Optional Fake As Boolean = False, Optional ByRef PYValues() As Long = Nothing)
+        Dim summ As Long = 0
         Dim cnt As UInteger = 0
         Dim CurRow As String()
         If Not Fake And Not Chart1.Series.IsUniqueName(GraphName) Then Chart1.Series.Remove(Chart1.Series.FindByName(GraphName))
@@ -2748,7 +2756,7 @@
                         While Not baseFile.EndOfData
                             CurRow = baseFile.ReadFields
                             If CurRow.Length > 1 Then
-                                summ = summ + CULng(CurRow(SumPos))
+                                summ = summ + CLng(CurRow(SumPos))
                                 cnt = cnt + 1
                             End If
                         End While
@@ -2933,11 +2941,11 @@
 
     Private Sub dataService_CellEndEdit(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dataService.CellEndEdit
         If e.ColumnIndex = 7 Or e.ColumnIndex = 9 Then
-            Dim DelID As ULong = 9999
-            DelID = CULng(dataService.Item("Column10", e.RowIndex).Value)
+            Dim DelID As Long = 9999
+            DelID = CLng(dataService.Item("Column10", e.RowIndex).Value)
             For i = 0 To dCash.RowCount - 1
                 Try
-                    If CULng(dCash.Item(0, i).Value) = DelID Then
+                    If CLng(dCash.Item(0, i).Value) = DelID Then
                         dCash.Item(4, i).Value = CStr(CLng(dataService.Item(7, e.RowIndex).Value) + CLng(dataService.Item(9, e.RowIndex).Value))
                         SaveCash()
                         Exit For
@@ -2946,11 +2954,11 @@
                 End Try
             Next
         ElseIf e.ColumnIndex = 10 Then
-            Dim DelID As ULong = 9999
-            DelID = CULng(dataService.Item("Column10", e.RowIndex).Value)
+            Dim DelID As Long = 9999
+            DelID = CLng(dataService.Item("Column10", e.RowIndex).Value)
             For i = 0 To dCash.RowCount - 1
                 Try
-                    If CULng(dCash.Item(0, i).Value) = DelID Then
+                    If CLng(dCash.Item(0, i).Value) = DelID Then
                         dCash.Item(5, i).Value = dataService.Item(10, e.RowIndex).Value
                         SaveCash()
                         Exit For
@@ -3257,9 +3265,9 @@
 
     Private Sub dgvAnalytics_SelectionChanged(sender As Object, e As EventArgs) Handles dgvAnalytics.SelectionChanged
         On Error Resume Next
-        Dim sum As ULong
+        Dim sum As Long
         For Each cell As DataGridViewCell In dgvAnalytics.SelectedCells
-            sum += CULng(cell.Value)
+            sum += CLng(cell.Value)
         Next
         Label1.Text = CStr(sum)
     End Sub
@@ -3612,49 +3620,52 @@
         lwProviders.Items.Clear()
         For Each prov In HCProvider.ProviderList
             Dim newItem = New ListViewItem({prov.Name, prov.PartList.Count.ToString})
-            lwProviders.Items.Add(prov.Name)
+            lwProviders.Items.Add(newItem)
         Next
     End Sub
 
     Private Sub lwProviders_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lwProviders.SelectedIndexChanged
-        lwParts.Items.Clear()
+        lwOrders.Items.Clear()
         If lwProviders.SelectedItems.Count = 0 Then
-            lwParts.Visible = False
-            lblPartsCaption.Visible = False
+            lwOrders.Visible = False
+            lblOrdersCaption.Visible = False
         Else
-            lwParts.Visible = True
-            lblPartsCaption.Visible = True
+            lwOrders.Visible = True
+            lblOrdersCaption.Visible = True
             curProv = HCProvider.GetByName(lwProviders.SelectedItems(0).Text)
             For Each Part In curProv.PartList
-                Dim newGrp As System.Windows.Forms.ListViewGroup = Nothing
                 Dim PartNumber As String = Part.Order.Number.GetFullNumber
-                For Each grp As Windows.Forms.ListViewGroup In lwParts.Groups
-                    If grp.Header = PartNumber Then newGrp = grp
+                Dim fFound As Boolean = False
+                For Each item As ListViewItem In lwOrders.Items
+                    If item.Text = PartNumber Then fFound = True
                 Next
-                If newGrp Is Nothing Then newGrp = New System.Windows.Forms.ListViewGroup(Part.Order.Number.GetFullNumber)
-                lwParts.Groups.Add(newGrp)
-                Dim newItem = New ListViewItem({Part.Name, CStr(Part.Count) & " " & Part.Units}, newGrp)
-                newItem.Tag = Part
-                lwParts.Items.Add(newItem)
+                If Not fFound Then
+                    Dim newItem = New ListViewItem({Part.Order.Number.GetFullNumber, ToMoney(Part.Order.GetProviderPrice(curProv))})
+                    newItem.Tag = Part
+                    lwOrders.Items.Add(newItem)
+                End If
             Next
         End If
     End Sub
 
     Dim curPart As HCPart
-    Private Sub lwParts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lwParts.SelectedIndexChanged
+    Private Sub lwOrders_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lwOrders.SelectedIndexChanged
         curPart = Nothing
-        If lwParts.SelectedItems.Count <> 0 Then curPart = lwParts.SelectedItems(0).Tag
-        RefreshPart()
+        If lwOrders.SelectedItems.Count <> 0 Then curPart = lwOrders.SelectedItems(0).Tag
+        RefreshOrder()
     End Sub
 
-    Sub RefreshPart()
+    Sub RefreshOrder()
         If curPart Is Nothing Then
             gbPart.Visible = False
         Else
             gbPart.Visible = True
-            txtPartName.Text = curPart.Name
-            txtPartCount.Text = curPart.Count & " " & curPart.Units
-            txtPartPrice.Text = ToMoney(curPart.Price * curPart.Count)
+            txtOrderNumber.Text = curPart.Order.Number.GetFullNumber
+            txtPartList.Text = ""
+            For Each part As HCPart In curPart.Order.PartList
+                If part.Provider Is curProv Then txtPartList.Text &= part.Name & " (" & part.Count & " " & part.Units & ") " & ToMoney(part.Price * part.Count) & vbNewLine
+            Next
+            txtOrderPrice.Text = ToMoney(curPart.Order.GetProviderPrice(curPart.Provider))
             dtpPayment.Value = curDate
         End If
     End Sub
@@ -3719,6 +3730,11 @@
         RefreshProviders()
     End Sub
 
+    Private Sub dgvPayments_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPayments.CellEndEdit
+        If LoadProcedureRunning Or SavingPayments Then Exit Sub
+        SavePayments()
+    End Sub
+
     Private Sub dgvPayments_RowsAdded(sender As Object, e As EventArgs) Handles dgvPayments.RowsAdded, dgvPayments.RowsRemoved, dgvPayments.CellValueChanged
         If LoadProcedureRunning Then Exit Sub
         UpdateDebitCredit()
@@ -3730,27 +3746,27 @@
         Dim CreditSum As Double = 0
         For Each row As DataGridViewRow In dgvPayments.Rows
             If row.Visible Then
-                DebitSum += CDbl(row.Cells(cmnDebit.Index).Value)
-                CreditSum += CDbl(row.Cells(cmnCredit.Index).Value)
+                DebitSum += Double.Parse(row.Cells(cmnDebit.Index).Value, culture)
+                CreditSum += Double.Parse(row.Cells(cmnCredit.Index).Value, culture)
             End If
         Next
-        txtDebitSum.Text = Math.Round(DebitSum, 2).ToString
-        txtCreditSum.Text = Math.Round(CreditSum, 2).ToString()
+        txtDebitSum.Text = DebitSum.ToString(specifier, culture)
+        txtCreditSum.Text = CreditSum.ToString(specifier, culture)
         txtDebitDiff.Text = ""
         txtCreditDiff.Text = ""
         Dim Diff As Double = Math.Round(DebitSum - CreditSum, 2)
         If Diff < 0 Then
-            txtCreditDiff.Text = (-Diff).ToString
+            txtCreditDiff.Text = (-Diff).ToString(specifier, culture)
         ElseIf Diff > 0 Then
-            txtDebitDiff.Text = Diff.ToString
+            txtDebitDiff.Text = Diff.ToString(specifier, culture)
         End If
     End Sub
 
     Private Sub dgvPayments_SelectionChanged(sender As Object, e As EventArgs) Handles dgvPayments.SelectionChanged
         On Error Resume Next
-        Dim sum As ULong
+        Dim sum As Long
         For Each cell As DataGridViewCell In dgvPayments.SelectedCells
-            sum += CULng(cell.Value)
+            sum += CLng(cell.Value)
         Next
         Label1.Text = CStr(sum)
     End Sub
@@ -3783,7 +3799,7 @@
     End Function
 
     Public Sub RegisterPartList(ByRef PartList As List(Of HCPart))
-        Dim sums As New List(Of Integer)
+        Dim sums As New List(Of Double)
         Dim names As New List(Of String)
         Dim IDs As New List(Of Integer)
         For Each Part In PartList
@@ -3801,15 +3817,35 @@
             End If
         Next
         For i = 0 To sums.Count - 1
-            AddPayment(IDs(i).ToString(), PartList(0).Order.Number.GetFullNumber, names(i).ToString, Date.Now.ToString("dd.MM.yyyy"), "0", CStr(Math.Round(sums(i), 2)), _
+            AddPayment(-IDs(i).ToString(), PartList(0).Order.Number.GetFullNumber, names(i), Date.Now.ToString("dd.MM.yyyy"), "0", sums(i).ToString(specifier, culture), _
                        "За заказ № " & PartList(0).Order.Number.GetFullNumber)
         Next
     End Sub
 
     Public Sub UpdatePart(ByRef Part As HCPart)
+        Dim fFound As Boolean = False
         For Each row As DataGridViewRow In dgvPayments.Rows
-            If row.Cells(cmnOrderID.Index).Value = Part.Order.Number.GetFullNumber And CInt(row.Cells(cmnProvID.Index).Value) = Part.Provider.ID Then
-                row.Cells(cmnCredit.Index).Value = Part.Order.GetProviderPrice(Part.Provider).ToString
+            If row.Cells(cmnOrderID.Index).Value = Part.Order.Number.GetFullNumber And CInt(row.Cells(cmnProvID.Index).Value) = -Part.Provider.ID Then
+                row.Cells(cmnCredit.Index).Value = Part.Order.GetProviderPrice(Part.Provider).ToString(specifier, culture)
+                fFound = True
+                SavePayments()
+                Exit For
+            End If
+        Next
+        If Not fFound Then
+            AddPayment((-Part.Provider.ID).ToString(), Part.Order.Number.GetFullNumber, Part.Provider.Name, Date.Now.ToString("dd.MM.yyyy"), "0", (Part.Price * Part.Count).ToString(specifier, culture), _
+                       "За заказ № " & Part.Order.Number.GetFullNumber)
+        End If
+    End Sub
+
+    Public Sub RemovePart(ByRef Part As HCPart)
+        For Each row As DataGridViewRow In dgvPayments.Rows
+            If row.Cells(cmnOrderID.Index).Value = Part.Order.Number.GetFullNumber And CInt(row.Cells(cmnProvID.Index).Value) = -Part.Provider.ID Then
+                If Double.Parse(row.Cells(cmnCredit.Index).Value, culture) = Part.Price * Part.Count Then
+                    dgvPayments.Rows.Remove(row)
+                Else
+                    row.Cells(cmnCredit.Index).Value = (Part.Order.GetProviderPrice(Part.Provider) - (Part.Price * Part.Count)).ToString(specifier, culture)
+                End If
             End If
         Next
         SavePayments()
@@ -3832,7 +3868,6 @@
                 'row.Cells(cmnProvider.Index).Value = npName
             End If
         Next
-
     End Sub
 
     Private Sub ДневнойОтчётToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem2.Click

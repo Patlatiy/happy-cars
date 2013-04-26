@@ -333,21 +333,27 @@ Partial Class Form1
         Me.gbPart = New System.Windows.Forms.GroupBox()
         Me.dtpPayment = New System.Windows.Forms.DateTimePicker()
         Me.btnAddPayment = New System.Windows.Forms.Button()
-        Me.txtPartCount = New System.Windows.Forms.TextBox()
-        Me.lblPartCount = New System.Windows.Forms.Label()
-        Me.txtPartName = New System.Windows.Forms.TextBox()
-        Me.lblPartName = New System.Windows.Forms.Label()
-        Me.txtPartPrice = New System.Windows.Forms.TextBox()
-        Me.lblPartPrice = New System.Windows.Forms.Label()
-        Me.lwParts = New System.Windows.Forms.ListView()
-        Me.cmnhName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.cmnhCount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.txtPartList = New System.Windows.Forms.TextBox()
+        Me.lblPartList = New System.Windows.Forms.Label()
+        Me.txtOrderNumber = New System.Windows.Forms.TextBox()
+        Me.lblOrderNumber = New System.Windows.Forms.Label()
+        Me.txtOrderPrice = New System.Windows.Forms.TextBox()
+        Me.lblOrderPrice = New System.Windows.Forms.Label()
+        Me.lwOrders = New System.Windows.Forms.ListView()
+        Me.cmnhNumber = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.cmnhPrice = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lwProviders = New System.Windows.Forms.ListView()
         Me.cmnhProviderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cmnhPartCount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.lblPartsCaption = New System.Windows.Forms.Label()
+        Me.lblOrdersCaption = New System.Windows.Forms.Label()
         Me.lblProvidersCaption = New System.Windows.Forms.Label()
         Me.tabPayments = New System.Windows.Forms.TabPage()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.txtDebitDiff = New System.Windows.Forms.TextBox()
+        Me.txtCreditDiff = New System.Windows.Forms.TextBox()
+        Me.txtCreditSum = New System.Windows.Forms.TextBox()
+        Me.txtDebitSum = New System.Windows.Forms.TextBox()
         Me.lblProviderFilet = New System.Windows.Forms.Label()
         Me.comboProviderFilter = New System.Windows.Forms.ComboBox()
         Me.dgvPayments = New System.Windows.Forms.DataGridView()
@@ -385,12 +391,6 @@ Partial Class Form1
         Me.ЗаписьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.МагазинToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПринятыеПлатежиToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.txtDebitSum = New System.Windows.Forms.TextBox()
-        Me.txtCreditSum = New System.Windows.Forms.TextBox()
-        Me.txtCreditDiff = New System.Windows.Forms.TextBox()
-        Me.txtDebitDiff = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -3501,9 +3501,9 @@ Partial Class Form1
         'tabProviders
         '
         Me.tabProviders.Controls.Add(Me.gbPart)
-        Me.tabProviders.Controls.Add(Me.lwParts)
+        Me.tabProviders.Controls.Add(Me.lwOrders)
         Me.tabProviders.Controls.Add(Me.lwProviders)
-        Me.tabProviders.Controls.Add(Me.lblPartsCaption)
+        Me.tabProviders.Controls.Add(Me.lblOrdersCaption)
         Me.tabProviders.Controls.Add(Me.lblProvidersCaption)
         Me.tabProviders.Location = New System.Drawing.Point(4, 22)
         Me.tabProviders.Name = "tabProviders"
@@ -3516,115 +3516,119 @@ Partial Class Form1
         '
         Me.gbPart.Controls.Add(Me.dtpPayment)
         Me.gbPart.Controls.Add(Me.btnAddPayment)
-        Me.gbPart.Controls.Add(Me.txtPartCount)
-        Me.gbPart.Controls.Add(Me.lblPartCount)
-        Me.gbPart.Controls.Add(Me.txtPartName)
-        Me.gbPart.Controls.Add(Me.lblPartName)
-        Me.gbPart.Controls.Add(Me.txtPartPrice)
-        Me.gbPart.Controls.Add(Me.lblPartPrice)
-        Me.gbPart.Location = New System.Drawing.Point(580, 39)
+        Me.gbPart.Controls.Add(Me.txtPartList)
+        Me.gbPart.Controls.Add(Me.lblPartList)
+        Me.gbPart.Controls.Add(Me.txtOrderNumber)
+        Me.gbPart.Controls.Add(Me.lblOrderNumber)
+        Me.gbPart.Controls.Add(Me.txtOrderPrice)
+        Me.gbPart.Controls.Add(Me.lblOrderPrice)
+        Me.gbPart.Location = New System.Drawing.Point(520, 39)
         Me.gbPart.Name = "gbPart"
-        Me.gbPart.Size = New System.Drawing.Size(363, 155)
+        Me.gbPart.Size = New System.Drawing.Size(626, 260)
         Me.gbPart.TabIndex = 11
         Me.gbPart.TabStop = False
-        Me.gbPart.Text = "Запчасть"
+        Me.gbPart.Text = "Заказ"
         Me.gbPart.Visible = False
         '
         'dtpPayment
         '
         Me.dtpPayment.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpPayment.Location = New System.Drawing.Point(158, 115)
+        Me.dtpPayment.Location = New System.Drawing.Point(193, 224)
         Me.dtpPayment.Name = "dtpPayment"
-        Me.dtpPayment.Size = New System.Drawing.Size(76, 20)
+        Me.dtpPayment.Size = New System.Drawing.Size(92, 20)
         Me.dtpPayment.TabIndex = 20
         Me.dtpPayment.Value = New Date(2012, 9, 3, 14, 6, 0, 0)
         '
         'btnAddPayment
         '
-        Me.btnAddPayment.Location = New System.Drawing.Point(18, 112)
+        Me.btnAddPayment.Location = New System.Drawing.Point(97, 222)
         Me.btnAddPayment.Name = "btnAddPayment"
         Me.btnAddPayment.Size = New System.Drawing.Size(90, 23)
         Me.btnAddPayment.TabIndex = 19
         Me.btnAddPayment.Text = "Рассчитаться"
         Me.btnAddPayment.UseVisualStyleBackColor = True
         '
-        'txtPartCount
+        'txtPartList
         '
-        Me.txtPartCount.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtPartCount.Location = New System.Drawing.Point(158, 50)
-        Me.txtPartCount.Name = "txtPartCount"
-        Me.txtPartCount.ReadOnly = True
-        Me.txtPartCount.Size = New System.Drawing.Size(100, 20)
-        Me.txtPartCount.TabIndex = 18
+        Me.txtPartList.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtPartList.Location = New System.Drawing.Point(158, 50)
+        Me.txtPartList.Multiline = True
+        Me.txtPartList.Name = "txtPartList"
+        Me.txtPartList.ReadOnly = True
+        Me.txtPartList.Size = New System.Drawing.Size(450, 130)
+        Me.txtPartList.TabIndex = 18
+        Me.txtPartList.WordWrap = False
         '
-        'lblPartCount
+        'lblPartList
         '
-        Me.lblPartCount.AutoSize = True
-        Me.lblPartCount.Location = New System.Drawing.Point(15, 53)
-        Me.lblPartCount.Name = "lblPartCount"
-        Me.lblPartCount.Size = New System.Drawing.Size(66, 13)
-        Me.lblPartCount.TabIndex = 17
-        Me.lblPartCount.Text = "Количество"
+        Me.lblPartList.AutoSize = True
+        Me.lblPartList.Location = New System.Drawing.Point(15, 53)
+        Me.lblPartList.Name = "lblPartList"
+        Me.lblPartList.Size = New System.Drawing.Size(99, 13)
+        Me.lblPartList.TabIndex = 17
+        Me.lblPartList.Text = "Список запчастей"
         '
-        'txtPartName
+        'txtOrderNumber
         '
-        Me.txtPartName.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtPartName.Location = New System.Drawing.Point(158, 24)
-        Me.txtPartName.Name = "txtPartName"
-        Me.txtPartName.ReadOnly = True
-        Me.txtPartName.Size = New System.Drawing.Size(201, 20)
-        Me.txtPartName.TabIndex = 18
+        Me.txtOrderNumber.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtOrderNumber.Location = New System.Drawing.Point(158, 24)
+        Me.txtOrderNumber.Name = "txtOrderNumber"
+        Me.txtOrderNumber.ReadOnly = True
+        Me.txtOrderNumber.Size = New System.Drawing.Size(127, 20)
+        Me.txtOrderNumber.TabIndex = 18
         '
-        'lblPartName
+        'lblOrderNumber
         '
-        Me.lblPartName.AutoSize = True
-        Me.lblPartName.Location = New System.Drawing.Point(15, 27)
-        Me.lblPartName.Name = "lblPartName"
-        Me.lblPartName.Size = New System.Drawing.Size(83, 13)
-        Me.lblPartName.TabIndex = 17
-        Me.lblPartName.Text = "Наименование"
+        Me.lblOrderNumber.AutoSize = True
+        Me.lblOrderNumber.Location = New System.Drawing.Point(15, 27)
+        Me.lblOrderNumber.Name = "lblOrderNumber"
+        Me.lblOrderNumber.Size = New System.Drawing.Size(41, 13)
+        Me.lblOrderNumber.TabIndex = 17
+        Me.lblOrderNumber.Text = "Номер"
         '
-        'txtPartPrice
+        'txtOrderPrice
         '
-        Me.txtPartPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtPartPrice.Location = New System.Drawing.Point(158, 76)
-        Me.txtPartPrice.Name = "txtPartPrice"
-        Me.txtPartPrice.ReadOnly = True
-        Me.txtPartPrice.Size = New System.Drawing.Size(100, 20)
-        Me.txtPartPrice.TabIndex = 18
+        Me.txtOrderPrice.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtOrderPrice.Location = New System.Drawing.Point(158, 186)
+        Me.txtOrderPrice.Name = "txtOrderPrice"
+        Me.txtOrderPrice.ReadOnly = True
+        Me.txtOrderPrice.Size = New System.Drawing.Size(127, 20)
+        Me.txtOrderPrice.TabIndex = 18
+        Me.txtOrderPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'lblPartPrice
+        'lblOrderPrice
         '
-        Me.lblPartPrice.AutoSize = True
-        Me.lblPartPrice.Location = New System.Drawing.Point(15, 79)
-        Me.lblPartPrice.Name = "lblPartPrice"
-        Me.lblPartPrice.Size = New System.Drawing.Size(77, 13)
-        Me.lblPartPrice.TabIndex = 17
-        Me.lblPartPrice.Text = "Цена закупки"
+        Me.lblOrderPrice.AutoSize = True
+        Me.lblOrderPrice.Location = New System.Drawing.Point(15, 189)
+        Me.lblOrderPrice.Name = "lblOrderPrice"
+        Me.lblOrderPrice.Size = New System.Drawing.Size(77, 13)
+        Me.lblOrderPrice.TabIndex = 17
+        Me.lblOrderPrice.Text = "Цена закупки"
         '
-        'lwParts
+        'lwOrders
         '
-        Me.lwParts.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cmnhName, Me.cmnhCount})
-        Me.lwParts.FullRowSelect = True
-        Me.lwParts.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.lwParts.HideSelection = False
-        Me.lwParts.Location = New System.Drawing.Point(273, 39)
-        Me.lwParts.MultiSelect = False
-        Me.lwParts.Name = "lwParts"
-        Me.lwParts.Size = New System.Drawing.Size(288, 434)
-        Me.lwParts.TabIndex = 10
-        Me.lwParts.UseCompatibleStateImageBehavior = False
-        Me.lwParts.View = System.Windows.Forms.View.Details
-        Me.lwParts.Visible = False
+        Me.lwOrders.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cmnhNumber, Me.cmnhPrice})
+        Me.lwOrders.FullRowSelect = True
+        Me.lwOrders.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lwOrders.HideSelection = False
+        Me.lwOrders.Location = New System.Drawing.Point(273, 39)
+        Me.lwOrders.MultiSelect = False
+        Me.lwOrders.Name = "lwOrders"
+        Me.lwOrders.Size = New System.Drawing.Size(236, 434)
+        Me.lwOrders.TabIndex = 10
+        Me.lwOrders.UseCompatibleStateImageBehavior = False
+        Me.lwOrders.View = System.Windows.Forms.View.Details
+        Me.lwOrders.Visible = False
         '
-        'cmnhName
+        'cmnhNumber
         '
-        Me.cmnhName.Text = "Наименование"
-        Me.cmnhName.Width = 120
+        Me.cmnhNumber.Text = "Номер"
+        Me.cmnhNumber.Width = 120
         '
-        'cmnhCount
+        'cmnhPrice
         '
-        Me.cmnhCount.Text = "Кол-во"
+        Me.cmnhPrice.Text = "Цена"
+        Me.cmnhPrice.Width = 100
         '
         'lwProviders
         '
@@ -3648,16 +3652,16 @@ Partial Class Form1
         '
         Me.cmnhPartCount.Text = "Частей"
         '
-        'lblPartsCaption
+        'lblOrdersCaption
         '
-        Me.lblPartsCaption.AutoSize = True
-        Me.lblPartsCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lblPartsCaption.Location = New System.Drawing.Point(366, 12)
-        Me.lblPartsCaption.Name = "lblPartsCaption"
-        Me.lblPartsCaption.Size = New System.Drawing.Size(103, 24)
-        Me.lblPartsCaption.TabIndex = 9
-        Me.lblPartsCaption.Text = "Запчасти"
-        Me.lblPartsCaption.Visible = False
+        Me.lblOrdersCaption.AutoSize = True
+        Me.lblOrdersCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lblOrdersCaption.Location = New System.Drawing.Point(366, 12)
+        Me.lblOrdersCaption.Name = "lblOrdersCaption"
+        Me.lblOrdersCaption.Size = New System.Drawing.Size(81, 24)
+        Me.lblOrdersCaption.TabIndex = 9
+        Me.lblOrdersCaption.Text = "Заказы"
+        Me.lblOrdersCaption.Visible = False
         '
         'lblProvidersCaption
         '
@@ -3686,6 +3690,64 @@ Partial Class Form1
         Me.tabPayments.TabIndex = 11
         Me.tabPayments.Text = "Расчёты с поставщиками"
         Me.tabPayments.UseVisualStyleBackColor = True
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(370, 461)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(44, 13)
+        Me.Label28.TabIndex = 111
+        Me.Label28.Text = "Сальдо"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(370, 439)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(41, 13)
+        Me.Label27.TabIndex = 111
+        Me.Label27.Text = "Сумма"
+        '
+        'txtDebitDiff
+        '
+        Me.txtDebitDiff.BackColor = System.Drawing.SystemColors.Control
+        Me.txtDebitDiff.Location = New System.Drawing.Point(421, 458)
+        Me.txtDebitDiff.Name = "txtDebitDiff"
+        Me.txtDebitDiff.ReadOnly = True
+        Me.txtDebitDiff.Size = New System.Drawing.Size(88, 20)
+        Me.txtDebitDiff.TabIndex = 110
+        Me.txtDebitDiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtCreditDiff
+        '
+        Me.txtCreditDiff.BackColor = System.Drawing.SystemColors.Control
+        Me.txtCreditDiff.Location = New System.Drawing.Point(511, 458)
+        Me.txtCreditDiff.Name = "txtCreditDiff"
+        Me.txtCreditDiff.ReadOnly = True
+        Me.txtCreditDiff.Size = New System.Drawing.Size(88, 20)
+        Me.txtCreditDiff.TabIndex = 110
+        Me.txtCreditDiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtCreditSum
+        '
+        Me.txtCreditSum.BackColor = System.Drawing.SystemColors.Control
+        Me.txtCreditSum.Location = New System.Drawing.Point(511, 436)
+        Me.txtCreditSum.Name = "txtCreditSum"
+        Me.txtCreditSum.ReadOnly = True
+        Me.txtCreditSum.Size = New System.Drawing.Size(88, 20)
+        Me.txtCreditSum.TabIndex = 110
+        Me.txtCreditSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtDebitSum
+        '
+        Me.txtDebitSum.BackColor = System.Drawing.SystemColors.Control
+        Me.txtDebitSum.Location = New System.Drawing.Point(421, 436)
+        Me.txtDebitSum.Name = "txtDebitSum"
+        Me.txtDebitSum.ReadOnly = True
+        Me.txtDebitSum.Size = New System.Drawing.Size(88, 20)
+        Me.txtDebitSum.TabIndex = 110
+        Me.txtDebitSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblProviderFilet
         '
@@ -3976,64 +4038,6 @@ Partial Class Form1
         Me.ПринятыеПлатежиToolStripMenuItem.Name = "ПринятыеПлатежиToolStripMenuItem"
         Me.ПринятыеПлатежиToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ПринятыеПлатежиToolStripMenuItem.Text = "Принятые платежи"
-        '
-        'txtDebitSum
-        '
-        Me.txtDebitSum.BackColor = System.Drawing.SystemColors.Control
-        Me.txtDebitSum.Location = New System.Drawing.Point(421, 436)
-        Me.txtDebitSum.Name = "txtDebitSum"
-        Me.txtDebitSum.ReadOnly = True
-        Me.txtDebitSum.Size = New System.Drawing.Size(88, 20)
-        Me.txtDebitSum.TabIndex = 110
-        Me.txtDebitSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCreditSum
-        '
-        Me.txtCreditSum.BackColor = System.Drawing.SystemColors.Control
-        Me.txtCreditSum.Location = New System.Drawing.Point(511, 436)
-        Me.txtCreditSum.Name = "txtCreditSum"
-        Me.txtCreditSum.ReadOnly = True
-        Me.txtCreditSum.Size = New System.Drawing.Size(88, 20)
-        Me.txtCreditSum.TabIndex = 110
-        Me.txtCreditSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtCreditDiff
-        '
-        Me.txtCreditDiff.BackColor = System.Drawing.SystemColors.Control
-        Me.txtCreditDiff.Location = New System.Drawing.Point(511, 458)
-        Me.txtCreditDiff.Name = "txtCreditDiff"
-        Me.txtCreditDiff.ReadOnly = True
-        Me.txtCreditDiff.Size = New System.Drawing.Size(88, 20)
-        Me.txtCreditDiff.TabIndex = 110
-        Me.txtCreditDiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtDebitDiff
-        '
-        Me.txtDebitDiff.BackColor = System.Drawing.SystemColors.Control
-        Me.txtDebitDiff.Location = New System.Drawing.Point(421, 458)
-        Me.txtDebitDiff.Name = "txtDebitDiff"
-        Me.txtDebitDiff.ReadOnly = True
-        Me.txtDebitDiff.Size = New System.Drawing.Size(88, 20)
-        Me.txtDebitDiff.TabIndex = 110
-        Me.txtDebitDiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(370, 439)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(41, 13)
-        Me.Label27.TabIndex = 111
-        Me.Label27.Text = "Сумма"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(370, 461)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(44, 13)
-        Me.Label28.TabIndex = 111
-        Me.Label28.Text = "Сальдо"
         '
         'Form1
         '
@@ -4465,19 +4469,19 @@ Partial Class Form1
     Friend WithEvents tabProviders As System.Windows.Forms.TabPage
     Friend WithEvents lblProvidersCaption As System.Windows.Forms.Label
     Friend WithEvents lwProviders As System.Windows.Forms.ListView
-    Friend WithEvents lwParts As System.Windows.Forms.ListView
-    Friend WithEvents cmnhName As System.Windows.Forms.ColumnHeader
-    Friend WithEvents lblPartsCaption As System.Windows.Forms.Label
-    Friend WithEvents cmnhCount As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lwOrders As System.Windows.Forms.ListView
+    Friend WithEvents cmnhNumber As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lblOrdersCaption As System.Windows.Forms.Label
+    Friend WithEvents cmnhPrice As System.Windows.Forms.ColumnHeader
     Friend WithEvents cmnhProviderName As System.Windows.Forms.ColumnHeader
     Friend WithEvents cmnhPartCount As System.Windows.Forms.ColumnHeader
     Friend WithEvents gbPart As System.Windows.Forms.GroupBox
-    Friend WithEvents txtPartCount As System.Windows.Forms.TextBox
-    Friend WithEvents lblPartCount As System.Windows.Forms.Label
-    Friend WithEvents txtPartName As System.Windows.Forms.TextBox
-    Friend WithEvents lblPartName As System.Windows.Forms.Label
-    Friend WithEvents txtPartPrice As System.Windows.Forms.TextBox
-    Friend WithEvents lblPartPrice As System.Windows.Forms.Label
+    Friend WithEvents txtPartList As System.Windows.Forms.TextBox
+    Friend WithEvents lblPartList As System.Windows.Forms.Label
+    Friend WithEvents txtOrderNumber As System.Windows.Forms.TextBox
+    Friend WithEvents lblOrderNumber As System.Windows.Forms.Label
+    Friend WithEvents txtOrderPrice As System.Windows.Forms.TextBox
+    Friend WithEvents lblOrderPrice As System.Windows.Forms.Label
     Friend WithEvents btnAddPayment As System.Windows.Forms.Button
     Friend WithEvents tabPayments As System.Windows.Forms.TabPage
     Friend WithEvents dgvPayments As System.Windows.Forms.DataGridView

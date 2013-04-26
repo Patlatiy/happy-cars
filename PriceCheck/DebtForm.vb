@@ -15,7 +15,7 @@
                     DayFile.SetDelimiters("|")
                     While Not DayFile.EndOfData
                         curRow = DayFile.ReadFields
-                        For i As ULong = 0 To Form1.NextDebtID
+                        For i As Long = 0 To Form1.NextDebtID
                             If j = Form1.DebtID(i, 0) And curRow(7) = CStr(Form1.DebtID(i, 1)) Then
                                 dWashDebt.Rows.Add(CStr(i), CStr(curID), CStr(j) & "." & CStr(Form1.curDate.Month) & "." & CStr(Form1.curDate.Year), curRow(1), curRow(3), curRow(4), curRow(6), "Закрыть")
                                 curID += 1
@@ -31,7 +31,7 @@
                     NightFile.ReadFields()
                     While Not NightFile.EndOfData
                         curRow = NightFile.ReadFields
-                        For i As ULong = 0 To Form1.NextDebtID
+                        For i As Long = 0 To Form1.NextDebtID
                             If j = Form1.DebtID(i, 0) And curRow(7) = CStr(Form1.DebtID(i, 1)) Then
                                 dWashDebt.Rows.Add(CStr(i), CStr(curID), CStr(j) & "." & CStr(Form1.curDate.Month) & "." & CStr(Form1.curDate.Year), curRow(1), curRow(3), curRow(4), curRow(6), "Закрыть")
                                 curID += 1
@@ -47,7 +47,7 @@
                     MountFile.SetDelimiters("|")
                     While Not MountFile.EndOfData
                         curRow = MountFile.ReadFields
-                        For i As ULong = 0 To Form1.NextDebtID
+                        For i As Long = 0 To Form1.NextDebtID
                             If j = Form1.DebtID(i, 0) And curRow(7) = CStr(Form1.DebtID(i, 1)) Then
                                 dMountDebt.Rows.Add(CStr(i), CStr(curID), CStr(j) & "." & CStr(Form1.curDate.Month) & "." & CStr(Form1.curDate.Year), curRow(1), curRow(3), curRow(4), curRow(6), "Закрыть")
                                 curID += 1
@@ -63,7 +63,7 @@
                     ServiceFile.SetDelimiters("|")
                     While Not ServiceFile.EndOfData
                         curRow = ServiceFile.ReadFields
-                        For i As ULong = 0 To Form1.NextDebtID
+                        For i As Long = 0 To Form1.NextDebtID
                             If j = Form1.DebtID(i, 0) And curRow(9) = CStr(Form1.DebtID(i, 1)) Then
                                 dServiceDebt.Rows.Add(CStr(i), CStr(curID), CStr(j) & "." & CStr(Form1.curDate.Month) & "." & CStr(Form1.curDate.Year), curRow(2), curRow(3), curRow(4), CStr(CInt(curRow(5)) + CInt(curRow(7))), "Закрыть")
                                 curID += 1

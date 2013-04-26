@@ -84,6 +84,7 @@ Partial Class frmNewPart
         '
         Me.nudMarginPc.Location = New System.Drawing.Point(155, 137)
         Me.nudMarginPc.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudMarginPc.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
         Me.nudMarginPc.Name = "nudMarginPc"
         Me.nudMarginPc.Size = New System.Drawing.Size(65, 20)
         Me.nudMarginPc.TabIndex = 21
@@ -94,6 +95,7 @@ Partial Class frmNewPart
         Me.nudMargin.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudMargin.Location = New System.Drawing.Point(266, 137)
         Me.nudMargin.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudMargin.Minimum = New Decimal(New Integer() {1000000, 0, 0, -2147483648})
         Me.nudMargin.Name = "nudMargin"
         Me.nudMargin.Size = New System.Drawing.Size(65, 20)
         Me.nudMargin.TabIndex = 22

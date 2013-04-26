@@ -86,7 +86,7 @@ HappyCars
 	<summary>
  Таймер для разных служебных нужд
  </summary>
-</member><member name="M:HappyCars.Form1.AddRecord(System.UInt64,System.UInt64,System.String,System.String,System.String,System.String,System.UInt64,System.UInt64,System.Int32)">
+</member><member name="M:HappyCars.Form1.AddRecord(System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int64,System.Int64,System.Int32)">
 	<summary>
  Добавляет запись в базу данных автомойки или шиномонтажа
  </summary>
@@ -98,7 +98,7 @@ HappyCars
 	<param name="uintSum">Сумма</param>
 	<param name="uintGroup">Группа</param>
 	<param name="SMode">Режим (0 - автомойка, 1 - шиномонтаж)</param>
-</member><member name="M:HappyCars.Form1.AddRecord(System.UInt64,System.UInt64,System.String,System.String,System.String,System.String,System.UInt64,System.String,System.UInt64,System.String,System.String,System.UInt64)">
+</member><member name="M:HappyCars.Form1.AddRecord(System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int64,System.String,System.Int64,System.String,System.String,System.Int64)">
 	<summary>
  Добавляет запись во вкладке автосервиса
  </summary>

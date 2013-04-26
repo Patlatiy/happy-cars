@@ -3,35 +3,35 @@
     Public Executor As HCExecutor
     Public DeliveryDate As Date
 
-    Public _PaymentSum As ULong
+    Public _PaymentSum As Long
     Public PaymentDate As Date
     Public Property PaymentSum As Double
         Get
             Return _PaymentSum / 100
         End Get
         Set(value As Double)
-            _PaymentSum = CULng(value * 100)
+            _PaymentSum = CLng(value * 100)
         End Set
     End Property
 
-    Public _AdvanceSum As ULong
+    Public _AdvanceSum As Long
     Public AdvanceDate As Date
     Public Property AdvanceSum As Double
         Get
             Return _AdvanceSum / 100
         End Get
         Set(value As Double)
-            _AdvanceSum = CULng(value * 100)
+            _AdvanceSum = CLng(value * 100)
         End Set
     End Property
 
-    Private _Discount As ULong
+    Private _Discount As Long
     Public Property Discount As Double
         Get
             Return _Discount / 100
         End Get
         Set(value As Double)
-            _Discount = CULng(value * 100)
+            _Discount = CLng(value * 100)
         End Set
     End Property
 
@@ -228,7 +228,7 @@
     Public Function GetProviderPrice(Provider As HCProvider) As Double
         Dim Total As Double = 0
         For Each part In PartList
-            If part.Provider Is Provider Then Total += part.Price * part.Count
+            If part.Provider Is Provider Then Total += part.Price * CDbl(part.Count)
         Next
         Total = Math.Round(Total, 2)
         Return Total

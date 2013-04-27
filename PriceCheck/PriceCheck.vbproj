@@ -119,6 +119,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Cars.vb" />
     <Compile Include="CashLeaf.Designer.vb">
       <DependentUpon>CashLeaf.vb</DependentUpon>
@@ -148,6 +149,18 @@
       <DependentUpon>frmLog.vb</DependentUpon>
     </Compile>
     <Compile Include="frmLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManagePasswords.Designer.vb">
+      <DependentUpon>frmManagePasswords.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmManagePasswords.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmOrder.Designer.vb">
@@ -266,6 +279,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManagePasswords.resx">
+      <DependentUpon>frmManagePasswords.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOrder.resx">
       <DependentUpon>frmOrder.vb</DependentUpon>

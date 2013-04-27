@@ -1,4 +1,25 @@
 ﻿Module mdlRandomFunctions
+    Public masterHash As Integer
+    Public girlHash As Integer
+    Public bkHash As Integer
+
+    Public Sub LoadHashes()
+        Dim pswFile As String = Application.StartupPath & "\data\hash"
+        If My.Computer.FileSystem.FileExists(pswFile) Then
+            Using pfile As New Microsoft.VisualBasic.FileIO.TextFieldParser(pswFile)
+                pfile.TextFieldType = FileIO.FieldType.Delimited
+                pfile.SetDelimiters(":")
+                Dim curRow As String()
+                curRow = pfile.ReadFields
+                masterHash = Integer.Parse(curRow(0))
+                curRow = pfile.ReadFields
+                girlHash = Integer.Parse(curRow(0))
+                curRow = pfile.ReadFields
+                bkHash = Integer.Parse(curRow(0))
+            End Using
+        End If
+    End Sub
+
     Function ToMoney(value As Double) As String
         If (value Mod 1) = 0 Then Return CStr(value) & " р."
         Dim rouble As String, kop As String

@@ -119,7 +119,6 @@
     Dim HiddenPages As New List(Of TabPage)
     Dim curProv As HCProvider
 
-
     Public Enum WriteRights
         Read_Only = 0
         Master = 1
@@ -269,89 +268,90 @@
         SaveAll()
     End Sub
 
+    Public Overloads Sub Show(rights As WriteRights, Optional log As Boolean = False)
+        Select Case rights
+            Case WriteRights.Bookkeeper
+                WriteRight = WriteRights.Bookkeeper
+                ПаролиToolStripMenuItem.Visible = True
+            Case WriteRights.Master
+                WriteRight = WriteRights.Master
+                EnablePage(tabWash, False)
+                EnablePage(tabMount, False)
+                EnablePage(tabService, False)
+                EnablePage(tabCash, False)
+                EnablePage(tabAnalytics, False)
+                EnablePage(tabStats, False)
+                EnablePage(tabProviders, False)
+                EnablePage(tabPayments, False)
+                EnablePage(tabSchedule, False)
+                cmnPayment.Visible = False
+                ReportsToolStripMenuItem.Enabled = False
+            Case WriteRights.The_Girl
+                WriteRight = WriteRights.The_Girl
+                EnablePage(tabAnalytics, False)
+                EnablePage(tabStats, False)
+                EnablePage(tabProviders, False)
+                EnablePage(tabPayments, False)
+                cmnEdit.Visible = False
+                cmnOpen.Visible = False
+            Case WriteRights.Read_Only
+                ComboBox1.Hide()
+                txtNumber.Hide()
+                Button1.Hide()
+                Button4.Hide()
+                Button5.Hide()
+                Button6.Hide()
+                Button7.Hide()
+                AddCashButton.Hide()
+                OweBox.Hide()
+                OweBox2.Hide()
+                OweBox3.Hide()
+                GroupBox1.Hide()
+                GroupBox2.Hide()
+                GroupBox5.Hide()
+                GroupBox6.Hide()
+                GroupBox7.Hide()
+                Label14.Hide()
+                DiscountNud.Hide()
+                DiscountCombo.Hide()
+                Label1.Hide()
+                Label12.Hide()
+                Button12.Hide()
+                ComboTLS2.Hide()
+                lblTomorrow.Hide()
+                For i = 0 To dCash.ColumnCount - 1
+                    dCash.Columns(i).ReadOnly = True
+                Next
+                dataDay.Left = 10
+                NightBox.Left = dataDay.Width + 20
+                NightBox.Top = 10
+                btnDebt1.Left = NightBox.Left
+                btnDebt1.Top = 35
+                TabControl1.Top = 30
+                Me.Height = Me.Height - 30
+                lblDaySum.Top = lblDaySum.Top - 30
+                dataDayMount.Left = 10
+                btnDebt2.Left = dataDayMount.Width + 20
+                btnDebt2.Top = 10
+                dataService.Left = 10
+                btnDebt3.Left = dataService.Width + 15
+                btnDebt3.Top = 10
+                btnNewCustomer.Hide()
+                btnNewOrder.Hide()
+                btnAddPayment.Hide()
+                Me.Text = Me.Text & " - ТОЛЬКО ЧТЕНИЕ"
+        End Select
+        If log Then frmLog.Show()
+        Me.Show()
+        Me.BringToFront()
+    End Sub
+
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        frmLogin.Show(Me)
         'Unused tabs atm:
         EnablePage(tabTable, False)
         EnablePage(tabZP, False)
 
-        'Parsing command line args:
-        For Each tmpSTR In My.Application.CommandLineArgs()
-            tmpSTR = tmpSTR.ToLower
-            Select Case tmpSTR
-                Case "-write", "-bk", "-bookkeeper", "-bookeeper"
-                    WriteRight = WriteRights.Bookkeeper
-                Case "-master"
-                    WriteRight = WriteRights.Master
-                    EnablePage(tabWash, False)
-                    EnablePage(tabMount, False)
-                    EnablePage(tabService, False)
-                    EnablePage(tabCash, False)
-                    EnablePage(tabAnalytics, False)
-                    EnablePage(tabStats, False)
-                    EnablePage(tabProviders, False)
-                    EnablePage(tabPayments, False)
-                    EnablePage(tabSchedule, False)
-                    cmnPayment.Visible = False
-                    ReportsToolStripMenuItem.Enabled = False
-                Case "-thegirl"
-                    WriteRight = WriteRights.The_Girl
-                    EnablePage(tabAnalytics, False)
-                    EnablePage(tabStats, False)
-                    EnablePage(tabProviders, False)
-                    EnablePage(tabPayments, False)
-                    cmnEdit.Visible = False
-                    cmnOpen.Visible = False
-                Case "-log"
-                    frmLog.Show()
-            End Select
-        Next
-        If WriteRight = WriteRights.Read_Only Then
-            ComboBox1.Hide()
-            txtNumber.Hide()
-            Button1.Hide()
-            Button4.Hide()
-            Button5.Hide()
-            Button6.Hide()
-            Button7.Hide()
-            AddCashButton.Hide()
-            OweBox.Hide()
-            OweBox2.Hide()
-            OweBox3.Hide()
-            GroupBox1.Hide()
-            GroupBox2.Hide()
-            GroupBox5.Hide()
-            GroupBox6.Hide()
-            GroupBox7.Hide()
-            Label14.Hide()
-            DiscountNud.Hide()
-            DiscountCombo.Hide()
-            Label1.Hide()
-            Label12.Hide()
-            Button12.Hide()
-            ComboTLS2.Hide()
-            lblTomorrow.Hide()
-            For i = 0 To dCash.ColumnCount - 1
-                dCash.Columns(i).ReadOnly = True
-            Next
-            dataDay.Left = 10
-            NightBox.Left = dataDay.Width + 20
-            NightBox.Top = 10
-            btnDebt1.Left = NightBox.Left
-            btnDebt1.Top = 35
-            TabControl1.Top = 30
-            Me.Height = Me.Height - 30
-            lblDaySum.Top = lblDaySum.Top - 30
-            dataDayMount.Left = 10
-            btnDebt2.Left = dataDayMount.Width + 20
-            btnDebt2.Top = 10
-            dataService.Left = 10
-            btnDebt3.Left = dataService.Width + 15
-            btnDebt3.Top = 10
-            btnNewCustomer.Hide()
-            btnNewOrder.Hide()
-            btnAddPayment.Hide()
-            Me.Text = Me.Text & " - ТОЛЬКО ЧТЕНИЕ"
-        End If
         LoadCars()
         LoadDiscounts()
         LoadProcedure(My.Computer.Clock.LocalTime.Date)
@@ -3951,5 +3951,9 @@
 
     Private Sub tabSchedule_Enter(sender As Object, e As EventArgs) Handles tabSchedule.Enter
         ServiceMode = 3
+    End Sub
+
+    Private Sub ИзменитьПаролиToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ИзменитьПаролиToolStripMenuItem.Click
+        frmManagePasswords.Show(Me)
     End Sub
 End Class

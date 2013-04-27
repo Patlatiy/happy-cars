@@ -124,3 +124,5 @@ D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmCustomer.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmShowPayments.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmLog.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\PriceCheck.vbprojResolveAssemblyReference.cache
+D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmLogin.resources
+D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmManagePasswords.resources

@@ -391,6 +391,8 @@ Partial Class Form1
         Me.ЗаписьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.МагазинToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПринятыеПлатежиToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПаролиToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ИзменитьПаролиToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -3931,7 +3933,7 @@ Partial Class Form1
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReportsToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReportsToolStripMenuItem, Me.ПаролиToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1193, 24)
@@ -3948,7 +3950,7 @@ Partial Class Form1
         '
         Me.ДневнойОтчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem2, Me.МесячныйОтчётToolStripMenuItem2})
         Me.ДневнойОтчётToolStripMenuItem.Name = "ДневнойОтчётToolStripMenuItem"
-        Me.ДневнойОтчётToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ДневнойОтчётToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ДневнойОтчётToolStripMenuItem.Text = "Мойка"
         '
         'ДневнойОтчётToolStripMenuItem2
@@ -3967,7 +3969,7 @@ Partial Class Form1
         '
         Me.МесячныйОтчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem3, Me.МесячныйОтчётToolStripMenuItem3})
         Me.МесячныйОтчётToolStripMenuItem.Name = "МесячныйОтчётToolStripMenuItem"
-        Me.МесячныйОтчётToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.МесячныйОтчётToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.МесячныйОтчётToolStripMenuItem.Text = "Шиномонтаж"
         '
         'ДневнойОтчётToolStripMenuItem3
@@ -3986,7 +3988,7 @@ Partial Class Form1
         '
         Me.СервисToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem4, Me.МесячныйОтчётToolStripMenuItem4})
         Me.СервисToolStripMenuItem.Name = "СервисToolStripMenuItem"
-        Me.СервисToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.СервисToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.СервисToolStripMenuItem.Text = "Сервис"
         '
         'ДневнойОтчётToolStripMenuItem4
@@ -4005,7 +4007,7 @@ Partial Class Form1
         '
         Me.КассаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem5, Me.МесячныйОтчётToolStripMenuItem5})
         Me.КассаToolStripMenuItem.Name = "КассаToolStripMenuItem"
-        Me.КассаToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.КассаToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.КассаToolStripMenuItem.Text = "Касса"
         '
         'ДневнойОтчётToolStripMenuItem5
@@ -4023,14 +4025,14 @@ Partial Class Form1
         'ЗаписьToolStripMenuItem
         '
         Me.ЗаписьToolStripMenuItem.Name = "ЗаписьToolStripMenuItem"
-        Me.ЗаписьToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ЗаписьToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ЗаписьToolStripMenuItem.Text = "Запись"
         '
         'МагазинToolStripMenuItem
         '
         Me.МагазинToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПринятыеПлатежиToolStripMenuItem})
         Me.МагазинToolStripMenuItem.Name = "МагазинToolStripMenuItem"
-        Me.МагазинToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.МагазинToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.МагазинToolStripMenuItem.Text = "Магазин"
         '
         'ПринятыеПлатежиToolStripMenuItem
@@ -4038,6 +4040,20 @@ Partial Class Form1
         Me.ПринятыеПлатежиToolStripMenuItem.Name = "ПринятыеПлатежиToolStripMenuItem"
         Me.ПринятыеПлатежиToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ПринятыеПлатежиToolStripMenuItem.Text = "Принятые платежи"
+        '
+        'ПаролиToolStripMenuItem
+        '
+        Me.ПаролиToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ИзменитьПаролиToolStripMenuItem})
+        Me.ПаролиToolStripMenuItem.Name = "ПаролиToolStripMenuItem"
+        Me.ПаролиToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.ПаролиToolStripMenuItem.Text = "Пароли"
+        Me.ПаролиToolStripMenuItem.Visible = False
+        '
+        'ИзменитьПаролиToolStripMenuItem
+        '
+        Me.ИзменитьПаролиToolStripMenuItem.Name = "ИзменитьПаролиToolStripMenuItem"
+        Me.ИзменитьПаролиToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.ИзменитьПаролиToolStripMenuItem.Text = "Изменить пароли"
         '
         'Form1
         '
@@ -4524,5 +4540,7 @@ Partial Class Form1
     Friend WithEvents txtDebitSum As System.Windows.Forms.TextBox
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents ПаролиToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ИзменитьПаролиToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

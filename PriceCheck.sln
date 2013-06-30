@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PriceCheck", "PriceCheck\PriceCheck.vbproj", "{7387561A-49A2-418C-A9AC-B1AEF55E748C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{AAFD5245-7081-4056-9876-16BF8ABAB924}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,16 +25,6 @@ Global
 		{7387561A-49A2-418C-A9AC-B1AEF55E748C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{7387561A-49A2-418C-A9AC-B1AEF55E748C}.Release|x86.ActiveCfg = Release|x86
 		{7387561A-49A2-418C-A9AC-B1AEF55E748C}.Release|x86.Build.0 = Release|x86
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{AAFD5245-7081-4056-9876-16BF8ABAB924}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

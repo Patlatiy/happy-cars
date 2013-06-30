@@ -109,7 +109,7 @@
     Dim CurSche As Integer = 1 'Текущая запись
 
     Public daySum As Long 'Дневная сумма
-    Dim LOADING As Boolean = True
+    Public LOADING As Boolean = True 'Первый запуск
     Dim LoadProcedureRunning As Boolean = True
     Dim ClosingNow As Boolean = False
 
@@ -255,7 +255,6 @@
         End If
 
         Label1.Text = CStr(sum) & " р."
-        Log(CStr(ServiceMode))
     End Sub
 
     Private Sub CheckForComplex()
@@ -339,7 +338,7 @@
                 btnNewCustomer.Hide()
                 btnNewOrder.Hide()
                 btnAddPayment.Hide()
-                Me.Text = Me.Text & " - ТОЛЬКО ЧТЕНИЕ"
+                Me.Text = "ТОЛЬКО ЧТЕНИЕ - Весёлые Машинки"
         End Select
         If log Then frmLog.Show()
         Me.Show()
@@ -354,8 +353,8 @@
 
         LoadCars()
         LoadDiscounts()
-        LoadProcedure(My.Computer.Clock.LocalTime.Date)
-        LOADING = False
+        'LoadProcedure(My.Computer.Clock.LocalTime.Date)
+        'LOADING = False
     End Sub
 
     Public Sub LoadWash()

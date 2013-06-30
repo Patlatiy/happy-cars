@@ -7,6 +7,8 @@
 
     Private Sub frmLogin_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         Form1.Show(rights, log)
+        Form1.LoadProcedure(DateTime.Now)
+        Form1.LOADING = False
         Form1.BringToFront()
     End Sub
 
@@ -46,12 +48,14 @@
                 rights = Form1.WriteRights.Bookkeeper
                 Close()
             Case Else
+                txtPass.Text = ""
                 MsgBox("Неверный пароль. Попробуйте ещё раз.", MsgBoxStyle.Critical, "Ошибка!")
         End Select
     End Sub
 
     Private Sub btnEnterReadOnly_Click(sender As Object, e As EventArgs) Handles btnEnterReadOnly.Click
         Form1.Show(Form1.WriteRights.Read_Only, log)
+        Close()
     End Sub
 
     Private Sub frmLogin_Shown(sender As Object, e As EventArgs) Handles Me.Shown

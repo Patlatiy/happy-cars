@@ -183,6 +183,7 @@ Partial Class StateForm
         Me.Label6.Size = New System.Drawing.Size(39, 13)
         Me.Label6.TabIndex = 13
         Me.Label6.Text = "Оклад"
+        Me.Label6.Visible = False
         '
         'nudSalary
         '
@@ -192,6 +193,7 @@ Partial Class StateForm
         Me.nudSalary.Name = "nudSalary"
         Me.nudSalary.Size = New System.Drawing.Size(91, 20)
         Me.nudSalary.TabIndex = 14
+        Me.nudSalary.Visible = False
         '
         'nudNorm
         '
@@ -201,6 +203,7 @@ Partial Class StateForm
         Me.nudNorm.Size = New System.Drawing.Size(34, 20)
         Me.nudNorm.TabIndex = 16
         Me.nudNorm.Value = New Decimal(New Integer() {11, 0, 0, 0})
+        Me.nudNorm.Visible = False
         '
         'Label7
         '
@@ -210,6 +213,7 @@ Partial Class StateForm
         Me.Label7.Size = New System.Drawing.Size(60, 13)
         Me.Label7.TabIndex = 15
         Me.Label7.Text = "Норма ч/д"
+        Me.Label7.Visible = False
         '
         'nudHour
         '
@@ -219,6 +223,7 @@ Partial Class StateForm
         Me.nudHour.Name = "nudHour"
         Me.nudHour.Size = New System.Drawing.Size(64, 20)
         Me.nudHour.TabIndex = 17
+        Me.nudHour.Visible = False
         '
         'Label8
         '
@@ -228,6 +233,7 @@ Partial Class StateForm
         Me.Label8.Size = New System.Drawing.Size(34, 13)
         Me.Label8.TabIndex = 18
         Me.Label8.Text = "В час"
+        Me.Label8.Visible = False
         '
         'FixedSalaryBox
         '
@@ -238,6 +244,7 @@ Partial Class StateForm
         Me.FixedSalaryBox.TabIndex = 19
         Me.FixedSalaryBox.Text = "Фикс. оклад"
         Me.FixedSalaryBox.UseVisualStyleBackColor = True
+        Me.FixedSalaryBox.Visible = False
         '
         'Label9
         '
@@ -247,6 +254,7 @@ Partial Class StateForm
         Me.Label9.Size = New System.Drawing.Size(38, 13)
         Me.Label9.TabIndex = 20
         Me.Label9.Text = "Аванс"
+        Me.Label9.Visible = False
         '
         'nudAdvance
         '
@@ -256,6 +264,7 @@ Partial Class StateForm
         Me.nudAdvance.Name = "nudAdvance"
         Me.nudAdvance.Size = New System.Drawing.Size(61, 20)
         Me.nudAdvance.TabIndex = 21
+        Me.nudAdvance.Visible = False
         '
         'ShapeContainer1
         '
@@ -270,6 +279,7 @@ Partial Class StateForm
         'LineShape1
         '
         Me.LineShape1.Name = "LineShape1"
+        Me.LineShape1.Visible = False
         Me.LineShape1.X1 = 217
         Me.LineShape1.X2 = 484
         Me.LineShape1.Y1 = 205
@@ -283,6 +293,7 @@ Partial Class StateForm
         Me.nudBonus.Name = "nudBonus"
         Me.nudBonus.Size = New System.Drawing.Size(61, 20)
         Me.nudBonus.TabIndex = 24
+        Me.nudBonus.Visible = False
         '
         'Label10
         '
@@ -292,6 +303,7 @@ Partial Class StateForm
         Me.Label10.Size = New System.Drawing.Size(47, 13)
         Me.Label10.TabIndex = 23
         Me.Label10.Text = "Премия"
+        Me.Label10.Visible = False
         '
         'nudOP
         '
@@ -301,6 +313,7 @@ Partial Class StateForm
         Me.nudOP.Name = "nudOP"
         Me.nudOP.Size = New System.Drawing.Size(61, 20)
         Me.nudOP.TabIndex = 28
+        Me.nudOP.Visible = False
         '
         'Label11
         '
@@ -310,6 +323,7 @@ Partial Class StateForm
         Me.Label11.Size = New System.Drawing.Size(92, 13)
         Me.Label11.TabIndex = 27
         Me.Label11.Text = "Прочие выплаты"
+        Me.Label11.Visible = False
         '
         'nudOC
         '
@@ -319,6 +333,7 @@ Partial Class StateForm
         Me.nudOC.Name = "nudOC"
         Me.nudOC.Size = New System.Drawing.Size(61, 20)
         Me.nudOC.TabIndex = 26
+        Me.nudOC.Visible = False
         '
         'Label12
         '
@@ -328,19 +343,21 @@ Partial Class StateForm
         Me.Label12.Size = New System.Drawing.Size(102, 13)
         Me.Label12.TabIndex = 25
         Me.Label12.Text = "Прочие удержания"
+        Me.Label12.Visible = False
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(410, 325)
+        Me.Button3.Location = New System.Drawing.Point(332, 325)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 29
         Me.Button3.Text = "Применить"
         Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.Visible = False
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(329, 325)
+        Me.Button4.Location = New System.Drawing.Point(413, 325)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 23)
         Me.Button4.TabIndex = 30

@@ -57,7 +57,7 @@
                 Dim w As Worker = Worker.FindByID(SI.tag)
                 w.Set2Name(txt2Name.Text)
                 SI.Text = w.FullName
-                Form1.dTable.Item(1, Form1.FindRowByID(SI.tag)).Value = SI.text
+                'Form1.dTable.Item(1, Form1.FindRowByID(SI.tag)).Value = SI.text
             Next
         End If
     End Sub
@@ -68,7 +68,7 @@
                 Dim w As Worker = Worker.FindByID(SI.tag)
                 w.SetPatron(txtPatron.Text)
                 SI.Text = w.FullName
-                Form1.dTable.Item(1, Form1.FindRowByID(SI.tag)).Value = SI.text
+                'Form1.dTable.Item(1, Form1.FindRowByID(SI.tag)).Value = SI.text
             Next
         End If
     End Sub
@@ -78,7 +78,7 @@
             For Each SI In StateList.SelectedItems
                 Dim w As Worker = Worker.FindByID(SI.tag)
                 w.SetJob(txtJob.Text)
-                Form1.dTable.Item(2, Form1.FindRowByID(SI.tag)).Value = txtJob.Text
+                'Form1.dTable.Item(2, Form1.FindRowByID(SI.tag)).Value = txtJob.Text
             Next
         End If
     End Sub
@@ -89,11 +89,11 @@
                 Dim w As Worker = Worker.FindByID(SI.tag)
                 w.SetWorkshop(ComboWorkshop.SelectedIndex)
                 SI.Group = StateList.Groups(w.GetWorkshopInt)
-                If Form1.ComboWorkshops.SelectedIndex = ComboWorkshop.SelectedIndex Then
-                    Form1.dTable.Rows(Form1.FindRowByID(SI.tag)).Visible = True
-                Else
-                    Form1.dTable.Rows(Form1.FindRowByID(SI.tag)).Visible = False
-                End If
+                'If Form1.ComboWorkshops.SelectedIndex = ComboWorkshop.SelectedIndex Then
+                '    Form1.dTable.Rows(Form1.FindRowByID(SI.tag)).Visible = True
+                'Else
+                '    Form1.dTable.Rows(Form1.FindRowByID(SI.tag)).Visible = False
+                'End If
             Next
         End If
     End Sub
@@ -103,12 +103,12 @@
         StateList.Items.Add(w.FullName)
         StateList.Items.Item(StateList.Items.Count - 1).Group = StateList.Groups(w.GetWorkshopInt)
         StateList.Items.Item(StateList.Items.Count - 1).Tag = w.GetID
-        Form1.dTable.Rows.Add(CStr(w.GetID), w.FullName)
-        If Form1.ComboWorkshops.SelectedIndex <> 0 Then Form1.dTable.Rows(Form1.dTable.RowCount - 1).Visible = False
-        For Each cell In Form1.dTable.Rows(Form1.dTable.RowCount - 1).Cells
-            cell.style.backcolor = Form1.DefaultBackColor
-            cell.style.forecolor = Form1.DefaultForeColor
-        Next
+        'Form1.dTable.Rows.Add(CStr(w.GetID), w.FullName)
+        'If Form1.ComboWorkshops.SelectedIndex <> 0 Then Form1.dTable.Rows(Form1.dTable.RowCount - 1).Visible = False
+        'For Each cell In Form1.dTable.Rows(Form1.dTable.RowCount - 1).Cells
+        '    cell.style.backcolor = Form1.DefaultBackColor
+        '    cell.style.forecolor = Form1.DefaultForeColor
+        'Next
         StateList.Items.Item(StateList.Items.Count - 1).Selected = True
     End Sub
 

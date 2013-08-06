@@ -178,6 +178,7 @@ Partial Class Form1
         Me.btnDebt3 = New System.Windows.Forms.Button()
         Me.OweBox3 = New System.Windows.Forms.CheckBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.Button15 = New System.Windows.Forms.Button()
         Me.btnAddExecutor = New System.Windows.Forms.Button()
         Me.listExecutors = New System.Windows.Forms.ListBox()
         Me.comboExecutor = New System.Windows.Forms.ComboBox()
@@ -285,7 +286,6 @@ Partial Class Form1
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.nudHoursToAdd = New System.Windows.Forms.NumericUpDown()
-        Me.Button15 = New System.Windows.Forms.Button()
         Me.ColorCommitButton = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
         Me.ColorPanel = New System.Windows.Forms.Panel()
@@ -1218,7 +1218,7 @@ Partial Class Form1
         '
         Me.btnDebt1.Location = New System.Drawing.Point(455, 91)
         Me.btnDebt1.Name = "btnDebt1"
-        Me.btnDebt1.Size = New System.Drawing.Size(75, 23)
+        Me.btnDebt1.Size = New System.Drawing.Size(82, 23)
         Me.btnDebt1.TabIndex = 21
         Me.btnDebt1.Text = "Долги..."
         Me.btnDebt1.UseVisualStyleBackColor = True
@@ -1332,7 +1332,7 @@ Partial Class Form1
         '
         Me.btnDebt2.Location = New System.Drawing.Point(462, 68)
         Me.btnDebt2.Name = "btnDebt2"
-        Me.btnDebt2.Size = New System.Drawing.Size(75, 23)
+        Me.btnDebt2.Size = New System.Drawing.Size(82, 23)
         Me.btnDebt2.TabIndex = 22
         Me.btnDebt2.Text = "Долги..."
         Me.btnDebt2.UseVisualStyleBackColor = True
@@ -1993,6 +1993,7 @@ Partial Class Form1
         'tabService
         '
         Me.tabService.BackColor = System.Drawing.SystemColors.Control
+        Me.tabService.Controls.Add(Me.Button15)
         Me.tabService.Controls.Add(Me.Button7)
         Me.tabService.Controls.Add(Me.btnDebt3)
         Me.tabService.Controls.Add(Me.OweBox3)
@@ -2018,7 +2019,7 @@ Partial Class Form1
         '
         Me.btnDebt3.Location = New System.Drawing.Point(286, 75)
         Me.btnDebt3.Name = "btnDebt3"
-        Me.btnDebt3.Size = New System.Drawing.Size(75, 23)
+        Me.btnDebt3.Size = New System.Drawing.Size(83, 23)
         Me.btnDebt3.TabIndex = 24
         Me.btnDebt3.Text = "Долги..."
         Me.btnDebt3.UseVisualStyleBackColor = True
@@ -2057,6 +2058,15 @@ Partial Class Form1
         Me.GroupBox6.Size = New System.Drawing.Size(282, 476)
         Me.GroupBox6.TabIndex = 22
         Me.GroupBox6.TabStop = False
+        '
+        'Button15
+        '
+        Me.Button15.Location = New System.Drawing.Point(286, 102)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(83, 23)
+        Me.Button15.TabIndex = 110
+        Me.Button15.Text = "Сотрудники..."
+        Me.Button15.UseVisualStyleBackColor = True
         '
         'btnAddExecutor
         '
@@ -3025,7 +3035,6 @@ Partial Class Form1
         Me.tabTable.Controls.Add(Me.Label21)
         Me.tabTable.Controls.Add(Me.Button19)
         Me.tabTable.Controls.Add(Me.nudHoursToAdd)
-        Me.tabTable.Controls.Add(Me.Button15)
         Me.tabTable.Controls.Add(Me.ColorCommitButton)
         Me.tabTable.Controls.Add(Me.Button14)
         Me.tabTable.Controls.Add(Me.ColorPanel)
@@ -3068,16 +3077,6 @@ Partial Class Form1
         Me.nudHoursToAdd.TabIndex = 110
         Me.nudHoursToAdd.Value = New Decimal(New Integer() {11, 0, 0, 0})
         Me.nudHoursToAdd.Visible = False
-        '
-        'Button15
-        '
-        Me.Button15.Location = New System.Drawing.Point(183, 3)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(87, 21)
-        Me.Button15.TabIndex = 109
-        Me.Button15.Text = "Сотрудники..."
-        Me.Button15.UseVisualStyleBackColor = True
-        Me.Button15.Visible = False
         '
         'ColorCommitButton
         '
@@ -3950,7 +3949,7 @@ Partial Class Form1
         '
         Me.ДневнойОтчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem2, Me.МесячныйОтчётToolStripMenuItem2})
         Me.ДневнойОтчётToolStripMenuItem.Name = "ДневнойОтчётToolStripMenuItem"
-        Me.ДневнойОтчётToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ДневнойОтчётToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.ДневнойОтчётToolStripMenuItem.Text = "Мойка"
         '
         'ДневнойОтчётToolStripMenuItem2
@@ -3969,7 +3968,7 @@ Partial Class Form1
         '
         Me.МесячныйОтчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem3, Me.МесячныйОтчётToolStripMenuItem3})
         Me.МесячныйОтчётToolStripMenuItem.Name = "МесячныйОтчётToolStripMenuItem"
-        Me.МесячныйОтчётToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.МесячныйОтчётToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.МесячныйОтчётToolStripMenuItem.Text = "Шиномонтаж"
         '
         'ДневнойОтчётToolStripMenuItem3
@@ -3988,7 +3987,7 @@ Partial Class Form1
         '
         Me.СервисToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem4, Me.МесячныйОтчётToolStripMenuItem4})
         Me.СервисToolStripMenuItem.Name = "СервисToolStripMenuItem"
-        Me.СервисToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.СервисToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.СервисToolStripMenuItem.Text = "Сервис"
         '
         'ДневнойОтчётToolStripMenuItem4
@@ -4007,7 +4006,7 @@ Partial Class Form1
         '
         Me.КассаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ДневнойОтчётToolStripMenuItem5, Me.МесячныйОтчётToolStripMenuItem5})
         Me.КассаToolStripMenuItem.Name = "КассаToolStripMenuItem"
-        Me.КассаToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.КассаToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.КассаToolStripMenuItem.Text = "Касса"
         '
         'ДневнойОтчётToolStripMenuItem5
@@ -4025,14 +4024,14 @@ Partial Class Form1
         'ЗаписьToolStripMenuItem
         '
         Me.ЗаписьToolStripMenuItem.Name = "ЗаписьToolStripMenuItem"
-        Me.ЗаписьToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ЗаписьToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.ЗаписьToolStripMenuItem.Text = "Запись"
         '
         'МагазинToolStripMenuItem
         '
         Me.МагазинToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПринятыеПлатежиToolStripMenuItem})
         Me.МагазинToolStripMenuItem.Name = "МагазинToolStripMenuItem"
-        Me.МагазинToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.МагазинToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.МагазинToolStripMenuItem.Text = "Магазин"
         '
         'ПринятыеПлатежиToolStripMenuItem
@@ -4401,7 +4400,6 @@ Partial Class Form1
     Friend WithEvents ColorPanel As System.Windows.Forms.Panel
     Friend WithEvents ColorDialog1 As System.Windows.Forms.ColorDialog
     Friend WithEvents ColorCommitButton As System.Windows.Forms.Button
-    Friend WithEvents Button15 As System.Windows.Forms.Button
     Friend WithEvents tabZP As System.Windows.Forms.TabPage
     Friend WithEvents dSalary As System.Windows.Forms.DataGridView
     Friend WithEvents zpWorkshops As System.Windows.Forms.ComboBox
@@ -4542,5 +4540,6 @@ Partial Class Form1
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents ПаролиToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ИзменитьПаролиToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Button15 As System.Windows.Forms.Button
 
 End Class

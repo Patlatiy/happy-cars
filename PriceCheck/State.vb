@@ -52,7 +52,7 @@
     End Sub
 
     Public Function FullName() As String
-        Return Me.Get2Name & " " & Me.GetName & " " & Me.GetPatron
+        Return (Me.Get2Name & " " & Me.GetName & " " & Me.GetPatron).Trim()
     End Function
 
     Public Function GetName() As String

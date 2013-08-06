@@ -2,7 +2,8 @@
     Dim EDIT_MODE As Boolean = True
 
     Private Sub StateForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        Form1.SaveAll()
+        'Form1.SaveAll()
+        Form1.LoadState()
     End Sub
 
     Private Sub StateForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load

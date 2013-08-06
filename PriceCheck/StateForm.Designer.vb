@@ -88,14 +88,14 @@ Partial Class StateForm
         Me.txtName.Location = New System.Drawing.Point(283, 45)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(198, 20)
-        Me.txtName.TabIndex = 2
+        Me.txtName.TabIndex = 20
         '
         'txt2Name
         '
         Me.txt2Name.Location = New System.Drawing.Point(283, 19)
         Me.txt2Name.Name = "txt2Name"
         Me.txt2Name.Size = New System.Drawing.Size(198, 20)
-        Me.txt2Name.TabIndex = 4
+        Me.txt2Name.TabIndex = 10
         '
         'Label2
         '
@@ -111,7 +111,7 @@ Partial Class StateForm
         Me.txtPatron.Location = New System.Drawing.Point(283, 71)
         Me.txtPatron.Name = "txtPatron"
         Me.txtPatron.Size = New System.Drawing.Size(198, 20)
-        Me.txtPatron.TabIndex = 6
+        Me.txtPatron.TabIndex = 30
         '
         'Label3
         '
@@ -127,7 +127,7 @@ Partial Class StateForm
         Me.txtJob.Location = New System.Drawing.Point(283, 97)
         Me.txtJob.Name = "txtJob"
         Me.txtJob.Size = New System.Drawing.Size(198, 20)
-        Me.txtJob.TabIndex = 8
+        Me.txtJob.TabIndex = 40
         '
         'Label4
         '
@@ -155,14 +155,14 @@ Partial Class StateForm
         Me.ComboWorkshop.Location = New System.Drawing.Point(283, 123)
         Me.ComboWorkshop.Name = "ComboWorkshop"
         Me.ComboWorkshop.Size = New System.Drawing.Size(198, 21)
-        Me.ComboWorkshop.TabIndex = 10
+        Me.ComboWorkshop.TabIndex = 50
         '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(12, 325)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(91, 23)
-        Me.Button1.TabIndex = 11
+        Me.Button1.TabIndex = 91
         Me.Button1.Text = "Добавить"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -171,7 +171,7 @@ Partial Class StateForm
         Me.Button2.Location = New System.Drawing.Point(109, 325)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(98, 23)
-        Me.Button2.TabIndex = 12
+        Me.Button2.TabIndex = 92
         Me.Button2.Text = "Удалить"
         Me.Button2.UseVisualStyleBackColor = True
         '
@@ -350,7 +350,7 @@ Partial Class StateForm
         Me.Button3.Location = New System.Drawing.Point(332, 325)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 29
+        Me.Button3.TabIndex = 99
         Me.Button3.Text = "Применить"
         Me.Button3.UseVisualStyleBackColor = True
         Me.Button3.Visible = False
@@ -360,7 +360,7 @@ Partial Class StateForm
         Me.Button4.Location = New System.Drawing.Point(413, 325)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 30
+        Me.Button4.TabIndex = 100
         Me.Button4.Text = "ОК"
         Me.Button4.UseVisualStyleBackColor = True
         '

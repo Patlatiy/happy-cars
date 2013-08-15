@@ -301,6 +301,7 @@
                 Button5.Hide()
                 Button6.Hide()
                 Button7.Hide()
+                Button15.Hide()
                 AddCashButton.Hide()
                 OweBox.Hide()
                 OweBox2.Hide()

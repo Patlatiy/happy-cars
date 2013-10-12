@@ -119,6 +119,34 @@
     Dim HiddenPages As New List(Of TabPage)
     Dim curProv As HCProvider
 
+    Shared LoadingWash As Boolean = False
+    Shared LoadingMount As Boolean = False
+    Shared LoadingService As Boolean = False
+    Shared LoadingCash As Boolean = False
+    Shared LoadingSchedule As Boolean = False
+    Shared LoadingTable As Boolean = False
+    Shared LoadingAdvance As Boolean = False
+    Shared LoadingDebts As Boolean = False
+    Shared LoadingCustomers As Boolean = False
+    Shared LoadingOrders As Boolean = False
+    Shared LoadingExecutors As Boolean = False
+    Shared LoadingPayments As Boolean = False
+    Shared LoadingProviders As Boolean = False
+
+    Shared SavingWash As Boolean = False
+    Shared SavingMount As Boolean = False
+    Shared SavingService As Boolean = False
+    Shared SavingCash As Boolean = False
+    Shared SavingSchedule As Boolean = False
+    Shared SavingTable As Boolean = False
+    Shared SavingAdvance As Boolean = False
+    Shared SavingDebts As Boolean = False
+    Shared SavingCustomers As Boolean = False
+    Shared SavingOrders As Boolean = False
+    Shared SavingExecutors As Boolean = False
+    Shared SavingPayments As Boolean = False
+    Shared SavingProviders As Boolean = False
+
     Public Enum WriteRights
         Read_Only = 0
         Master = 1
@@ -359,6 +387,11 @@
     End Sub
 
     Public Sub LoadWash()
+        If LoadingWash Or SavingWash Then
+            Exit Sub
+        Else
+            LoadingWash = True
+        End If
         Try
             Log("Loading wash")
             dayCC = 1 'Устанавлиаем номер последней машины
@@ -399,9 +432,15 @@
             End If
         Catch ex As Exception
         End Try
+        LoadingWash = False
     End Sub
 
     Public Sub LoadMount()
+        If LoadingMount Or SavingMount Then
+            Exit Sub
+        Else
+            LoadingMount = True
+        End If
         Try
             Log("Loading mount")
             DayCCMount = 1 'Устанавлиаем номер последней машины на шиномонтаже
@@ -423,9 +462,15 @@
             End If
         Catch ex As Exception
         End Try
+        LoadingMount = False
     End Sub
 
     Public Sub LoadService()
+        If LoadingService Or SavingService Then
+            Exit Sub
+        Else
+            LoadingService = True
+        End If
         Try
             Log("Loading service")
             DayCCService = 1 'Устанавливаем ... ну вы поняли
@@ -455,9 +500,15 @@
             End If
         Catch ex As Exception
         End Try
+        LoadingService = False
     End Sub
 
     Public Sub LoadCash()
+        If LoadingCash Or SavingCash Then
+            Exit Sub
+        Else
+            LoadingCash = True
+        End If
         Try
             Log("Loading cash")
             dCash.Rows.Clear() 'Очищаем кассовуюю книгу
@@ -489,6 +540,7 @@
             End If
         Catch ex As Exception
         End Try
+        LoadingCash = False
     End Sub
 
     Public Sub LoadTable()
@@ -562,6 +614,11 @@
     End Sub
 
     Public Sub LoadSchedule(Optional RefreshHash As Boolean = False)
+        If LoadingSchedule Or SavingSchedule Then
+            Exit Sub
+        Else
+            LoadingSchedule = True
+        End If
         Try
             Log("Loading schedule")
             sc1Path = Application.StartupPath & "\data\" & CStr(curDate.Year) & "\" & CStr(curDate.Month) & "\" & CStr(curDate.Day) & CStr(CurSche) & "sc.ini"
@@ -619,9 +676,15 @@
             End If
         Catch ex As Exception
         End Try
+        LoadingSchedule = False
     End Sub
 
     Public Sub LoadAdvance()
+        If LoadingAdvance Or SavingAdvance Then
+            Exit Sub
+        Else
+            LoadingAdvance = True
+        End If
         Try
             Log("Loading advance")
             Dim CurRow As String()
@@ -666,9 +729,15 @@
             End If
         Catch ex As Exception
         End Try
+        LoadingAdvance = False
     End Sub
 
     Public Sub LoadDebts()
+        If LoadingDebts Or SavingDebts Then
+            Exit Sub
+        Else
+            LoadingDebts = True
+        End If
         Try
             Log("Loading debts")
             Dim CurRow As String()
@@ -689,9 +758,11 @@
             End If
         Catch ex As Exception
         End Try
+        LoadingDebts = False
     End Sub
 
     Public Sub LoadState()
+        'MUCHO IMPORTANTE: INSTERTO SAVING/LOADING CHECK HERE
         Try
             Log("Loading state")
             Worker.Clear()
@@ -728,6 +799,11 @@
     End Sub
 
     Sub LoadCustomers()
+        If LoadingCustomers Or SavingCustomers Then
+            Exit Sub
+        Else
+            LoadingCustomers = True
+        End If
         Dim curRow As String()
         Try
             Log("Loading customers")
@@ -773,9 +849,15 @@
             If TabControl1.SelectedTab Is tabCustomersOrders Then RefreshCustomersAndOrders()
         Catch ex As Exception
         End Try
+        LoadingCustomers = False
     End Sub
 
     Sub LoadExecutors()
+        If LoadingExecutors Or SavingExecutors Then
+            Exit Sub
+        Else
+            LoadingExecutors = True
+        End If
         Try
             Log("Loading executors")
             HCExecutor.KillAll()
@@ -790,6 +872,7 @@
             End Using
         Catch ex As Exception
         End Try
+        LoadingExecutors = False
     End Sub
 
     Sub LoadUnits()
@@ -810,6 +893,11 @@
     End Sub
 
     Sub LoadProviders()
+        If LoadingProviders Or SavingProviders Then
+            Exit Sub
+        Else
+            LoadingProviders = True
+        End If
         Try
             Log("Loading providers")
             HCProvider.ProviderList.Clear()
@@ -828,6 +916,7 @@
         Catch ex As Exception
             'MsgBox(ex.Message)
         End Try
+        LoadingProviders = False
     End Sub
 
     Private Sub RefreshProviderFilter()
@@ -842,9 +931,10 @@
     End Sub
 
     Public Sub LoadPayments()
-        If SavingPayments Then
-            Log("Saving payments now! Could not load payments")
+        If LoadingPayments Or SavingPayments Then
             Exit Sub
+        Else
+            LoadingPayments = True
         End If
         Try
             Log("Loading payments")
@@ -865,6 +955,7 @@
         Catch ex As Exception
             'MsgBox(ex.Message)
         End Try
+        LoadingPayments = False
     End Sub
 
     ''' <summary>
@@ -1709,6 +1800,11 @@
 
     Public Sub SaveWash()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingWash Or SavingWash Then
+            Exit Sub
+        Else
+            SavingWash = True
+        End If
         Log("Saving wash...")
         RecountRows()
         Dim tmpSTR As String = ""
@@ -1724,14 +1820,20 @@
             tmpSTR = tmpSTR & dataDay.Item(7, i).Value & vbNewLine
         Next
         My.Computer.FileSystem.WriteAllText(fPath, tmpSTR, False)
-        Application.DoEvents()
+        'Application.DoEvents()
         Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
             WashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingWash = False
     End Sub
 
     Public Sub SaveMount()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingMount Or SavingMount Then
+            Exit Sub
+        Else
+            SavingMount = True
+        End If
         Log("Saving mount...")
         RecountRows()
         Dim tmpSTR As String = ""
@@ -1750,10 +1852,16 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(fmPath)
             MountHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingMount = False
     End Sub
 
     Public Sub SaveService()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingService Or SavingService Then
+            Exit Sub
+        Else
+            SavingService = True
+        End If
         Log("Saving service...")
         RecountRows()
         Dim tmpSTR As String = ""
@@ -1769,10 +1877,16 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(sPath)
             ServiceHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingService = False
     End Sub
 
     Public Sub SaveCash()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingCash Or SavingCash Then
+            Exit Sub
+        Else
+            SavingCash = True
+        End If
         Log("Saving cash...")
         Dim tmpSTR As String = CStr(curID) & vbNewLine
         For i = 0 To dCash.RowCount - 2
@@ -1789,12 +1903,16 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(cPath)
             CashHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingCash = False
     End Sub
 
-    Dim SavingPayments As Boolean = False
     Public Sub SavePayments()
-        SavingPayments = True
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingPayments Or SavingPayments Then
+            Exit Sub
+        Else
+            SavingPayments = True
+        End If
         Log("Saving payments...")
         Dim tmpSTR As String = ""
         For i = 0 To dgvPayments.RowCount - 1
@@ -1810,9 +1928,13 @@
         SavingPayments = False
     End Sub
 
-    Dim ScheduleSaving As Boolean = False
     Public Sub SaveSchedule()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingSchedule Or SavingSchedule Then
+            Exit Sub
+        Else
+            SavingSchedule = True
+        End If
         Log("Saving schedule...")
         Dim tmpSTR As String = ""
         For i = 0 To dSchedule1.RowCount - 1
@@ -1832,9 +1954,9 @@
             tmpSTR = tmpSTR & vbNewLine
         Next i
         My.Computer.FileSystem.WriteAllText(sc2Path, tmpSTR, False)
-
-        ScheduleTimer.Start()
-        ScheduleSaving = True
+        SavingSchedule = False
+        'ScheduleTimer.Start()
+        'ScheduleSaving = True
     End Sub
 
     Public Sub SaveTable()
@@ -1858,6 +1980,11 @@
 
     Public Sub SaveAdvance()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingAdvance Or SavingAdvance Then
+            Exit Sub
+        Else
+            SavingAdvance = True
+        End If
         Log("Saving advance...")
         Dim tmpSTR As String = "[Advance]" & vbNewLine
         For Each w In Worker.AllOfThem
@@ -1888,10 +2015,16 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Advance.ini")
             AdvanceHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingAdvance = False
     End Sub
 
     Public Sub SaveDebts()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingDebts Or SavingDebts Then
+            Exit Sub
+        Else
+            SavingDebts = True
+        End If
         Log("Saving debts")
         Dim ReduceFor As Integer = 0
         Dim tmpSTR As String = CStr(NextDebtID) & vbNewLine
@@ -1912,10 +2045,12 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Debts.ini")
             DebtsHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingDebts = False
     End Sub
 
     Public Sub SaveState()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        'IMPORTATNTE: INSERT SAVE/LOAD CHECK HERE
         Log("Saving state...")
         Dim tmpSTR As String = CStr(Worker.nextID) & vbNewLine
         For i = 0 To 2
@@ -1942,6 +2077,11 @@
 
     Sub SaveCustomers()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingCustomers Or SavingCustomers Then
+            Exit Sub
+        Else
+            SavingCustomers = True
+        End If
         SaveExecutors()
         Log("Saving customers...")
         Dim TextToWrite As String = CStr(HCCustomer.GlobalID) & vbNewLine
@@ -1986,10 +2126,16 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Orders.ini")
             OrdersHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingCustomers = False
     End Sub
 
     Sub SaveExecutors()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingExecutors Or SavingExecutors Then
+            Exit Sub
+        Else
+            SavingExecutors = True
+        End If
         Log("Saving executors...")
         Dim ttw As String = ""
         For Each exec As HCExecutor In HCExecutor.ExecList
@@ -2003,10 +2149,16 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Executors.ini")
             ExecutorsHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingExecutors = False
     End Sub
 
     Sub SaveProviders()
         If WriteRight = WriteRights.Read_Only Or LoadProcedureRunning Then Exit Sub
+        If LoadingProviders Or SavingProviders Then
+            Exit Sub
+        Else
+            SavingProviders = True
+        End If
         Log("Saving providers...")
         Dim ttw As String = HCProvider.GlobalID.ToString & vbNewLine
         For Each prov In HCProvider.ProviderList
@@ -2017,6 +2169,7 @@
         Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Providers.ini")
             ProvHashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
         End Using
+        SavingProviders = False
     End Sub
 
     Private Sub txtNumber_Enter(sender As Object, e As System.EventArgs) Handles txtNumber.Enter
@@ -3335,6 +3488,7 @@
         Appendix = Appendix.Remove(Appendix.Length - 4, 4)
         Select Case Appendix
             Case CDD, CDD & "N"
+                If SavingWash Or LoadingWash Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3344,6 +3498,7 @@
                 Me.Invoke(Sub() LoadWash())
                 Me.Invoke(Sub() Commit())
             Case CDD & "m"
+                If SavingMount Or LoadingMount Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(fmPath)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3353,6 +3508,7 @@
                 Me.Invoke(Sub() LoadMount())
                 Me.Invoke(Sub() Commit())
             Case CDD & "s"
+                If SavingService Or LoadingService Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(sPath)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3362,6 +3518,7 @@
                 Me.Invoke(Sub() LoadService())
                 Me.Invoke(Sub() Commit())
             Case CDD & "c"
+                If SavingCash Or LoadingCash Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(cPath)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3371,7 +3528,7 @@
                 Me.Invoke(Sub() LoadCash())
                 Me.Invoke(Sub() Commit())
             Case CDD & CStr(CurSche) & "sc"
-                If ScheduleSaving Then Exit Select
+                If SavingSchedule Or LoadingSchedule Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(sc1Path)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3380,7 +3537,7 @@
                 sc1HashCode = HashCode
                 Me.Invoke(Sub() LoadSchedule())
             Case NDD & CStr(CurSche) & "sc"
-                If ScheduleSaving Then Exit Select
+                If SavingSchedule Or LoadingSchedule Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(sc2Path)
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3397,6 +3554,7 @@
                 TableHashCode = HashCode
                 Me.Invoke(Sub() LoadTable())
             Case "Advance"
+                If SavingAdvance Or LoadingAdvance Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Advance.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3405,6 +3563,7 @@
                 AdvanceHashCode = HashCode
                 Me.Invoke(Sub() LoadAdvance())
             Case "Debts"
+                If SavingDebts Or LoadingDebts Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(dPath & "\Debts.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3441,6 +3600,7 @@
                 If fQuit Then Exit Sub 'if nothing really changed - there is no need to reload, so exit sub
                 Me.Invoke(Sub() LoadCustomers())
             Case "Payments"
+                If SavingPayments Or LoadingPayments Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\" & CStr(curDate.Year) & "\Payments.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3449,6 +3609,7 @@
                 PaymentsHashCode = HashCode
                 Me.Invoke(Sub() LoadPayments())
             Case "Providers"
+                If SavingProviders Or LoadingProviders Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Providers.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3457,6 +3618,7 @@
                 ProvHashCode = HashCode
                 Me.Invoke(Sub() LoadProviders())
             Case "Executors"
+                If SavingExecutors Or LoadingExecutors Then Exit Select
                 Dim HashCode As Byte()
                 Using stream As System.IO.Stream = System.IO.File.OpenRead(Application.StartupPath & "\data\Executors.ini")
                     HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
@@ -3482,17 +3644,17 @@
     End Sub
 
     Private Sub ScheduleTimer_Tick(sender As Object, e As EventArgs) Handles ScheduleTimer.Tick
-        On Error Resume Next
-        ScheduleTimer.Stop()
-        sc1HashCode = Nothing
-        Using stream As System.IO.Stream = System.IO.File.OpenRead(sc1Path)
-            sc1HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
-        End Using
-        sc2HashCode = Nothing
-        Using stream As System.IO.Stream = System.IO.File.OpenRead(sc2Path)
-            sc2HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
-        End Using
-        ScheduleSaving = False
+        '    On Error Resume Next
+        '    ScheduleTimer.Stop()
+        '    sc1HashCode = Nothing
+        '    Using stream As System.IO.Stream = System.IO.File.OpenRead(sc1Path)
+        '        sc1HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        '    End Using
+        '    sc2HashCode = Nothing
+        '    Using stream As System.IO.Stream = System.IO.File.OpenRead(sc2Path)
+        '        sc2HashCode = System.Security.Cryptography.MD5.Create.ComputeHash(stream)
+        '    End Using
+        '    ScheduleSaving = False
     End Sub
 
     Private Sub btnAddExecutor_Click(sender As Object, e As EventArgs) Handles btnAddExecutor.Click

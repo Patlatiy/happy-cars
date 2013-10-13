@@ -19,7 +19,7 @@
     End Sub
 
     Private Sub AdvanceForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Label1.Text = "Аванс за " & Form2.NumberToMonth(Form1.curDate.Month)
+        Label1.Text = "Аванс за " & frmReport.NumberToMonth(Form1.curDate.Month)
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged

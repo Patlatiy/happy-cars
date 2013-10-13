@@ -1,4 +1,4 @@
-﻿Public Class Form2
+﻿Public Class frmReport
     Dim currentDate As Date
     Dim fpath As String
     Dim dummieString As String
@@ -31,8 +31,10 @@
                                 baseFile.SetDelimiters("|")
                                 While Not baseFile.EndOfData
                                     CurRow = baseFile.ReadFields
-                                    If CurRow.Length > 1 Then sum = sum + CLng(CurRow(6))
-                                    cnt = cnt + 1
+                                    If CurRow.Length > 1 Then
+                                        sum = sum + CLng(CurRow(6))
+                                        cnt += 1
+                                    End If
                                 End While
                             End Using
                         End If
@@ -54,7 +56,7 @@
                                 While Not baseFile.EndOfData
                                     CurRow = baseFile.ReadFields
                                     sum = sum + CLng(CurRow(6))
-                                    cnt = cnt + 1
+                                    cnt += 1
                                 End While
                             End Using
                         End If

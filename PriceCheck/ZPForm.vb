@@ -14,7 +14,7 @@
     End Sub
 
     Private Sub ZPForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Label1.Text = "Рассчетная ведомость за " & Form2.NumberToMonth(Form1.curDate.Month)
+        Label1.Text = "Рассчетная ведомость за " & frmReport.NumberToMonth(Form1.curDate.Month)
         Dim cnt As Integer = 1
         Select Case Form1.zpWorkshops.SelectedIndex
             Case 0

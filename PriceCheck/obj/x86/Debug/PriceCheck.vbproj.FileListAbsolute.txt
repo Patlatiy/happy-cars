@@ -105,7 +105,6 @@ D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\Happy Cars.pdb
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.CashLeaf.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.DebtForm.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.Form1.resources
-D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.Form2.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.AdvanceForm.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.StateForm.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.Resources.resources
@@ -126,3 +125,4 @@ D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmLog.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\PriceCheck.vbprojResolveAssemblyReference.cache
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmLogin.resources
 D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmManagePasswords.resources
+D:\Repos\happy-cars\PriceCheck\obj\x86\Debug\HappyCars.frmReport.resources

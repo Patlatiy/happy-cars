@@ -1081,7 +1081,7 @@
         Dim strMountTotal As String = CStr(CountAverage(1, Date.DaysInMonth(curDate.Year, curDate.Month), dPath, "m.ini", 6, True))
         Dim strServiceTotal As String = CStr(CountAverage(1, Date.DaysInMonth(curDate.Year, curDate.Month), dPath, "s.ini", 7, True))
         Dim strTotal As String = CStr(CInt(strWashDayTotal) + CInt(strWashNightTotal) + CInt(strMountTotal) + CInt(strServiceTotal))
-        Label19.Text = Form2.NumberToMonth(curDate.Month) & ": Дневная выручка по мойке: " & strWashDayTotal & " Ночная выручка по мойке: " & strWashNightTotal & " Выручка по шиномонтажу: " & strMountTotal & " Выручка по сервису: " & strServiceTotal & " Общая выручка: " & strTotal
+        Label19.Text = frmReport.NumberToMonth(curDate.Month) & ": Дневная выручка по мойке: " & strWashDayTotal & " Ночная выручка по мойке: " & strWashNightTotal & " Выручка по шиномонтажу: " & strMountTotal & " Выручка по сервису: " & strServiceTotal & " Общая выручка: " & strTotal
         'Заполнение хэш-кодов
         If My.Computer.FileSystem.FileExists(fPath) Then
             Using stream As System.IO.Stream = System.IO.File.OpenRead(fPath)
@@ -2733,8 +2733,8 @@
             AddCash("xxx", "День закрыт", curDate.ToString("dd.MM.yyyy"), FormattedTime, CStr(Income) & " р.", CStr(Outcome) & " р.", "В кассе: " & CStr(cSum))
         End If
         SaveCash()
-        Form2.LoadCash()
-        Form2.Show()
+        frmReport.LoadCash()
+        frmReport.Show()
     End Sub
 
     Private Sub OB2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles OweBox2.CheckedChanged
@@ -3156,7 +3156,7 @@
             comboDayTo.Items.Add(CStr(i))
         Next
         comboDayFrom.SelectedIndex = 0
-        If Form2.NumberToMonth(curDate.Month) = comboMonth.Text And CStr(curDate.Year) = comboYear.Text Then
+        If frmReport.NumberToMonth(curDate.Month) = comboMonth.Text And CStr(curDate.Year) = comboYear.Text Then
             comboDayTo.SelectedIndex = curDate.Day - 1
         Else
             comboDayTo.SelectedIndex = comboDayTo.Items.Count - 1
@@ -4033,66 +4033,66 @@
     End Sub
 
     Private Sub ДневнойОтчётToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem2.Click
-        Form2.Dispose()
-        Form2.LoadDay("Wash")
-        Form2.Show()
+        frmReport.Dispose()
+        frmReport.LoadDay("Wash")
+        frmReport.Show()
     End Sub
 
     Private Sub ДневнойОтчётToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem3.Click
-        Form2.Dispose()
-        Form2.LoadDay("Mount")
-        Form2.Show()
+        frmReport.Dispose()
+        frmReport.LoadDay("Mount")
+        frmReport.Show()
     End Sub
 
     Private Sub ДневнойОтчётToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem4.Click
-        Form2.Dispose()
-        Form2.LoadDay("Service")
-        Form2.Show()
+        frmReport.Dispose()
+        frmReport.LoadDay("Service")
+        frmReport.Show()
     End Sub
 
     Private Sub ДневнойОтчётToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ДневнойОтчётToolStripMenuItem5.Click
-        Form2.Dispose()
-        Form2.LoadCash()
-        Form2.Show()
+        frmReport.Dispose()
+        frmReport.LoadCash()
+        frmReport.Show()
     End Sub
 
     Private Sub МесячныйОтчётToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles МесячныйОтчётToolStripMenuItem2.Click
-        Form2.Dispose()
-        Form2.LoadMonth("Wash", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
-        Form2.Show()
+        frmReport.Dispose()
+        frmReport.LoadMonth("Wash", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
+        frmReport.Show()
     End Sub
 
     Private Sub МесячныйОтчётToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles МесячныйОтчётToolStripMenuItem3.Click
-        Form2.Dispose()
-        Form2.LoadMonth("Mount", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
-        Form2.Show()
+        frmReport.Dispose()
+        frmReport.LoadMonth("Mount", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
+        frmReport.Show()
     End Sub
 
     Private Sub МесячныйОтчётToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles МесячныйОтчётToolStripMenuItem4.Click
-        Form2.Dispose()
-        Form2.LoadMonth("Service", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
-        Form2.Show()
+        frmReport.Dispose()
+        frmReport.LoadMonth("Service", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
+        frmReport.Show()
     End Sub
 
     Private Sub МесячныйОтчётToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles МесячныйОтчётToolStripMenuItem5.Click
-        Form2.Dispose()
-        Form2.LoadMonth("Cash", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
-        Form2.Show()
+        frmReport.Dispose()
+        frmReport.LoadMonth("Cash", 1, Date.DaysInMonth(curDate.Year, curDate.Month), curDate.Month, curDate.Year)
+        frmReport.Show()
     End Sub
 
     Private Sub ЗаписьToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ЗаписьToolStripMenuItem.Click
-        Form2.Dispose()
+        frmReport.Dispose()
         dSchedule1.Columns.Item(3).Visible = False
         dSchedule1.Columns.Item(4).Visible = False
         RadioButton19.Checked = True
         Application.DoEvents()
-        Form2.LoadSchedule(True)
+        frmReport.LoadSchedule(True)
         RadioButton20.Checked = True
         Application.DoEvents()
-        Form2.LoadSchedule(False)
+        frmReport.LoadSchedule(False)
         dSchedule1.Columns.Item(3).Visible = True
         dSchedule1.Columns.Item(4).Visible = True
-        Form2.Show()
+        frmReport.Show()
     End Sub
 
     Private Sub ПринятыеПлатежиToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ПринятыеПлатежиToolStripMenuItem.Click
